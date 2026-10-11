@@ -1,0 +1,572 @@
+{
+  "schema": "deepdesk-asgi-transport-static-review-v1",
+  "reviewed_at_utc": "2026-10-11T01:51:00Z",
+  "status": "static-source-review-only; no downloaded package installed, imported, or executed; no macOS runtime result",
+  "conclusion": "The unchanged managed wrapper can reach the real ASGI app through an intercepted uvicorn.run and context-managed TestClient. This removes TCP HTTP serving and connecting, but is not literally socket-free because the default asyncio loop uses an internal AF_UNIX socketpair. Full-runtime TestClient selects httpx2 2.13.1, not httpx 0.28.1.",
+  "archives": {
+    "anyio": {
+      "version": "4.15.1",
+      "path": "audit/engine-ci/runtime-inspection/anyio-4.15.1-py3-none-any.whl",
+      "sha256": "6152fdbbf9a77fdec97731721bebf7c4c44f7c29b424b0065826173efc7ed101",
+      "sha256_matches_reviewed_proposal": true,
+      "official_distribution_url": "https://files.pythonhosted.org/packages/12/b8/4bd346e22b28902df4d651910f5242c28d84e4a5c2435ca5c3f797ed7e2e/anyio-4.15.1-py3-none-any.whl",
+      "metadata_source": "https://pypi.org/pypi/anyio/4.15.1/json"
+    },
+    "fastapi": {
+      "version": "0.136.3",
+      "path": "audit/engine-ci/runtime-inspection/fastapi-0.136.3-py3-none-any.whl",
+      "sha256": "3d2a69bdf04b7e9f3afa292c3bc7a98816bbfafa10bc9b45f3f3700d2f761620",
+      "sha256_matches_reviewed_proposal": true,
+      "official_distribution_url": "https://files.pythonhosted.org/packages/e0/82/45359b62a067409bd929ae8a56b8ed13e5a8c8a61194b3c236920999ab83/fastapi-0.136.3-py3-none-any.whl",
+      "metadata_source": "https://pypi.org/pypi/fastapi/0.136.3/json"
+    },
+    "httpx": {
+      "version": "0.28.1",
+      "path": "audit/engine-ci/runtime-inspection/httpx-0.28.1-py3-none-any.whl",
+      "sha256": "d909fcccc110f8c7faf814ca82a9a4d816bc5a6dbfea25d6591d6985b8ba59ad",
+      "sha256_matches_reviewed_proposal": true,
+      "official_distribution_url": "https://files.pythonhosted.org/packages/2a/39/e50c7c3a983047577ee07d2a9e53faf5a69493943ec3f6a384bdc792deb2/httpx-0.28.1-py3-none-any.whl",
+      "metadata_source": "https://pypi.org/pypi/httpx/0.28.1/json"
+    },
+    "httpx2": {
+      "version": "2.13.1",
+      "path": "audit/engine-ci/runtime-inspection/httpx2-2.13.1-py3-none-any.whl",
+      "sha256": "6dff50fabc270ee5fd25d845d0b078ed20564579744d6d962850975996d2f9a4",
+      "sha256_matches_reviewed_proposal": true,
+      "official_distribution_url": "https://files.pythonhosted.org/packages/d8/9c/6fe8931fd9f381042a9e4c7d5a7b4cbf7016b252bec0c99a49fce42c3326/httpx2-2.13.1-py3-none-any.whl",
+      "metadata_source": "https://pypi.org/pypi/httpx2/2.13.1/json"
+    },
+    "starlette": {
+      "version": "1.3.1",
+      "path": "audit/engine-ci/runtime-inspection/starlette-1.3.1-py3-none-any.whl",
+      "sha256": "c7372aae11c3c3f26a42df7bd626cec2f47d03483d261d369516a615a53714c6",
+      "sha256_matches_reviewed_proposal": true,
+      "official_distribution_url": "https://files.pythonhosted.org/packages/ec/bb/2799cc2ede3ed41131f8975621e7213dfc7ef4acbbaadfa440f32500c370/starlette-1.3.1-py3-none-any.whl",
+      "metadata_source": "https://pypi.org/pypi/starlette/1.3.1/json"
+    },
+    "uvicorn": {
+      "version": "0.54.0",
+      "path": "audit/engine-ci/runtime-inspection/uvicorn-0.54.0-py3-none-any.whl",
+      "sha256": "505bdb0f318731d45f1f712071fc781a8981f6847a31c902c9f5e652d4f67faf",
+      "sha256_matches_reviewed_proposal": true,
+      "official_distribution_url": "https://files.pythonhosted.org/packages/38/0c/b54a4fdd7f90a3af8b02ebc9ce6712c2c208b7926a2f7bad95c33ebbe943/uvicorn-0.54.0-py3-none-any.whl",
+      "metadata_source": "https://pypi.org/pypi/uvicorn/0.54.0/json"
+    },
+    "cpython": {
+      "version": "3.12.15",
+      "path": "audit/engine-ci/cpython-3.12.15+20261009-aarch64-apple-darwin-install_only.tar.gz",
+      "sha256": "83dcb04777c798bd95f3687acf9ae84b09860272ee6bdfb05be8bcf9447f75b8",
+      "distribution_url": "https://github.com/astral-sh/python-build-standalone/releases/download/20261009/cpython-3.12.15%2B20261009-aarch64-apple-darwin-install_only.tar.gz",
+      "distribution": "astral-sh/python-build-standalone"
+    }
+  },
+  "primary_source_evidence": [
+    {
+      "id": "starlette_client_selection",
+      "archive": "starlette",
+      "member": "starlette/testclient.py",
+      "lines": [
+        [
+          32,
+          51
+        ]
+      ],
+      "member_sha256": "52a9e32222a492b368339cabf0357163de2ed7e80959d7f3e88299c5b8c4eb4c"
+    },
+    {
+      "id": "starlette_scope",
+      "archive": "starlette",
+      "member": "starlette/testclient.py",
+      "lines": [
+        [
+          225,
+          291
+        ]
+      ],
+      "member_sha256": "52a9e32222a492b368339cabf0357163de2ed7e80959d7f3e88299c5b8c4eb4c"
+    },
+    {
+      "id": "starlette_inprocess_call",
+      "archive": "starlette",
+      "member": "starlette/testclient.py",
+      "lines": [
+        [
+          293,
+          373
+        ]
+      ],
+      "member_sha256": "52a9e32222a492b368339cabf0357163de2ed7e80959d7f3e88299c5b8c4eb4c"
+    },
+    {
+      "id": "starlette_constructor",
+      "archive": "starlette",
+      "member": "starlette/testclient.py",
+      "lines": [
+        [
+          381,
+          427
+        ]
+      ],
+      "member_sha256": "52a9e32222a492b368339cabf0357163de2ed7e80959d7f3e88299c5b8c4eb4c"
+    },
+    {
+      "id": "starlette_lifespan",
+      "archive": "starlette",
+      "member": "starlette/testclient.py",
+      "lines": [
+        [
+          678,
+          748
+        ]
+      ],
+      "member_sha256": "52a9e32222a492b368339cabf0357163de2ed7e80959d7f3e88299c5b8c4eb4c"
+    },
+    {
+      "id": "starlette_session",
+      "archive": "starlette",
+      "member": "starlette/middleware/sessions.py",
+      "lines": [
+        [
+          16,
+          88
+        ]
+      ],
+      "member_sha256": "91b4b366130df11da87ddaef31010ccf87b1e311215beb1349fb13290f524866"
+    },
+    {
+      "id": "httpx_client",
+      "archive": "httpx",
+      "member": "httpx/_client.py",
+      "lines": [
+        [
+          206,
+          218
+        ],
+        [
+          413,
+          422
+        ],
+        [
+          685,
+          738
+        ],
+        [
+          897,
+          908
+        ],
+        [
+          964,
+          1023
+        ]
+      ],
+      "member_sha256": "c43f941baefe58c91e96d00039e1868fe719d91453026d7db1647194563bff8d"
+    },
+    {
+      "id": "httpx_cookies_host",
+      "archive": "httpx",
+      "member": "httpx/_models.py",
+      "lines": [
+        [
+          441,
+          460
+        ],
+        [
+          1101,
+          1115
+        ]
+      ],
+      "member_sha256": "e3ffc6bb2bf580bc6e6428708a6f247d036220e709f5a72b785392babbd97e6b"
+    },
+    {
+      "id": "httpx2_client",
+      "archive": "httpx2",
+      "member": "httpx2/_client.py",
+      "lines": [
+        [
+          197,
+          210
+        ],
+        [
+          395,
+          404
+        ],
+        [
+          613,
+          710
+        ],
+        [
+          949,
+          995
+        ],
+        [
+          1033,
+          1083
+        ]
+      ],
+      "member_sha256": "fa3948aa66a9efd5edf097c6d13d927612c617328b43ceefc4bdd5e350aaa93b"
+    },
+    {
+      "id": "httpx2_cookies_host",
+      "archive": "httpx2",
+      "member": "httpx2/_models.py",
+      "lines": [
+        [
+          460,
+          474
+        ],
+        [
+          1097,
+          1114
+        ]
+      ],
+      "member_sha256": "d139d0c54a1acd65995f693d876441e55fe418ef2799f647ec6361f695b0d4d6"
+    },
+    {
+      "id": "anyio_portal",
+      "archive": "anyio",
+      "member": "anyio/from_thread.py",
+      "lines": [
+        [
+          505,
+          566
+        ]
+      ],
+      "member_sha256": "89965b7dc3724a2e3001cc75fdcc40404e09d18642f3ca9130862a43a485f6c7"
+    },
+    {
+      "id": "anyio_asyncio_runner",
+      "archive": "anyio",
+      "member": "anyio/_backends/_asyncio.py",
+      "lines": [
+        [
+          2515,
+          2548
+        ]
+      ],
+      "member_sha256": "56acbb3b5ca6984a714e23f37a14ae042553ce21802cd57e05bb0845a297b20e"
+    },
+    {
+      "id": "cpython_runner",
+      "archive": "cpython",
+      "member": "python/lib/python3.12/asyncio/runners.py",
+      "lines": [
+        [
+          131,
+          148
+        ]
+      ],
+      "member_sha256": "739e0ecbb335cfec821a39f9e225583b5911bb6e3894ef93782005f852c54263"
+    },
+    {
+      "id": "cpython_unix_policy",
+      "archive": "cpython",
+      "member": "python/lib/python3.12/asyncio/unix_events.py",
+      "lines": [
+        [
+          57,
+          65
+        ],
+        [
+          1442,
+          1444
+        ],
+        [
+          1499,
+          1500
+        ]
+      ],
+      "member_sha256": "1fff06cce78763800f05f4d2bebfcdbc07ebf9564ca7e7222e0d91e39dee08c9"
+    },
+    {
+      "id": "cpython_self_pipe",
+      "archive": "cpython",
+      "member": "python/lib/python3.12/asyncio/selector_events.py",
+      "lines": [
+        [
+          59,
+          67
+        ],
+        [
+          118,
+          157
+        ]
+      ],
+      "member_sha256": "b77c4b8a85f1e1e2882a2bf3bd85a4b1c1fcfd7cb37ed0d8d8eb5f9a2ea44231"
+    },
+    {
+      "id": "cpython_socketpair",
+      "archive": "cpython",
+      "member": "python/lib/python3.12/socket.py",
+      "lines": [
+        [
+          652,
+          673
+        ]
+      ],
+      "member_sha256": "7d4d4c66e6f4bcc961ab462c4f08002ca97def8713a4be1c7373bdbd970a5274"
+    },
+    {
+      "id": "uvicorn_run",
+      "archive": "uvicorn",
+      "member": "uvicorn/main.py",
+      "lines": [
+        [
+          503,
+          539
+        ],
+        [
+          622,
+          640
+        ]
+      ],
+      "member_sha256": "ecb83544b48126d700e803d1d558ef158346961a82d0fc5fd5fe77d8befa85df"
+    },
+    {
+      "id": "fastapi_testclient_alias",
+      "archive": "fastapi",
+      "member": "fastapi/testclient.py",
+      "lines": [
+        [
+          1,
+          1
+        ]
+      ],
+      "member_sha256": "9c1bda0265fae9895d45e24d6573ce935b1fba8d90ea1b3c6cebc86827a9e8b4"
+    },
+    {
+      "id": "managed_wrapper",
+      "archive": null,
+      "member": "packaging/engine_entry.py",
+      "lines": [
+        [
+          20,
+          67
+        ],
+        [
+          190,
+          229
+        ]
+      ],
+      "member_sha256": "c150823f009f0a9f004923413444894e95f3681d81f0fb94537be75cf7f778b9"
+    },
+    {
+      "id": "upstream_launcher",
+      "archive": null,
+      "member": "upstream/src/local_deep_research/web/app.py",
+      "lines": [
+        [
+          59,
+          103
+        ],
+        [
+          106,
+          149
+        ]
+      ],
+      "member_sha256": "09baea277e732c3c782f5506f774f78c44b1b18b34ea4b545e6f0f4724bdf71a"
+    },
+    {
+      "id": "upstream_lifespan",
+      "archive": null,
+      "member": "upstream/src/local_deep_research/web/fastapi_app.py",
+      "lines": [
+        [
+          271,
+          299
+        ],
+        [
+          434,
+          504
+        ],
+        [
+          531,
+          576
+        ],
+        [
+          2346,
+          2403
+        ]
+      ],
+      "member_sha256": "869304e75567cb589fd7a974c082643a355ea1dd34d2be43776fd3a4e2082692"
+    }
+  ],
+  "findings": [
+    {
+      "id": "client_selection",
+      "finding": "Starlette first imports httpx2 as httpx and falls back to httpx only on ModuleNotFoundError. Both distributions are in the reviewed full runtime; expect httpx2 2.13.1. Record starlette.testclient.httpx.__name__ and its distribution version. Do not force a different module or claim this lane tests httpx 0.28.1.",
+      "evidence": [
+        "starlette_client_selection",
+        "httpx2_client",
+        "httpx_client"
+      ]
+    },
+    {
+      "id": "compatible_constructor",
+      "finding": "Pinned TestClient accepts base_url, follow_redirects, client, backend and raise_server_exceptions, and supplies its own _TestClientTransport to the selected HTTP client. FastAPI TestClient is the same class.",
+      "evidence": [
+        "starlette_constructor",
+        "fastapi_testclient_alias"
+      ]
+    },
+    {
+      "id": "lifespan",
+      "finding": "A with TestClient(...) context creates an AnyIO blocking portal and in-memory lifespan channels, calls startup before yielding the client, and waits for shutdown during context exit. Merely constructing TestClient does not do this. The upstream lifespan initializes its real loop, middleware state, queues/schedulers and DB shutdown; no lifespan stubs are required.",
+      "evidence": [
+        "starlette_lifespan",
+        "upstream_lifespan"
+      ]
+    },
+    {
+      "id": "cookies",
+      "finding": "Both pinned HTTP clients maintain a CookieJar, merge its cookies into later requests, and extract Set-Cookie before redirect handling returns. The real Starlette SessionMiddleware signs, verifies and expires session cookies. Use the same TestClient within each phase and a fresh client in the next interpreter; do not substitute hand-made session cookies. HTTP cookie behavior is covered, but browser SameSite enforcement is not.",
+      "evidence": [
+        "httpx_client",
+        "httpx_cookies_host",
+        "httpx2_client",
+        "httpx2_cookies_host",
+        "starlette_session"
+      ]
+    },
+    {
+      "id": "redirects",
+      "finding": "follow_redirects=False returns the original response, status and Location; next_request may be prepared but is not sent. Do not send response.next_request or override follow_redirects on individual requests. Assert empty response.history and expected Location in login/register/logout checks.",
+      "evidence": [
+        "httpx_client",
+        "httpx2_client",
+        "starlette_constructor"
+      ]
+    },
+    {
+      "id": "scope",
+      "finding": "For http://127.0.0.1:54321 and client=(127.0.0.1,54322), HTTP scope has scheme=http, http_version=1.1, server=[127.0.0.1,54321], client=(127.0.0.1,54322), root_path empty and the real request method/path/query. Host is generated from URL unless explicitly supplied, then retained as supplied. The wrapper therefore sees exactly Host: 127.0.0.1:54321; these ports are synthetic scope values, not reserved or bound ports.",
+      "evidence": [
+        "starlette_scope",
+        "httpx_cookies_host",
+        "httpx2_cookies_host",
+        "managed_wrapper"
+      ]
+    },
+    {
+      "id": "no_tcp_http_transport",
+      "finding": "The TestClient request path collects bodies in BytesIO and invokes self.app(scope, receive, send) via portal.call. Both HTTP clients return the supplied transport instead of creating HTTPTransport; environment proxies are disabled when a custom transport is present. Intercepting uvicorn.run avoids Uvicorn server.run/binding. This proves the selected HTTP transport has no TCP bind/connect path; it does not prove the application and dependencies cannot attempt unrelated sockets. Preserve the OS deny(network*) guard.",
+      "evidence": [
+        "starlette_inprocess_call",
+        "starlette_constructor",
+        "httpx_client",
+        "httpx2_client",
+        "uvicorn_run"
+      ]
+    },
+    {
+      "id": "internal_socketpair",
+      "finding": "AnyIO default backend is asyncio with use_uvloop false. Its portal creates a thread and asyncio Runner; CPython Unix event-loop construction calls _make_self_pipe and socket.socketpair(), whose native default is AF_UNIX. Thus a blanket monkeypatch denying every socket constructor can break the fixture itself. macOS sandbox acceptance of this exact internal operation is unverified here; keep deny(network*) unchanged and fail closed if portal startup is denied. Do not add network exceptions to make the test pass.",
+      "evidence": [
+        "starlette_constructor",
+        "anyio_portal",
+        "anyio_asyncio_runner",
+        "cpython_runner",
+        "cpython_unix_policy",
+        "cpython_self_pipe",
+        "cpython_socketpair"
+      ]
+    },
+    {
+      "id": "boundedness",
+      "finding": "TestClient waits synchronously on portal.call and buffers the complete response in BytesIO before returning. HTTP timeout arguments and a post-response byte-length assertion do not impose an application execution deadline or prevent response buffering. Retain an external bounded subprocess deadline, output cap and existing resource controls.",
+      "evidence": [
+        "starlette_inprocess_call",
+        "httpx_client",
+        "httpx2_client"
+      ]
+    },
+    {
+      "id": "coverage_boundary",
+      "finding": "This lane can validate real middleware/auth/CSRF/session/report/DB behavior and normal ASGI lifespan completion in two fresh interpreters. It does not validate an actual HTTP listener, Uvicorn HTTP parser, sockets, signal handling, graceful-shutdown timeout, uvloop selection, app packaging/frozen launcher, browser security semantics, model inference, providers or external research.",
+      "evidence": [
+        "starlette_scope",
+        "starlette_lifespan",
+        "managed_wrapper",
+        "upstream_launcher",
+        "uvicorn_run"
+      ]
+    }
+  ],
+  "recommended_call_contract": {
+    "interception_order": [
+      "Load only uvicorn before patching uvicorn.run; do not import local_deep_research first.",
+      "Load the existing engine_entry.py without invoking its __main__ branch; call its unchanged serve().",
+      "Require the intercepted run call to occur exactly once and match the exact positional/keyword arguments below.",
+      "Only inside the interceptor, resolve local_deep_research.web.fastapi_app:app and verify it is the cached module-level app that serve() already configured.",
+      "Run the real scenario inside with TestClient(app, base_url=..., follow_redirects=False, client=..., backend=\"asyncio\", raise_server_exceptions=True).",
+      "Let the context complete normally and propagate startup/request/shutdown errors; restore uvicorn.run in finally.",
+      "Run each phase in its own fresh interpreter while preserving only the isolated synthetic data directory needed for persistence checks."
+    ],
+    "uvicorn_positional_args": [
+      "local_deep_research.web.fastapi_app:app"
+    ],
+    "uvicorn_keyword_args": {
+      "host": "127.0.0.1",
+      "port": 54321,
+      "workers": 1,
+      "log_level": "warning",
+      "access_log": false,
+      "server_header": false,
+      "timeout_keep_alive": 5,
+      "timeout_graceful_shutdown": 10,
+      "proxy_headers": false,
+      "forwarded_allow_ips": null
+    },
+    "testclient_arguments": {
+      "base_url": "http://127.0.0.1:54321",
+      "follow_redirects": false,
+      "client": [
+        "127.0.0.1",
+        54322
+      ],
+      "backend": "asyncio",
+      "raise_server_exceptions": true
+    },
+    "scope_expectations": {
+      "type": "http",
+      "http_version": "1.1",
+      "scheme": "http",
+      "root_path": "",
+      "server": [
+        "127.0.0.1",
+        54321
+      ],
+      "client": [
+        "127.0.0.1",
+        54322
+      ],
+      "host_header": "127.0.0.1:54321"
+    },
+    "request_safety": [
+      "Allow only known fixture-relative paths; reject absolute/network-path URLs.",
+      "Send no Origin or Sec-Fetch-Site headers on accepted native requests; send the nonce header after the handshake.",
+      "Use the actual selected HTTP client cookie jar; do not seed production cookies.",
+      "For negative Host/Origin/nonce tests, expect wrapper-generated 403 without an instance header, because the wrapper returns before send_with_identity."
+    ]
+  },
+  "recommended_runtime_report_fields": {
+    "test_transport": "starlette-testclient-inprocess-asgi",
+    "http_client_distribution": "Read at runtime; expected httpx2",
+    "http_client_version": "Read at runtime; expected 2.13.1",
+    "starlette_version": "Read at runtime; expected 1.3.1",
+    "anyio_version": "Read at runtime; expected 4.15.1",
+    "async_backend": "asyncio",
+    "http_listener_tested": false,
+    "uvicorn_server_run_executed": false,
+    "scope_host": "127.0.0.1:54321",
+    "scope_client": [
+      "127.0.0.1",
+      54322
+    ],
+    "follow_redirects": false,
+    "os_network_policy": "deny network*; actual enforced run must pass before success is reported",
+    "lifespan_startup_shutdown_completed": "Set true only after successful context entry and exit in each phase",
+    "fresh_interpreter_phases_completed": "Record observed successful phase count, not a planned value",
+    "network_research_tested": false,
+    "provider_or_model_tested": false
+  }
+}

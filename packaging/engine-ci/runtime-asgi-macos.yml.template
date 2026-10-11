@@ -1,0 +1,44 @@
+# Candidate only; requires a separate exact full-runtime review and approval.
+name: Validate Deepdesk installed runtime ASGI
+on:
+  push:
+    branches:
+      - engine-runtime-asgi-ci
+    paths:
+      - 'packaging/engine-ci/**'
+      - 'packaging/engine_entry.py'
+      - 'packaging/patches/**'
+      - 'research/engine-ci/**'
+      - '.github/workflows/engine-runtime-asgi-macos.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: deepdesk-runtime-asgi-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  installed-runtime-asgi:
+    if: github.repository == 'Emin-dev/deepdesk' && github.ref == 'refs/heads/engine-runtime-asgi-ci' && github.event.repository.private == false
+    runs-on: macos-26
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Verify standard arm64 host
+        run: |
+          test "$(uname -m)" = arm64
+          test -x /usr/bin/sandbox-exec
+          sw_vers
+          df -h "$RUNNER_TEMP"
+      - name: Separately reviewed complete-runtime and synthetic in-process ASGI validation
+        run: python3 -I packaging/engine-ci/runtime_asgi_stage.py --repository "$GITHUB_WORKSPACE" --review-receipt packaging/engine-ci/runtime-asgi-review-receipt.json
+      - name: Record precise validation boundary
+        if: success()
+        run: |
+          printf '%s\n' \
+            'Complete reviewed wheelhouse installed offline, including an explicit separate official PyPI Torch input.' \
+            'Installed engine ASGI auth/session/CSRF/encrypted persistence and synthetic report routes passed in-process.' \
+            'No TCP listener, real HTTP, native transport, research generation, provider query, model load, standalone bundle, PDF/libmagic, signing, DMG or release was tested.' \
+            'No cache or artifacts were uploaded. Exact same-run source-wheel and runtime-lock hashes are in logs.' >> "$GITHUB_STEP_SUMMARY"
