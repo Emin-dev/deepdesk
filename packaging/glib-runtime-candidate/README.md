@@ -1,6 +1,16 @@
-# Inactive source iconv / GNU Make correction v3
+# Inactive GLib symbol-parser correction v4
 
 This receipt-closed candidate preserves the passed foundation, adds official source GNU Make 4.4.1 and GNU libiconv 1.19, rebuilds a separate iconv-enabled GNU libintl, then resumes the reviewed gettext-tools/GLib/NLS/native checks. It has not run on macOS. No downloaded source, configure script, compiler input, wheel or native payload has been executed during preparation. Independent review and exact root approval are required before activation.
+
+## Narrow v4 correction
+
+The published v3 commit `d79f769ace82da5dabbd63f875761bf409fcff20`, run [38151631531](https://github.com/Emin-dev/deepdesk/actions/runs/38151631531), passed GNU Make NLS and source libiconv build/native checks, then stopped at its required export check. The nm child exited zero and produced 365 private stdout bytes; its names were not disclosed. The log SHA-256 is `c926c05c0143601a2f7222f6957ea8e58b9e4738841b2e401c8381764b5f9cbc`.
+
+The inherited parser accepts a leading Mach-O underscore only when followed by a letter. Pinned GNU libiconv declares and defines the C global `_libiconv_version`; its expected Mach-O spelling is `__libiconv_version`. That spelling is unconditionally excluded by the old parser. [LLVM's official data-layout specification](https://llvm.org/docs/LangRef.html#data-layout) states that nonprivate Mach-O symbols receive an underscore prefix. This source/ABI finding proves a parser defect, without proving the actual runner symbol was present.
+
+V4 overrides only the `source-libiconv` export check. Other labels delegate to the unchanged foundation implementation. The parser accepts the added Mach-O underscore followed by a complete C identifier, including leading underscores, and requires the same exact six symbols. No symbol is dropped or inferred from source alone. The bounded result reports only status, fixed required count, and missing names drawn from that hard-coded six-name contract; arbitrary nm names, addresses and raw stdout remain private. Single-/double-/triple-underscore, missing-symbol, exact-required-set and non-disclosure regressions use inert bytes. Inputs, sources, commands, sandbox, environment, budgets and all native/runtime assertions remain unchanged. The full semantic/origin and later GLib checks remain unproved until an approved run reaches them.
+
+The following sections retain the v3 correction design; v4 does not add another provider or feature.
 
 ## Evidence and corrected scope
 

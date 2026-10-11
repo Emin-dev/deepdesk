@@ -1,0 +1,52 @@
+{
+  "fixed_required_c_identifiers": [
+    "libiconv_open",
+    "libiconv",
+    "libiconv_close",
+    "libiconvctl",
+    "libiconvlist",
+    "_libiconv_version"
+  ],
+  "inference_limit": "The inherited grammar cannot accept the required decorated spelling. Source and ABI evidence establish the expected spelling, not actual runner export presence. No symbol is dropped; the next approved run must observe every required name.",
+  "mode": "source and documentation data only; no compiler or native execution",
+  "observed_failure": {
+    "actual_export_presence": "unobserved",
+    "commit": "d79f769ace82da5dabbd63f875761bf409fcff20",
+    "job": 114506110982,
+    "log_sha256": "c926c05c0143601a2f7222f6957ea8e58b9e4738841b2e401c8381764b5f9cbc",
+    "nm_exit": 0,
+    "private_stdout_bytes": 365,
+    "run": 38151631531
+  },
+  "primary_documentation": [
+    {
+      "paraphrase": "Nonprivate Mach-O symbols receive an underscore prefix. Applied to the declared C global, that yields the double-underscore spelling.",
+      "read_date": "2026-10-11",
+      "section": "m:<mangling>, o: Mach-O mangling",
+      "url": "https://llvm.org/docs/LangRef.html#data-layout"
+    },
+    {
+      "paraphrase": "Default BSD output puts hexadecimal address, type and symbol name on each line. The unchanged -gU request selects external defined symbols. This candidate reads already inspected native Mach-O libraries, not LLVM bitcode.",
+      "read_date": "2026-10-11",
+      "sections": [
+        "DESCRIPTION",
+        "--defined-only, -U",
+        "--extern-only, -g",
+        "--format"
+      ],
+      "url": "https://llvm.org/docs/CommandGuide/llvm-nm.html"
+    }
+  ],
+  "schema": 1,
+  "source": {
+    "archive_sha256": "88dd96a8c0464eca144fc791ae60cd31cd8ee78321e67397e25fc095c4a19aa6",
+    "c_identifier": "_libiconv_version",
+    "declaration_line": 28,
+    "declaration_path": "source-review/libiconv/include/iconv.h.in",
+    "declaration_sha256": "eeecdd8d98e9a189201a99299e094e149ca14a246e90d848507d30815d4bf8e4",
+    "definition_line": 680,
+    "definition_path": "source-review/libiconv/lib/iconv.c",
+    "definition_sha256": "af028d1aeb837e05ecf8a6e3a480ef1497d2b5545a14985f463eea7b49280afe",
+    "expected_macho_identifier": "__libiconv_version"
+  }
+}

@@ -32,7 +32,7 @@ def load(name, path):
 foundation = load('foundation_stage', HERE / 'foundation_stage.py')
 safe_reads = load('glib_safe_reads', HERE / 'safe_reads.py')
 need, digest = foundation.need, foundation.digest
-SCOPE = 'glib-runtime-iconv-correction-v3'
+SCOPE = 'glib-runtime-symbol-parser-v4'
 BRANCH = 'engine-glib-runtime-v1-ci'
 WORKFLOW = '.github/workflows/engine-glib-runtime-v1-macos.yml'
 INPUT_HASHES = dict(foundation.INPUT_HASHES,
@@ -98,7 +98,7 @@ def verify_python_commands(data, python, visibility_generator):
 
 def validate(root, receipt, execute=False):
     need(receipt.get('schema') == 1 and receipt.get('scope') == SCOPE)
-    need(receipt.get('candidate_revision') == 3 and receipt.get('destination_branch') == BRANCH)
+    need(receipt.get('candidate_revision') == 4 and receipt.get('destination_branch') == BRANCH)
     need(receipt.get('input_sha256') == INPUT_HASHES and receipt.get('false_gates') == FALSE_GATES)
     need(receipt.get('source_changes_allowed') is False)
     need(not any(p.is_symlink() for p in HERE.rglob('*')))
@@ -121,6 +121,15 @@ def validate(root, receipt, execute=False):
 
 
 class Lane(foundation.Lane):
+    def symbols(self, label, path, required):
+        if label != 'source-libiconv':
+            return super().symbols(label, path, required)
+        contract = load('glib_export_contract', self.helpers / 'glib_export_contract.py')
+        out, _, _ = self.run('exports-' + label, [self.tools['nm'], '-gU', path], timeout=30)
+        record = contract.source_libiconv(out, required)
+        print(json.dumps({'phase': 'export-contract-' + label, **record}, sort_keys=True))
+        need(record['status'] == 'passed')
+
     def checkpoint(self):
         need(time.monotonic() < self.deadline and self.bounds.disk_bytes(self.work) <= WORKSPACE_LIMIT)
         need(shutil.disk_usage(self.work).free >= 1024**3)
