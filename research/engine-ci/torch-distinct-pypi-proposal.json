@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "status": "unapproved-distinct-PyPI-packaging-input",
+  "pdm_lock_unchanged": true,
+  "original_lock_wheel_sha256": "ab7e226c18d3cbc134dfa952d18ab1df202055dd33446837c8fd050ad449e6f5",
+  "rationale_source": "https://pytorch.org/get-started/locally/",
+  "metadata_source": "https://pypi.org/pypi/torch/2.14.0/json",
+  "runtime": [
+    {
+      "name": "torch",
+      "version": "2.14.0",
+      "kind": "wheel",
+      "file": {
+        "filename": "torch-2.14.0-cp312-cp312-macosx_14_0_arm64.whl",
+        "sha256": "c1f844f1c750e87df4b68bc3afbc0e2b0c7ef19d7b8f666e48bdcf6a0c4f0056",
+        "size": 127303200,
+        "url": "https://files.pythonhosted.org/packages/17/76/bb4770f56cf6d8971671dbcbb7493e5a6a15ad2825f4e359b02c27c38297/torch-2.14.0-cp312-cp312-macosx_14_0_arm64.whl"
+      },
+      "metadata_requires_dist": [
+        "filelock",
+        "typing-extensions>=4.10.0",
+        "setuptools>=77.0.3",
+        "sympy>=1.13.3",
+        "networkx>=2.5.1",
+        "jinja2",
+        "fsspec>=0.8.5",
+        "cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == \"Linux\"",
+        "cuda-bindings<14,>=13.0.3; platform_system == \"Linux\" and python_version < \"3.15\"",
+        "nvidia-cudnn-cu13==9.24.0.43; platform_system == \"Linux\"",
+        "nvidia-cusparselt-cu13==0.8.1; platform_system == \"Linux\"",
+        "nvidia-nccl-cu13==2.30.7; platform_system == \"Linux\"",
+        "nvidia-nvshmem-cu13==3.4.5; platform_system == \"Linux\"",
+        "triton~=3.8.0; platform_system == \"Linux\" and python_version < \"3.15\"",
+        "optree>=0.13.0; extra == \"optree\"",
+        "opt-einsum>=3.3; extra == \"opt-einsum\"",
+        "pyyaml; extra == \"pyyaml\""
+      ],
+      "license_claim": null,
+      "project_urls": {
+        "Documentation": "https://pytorch.org/docs",
+        "Forum": "https://discuss.pytorch.org",
+        "Homepage": "https://pytorch.org",
+        "Issue Tracker": "https://github.com/pytorch/pytorch/issues",
+        "Repository": "https://github.com/pytorch/pytorch"
+      }
+    }
+  ],
+  "build": [],
+  "requires": [
+    "Explicit reviewed packaging-lock override, never edit upstream PDM",
+    "Verify arm64 Mach-O and complete license/notice records",
+    "Full source import/version and runtime freeze/API tests on macOS",
+    "No claim that PyPI wheel reproduces CPU-index bytes"
+  ]
+}

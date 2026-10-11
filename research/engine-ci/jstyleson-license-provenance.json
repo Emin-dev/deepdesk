@@ -1,0 +1,7 @@
+{
+  "source": "https://api.github.com/repos/linjackson78/jstyleson/git/blobs/807babd62b640fa6532d26857daf531336b72b97",
+  "git_blob_sha1": "807babd62b640fa6532d26857daf531336b72b97",
+  "size": 1075,
+  "sha256": "d73ae9052b2bd1a0e7f586638ad83d67408e11a1ff6236d9d6fc45c15e4d7485",
+  "note": "Supplementary upstream repository license; absent from the pinned PyPI sdist. Verify attribution before distribution."
+}

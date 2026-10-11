@@ -1,0 +1,35 @@
+{
+  "built_wheels": [
+    {
+      "filename": "google_search_results-2.4.2-py3-none-any.whl",
+      "sha256": "9d96f2e352540b57a8cdd88940b367251248571ab861f0f5a479c97a128f8d49",
+      "size": 32092
+    },
+    {
+      "filename": "jstyleson-0.0.2-py3-none-any.whl",
+      "sha256": "71c586c73f9635233df05076f3b3e289e9fd933127dc4761c78ba3562b1244a3",
+      "size": 2420
+    },
+    {
+      "filename": "langdetect-1.0.9-py3-none-any.whl",
+      "sha256": "23db79e09bc6e18c87963cc6b1fe05cbad014101c0b75b34f3ccd2bbcd136851",
+      "size": 993332
+    },
+    {
+      "filename": "local_deep_research-1.10.7-py3-none-any.whl",
+      "sha256": "1b3399bd511d64f454c73171043a106bcb9a86b133473c241f52dc7dd56ebebe",
+      "size": 4112744
+    },
+    {
+      "filename": "wikipedia-1.4.0-py3-none-any.whl",
+      "sha256": "11c089187dc5f79bc6955c27c288b50c127d762696d916c121a6a7476617bbee",
+      "size": 11757
+    }
+  ],
+  "run": 38099846861,
+  "job": 114353329139,
+  "commit": "80b63b943444f280946ed10fdd2c2458f7a1871d",
+  "url": "https://github.com/Emin-dev/deepdesk/actions/runs/38099846861",
+  "status": "observed-built-wheels-not-proven-reproducible",
+  "note": "These are actual stage-A archive hashes. Stage B validates every non-metadata payload against pre-build approved-source digests, reports archive hash equality/difference, and hash-locks inspected outputs from that run. No byte-reproducibility claim is inferred from one build."
+}

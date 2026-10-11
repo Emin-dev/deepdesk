@@ -1,0 +1,53 @@
+{
+  "status": "header-inspection-only-not-load-test",
+  "binaries": [
+    {
+      "path": "torch/_C.cpython-312-darwin.so",
+      "size": 67760,
+      "magic": "cffaedfe",
+      "cpu_type": 16777228
+    },
+    {
+      "path": "torch/lib/libc10.dylib",
+      "size": 1121632,
+      "magic": "cffaedfe",
+      "cpu_type": 16777228
+    },
+    {
+      "path": "torch/lib/libomp.dylib",
+      "size": 856096,
+      "magic": "cffaedfe",
+      "cpu_type": 16777228
+    },
+    {
+      "path": "torch/lib/libshm.dylib",
+      "size": 82016,
+      "magic": "cffaedfe",
+      "cpu_type": 16777228
+    },
+    {
+      "path": "torch/lib/libtorch.dylib",
+      "size": 34800,
+      "magic": "cffaedfe",
+      "cpu_type": 16777228
+    },
+    {
+      "path": "torch/lib/libtorch_cpu.dylib",
+      "size": 386016976,
+      "magic": "cffaedfe",
+      "cpu_type": 16777228
+    },
+    {
+      "path": "torch/lib/libtorch_global_deps.dylib",
+      "size": 16760,
+      "magic": "cffaedfe",
+      "cpu_type": 16777228
+    },
+    {
+      "path": "torch/lib/libtorch_python.dylib",
+      "size": 31036048,
+      "magic": "cffaedfe",
+      "cpu_type": 16777228
+    }
+  ]
+}

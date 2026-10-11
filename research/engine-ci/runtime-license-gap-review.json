@@ -1,0 +1,765 @@
+{
+  "schema_version": 1,
+  "reviewed_at_utc": "2026-10-11T01:05:31Z",
+  "status": "seven-top-level-license-gaps-supplemented-native-redistribution-gates-remain",
+  "scope": "Static files, archive metadata, exact upstream license/source text and official release metadata only. No package installation/import, downloaded executable invocation, model/bottle download, remote write, protected repository change or frozen stage-A/runtime change.",
+  "inputs": {
+    "proposal": "research/engine-ci/all-pypi-input-proposal.json",
+    "proposal_sha256": "ec0733c361635536914d05cbd797e0c04802dadaff71acf9994bcc7e0ce08fda",
+    "static_inventory": "research/engine-ci/runtime-static-inventory.json",
+    "static_inventory_sha256": "7d9612c314da3b3713800a6b3c7d3c21ad4b2755ac843714a6b4463718699516"
+  },
+  "summary": {
+    "top_level_licenses_supplemented": 7,
+    "pure_python_top_level_notices_supplemented": 4,
+    "native_distributions_with_open_closure": 3,
+    "pypandoc_arm64_label_contains_x86_64_binary": true,
+    "license_compatibility_or_redistribution_approval": false
+  },
+  "distributions": [
+    {
+      "name": "langchain-community",
+      "version": "0.4.2",
+      "wheel": {
+        "filename": "langchain_community-0.4.2-py3-none-any.whl",
+        "sha256": "84dd8c5122532394d5b6849a5fc9995ef28e4f77227daeb09f24b3d942e9e466",
+        "size": 2364406,
+        "upload_time": "2026-05-22T19:42:57.103325Z",
+        "url": "https://files.pythonhosted.org/packages/8f/39/5d97e42a3e95dc2a6d71b2f902a3fae71786131e11d01bddb604accb0ebe/langchain_community-0.4.2-py3-none-any.whl"
+      },
+      "wheel_local_path": "audit/engine-ci/runtime-inspection/langchain_community-0.4.2-py3-none-any.whl",
+      "official_metadata": {
+        "url": "https://pypi.org/pypi/langchain-community/0.4.2/json",
+        "sha256": "458f997a118423726710cb295eb41f4481b6dcf6f088c77c3a03897e92e2a951",
+        "local_path": "research/engine-ci/runtime-license-supplements/langchain-community-0.4.2/pypi.json",
+        "selected_wheel_hash_and_size_match_frozen_proposal": true
+      },
+      "project_license": "MIT",
+      "top_level_notice_gap": "resolved-with-retained-supplement",
+      "license": {
+        "repository_path": "LICENSE",
+        "url": "https://raw.githubusercontent.com/langchain-ai/langchain-community/7c10a5fa327f6aaaf7c932822a9e5d144891406e/LICENSE",
+        "sha256": "a01dcffdc1291b4043f2a81d249a9f3e45c9036f2308c9cdfeefe18371371e80",
+        "size": 1066,
+        "local_path": "research/engine-ci/runtime-license-supplements/langchain-community-0.4.2/upstream/LICENSE",
+        "git_blob_sha1": "57d0481d4b50c89fee2cb9e88242639d8e674028",
+        "git_blob_matches_release_tree": true,
+        "git_mode": "100644"
+      },
+      "release_tag": "libs/community/v0.4.2",
+      "repository": "langchain-ai/langchain-community",
+      "release_commit": "7c10a5fa327f6aaaf7c932822a9e5d144891406e",
+      "release_ref_evidence": "research/engine-ci/runtime-license-supplements/langchain-community-0.4.2/github-tag-ref.json",
+      "source_identity_evidence": {
+        "matched_wheel_python_or_stub_members": 1204,
+        "unmatched_wheel_python_or_stub_members": [],
+        "detail_path": "research/engine-ci/runtime-license-supplements/wheel-tag-source-comparison.json",
+        "method": "Recomputed Git blob SHA-1 over each wheel .py/.pyi byte string and compared to the recursive Git tree at the exact release commit. These checks do not establish reproducibility of native binaries."
+      },
+      "native_members": [],
+      "redistribution_review_status": "top-level-notice-supplement-complete",
+      "remaining_actions": [],
+      "published_pypi_provenance": {
+        "integrity_endpoint_observation": "HTTP 404 for this exact wheel on 2026-10-11; not treated as proof of absent provenance elsewhere."
+      }
+    },
+    {
+      "name": "langchain-text-splitters",
+      "version": "1.1.2",
+      "wheel": {
+        "filename": "langchain_text_splitters-1.1.2-py3-none-any.whl",
+        "sha256": "a2de0d799ff31886429fd6e2e0032df275b60ec817c19059a7b46181cc1c2f10",
+        "size": 35903,
+        "upload_time": "2026-04-16T14:20:38.243834Z",
+        "url": "https://files.pythonhosted.org/packages/d3/26/1ef06f56198d631296d646a6223de35bcc6cf9795ceb2442816bc963b84c/langchain_text_splitters-1.1.2-py3-none-any.whl"
+      },
+      "wheel_local_path": "audit/engine-ci/runtime-inspection/langchain_text_splitters-1.1.2-py3-none-any.whl",
+      "official_metadata": {
+        "url": "https://pypi.org/pypi/langchain-text-splitters/1.1.2/json",
+        "sha256": "ea52c5b619f220f97d8e500f940f007c9db1ff262a69feed8022e9177a69c961",
+        "local_path": "research/engine-ci/runtime-license-supplements/langchain-text-splitters-1.1.2/pypi.json",
+        "selected_wheel_hash_and_size_match_frozen_proposal": true
+      },
+      "project_license": "MIT",
+      "top_level_notice_gap": "resolved-with-retained-supplement",
+      "license": {
+        "repository_path": "LICENSE",
+        "url": "https://raw.githubusercontent.com/langchain-ai/langchain/58c4e5bbdd9d18d7fe7ec83b5a05477d06fe2a8e/LICENSE",
+        "sha256": "4ec67e4ca6e6721dba849b2ca82261597c86a61ee214bbf21416006b7b2d0478",
+        "size": 1067,
+        "local_path": "research/engine-ci/runtime-license-supplements/langchain-text-splitters-1.1.2/upstream/LICENSE",
+        "git_blob_sha1": "3957738673765912ca83a0048f833e095d61e087",
+        "git_blob_matches_release_tree": true,
+        "git_mode": "100644"
+      },
+      "release_tag": "langchain-text-splitters==1.1.2",
+      "repository": "langchain-ai/langchain",
+      "release_commit": "58c4e5bbdd9d18d7fe7ec83b5a05477d06fe2a8e",
+      "release_ref_evidence": "research/engine-ci/runtime-license-supplements/langchain-text-splitters-1.1.2/github-tag-ref.json",
+      "source_identity_evidence": {
+        "matched_wheel_python_or_stub_members": 13,
+        "unmatched_wheel_python_or_stub_members": [],
+        "detail_path": "research/engine-ci/runtime-license-supplements/wheel-tag-source-comparison.json",
+        "method": "Recomputed Git blob SHA-1 over each wheel .py/.pyi byte string and compared to the recursive Git tree at the exact release commit. These checks do not establish reproducibility of native binaries."
+      },
+      "native_members": [],
+      "redistribution_review_status": "top-level-notice-supplement-complete",
+      "remaining_actions": [],
+      "published_pypi_provenance": {
+        "integrity_endpoint_observation": "HTTP 404 for this exact wheel on 2026-10-11; not treated as proof of absent provenance elsewhere."
+      }
+    },
+    {
+      "name": "langsmith",
+      "version": "0.14.1",
+      "wheel": {
+        "filename": "langsmith-0.14.1-py3-none-any.whl",
+        "sha256": "dcfd8a25ba72d8663024bd87df02e372e470f43e18f4a726f37fbacc772c0193",
+        "size": 812092,
+        "upload_time": "2026-09-25T17:38:05.704954Z",
+        "url": "https://files.pythonhosted.org/packages/04/d6/1771421302dd230d3e52f29546b187cda824cff1443031067b69d46207ee/langsmith-0.14.1-py3-none-any.whl"
+      },
+      "wheel_local_path": "audit/engine-ci/runtime-inspection/langsmith-0.14.1-py3-none-any.whl",
+      "official_metadata": {
+        "url": "https://pypi.org/pypi/langsmith/0.14.1/json",
+        "sha256": "90bc6af5bb6efe0a62e901434b1ec557edabd3efbc352a61adb1fa2fc07f688c",
+        "local_path": "research/engine-ci/runtime-license-supplements/langsmith-0.14.1/pypi.json",
+        "selected_wheel_hash_and_size_match_frozen_proposal": true
+      },
+      "project_license": "MIT",
+      "top_level_notice_gap": "resolved-with-retained-supplement",
+      "license": {
+        "repository_path": "LICENSE",
+        "url": "https://raw.githubusercontent.com/langchain-ai/langsmith-sdk/c51e722026138478b728884d9a3b504ef2ba8ea0/LICENSE",
+        "sha256": "34e0b9842c7a31d34e53bc7eb224e81e07a34996106e029bbc72dea2d449f496",
+        "size": 1066,
+        "local_path": "research/engine-ci/runtime-license-supplements/langsmith-0.14.1/upstream/LICENSE",
+        "git_blob_sha1": "136a251bf3a98cd47ba4c4cf5d2517d37236eaa1",
+        "git_blob_matches_release_tree": true,
+        "git_mode": "100644"
+      },
+      "release_tag": "v0.14.1",
+      "repository": "langchain-ai/langsmith-sdk",
+      "release_commit": "c51e722026138478b728884d9a3b504ef2ba8ea0",
+      "release_ref_evidence": "research/engine-ci/runtime-license-supplements/langsmith-0.14.1/github-tag-ref.json",
+      "source_identity_evidence": {
+        "matched_wheel_python_or_stub_members": 305,
+        "unmatched_wheel_python_or_stub_members": [],
+        "detail_path": "research/engine-ci/runtime-license-supplements/wheel-tag-source-comparison.json",
+        "method": "Recomputed Git blob SHA-1 over each wheel .py/.pyi byte string and compared to the recursive Git tree at the exact release commit. These checks do not establish reproducibility of native binaries."
+      },
+      "native_members": [],
+      "redistribution_review_status": "top-level-notice-supplement-complete",
+      "remaining_actions": [],
+      "published_pypi_provenance": {
+        "path": "research/engine-ci/runtime-license-supplements/langsmith-0.14.1/pypi-provenance-decoded.json",
+        "subject_wheel_sha256_matches": true,
+        "independent_signature_verification_performed": false
+      }
+    },
+    {
+      "name": "loguru",
+      "version": "0.7.3",
+      "wheel": {
+        "filename": "loguru-0.7.3-py3-none-any.whl",
+        "sha256": "31a33c10c8e1e10422bfd431aeb5d351c7cf7fa671e3c4df004162264b28220c",
+        "size": 61595,
+        "upload_time": "2024-12-06T11:20:54.538869Z",
+        "url": "https://files.pythonhosted.org/packages/0c/29/0348de65b8cc732daa3e33e67806420b2ae89bdce2b04af740289c5c6c8c/loguru-0.7.3-py3-none-any.whl"
+      },
+      "wheel_local_path": "audit/engine-ci/runtime-inspection/loguru-0.7.3-py3-none-any.whl",
+      "official_metadata": {
+        "url": "https://pypi.org/pypi/loguru/0.7.3/json",
+        "sha256": "ee7b27c01867c9a870e3f432f1fce5a5c3baaccacd0d66e347b733e81f5b2045",
+        "local_path": "research/engine-ci/runtime-license-supplements/loguru-0.7.3/pypi.json",
+        "selected_wheel_hash_and_size_match_frozen_proposal": true
+      },
+      "project_license": "MIT",
+      "top_level_notice_gap": "resolved-with-retained-supplement",
+      "license": {
+        "repository_path": "LICENSE",
+        "url": "https://raw.githubusercontent.com/Delgan/loguru/ae3bfd1b85b6b4a3db535f69b975687c79498be4/LICENSE",
+        "sha256": "b35d026cc7aca9d5859a02eb87ddf7a386a24c986838651bd1f283f94e003327",
+        "size": 1056,
+        "local_path": "research/engine-ci/runtime-license-supplements/loguru-0.7.3/upstream/LICENSE",
+        "git_blob_sha1": "5285f420ff222526f9afa7acf507362367132f9c",
+        "git_blob_matches_release_tree": true,
+        "git_mode": "100644"
+      },
+      "release_tag": "0.7.3",
+      "repository": "Delgan/loguru",
+      "release_commit": "ae3bfd1b85b6b4a3db535f69b975687c79498be4",
+      "release_ref_evidence": "research/engine-ci/runtime-license-supplements/loguru-0.7.3/github-tag-ref.json",
+      "source_identity_evidence": {
+        "matched_wheel_python_or_stub_members": 20,
+        "unmatched_wheel_python_or_stub_members": [],
+        "detail_path": "research/engine-ci/runtime-license-supplements/wheel-tag-source-comparison.json",
+        "method": "Recomputed Git blob SHA-1 over each wheel .py/.pyi byte string and compared to the recursive Git tree at the exact release commit. These checks do not establish reproducibility of native binaries."
+      },
+      "native_members": [],
+      "redistribution_review_status": "top-level-notice-supplement-complete",
+      "remaining_actions": [],
+      "published_pypi_provenance": {
+        "path": "research/engine-ci/runtime-license-supplements/loguru-0.7.3/pypi-provenance-decoded.json",
+        "subject_wheel_sha256_matches": true,
+        "independent_signature_verification_performed": false
+      }
+    },
+    {
+      "name": "primp",
+      "version": "2.0.1",
+      "wheel": {
+        "filename": "primp-2.0.1-cp310-abi3-macosx_11_0_arm64.whl",
+        "sha256": "ca21c764f17ba42dde38c29d6a1f01970d39fa5f4793b0fe702006bd71b7a16a",
+        "size": 6020705,
+        "upload_time": "2026-09-13T00:17:33.360393Z",
+        "url": "https://files.pythonhosted.org/packages/5d/ab/0a8af6dd09aa6875109aaf93fa0ceec4b6b8302d303690f1ce0922becece/primp-2.0.1-cp310-abi3-macosx_11_0_arm64.whl"
+      },
+      "wheel_local_path": "audit/engine-ci/runtime-inspection/primp-2.0.1-cp310-abi3-macosx_11_0_arm64.whl",
+      "official_metadata": {
+        "url": "https://pypi.org/pypi/primp/2.0.1/json",
+        "sha256": "df75f97204de01b1a887ba4fcdd9e95d55ab50c772bea26168c66883f95b6b3f",
+        "local_path": "research/engine-ci/runtime-license-supplements/primp-2.0.1/pypi.json",
+        "selected_wheel_hash_and_size_match_frozen_proposal": true
+      },
+      "project_license": "MIT",
+      "top_level_notice_gap": "resolved-with-retained-supplement",
+      "license": {
+        "repository_path": "LICENSE",
+        "url": "https://raw.githubusercontent.com/deedy5/primp/cf29cd94f339c1a69ec7f271f532f0f2411aa06e/LICENSE",
+        "sha256": "64f0fdb426abd21f75b48e2ff93b9976b8c374bab3538af33d3c6d3f7c7efae7",
+        "size": 1063,
+        "local_path": "research/engine-ci/runtime-license-supplements/primp-2.0.1/upstream/LICENSE",
+        "git_blob_sha1": "16e546952e854e7c7aed06eb3eb1f4e14be98943",
+        "git_blob_matches_release_tree": true,
+        "git_mode": "100644"
+      },
+      "release_tag": "v2.0.1",
+      "repository": "deedy5/primp",
+      "release_commit": "cf29cd94f339c1a69ec7f271f532f0f2411aa06e",
+      "release_ref_evidence": "research/engine-ci/runtime-license-supplements/primp-2.0.1/github-tag-ref.json",
+      "source_identity_evidence": {
+        "matched_wheel_python_or_stub_members": 1,
+        "unmatched_wheel_python_or_stub_members": [
+          {
+            "wheel_member": "primp/__init__.py",
+            "repository_path": "crates/primp-python/primp/__init__.py",
+            "computed_git_blob_sha1": "0b849e2358c58fe4ccffe3a784243235e5a72b19",
+            "repository_git_blob_sha1": null,
+            "sha256": "42e31a2eda72f776d431612ac5116a9f66259935906762a0bca6b133b4e67dca"
+          }
+        ],
+        "detail_path": "research/engine-ci/runtime-license-supplements/wheel-tag-source-comparison.json",
+        "method": "Recomputed Git blob SHA-1 over each wheel .py/.pyi byte string and compared to the recursive Git tree at the exact release commit. These checks do not establish reproducibility of native binaries.",
+        "generated_wrapper_note": "The only unmatched Python member is the small maturin-style import wrapper primp/__init__.py; the stub matches the release tree. Exact-version PyPI sdist Rust sources and Cargo manifests are separately compared to the same commit."
+      },
+      "native_members": [
+        {
+          "member": "primp/primp.abi3.so",
+          "size": 12637872,
+          "sha256": "92fd336bc9562157d295e21a7b01451cbf1d2937733ecc90fecaa3185573eb6b",
+          "magic_bytes": "cffaedfe",
+          "macho_cpu_type": "0x100000c",
+          "architecture": "arm64"
+        }
+      ],
+      "redistribution_review_status": "native-closure-open",
+      "remaining_actions": [
+        "Establish the target/features and linked-component inventory for the exact native wheel; the Cargo.lock contains 423 source-lock packages including optional/build/test/platform-only entries.",
+        "Collect exact notices for actually bundled third-party native/Rust dependencies, including cryptography/compression components where linked. Retained in-tree primp-h2 and primp-rustls notices alone do not close this."
+      ],
+      "published_pypi_provenance": {
+        "integrity_endpoint_observation": "HTTP 404 for this exact wheel on 2026-10-11; not treated as proof of absent provenance elsewhere."
+      },
+      "additional_retained_project_notices": [
+        {
+          "repository_path": "crates/primp/LICENSE",
+          "url": "https://raw.githubusercontent.com/deedy5/primp/cf29cd94f339c1a69ec7f271f532f0f2411aa06e/crates/primp/LICENSE",
+          "sha256": "64f0fdb426abd21f75b48e2ff93b9976b8c374bab3538af33d3c6d3f7c7efae7",
+          "size": 1063,
+          "local_path": "research/engine-ci/runtime-license-supplements/primp-2.0.1/upstream/crates/primp/LICENSE",
+          "git_blob_sha1": "16e546952e854e7c7aed06eb3eb1f4e14be98943",
+          "git_blob_matches_release_tree": true,
+          "git_mode": "100644"
+        },
+        {
+          "repository_path": "crates/primp-h2/LICENSE",
+          "url": "https://raw.githubusercontent.com/deedy5/primp/cf29cd94f339c1a69ec7f271f532f0f2411aa06e/crates/primp-h2/LICENSE",
+          "sha256": "b21623012e6c453d944b0342c515b631cfcbf30704c2621b291526b69c10724d",
+          "size": 1054,
+          "local_path": "research/engine-ci/runtime-license-supplements/primp-2.0.1/upstream/crates/primp-h2/LICENSE",
+          "git_blob_sha1": "11239dd1c157a353a2402fc66a1f5e7596d88c76",
+          "git_blob_matches_release_tree": true,
+          "git_mode": "100644"
+        },
+        {
+          "repository_path": "crates/primp-rustls/LICENSE",
+          "url": "https://raw.githubusercontent.com/deedy5/primp/cf29cd94f339c1a69ec7f271f532f0f2411aa06e/crates/primp-rustls/LICENSE",
+          "sha256": "d75967ce788187f83c3bd3328210974acfc443d4dc44909f1d7e34f21623a0c6",
+          "size": 286,
+          "local_path": "research/engine-ci/runtime-license-supplements/primp-2.0.1/upstream/crates/primp-rustls/LICENSE",
+          "git_blob_sha1": "df2af4fa51df62883cc72bd5843d167893207b77",
+          "git_blob_matches_release_tree": true,
+          "git_mode": "100644"
+        },
+        {
+          "repository_path": "crates/primp-rustls/LICENSE-APACHE",
+          "url": "https://raw.githubusercontent.com/deedy5/primp/cf29cd94f339c1a69ec7f271f532f0f2411aa06e/crates/primp-rustls/LICENSE-APACHE",
+          "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "size": 10847,
+          "local_path": "research/engine-ci/runtime-license-supplements/primp-2.0.1/upstream/crates/primp-rustls/LICENSE-APACHE",
+          "git_blob_sha1": "16fe87b06e802f094b3fbb0894b137bca2b16ef1",
+          "git_blob_matches_release_tree": true,
+          "git_mode": "100644"
+        },
+        {
+          "repository_path": "crates/primp-rustls/LICENSE-ISC",
+          "url": "https://raw.githubusercontent.com/deedy5/primp/cf29cd94f339c1a69ec7f271f532f0f2411aa06e/crates/primp-rustls/LICENSE-ISC",
+          "sha256": "7cfafc877eccc46c0e346ccbaa5c51bb6b894d2b818e617d970211e232785ad4",
+          "size": 775,
+          "local_path": "research/engine-ci/runtime-license-supplements/primp-2.0.1/upstream/crates/primp-rustls/LICENSE-ISC",
+          "git_blob_sha1": "03acf1bd2c44c9c10429d0ee4d05ee1e92f9e3f9",
+          "git_blob_matches_release_tree": true,
+          "git_mode": "100644"
+        },
+        {
+          "repository_path": "crates/primp-rustls/LICENSE-MIT",
+          "url": "https://raw.githubusercontent.com/deedy5/primp/cf29cd94f339c1a69ec7f271f532f0f2411aa06e/crates/primp-rustls/LICENSE-MIT",
+          "sha256": "709e3175b4212f7b13aa93971c9f62ff8c69ec45ad8c6532a7e0c41d7a7d6f8c",
+          "size": 1082,
+          "local_path": "research/engine-ci/runtime-license-supplements/primp-2.0.1/upstream/crates/primp-rustls/LICENSE-MIT",
+          "git_blob_sha1": "ef480e6f0936ef5d006d6e3ce9ea8536232b3c88",
+          "git_blob_matches_release_tree": true,
+          "git_mode": "100644"
+        },
+        {
+          "repository_path": "crates/primp-rustls/rustls/LICENSE",
+          "url": "https://raw.githubusercontent.com/deedy5/primp/cf29cd94f339c1a69ec7f271f532f0f2411aa06e/crates/primp-rustls/rustls/LICENSE",
+          "sha256": "d75967ce788187f83c3bd3328210974acfc443d4dc44909f1d7e34f21623a0c6",
+          "size": 286,
+          "local_path": "research/engine-ci/runtime-license-supplements/primp-2.0.1/upstream/crates/primp-rustls/rustls/LICENSE",
+          "git_blob_sha1": "df2af4fa51df62883cc72bd5843d167893207b77",
+          "git_blob_matches_release_tree": true,
+          "git_mode": "100644"
+        },
+        {
+          "repository_path": "crates/primp-rustls/rustls/LICENSE-APACHE",
+          "url": "https://raw.githubusercontent.com/deedy5/primp/cf29cd94f339c1a69ec7f271f532f0f2411aa06e/crates/primp-rustls/rustls/LICENSE-APACHE",
+          "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "size": 10847,
+          "local_path": "research/engine-ci/runtime-license-supplements/primp-2.0.1/upstream/crates/primp-rustls/rustls/LICENSE-APACHE",
+          "git_blob_sha1": "16fe87b06e802f094b3fbb0894b137bca2b16ef1",
+          "git_blob_matches_release_tree": true,
+          "git_mode": "100644"
+        },
+        {
+          "repository_path": "crates/primp-rustls/rustls/LICENSE-ISC",
+          "url": "https://raw.githubusercontent.com/deedy5/primp/cf29cd94f339c1a69ec7f271f532f0f2411aa06e/crates/primp-rustls/rustls/LICENSE-ISC",
+          "sha256": "7cfafc877eccc46c0e346ccbaa5c51bb6b894d2b818e617d970211e232785ad4",
+          "size": 775,
+          "local_path": "research/engine-ci/runtime-license-supplements/primp-2.0.1/upstream/crates/primp-rustls/rustls/LICENSE-ISC",
+          "git_blob_sha1": "03acf1bd2c44c9c10429d0ee4d05ee1e92f9e3f9",
+          "git_blob_matches_release_tree": true,
+          "git_mode": "100644"
+        },
+        {
+          "repository_path": "crates/primp-rustls/rustls/LICENSE-MIT",
+          "url": "https://raw.githubusercontent.com/deedy5/primp/cf29cd94f339c1a69ec7f271f532f0f2411aa06e/crates/primp-rustls/rustls/LICENSE-MIT",
+          "sha256": "709e3175b4212f7b13aa93971c9f62ff8c69ec45ad8c6532a7e0c41d7a7d6f8c",
+          "size": 1082,
+          "local_path": "research/engine-ci/runtime-license-supplements/primp-2.0.1/upstream/crates/primp-rustls/rustls/LICENSE-MIT",
+          "git_blob_sha1": "ef480e6f0936ef5d006d6e3ce9ea8536232b3c88",
+          "git_blob_matches_release_tree": true,
+          "git_mode": "100644"
+        }
+      ]
+    },
+    {
+      "name": "pypandoc-binary",
+      "version": "1.17",
+      "wheel": {
+        "filename": "pypandoc_binary-1.17-py3-none-macosx_11_0_arm64.whl",
+        "sha256": "fcfd28f347ed998dda28823fc6bc24f9310e7fdf3ddceaf925bf0563a100ab5b",
+        "size": 25553944,
+        "upload_time": "2026-03-14T22:38:50.740629Z",
+        "url": "https://files.pythonhosted.org/packages/15/58/8fd107c68522957868c1e785fbea7595608df118e440e424d189668294df/pypandoc_binary-1.17-py3-none-macosx_11_0_arm64.whl"
+      },
+      "wheel_local_path": "audit/engine-ci/runtime-inspection/pypandoc_binary-1.17-py3-none-macosx_11_0_arm64.whl",
+      "official_metadata": {
+        "url": "https://pypi.org/pypi/pypandoc-binary/1.17/json",
+        "sha256": "e52295f9d70881f24789d241313b35e4929870a6e5f5e7dd69a7d8bee57bd872",
+        "local_path": "research/engine-ci/runtime-license-supplements/pypandoc-binary-1.17/pypi.json",
+        "selected_wheel_hash_and_size_match_frozen_proposal": true
+      },
+      "project_license": "MIT",
+      "top_level_notice_gap": "resolved-with-retained-supplement",
+      "license": {
+        "repository_path": "LICENSE",
+        "url": "https://raw.githubusercontent.com/JessicaTegner/pypandoc/51af11f47a783e31dab230269527d02f6fe08a20/LICENSE",
+        "sha256": "7e20c0e8f3d425c66500ab55508393f80f6bddb29fed599c13d166ecb863758c",
+        "size": 1103,
+        "local_path": "research/engine-ci/runtime-license-supplements/pypandoc-binary-1.17/upstream/LICENSE",
+        "git_blob_sha1": "8fa0bb5e17556ae58c92b8682fb2070addfab46e",
+        "git_blob_matches_release_tree": true,
+        "git_mode": "100644"
+      },
+      "release_tag": "v1.17",
+      "repository": "JessicaTegner/pypandoc",
+      "release_commit": "51af11f47a783e31dab230269527d02f6fe08a20",
+      "release_ref_evidence": "research/engine-ci/runtime-license-supplements/pypandoc-binary-1.17/github-tag-ref.json",
+      "source_identity_evidence": {
+        "matched_wheel_python_or_stub_members": 6,
+        "unmatched_wheel_python_or_stub_members": [],
+        "detail_path": "research/engine-ci/runtime-license-supplements/wheel-tag-source-comparison.json",
+        "method": "Recomputed Git blob SHA-1 over each wheel .py/.pyi byte string and compared to the recursive Git tree at the exact release commit. These checks do not establish reproducibility of native binaries."
+      },
+      "native_members": [
+        {
+          "member": "pypandoc/files/pandoc",
+          "size": 119565632,
+          "sha256": "d7b1e75cd20ee6a788a1399492be07d4559949e18e55f34cfc5c91807fdfa90d",
+          "magic_bytes": "cffaedfe",
+          "macho_cpu_type": "0x1000007",
+          "architecture": "x86_64"
+        }
+      ],
+      "redistribution_review_status": "native-closure-open",
+      "remaining_actions": [
+        "Replace/reselect the x86_64 Pandoc payload for a native-arm64 target under a separately reviewed packaging-input change; the wheel platform tag is insufficient.",
+        "Complete the Pandoc corresponding-source delivery/source-offer decision and bundled dependency notices, and establish provenance of the selected native executable."
+      ],
+      "published_pypi_provenance": {
+        "path": "research/engine-ci/runtime-license-supplements/pypandoc-binary-1.17/pypi-provenance-decoded.json",
+        "subject_wheel_sha256_matches": true,
+        "independent_signature_verification_performed": false
+      }
+    },
+    {
+      "name": "tokenizers",
+      "version": "0.23.2",
+      "wheel": {
+        "filename": "tokenizers-0.23.2-cp310-abi3-macosx_11_0_arm64.whl",
+        "sha256": "986670e43691469dcee610ea0f846f91a8f84e91fc6f7a48d4c064414c0ec2bf",
+        "size": 3101593,
+        "upload_time": "2026-09-03T08:55:28.587425Z",
+        "url": "https://files.pythonhosted.org/packages/67/49/22da045a91732384d3a3771816bf188dc5a1f702c32e635afa7c679c0bef/tokenizers-0.23.2-cp310-abi3-macosx_11_0_arm64.whl"
+      },
+      "wheel_local_path": "audit/engine-ci/runtime-inspection/tokenizers-0.23.2-cp310-abi3-macosx_11_0_arm64.whl",
+      "official_metadata": {
+        "url": "https://pypi.org/pypi/tokenizers/0.23.2/json",
+        "sha256": "426a2b4af9c418cc2c8bf5fdf2a7706a2f35f77fee70ed0398026f8fffdfc65c",
+        "local_path": "research/engine-ci/runtime-license-supplements/tokenizers-0.23.2/pypi.json",
+        "selected_wheel_hash_and_size_match_frozen_proposal": true
+      },
+      "project_license": "Apache-2.0",
+      "top_level_notice_gap": "resolved-with-retained-supplement",
+      "license": {
+        "repository_path": "LICENSE",
+        "url": "https://raw.githubusercontent.com/huggingface/tokenizers/88a4498ad4ea1a9487b0a9b0ff881383fd5a06a3/LICENSE",
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+        "size": 11357,
+        "local_path": "research/engine-ci/runtime-license-supplements/tokenizers-0.23.2/upstream/LICENSE",
+        "git_blob_sha1": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+        "git_blob_matches_release_tree": true,
+        "git_mode": "100644"
+      },
+      "release_tag": "v0.23.2",
+      "repository": "huggingface/tokenizers",
+      "release_commit": "88a4498ad4ea1a9487b0a9b0ff881383fd5a06a3",
+      "release_ref_evidence": "research/engine-ci/runtime-license-supplements/tokenizers-0.23.2/github-tag-ref.json",
+      "source_identity_evidence": {
+        "matched_wheel_python_or_stub_members": 25,
+        "unmatched_wheel_python_or_stub_members": [],
+        "detail_path": "research/engine-ci/runtime-license-supplements/wheel-tag-source-comparison.json",
+        "method": "Recomputed Git blob SHA-1 over each wheel .py/.pyi byte string and compared to the recursive Git tree at the exact release commit. These checks do not establish reproducibility of native binaries."
+      },
+      "native_members": [
+        {
+          "member": "tokenizers/tokenizers.abi3.so",
+          "size": 9585168,
+          "sha256": "447866c1f44704aad07c12f1ea068a63c45b29ecfce301a9d122b549cafc1623",
+          "magic_bytes": "cffaedfe",
+          "macho_cpu_type": "0x100000c",
+          "architecture": "arm64"
+        }
+      ],
+      "redistribution_review_status": "native-closure-open",
+      "remaining_actions": [
+        "Establish exact linked Rust/C/C++ dependency closure for the wheel; the bindings source Cargo.lock has 153 packages, not an installed/linked SBOM.",
+        "Source defaults enable onig and esaxx_fast; reconcile their bundled upstream notices and every linked Rust dependency before redistribution."
+      ],
+      "published_pypi_provenance": {
+        "integrity_endpoint_observation": "HTTP 404 for this exact wheel on 2026-10-11; not treated as proof of absent provenance elsewhere."
+      },
+      "additional_retained_project_notices": [
+        {
+          "repository_path": "tokenizers/LICENSE",
+          "url": "https://raw.githubusercontent.com/huggingface/tokenizers/88a4498ad4ea1a9487b0a9b0ff881383fd5a06a3/tokenizers/LICENSE",
+          "sha256": "1e881ecf2862d01e6e5bc2b861e46886d2a6fb01499c0c508a209a7271b13cf2",
+          "size": 10,
+          "local_path": "research/engine-ci/runtime-license-supplements/tokenizers-0.23.2/upstream/tokenizers/LICENSE",
+          "git_blob_sha1": "ea5b60640b01f74e295037aa8a6b7d4ea278a739",
+          "git_blob_matches_release_tree": true,
+          "git_mode": "120000"
+        }
+      ]
+    }
+  ],
+  "pandoc": {
+    "wrapper_license": "MIT",
+    "bundled_program_license": "GPL-2.0-or-later",
+    "version_identification": {
+      "version": "3.9",
+      "basis": "Static embedded pandoc-3.9-inplace unit strings in the exact bundled executable. No --version or code execution; not proof of bit-identical official upstream executable.",
+      "evidence_path": "research/engine-ci/runtime-license-supplements/pandoc-3.9/bundled-binary-static-evidence.json"
+    },
+    "bundled_binary": {
+      "wheel_sha256": "fcfd28f347ed998dda28823fc6bc24f9310e7fdf3ddceaf925bf0563a100ab5b",
+      "member": "pypandoc/files/pandoc",
+      "sha256": "d7b1e75cd20ee6a788a1399492be07d4559949e18e55f34cfc5c91807fdfa90d",
+      "size": 119565632,
+      "macho": {
+        "magic": "0xfeedfacf",
+        "cpu_type": "0x1000007",
+        "cpu_subtype": "0x3",
+        "file_type": 2,
+        "ncmds": 22,
+        "architecture": "x86_64",
+        "dylib_commands": [
+          {
+            "command": "0xc",
+            "name": "/usr/lib/libSystem.B.dylib"
+          },
+          {
+            "command": "0xc",
+            "name": "/usr/lib/libz.1.dylib"
+          },
+          {
+            "command": "0xc",
+            "name": "/usr/lib/libiconv.2.dylib"
+          },
+          {
+            "command": "0xc",
+            "name": "/usr/lib/libffi.dylib"
+          },
+          {
+            "command": "0xc",
+            "name": "/System/Library/Frameworks/Security.framework/Versions/A/Security"
+          },
+          {
+            "command": "0xc",
+            "name": "/usr/lib/libcharset.1.dylib"
+          }
+        ]
+      }
+    },
+    "release_tag": "3.9",
+    "release_commit": "19c1f6552b12c70741674f509f8064ae506f29db",
+    "release_url": "https://github.com/jgm/pandoc/releases/tag/3.9",
+    "release_metadata_sha256": "3f200b3307766ed4179df188c418d6f9ccbee039e6099b9c22ea2a9d58e4a870",
+    "authoritative_notices": [
+      {
+        "repository_path": "COPYING.md",
+        "url": "https://raw.githubusercontent.com/jgm/pandoc/19c1f6552b12c70741674f509f8064ae506f29db/COPYING.md",
+        "sha256": "9d56cac92294e206af026a5502bee0fed77200b08b51ec28aa63c9efda4dcfdd",
+        "size": 17787,
+        "local_path": "research/engine-ci/runtime-license-supplements/pandoc-3.9/upstream/COPYING.md",
+        "git_blob_sha1": "a2f014a432e4fde941056984227ebbb75a0d8950",
+        "git_blob_matches_release_tree": true,
+        "git_mode": "100644"
+      },
+      {
+        "repository_path": "COPYRIGHT",
+        "url": "https://raw.githubusercontent.com/jgm/pandoc/19c1f6552b12c70741674f509f8064ae506f29db/COPYRIGHT",
+        "sha256": "842e33ef01625e93f85bebb8bac83aa570186b7aa77a09971257cc29f8f60740",
+        "size": 9598,
+        "local_path": "research/engine-ci/runtime-license-supplements/pandoc-3.9/upstream/COPYRIGHT",
+        "git_blob_sha1": "2cff18ace174ac014adf882d7802ef4f48873625",
+        "git_blob_matches_release_tree": true,
+        "git_mode": "100644"
+      }
+    ],
+    "retained_build_and_package_texts": [
+      {
+        "repository_path": ".github/workflows/release-candidate.yml",
+        "url": "https://raw.githubusercontent.com/jgm/pandoc/19c1f6552b12c70741674f509f8064ae506f29db/.github/workflows/release-candidate.yml",
+        "sha256": "a447907264b9fbac66a951ad5826f3da40a8606c29134e3f81960e03212bec82",
+        "size": 5341,
+        "local_path": "research/engine-ci/runtime-license-supplements/pandoc-3.9/upstream/.github/workflows/release-candidate.yml",
+        "git_blob_sha1": "2648efb2437cfec0012fdc307b7fcdbe1a857644",
+        "git_blob_matches_release_tree": true,
+        "git_mode": "100644"
+      },
+      {
+        "repository_path": "cabal.project",
+        "url": "https://raw.githubusercontent.com/jgm/pandoc/19c1f6552b12c70741674f509f8064ae506f29db/cabal.project",
+        "sha256": "65491668083806ec312bd63330f6878714edc0634b0b5a6ba87a31611b217788",
+        "size": 2765,
+        "local_path": "research/engine-ci/runtime-license-supplements/pandoc-3.9/upstream/cabal.project",
+        "git_blob_sha1": "1ac471566eb7ee5af15f3f82222fb4a04ed5ee8e",
+        "git_blob_matches_release_tree": true,
+        "git_mode": "100644"
+      },
+      {
+        "repository_path": "macos/Makefile",
+        "url": "https://raw.githubusercontent.com/jgm/pandoc/19c1f6552b12c70741674f509f8064ae506f29db/macos/Makefile",
+        "sha256": "4ff57dc225e51b7a3f70e98ce699328c0fde29d1bbd9d84816921c27fd1660a9",
+        "size": 1299,
+        "local_path": "research/engine-ci/runtime-license-supplements/pandoc-3.9/upstream/macos/Makefile",
+        "git_blob_sha1": "ae1ee4197bd48d9dcaf67138b6f0208716b9ead6",
+        "git_blob_matches_release_tree": true,
+        "git_mode": "100644"
+      },
+      {
+        "repository_path": "macos/make_macos_release.sh",
+        "url": "https://raw.githubusercontent.com/jgm/pandoc/19c1f6552b12c70741674f509f8064ae506f29db/macos/make_macos_release.sh",
+        "sha256": "0569293e5573443a2da6ea8ca70b078d6aa1425e539b27259f064c08ccb8a02e",
+        "size": 1453,
+        "local_path": "research/engine-ci/runtime-license-supplements/pandoc-3.9/upstream/macos/make_macos_release.sh",
+        "git_blob_sha1": "250a0322a0cb65c4befe0fdf96ac3afeb92865de",
+        "git_blob_matches_release_tree": true,
+        "git_mode": "100644"
+      },
+      {
+        "repository_path": "pandoc-cli/COPYING.md",
+        "url": "https://raw.githubusercontent.com/jgm/pandoc/19c1f6552b12c70741674f509f8064ae506f29db/pandoc-cli/COPYING.md",
+        "sha256": "979d3c299df27c0b248bd6bb14eff0425e92209ae43539705b773bec39ad985a",
+        "size": 13,
+        "local_path": "research/engine-ci/runtime-license-supplements/pandoc-3.9/upstream/pandoc-cli/COPYING.md",
+        "git_blob_sha1": "0c9476f2b40f5b1b9a811742309d538bbe244719",
+        "git_blob_matches_release_tree": true,
+        "git_mode": "120000"
+      },
+      {
+        "repository_path": "pandoc-cli/pandoc-cli.cabal",
+        "url": "https://raw.githubusercontent.com/jgm/pandoc/19c1f6552b12c70741674f509f8064ae506f29db/pandoc-cli/pandoc-cli.cabal",
+        "sha256": "eb4be2106aa7869afb6226e278dcf96f20a674a6de161ab6135188d088051dbc",
+        "size": 3447,
+        "local_path": "research/engine-ci/runtime-license-supplements/pandoc-3.9/upstream/pandoc-cli/pandoc-cli.cabal",
+        "git_blob_sha1": "34409d9fd13b6d5b30bfc025735c11caaaa5862f",
+        "git_blob_matches_release_tree": true,
+        "git_mode": "100644"
+      },
+      {
+        "repository_path": "pandoc-lua-engine/COPYING.md",
+        "url": "https://raw.githubusercontent.com/jgm/pandoc/19c1f6552b12c70741674f509f8064ae506f29db/pandoc-lua-engine/COPYING.md",
+        "sha256": "979d3c299df27c0b248bd6bb14eff0425e92209ae43539705b773bec39ad985a",
+        "size": 13,
+        "local_path": "research/engine-ci/runtime-license-supplements/pandoc-3.9/upstream/pandoc-lua-engine/COPYING.md",
+        "git_blob_sha1": "0c9476f2b40f5b1b9a811742309d538bbe244719",
+        "git_blob_matches_release_tree": true,
+        "git_mode": "120000"
+      },
+      {
+        "repository_path": "pandoc-lua-engine/pandoc-lua-engine.cabal",
+        "url": "https://raw.githubusercontent.com/jgm/pandoc/19c1f6552b12c70741674f509f8064ae506f29db/pandoc-lua-engine/pandoc-lua-engine.cabal",
+        "sha256": "3a37fa76bbec0c2e93bed34cb3bef854cd1c92b873f439cf8b50b86480f3206d",
+        "size": 7199,
+        "local_path": "research/engine-ci/runtime-license-supplements/pandoc-3.9/upstream/pandoc-lua-engine/pandoc-lua-engine.cabal",
+        "git_blob_sha1": "f82f2986bb3a39fdbfb292955aa4f2e8f43157c9",
+        "git_blob_matches_release_tree": true,
+        "git_mode": "100644"
+      },
+      {
+        "repository_path": "pandoc.cabal",
+        "url": "https://raw.githubusercontent.com/jgm/pandoc/19c1f6552b12c70741674f509f8064ae506f29db/pandoc.cabal",
+        "sha256": "8d6da253046492c0742731254e30d91d8f32b5a0654e19da4375c0b392e4237c",
+        "size": 42063,
+        "local_path": "research/engine-ci/runtime-license-supplements/pandoc-3.9/upstream/pandoc.cabal",
+        "git_blob_sha1": "3640dc43cd2499ac437aa1b8e5bfd39dff3b5d47",
+        "git_blob_matches_release_tree": true,
+        "git_mode": "100644"
+      },
+      {
+        "repository_path": "stack.yaml",
+        "url": "https://raw.githubusercontent.com/jgm/pandoc/19c1f6552b12c70741674f509f8064ae506f29db/stack.yaml",
+        "sha256": "cc8897fac814a111232a6914acd070700b6299ea54d244c22c74d4d366cb3c62",
+        "size": 752,
+        "local_path": "research/engine-ci/runtime-license-supplements/pandoc-3.9/upstream/stack.yaml",
+        "git_blob_sha1": "c0342d0d087682a1059c9b57c769a41a43590d0f",
+        "git_blob_matches_release_tree": true,
+        "git_mode": "100644"
+      }
+    ],
+    "source_locations_declared_by_upstream": [
+      "https://github.com/jgm/pandoc/tree/3.9",
+      "https://hackage.haskell.org/package/pandoc-3.9/pandoc-3.9.tar.gz"
+    ],
+    "official_macos_release_asset_metadata": [
+      {
+        "filename": "pandoc-3.9-arm64-macOS.pkg",
+        "url": "https://github.com/jgm/pandoc/releases/download/3.9/pandoc-3.9-arm64-macOS.pkg",
+        "size": 42464507,
+        "provider_digest": "sha256:c1b2dc8bd3abe2d56a7d2ca73dcf2d2c7f6e623b37b1f328de1b36bdee480a05",
+        "downloaded": false
+      },
+      {
+        "filename": "pandoc-3.9-arm64-macOS.zip",
+        "url": "https://github.com/jgm/pandoc/releases/download/3.9/pandoc-3.9-arm64-macOS.zip",
+        "size": 42595715,
+        "provider_digest": "sha256:7d56ac6fe6fad0a7407bcd776aa142f61ca41838f286165f79d0584fa57b24d1",
+        "downloaded": false
+      },
+      {
+        "filename": "pandoc-3.9-x86_64-macOS.pkg",
+        "url": "https://github.com/jgm/pandoc/releases/download/3.9/pandoc-3.9-x86_64-macOS.pkg",
+        "size": 25648665,
+        "provider_digest": "sha256:06743dd5ff1e02a91ae745cf9d11dde492be498636ad50728378ce7cfb0d2ff5",
+        "downloaded": false
+      },
+      {
+        "filename": "pandoc-3.9-x86_64-macOS.zip",
+        "url": "https://github.com/jgm/pandoc/releases/download/3.9/pandoc-3.9-x86_64-macOS.zip",
+        "size": 25692894,
+        "provider_digest": "sha256:f1dfb5a433976b131818c2e69db70bb46874604367e8923412a5c2fa673f2526",
+        "downloaded": false
+      }
+    ],
+    "source_delivery_inventory": {
+      "wheel_contains_complete_corresponding_source": false,
+      "wheel_contains_written_source_offer": false,
+      "wheel_contains_standalone_pandoc_license_notice_files": false,
+      "observed_wheel_scope": "Six wrapper .py files, one pandoc executable, and four dist-info files; no source bundle or source-offer document.",
+      "retained_source_evidence": "Exact release commit COPYRIGHT/COPYING, cabal/stack manifests and macOS build scripts retained as text. Source-location URLs do not establish complete corresponding-source delivery for the actual bundled binary.",
+      "remaining_review": "Choose and implement an applicable GPL distribution/source-delivery route for the actual shipped Pandoc and its linked components. Review whether complete corresponding source includes the necessary dependency sources, modifications and build/install scripts. Do not invent a written offer or treat an upstream link as an automatic compliance conclusion.",
+      "license_reference": "COPYING.md, GPL version 2 section 3"
+    },
+    "component_notice_inventory": {
+      "retained_from_COPYRIGHT": [
+        "Pandoc main code: GPL-2.0-or-later",
+        "pandoc-types: BSD-3-Clause",
+        "Pandoc data templates: GPL-2.0-or-later OR BSD-3-Clause",
+        "dzslides template content: WTFPL declaration (full text not supplied by this COPYRIGHT)",
+        "Embedded Lua interpreter: MIT notice and text",
+        "Per-module copyrights for Muse, Texinfo, OpenDocument, Org, ZimWiki, Docx, Textile, TikiWiki, JATS, EPUB, Lua, Jira and FB2",
+        "WASM-derived patches: MIT text retained in COPYRIGHT, but inclusion in this native Mac executable is not asserted"
+      ],
+      "limitations": "Upstream COPYRIGHT is not proven to be a full notice bundle for every statically linked Haskell/C library in this exact executable. Static package strings and source manifests are supporting inventory, not a complete linked SBOM.",
+      "incomplete_third_party_notices": [
+        "Full dzslides/WTFPL terms when those templates are distributed",
+        "Exact linked Haskell/C dependency notices, plus any corresponding-source obligations for those components"
+      ]
+    },
+    "packaging_findings": [
+      "Bundled Mach-O is thin x86_64 (CPU type 0x01000007), despite filename and WHEEL tag claiming macosx_11_0_arm64.",
+      "The exact pypandoc v1.17 CI calls download_pandoc() with its default latest version and declares both x86_64 and arm64 wheel targets. It does not pin the Pandoc version/digest in that invocation.",
+      "The authoritative 3.9 release separately lists real arm64 and x86_64 Mac assets. Their metadata was retained; no asset bytes were downloaded and no packaging input was substituted."
+    ],
+    "compatibility_conclusion": "No blanket app-wide incompatibility conclusion is made. The wrapper subprocess boundary, app distribution arrangement, and all linked/bundled components require the release/license review. The current candidate is not cleared for native-arm64 redistribution."
+  },
+  "evidence_indexes": {
+    "upstream_texts": "research/engine-ci/runtime-license-supplements/upstream-text-inventory.json",
+    "repository_refs": "research/engine-ci/runtime-license-supplements/repository-ref-inventory.json",
+    "wheel_source_comparisons": "research/engine-ci/runtime-license-supplements/wheel-tag-source-comparison.json",
+    "sdist_sources": "research/engine-ci/runtime-license-supplements/pypi-source-inventory.json",
+    "sdist_source_comparisons": "research/engine-ci/runtime-license-supplements/sdist-tag-source-comparison.json",
+    "primp_source_lock": "research/engine-ci/runtime-license-supplements/primp-2.0.1/cargo-lock-inventory.json",
+    "tokenizers_source_lock": "research/engine-ci/runtime-license-supplements/tokenizers-0.23.2/cargo-lock-inventory.json"
+  },
+  "verification_limits": [
+    "Source file/Git tree hash matches connect notices to exact release sources, but do not reproduce or attest every native wheel byte.",
+    "PyPI-published provenance was retained/decoded for langsmith, loguru and pypandoc-binary. Subject hashes match; signature/certificate-chain/transparency proofs were not independently verified.",
+    "Presence and provenance of these notices are not a blanket compatibility opinion or a complete transitive-notice verdict.",
+    "Any release-input replacement or actual Mac runtime/freeze test is outside this review."
+  ]
+}
