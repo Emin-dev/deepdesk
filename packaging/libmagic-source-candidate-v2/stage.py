@@ -24,7 +24,7 @@ import time
 import urllib.request
 
 sys.dont_write_bytecode = True
-SCOPE = 'libmagic-source-nofork-patched-synthetic-pilot-v2'
+SCOPE = 'libmagic-source-nofork-patched-native-canary-pilot-v4'
 SOURCE_SCOPE = 'libmagic-source-synthetic-mime-pilot-only'
 OVERLAY_BEFORE_SHA = 'f174166d37224e093cadfdde70efc9b2d467c22f99709349782df392157f789a'
 OVERLAY_AFTER_SHA = 'f7b5bb8420a17d9b6cd14983adf20f77a2bbf0f9704ecc8ccda68f0b302d62eb'
@@ -36,7 +36,7 @@ EXPANDED_SIZE = 5966778
 BOUNDED_SHA = 'a94a58ba7e45f203fafd4d4d7a0d60ec91cd8366ac7ae8d55909c7d8b1d128f4'
 NAMES = {'stage.py','bounded_runtime.py','offline.sb','sdk_codec_preflight.c','smoke_fixture.c',
          'synthetic_fixtures.h','source-pin.json','source-members.json','test_helpers.py',
-         'libmagic-source-macos.yml.template','README.md','source-overlay.json','compress-nofork.patch','smoke-no-exec.sb'}
+         'libmagic-source-macos.yml.template','README.md','source-overlay.json','compress-nofork.patch','smoke-no-exec.sb','exec_denial_canary.h','test_exec_denial_canary.c'}
 MACROS = ('ZLIBSUPPORT','BZLIBSUPPORT','XZLIBSUPPORT','ZSTDLIBSUPPORT','LZLIBSUPPORT',
           'LRZIPLIBSUPPORT','HAVE_POSIX_SPAWNP','HAVE_FORK')
 EXPECTED_FIXTURES = {'fixture_pass=plain:text/plain','fixture_pass=pdf:application/pdf',
@@ -324,6 +324,38 @@ def validate_smoke(text, prefix, executable):
     return images
 
 
+
+def native_canary_observation(marker, child_succeeded, output=None):
+    try:
+        before=marker.lstat()
+        require(stat.S_ISREG(before.st_mode) and before.st_nlink==1 and before.st_size<=128, 'Invalid native canary marker')
+        fd=os.open(marker,os.O_RDONLY|os.O_NOFOLLOW)
+        try:
+            current=os.fstat(fd)
+            require((before.st_dev,before.st_ino)==(current.st_dev,current.st_ino)
+                    and stat.S_ISREG(current.st_mode) and current.st_nlink==1, 'Native canary marker changed')
+            data=os.read(fd,129)
+            require(len(data)<=128 and os.read(fd,1)==b'' and os.fstat(fd).st_size==len(data), 'Native canary marker size differs')
+        finally: os.close(fd)
+        outcomes={b'':'native_entry_not_observed',b'entered\n':'native_entered_incomplete',
+            b'entered\npermission_denied\n':'native_permission_denied',
+            b'entered\nunexpected_spawn_error\n':'native_unexpected_spawn_error',
+            b'entered\nexec_allowed_child_reaped\n':'native_exec_allowed_child_reaped',
+            b'entered\nexec_allowed_reap_failed\n':'native_exec_allowed_reap_failed'}
+        require(data in outcomes, 'Native canary token order differs')
+        progress=outcomes[data]
+    except Exception:
+        return {'native_canary_progress':'marker_invalid','native_canary_classification':'marker_invalid','passed':False}
+    expected=b'native_exec_canary_entered\nnative_exec_canary_permission_denied\n'
+    if child_succeeded != (progress=='native_permission_denied'):
+        classification='exit_marker_mismatch'
+    elif child_succeeded and output!=expected:
+        classification='unexpected_canary_stdout'
+    else: classification=progress
+    return {'native_canary_progress':progress,'native_canary_classification':classification,
+            'passed':child_succeeded and classification=='native_permission_denied'}
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--repository', type=Path, required=True)
@@ -441,13 +473,22 @@ def main():
                 'minimum_os':minos[0],'code_signature_load_command_present':'LC_CODE_SIGNATURE' in commands})
         missing=work/'nonexistent-database.mgc';require(not missing.exists(),'Negative path exists')
         before_stage=snapshot(prefix)
-        exec_probe="import errno,subprocess\ntry:\n subprocess.run(['/usr/bin/true'],check=True)\nexcept OSError as e:\n assert e.errno in (errno.EPERM,errno.EACCES)\nelse:\n raise RuntimeError('External exec allowed')\n"
-        run([py,'-I','-c',exec_probe],name='smoke-external-exec-denied',timeout=10,smoke_exec=py)
+        canary_marker=work/'native-exec-canary.marker'
+        with canary_marker.open('xb'): pass
+        try:
+            canary_output=run([fixture,'--verify-exec-denial',canary_marker],
+                name='smoke-external-exec-denied',timeout=10,smoke_exec=fixture)
+        except Exception:
+            print(json.dumps(native_canary_observation(canary_marker,False),sort_keys=True),flush=True)
+            raise RuntimeError('Native exec denial canary failed; details withheld') from None
+        canary_observation=native_canary_observation(canary_marker,True,canary_output)
+        print(json.dumps(canary_observation,sort_keys=True),flush=True)
+        require(canary_observation['passed'],'Native exec denial canary result differs')
         smoke=run([fixture,library,database,missing],name='synthetic-mime-codec-database-and-external-rejection',timeout=20,smoke_exec=fixture).decode()
         images=validate_smoke(smoke,prefix,fixture)
         require(snapshot(immutable)==before_immutable and snapshot(prefix)==before_stage,'Input/staged bytes changed')
         result={'status':'passed','scope':SCOPE,'source_sha256':SOURCE_SHA,'source_members':655,
-            'native_execution':'scoped-source-build-and-synthetic-fixtures','source_changed':True,'source_provenance':source_provenance,'source_patch_scope':'single-nofork-guard-move',
+            'native_execution':'scoped-source-build-and-synthetic-fixtures','native_exec_canary':canary_observation,'source_changed':True,'source_provenance':source_provenance,'source_patch_scope':'single-nofork-guard-move',
             'compiler_version':compiler.strip(),'sdk':sdk,'os_version':os_version.strip(),'codec_versions':codec_versions.strip(),
             'detected_capabilities':caps,'installed_manifest':before_stage,'native_records':native_records,
             'loaded_images':images,'steps':steps,'total_seconds':round(time.monotonic()-started,3),

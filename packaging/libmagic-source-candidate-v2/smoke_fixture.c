@@ -8,6 +8,7 @@
 #include <magic.h>
 #include <mach-o/dyld.h>
 #include "synthetic_fixtures.h"
+#include "exec_denial_canary.h"
 static int check(magic_t m, const char *name, const unsigned char *b,
                  size_t n, const char *expected) {
     const char *actual = magic_buffer(m, b, n);
@@ -20,6 +21,8 @@ static int check(magic_t m, const char *name, const unsigned char *b,
 }
 int main(int argc, char **argv) {
     /* Exact paths are provided by the reviewed wrapper, never by a user. */
+    if (argc == 3 && !strcmp(argv[1], "--verify-exec-denial"))
+        return verify_exec_denial(argv[2]);
     if (argc != 4) return 2;
     char actual_library[PATH_MAX], expected_library[PATH_MAX];
     Dl_info info;

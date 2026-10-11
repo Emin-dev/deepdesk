@@ -2,7 +2,7 @@
   "schema": 1,
   "execution_approved": true,
   "review_status": "independent-exact-input-review-approved",
-  "scope": "libmagic-source-nofork-patched-synthetic-pilot-v2",
+  "scope": "libmagic-source-nofork-patched-native-canary-pilot-v4",
   "source_sha256": "ed14656883b23a364b4057c05595d93252da9bc473d30106519519d0da141283",
   "source_changes_allowed": "exact-reviewed-compress-nofork-overlay-only",
   "destination_branch": "engine-libmagic-source-v2-ci",
@@ -16,20 +16,22 @@
   "standalone_engine_or_app_approved": false,
   "model_or_provider_execution_approved": false,
   "sha256": {
-    "README.md": "a8656d499a6d89b0900935538c2c727d1c9ebb16908d8e136175cc2ed0325019",
+    "README.md": "8eb1e589a1ebd39ba770d9414a022ee392b4ac1fc955a44269d99104488c70d7",
     "bounded_runtime.py": "a94a58ba7e45f203fafd4d4d7a0d60ec91cd8366ac7ae8d55909c7d8b1d128f4",
     "compress-nofork.patch": "cd8e4f541ca74e3018a2b14bd2797cf1faf33f1cfd066435ed65eb47353489d7",
+    "exec_denial_canary.h": "98ff3995b5411e98c5b1524653164dea52280b80cdd3157527d094caedc03e60",
     "libmagic-source-macos.yml.template": "97bf79bdbc1991494d35d29b31125eed38ea13c7a6039de21b80ba1bdbed6fa8",
     "offline.sb": "b1ef4e080f63c8b50de664fe217ebd9887684454cdc7b94290aa2998cfd9802d",
     "sdk_codec_preflight.c": "98cf6d8ab8e40b112f5f519d6971a778928e5fe3fef78e551eba7bbab1654f1a",
     "smoke-no-exec.sb": "981b85c11f138be1f44192791fd1ebe2896096c976d9741f9e4207a677aef3a4",
-    "smoke_fixture.c": "0a8fe1d43dda74d06e15c090668a8914f44445e35c23a8caf1a24bb450700b95",
+    "smoke_fixture.c": "de713e230b594ae4916f5c4abe109ecc8e1bd88d43c658b5be8a15504c5dca39",
     "source-members.json": "98b2114e31e92c3faf911d88138e002b5ef3fe94cd052790ca24d0ef0b1a4b1e",
     "source-overlay.json": "f474cc6c5f138b08ac3d41200c293a734983d478d68ffa91320ddc18d64b1ce0",
     "source-pin.json": "fb0f2b362dae27545563fef48dc83f5af5617534fb4822d26cd9729efb742e56",
-    "stage.py": "b2ba14087414b2b0ea51428efbfb306bac289969faa34f7b4940a6a0dbae8802",
+    "stage.py": "e3e6842504a39d6f8e2483d2d635feb63bc05c2784bda9d28632d33f38639373",
     "synthetic_fixtures.h": "f992e1b664f27ab949e34936ddf1d77ea39b526529877e2d799262d7d3fbe472",
-    "test_helpers.py": "7bcc70fd2796f42bd6612e864f43f1043f5f296339dfae7433e66633a80c0dba"
+    "test_exec_denial_canary.c": "65fb69d1c74d21fa6ca363a77cfd94c3161f4cb53c9d5d460839c62569f25c90",
+    "test_helpers.py": "dbc67894541798ae144247f1af7e6c6a3619edeaa4f2a17f4fdffb2a860e697c"
   },
   "source_overlay_approved": true,
   "source_overlay_before_sha256": "f174166d37224e093cadfdde70efc9b2d467c22f99709349782df392157f789a",
@@ -37,9 +39,9 @@
   "source_overlay_patch_sha256": "cd8e4f541ca74e3018a2b14bd2797cf1faf33f1cfd066435ed65eb47353489d7",
   "reviewer": "independent exact-input review",
   "approved_by": "approved project-task scope",
-  "approval_recorded_utc": "2026-10-11T04:05:51.396556+00:00",
-  "approved_candidate_manifest_sha256": "078c0109c4119eb9fbe56694ba3d1f25f1ad94b9ca3c3969164a3457d45ec8c9",
+  "approval_recorded_utc": "2026-10-11T04:48:53.535742+00:00",
+  "approved_candidate_manifest_sha256": "7cbe66217b38e98c724bd186b0674d53cac5e0ffc7c19182b2642adf00b4f950",
   "independent_review_artifacts": {
-    "independent-libmagic-source-v3-review.json": "ce237fcf8bf2aa426ed19e9ca4fb388a22cd2073aa107d307d1a7aef28ec2440"
+    "independent-libmagic-source-v4-review.json": "1b5389e5c5858906afe1134e17d2a1be465c67e10fe941597d4cc4703c736ebe"
   }
 }

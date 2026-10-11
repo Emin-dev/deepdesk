@@ -1,6 +1,6 @@
-# Approval-closed libmagic source pilot v2
+# Approval-closed libmagic source pilot v4
 
-This separate candidate corrects one statically verified file/libmagic 5.48 control-flow defect. Frozen v1 is unchanged and unapproved. V2 has not executed source, compiled its fixtures, or activated CI.
+This v4 candidate is copied from the exact approved-final v3 publication and changes only the exec-denial canary implementation plus its first-party checks/provenance. V4 has not executed libmagic source, run the real smoke fixture or activated CI. Frozen v1/v2/v3 remain unchanged.
 
 ## Exact source and one permitted change
 
@@ -18,9 +18,9 @@ The original defect rejects mandatory builtin gzip/bzip2 decoders when MAGIC_NO_
 
 ## Native fixture and separate execution policies
 
-The original synthetic text, PDF, PNG, gzip, bzip2 and missing-database checks remain. One additional 16-byte deliberately incomplete .Z header begins `1f 9d 90`. Exact source maps it to method 0, which has no builtin decoder regardless of optional codec macros. With COMPRESS_TRANSP and NO_COMPRESS_FORK, the corrected guard must yield exactly `application/x-decompression-error-gzip-Fork-is-required-to-uncompress--but-disabled`, before any pipes/spawn path. This proves refusal of this recognized external-only method, not working .Z decompression or full external-helper closure.
+The original synthetic text, PDF, PNG, gzip, bzip2 and missing-database checks remain. One additional 16-byte deliberately incomplete .Z header begins `1f 9d 90`. Exact source maps it to method 0, which has no builtin decoder regardless of optional codec macros. With COMPRESS_TRANSP and NO_COMPRESS_FORK, the corrected guard must yield exactly `application/x-decompression-error-gzip-Fork-is-required-to-uncompress--but-disabled`, before any pipes/spawn path. If successful, this demonstrates refusal of this recognized external-only method, not working .Z decompression or full external-helper closure.
 
-Build/configure legitimately execute compiler tools and generated helpers under `offline.sb`. Native smoke instead uses `smoke-no-exec.sb`, which adds process-exec denial with one exact executable-path allowance for the fixture. The same smoke policy is first canary-tested with only the exact first-party orchestration interpreter allowed; attempted `/usr/bin/true` execution must raise EPERM/EACCES. Missing files, timeouts, successful execution and other errors fail. During actual smoke, only the exact C fixture path is allowed, so a source regression cannot invoke host decompression helpers. This policy restricts executable paths; it does not claim to prohibit fork-without-exec or re-execution of the one allowed path. Its actual Mac behavior remains a fail-closed runtime gate.
+Build/configure legitimately execute compiler tools and generated helpers under `offline.sb`. Native smoke instead uses `smoke-no-exec.sb`, which adds process-exec denial with one exact executable-path allowance for the fixture. The same smoke policy is first canary-tested with only the exact compiled smoke fixture allowed, invoking its separate `--verify-exec-denial` mode. That mode uses posix_spawn for the fixed `/usr/bin/true` argv and an empty environment; only EPERM/EACCES is accepted. Missing files, timeouts, successfully started children and all other errors fail. During actual smoke, only the exact C fixture path is allowed, so a source regression cannot invoke host decompression helpers. This policy restricts executable paths; it does not claim to prohibit fork-without-exec or re-execution of the one allowed path. Its actual Mac behavior remains a fail-closed runtime gate.
 
 The harness verifies libmagic version 548, the exact loaded dylib realpath, explicit matching magic.mgc, all seven fixed results and loaded-image paths. Only compiled-in synthetic bytes are processed. Static output checks require arm64, exact macOS26 minimum target, no unexpected rpath, and Apple/staged load closure. Immutable input and staged-output hashes are checked after smoke.
 
@@ -38,7 +38,7 @@ Execution approval, exact source-overlay approval, install-ID assignment approva
 
 ## Verification boundary
 
-Run `python -B -I packaging/libmagic-source-candidate-v2/test_helpers.py` for first-party synthetic helper tests only. Static archive materialization and patch verification do not execute source. Independent review and root GO must precede any approval change or workflow activation; any changed candidate byte requires re-freezing.
+Run `python -B -I packaging/libmagic-source-candidate-v4/test_helpers.py` for first-party synthetic helper tests only. Static archive materialization and patch verification do not execute source. Independent review and root GO must precede any approval change or workflow activation; any changed candidate byte requires re-freezing.
 
 Success means only the exact patched-source build, matching database, synthetic MIME, two builtin codec checks and one external-only refusal fixture passed. Full decompression, external helpers, optional codec coverage, relocation, WeasyPrint, complete native closure, engine freeze, clean-machine app and redistribution clearance remain unestablished.
 
@@ -55,3 +55,18 @@ Primary sources read on 2026-10-11:
 A first-party AST regression pins the single lipo invocation to the exact corrected list and rejects the previous ordering, an alternate architecture, and replacement with a non-verifying inspection command. This source-backed correction has not been run on macOS in the v3 preparation step. The preceding v2 CI report reached configure, make, staged installation and fixture compilation before its first lipo command failed; that is partial build evidence, not completed native/fixture proof.
 
 The v3 receipt is reset closed pending independent exact review and root approval. A second, separately identified small v3 delta wraps the unchanged bounded helper with fixed failure classification. Exact known first-party RuntimeError messages map to nonzero_exit, timeout, output_limit or work_limit. Other exceptions or non-exact messages map to unknown. Only a hardcoded reviewed phase name and fixed category are printed; arbitrary exception text and prior trace context are suppressed, and the step still raises a fixed failure. Successful output, source inputs, sandbox, process cleanup and all runtime assertions remain unchanged. First-party tests cover every mapped message, secret-bearing unknown failures, no leakage from captured helper stdout, rejected unreviewed phase names and failure after the fixed summary. No raw child stderr is exposed.
+
+
+## V4 native canary and evidence boundary
+
+Source-free diagnostic run 38111891882 at 2c2b16bc observed successful ordinary Python entry, no first marker under restrictive execution, and a mismatch between the actual Apple host image and resolved interpreter identity. This is evidence that Python was an inappropriate representative of the final native fixture launch shape; it does not establish the exact forwarding/startup cause.
+
+V4 does not select another interpreter or allow any additional executable. The already compiled `smoke-fixture` runs once with fixed `--verify-exec-denial MARKER` arguments under the unchanged fixture-only profile, before the existing MIME invocation. Its mode returns before libmagic API calls; the linked images may load normally. All seven MIME/resource assertions and the later image/identity checks remain unchanged.
+
+The first-party C canary appends `entered` to a fresh work-local marker before trying posix_spawn. Only EPERM/EACCES passes. If a child unexpectedly starts, it is reaped with waitpid (retrying EINTR) and the canary fails regardless of exit status. Spawn errors, invalid child identity, reap errors and marker errors fail. Existing ten-second child and outer process-group bounds contain a stalled wait. No shell, inherited environment or alternate helper path is used.
+
+Markers are capped at 128 bytes, written without following links, and read only after the unchanged bounded helper has completed or cleaned up. Parent reading rejects nonregular/multilink/symlink/oversize/changed-inode/invalid-order data. Fixed progress survives nonzero exit, distinguishing no observed entry, entered-incomplete, denied, unexpected spawn error, unexpectedly allowed-and-reaped child and reap failure. Only the exact permission marker, zero child result and fixed success stdout agree on success; other states remain fatal. No errno text, arbitrary path, raw output or original exception context is exposed.
+
+`test_exec_denial_canary.c` replaces spawn, wait, marker writing and output with deterministic inert mocks before including the actual canary header. Local compilation/execution of this isolated first-party contract test is separately authorized; it never invokes /usr/bin/true, loads libmagic, uses an Apple API or runs the real fixture. It exercises both permitted errno values, unexpected spawn error, reaping, EINTR, reap failure, invalid child and entry-marker failure. This establishes C control-flow behavior under mocks only, not macOS policy behavior.
+
+Local review path: `packaging/libmagic-source-candidate-v4`. Eventual publication must map these files to existing `packaging/libmagic-source-candidate-v2` on `engine-libmagic-source-v2-ci`, with the unchanged existing workflow path/template. The stage intentionally retains those deployed path guards. All four approval fields are reclosed: execution, exact source overlay, install-ID assignment and implicit temporary linker ad-hoc effects. Independent review and root GO are required before any rerun.

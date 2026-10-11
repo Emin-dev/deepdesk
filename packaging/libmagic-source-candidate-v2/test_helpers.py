@@ -230,20 +230,55 @@ class CandidateTests(unittest.TestCase):
     def test_smoke_exec_denial_is_separate_and_canary_fail_closed(self):
         profile=(HERE/'smoke-no-exec.sb').read_text();base=(HERE/'offline.sb').read_text()
         self.assertEqual(profile,base+'(deny process-exec)\n(allow process-exec (literal (param "FIXTURE_PATH")))\n')
-        tree=ast.parse((HERE/'stage.py').read_text())
-        values=[n.value.value for n in ast.walk(tree) if isinstance(n,ast.Assign)
-                and any(isinstance(t,ast.Name) and t.id=='exec_probe' for t in n.targets) and isinstance(n.value,ast.Constant)]
-        self.assertEqual(len(values),1)
-        for value in [errno.EPERM,errno.EACCES]:
-            with mock.patch.dict(sys.modules,{'subprocess':types.SimpleNamespace(run=mock.Mock(side_effect=OSError(value,'synthetic')))}):
-                exec(values[0],{})
-        for outcome in [None,OSError(errno.ENOENT,'synthetic'),OSError(errno.ETIMEDOUT,'synthetic')]:
-            with mock.patch.dict(sys.modules,{'subprocess':types.SimpleNamespace(run=mock.Mock(side_effect=outcome))}):
-                with self.assertRaises((RuntimeError,AssertionError)):exec(values[0],{})
+        source=(HERE/'stage.py').read_text();tree=ast.parse(source)
+        self.assertNotIn('exec_probe=',source)
+        calls=[n for n in ast.walk(tree) if isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id=='run'
+            and any(k.arg=='name' and isinstance(k.value,ast.Constant) and k.value.value=='smoke-external-exec-denied' for k in n.keywords)]
+        self.assertEqual(len(calls),1)
+        self.assertEqual(ast.dump(calls[0].args[0]),ast.dump(ast.parse("[fixture,'--verify-exec-denial',canary_marker]",mode='eval').body))
+        self.assertEqual(ast.dump(next(k.value for k in calls[0].keywords if k.arg=='smoke_exec')),ast.dump(ast.Name(id='fixture',ctx=ast.Load())))
+        self.assertEqual(next(k.value.value for k in calls[0].keywords if k.arg=='timeout'),10)
+        self.assertIn('run([fixture,library,database,missing]',source)
         c=(HERE/'smoke_fixture.c').read_text()
         self.assertIn('MAGIC_COMPRESS_TRANSP | MAGIC_NO_COMPRESS_FORK',c)
         self.assertIn('external_compress_helper_rejected',c)
         self.assertIn('application/x-decompression-error-gzip-Fork-is-required-to-uncompress--but-disabled',c)
+        self.assertLess(c.index('--verify-exec-denial'),c.index('magic_open('))
+    def test_native_canary_markers_and_zero_exit_must_agree(self):
+        with tempfile.TemporaryDirectory() as td:
+            marker=Path(td)/'marker';marker.write_bytes(b'entered\npermission_denied\n')
+            output=b'native_exec_canary_entered\nnative_exec_canary_permission_denied\n'
+            self.assertTrue(stage.native_canary_observation(marker,True,output)['passed'])
+            self.assertEqual(stage.native_canary_observation(marker,False)['native_canary_classification'],'exit_marker_mismatch')
+            self.assertEqual(stage.native_canary_observation(marker,True,b'::error::unexpected')['native_canary_classification'],'unexpected_canary_stdout')
+            for data,progress in [(b'','native_entry_not_observed'),(b'entered\n','native_entered_incomplete'),
+                (b'entered\nunexpected_spawn_error\n','native_unexpected_spawn_error'),
+                (b'entered\nexec_allowed_child_reaped\n','native_exec_allowed_child_reaped'),
+                (b'entered\nexec_allowed_reap_failed\n','native_exec_allowed_reap_failed')]:
+                marker.write_bytes(data);result=stage.native_canary_observation(marker,False)
+                self.assertEqual(result['native_canary_classification'],progress);self.assertFalse(result['passed'])
+                self.assertEqual(stage.native_canary_observation(marker,True,output)['native_canary_classification'],'exit_marker_mismatch')
+    def test_native_canary_markers_reject_links_oversize_and_order(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);marker=root/'marker';marker.write_bytes(b'')
+            for data in [b'x'*129,b'permission_denied\n',b'entered\nentered\n',b'entered\npermission_denied\nextra\n',b'::error::secret']:
+                marker.write_bytes(data);self.assertEqual(stage.native_canary_observation(marker,False)['native_canary_classification'],'marker_invalid')
+            link=root/'link';link.symlink_to(marker)
+            self.assertEqual(stage.native_canary_observation(link,False)['native_canary_classification'],'marker_invalid')
+            alias=root/'alias';os.link(marker,alias)
+            self.assertEqual(stage.native_canary_observation(alias,False)['native_canary_classification'],'marker_invalid')
+            self.assertEqual(stage.native_canary_observation(root/'missing',False)['native_canary_classification'],'marker_invalid')
+    def test_native_source_command_and_mock_seams_are_fixed(self):
+        header=(HERE/'exec_denial_canary.h').read_text();test=(HERE/'test_exec_denial_canary.c').read_text()
+        self.assertIn('char *const args[] = {"/usr/bin/true", NULL};',header)
+        self.assertIn('char *const empty_environment[] = {NULL};',header)
+        self.assertIn('result == EPERM || result == EACCES',header)
+        self.assertIn('CANARY_WAIT(child, &status, 0)',header)
+        self.assertIn('while (waited < 0 && errno == EINTR)',header)
+        self.assertIn('O_WRONLY | O_APPEND | O_NOFOLLOW',header)
+        self.assertNotIn('system(',header);self.assertNotIn('environ;',header)
+        for name,target in [('SPAWN','fake_spawn'),('WAIT','fake_wait'),('MARK','fake_mark'),('OUTPUT','fake_output')]:
+            self.assertLess(test.index('#define CANARY_'+name+' '+target),test.index('#include "exec_denial_canary.h"'))
 
     def test_lipo_verify_arch_file_precedes_terminal_architecture_list(self):
         # Apple cctools misc/lipo.c:432-451 consumes the complete trailing argv
