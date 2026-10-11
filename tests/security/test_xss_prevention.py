@@ -1,0 +1,363 @@
+"""
+XSS (Cross-Site Scripting) Prevention Tests
+
+Tests that verify user inputs are properly escaped and sanitized
+to prevent XSS attacks in web templates and API responses.
+
+Ported from the pre-FastAPI Flask version: Flask's ``create_app`` +
+``flask_app.test_client()`` are replaced by the FastAPI app
+(``local_deep_research.web.fastapi_app:app``) + ``fastapi.testclient.TestClient``.
+The Jinja2 auto-escaping checks now read the shared ``Jinja2Templates``
+environment (``local_deep_research.web.template_config.templates.env``), which
+is the real environment every page render goes through — so this still
+exercises production escaping behaviour rather than a stand-in.
+"""
+
+import pytest
+from fastapi.testclient import TestClient
+
+from tests.test_utils import add_src_to_path
+
+add_src_to_path()
+
+from local_deep_research.web.fastapi_app import app  # noqa: E402
+from local_deep_research.web.template_config import templates  # noqa: E402
+
+
+class TestXSSPrevention:
+    """Test XSS prevention in web interface and API responses."""
+
+    @pytest.fixture
+    def jinja_env(self):
+        """The real Jinja2 environment used for all page renders."""
+        return templates.env
+
+    @pytest.fixture
+    def client(self):
+        """Create a FastAPI test client."""
+        return TestClient(app, raise_server_exceptions=False)
+
+    def test_jinja2_autoescaping_enabled(self, jinja_env):
+        """Test that Jinja2 auto-escaping is enabled (FastAPI/Jinja default)."""
+        # The shared templates env uses select_autoescape with
+        # default_for_string=True, so autoescape is a callable (or True),
+        # not False/None.
+        assert jinja_env.autoescape
+        assert callable(jinja_env.autoescape) or jinja_env.autoescape is True
+
+    def test_html_injection_in_templates(self, jinja_env):
+        """Test that HTML/JavaScript is escaped in templates."""
+        # Malicious inputs that should be escaped
+        xss_payloads = [
+            "<script>alert('XSS')</script>",
+            "<img src=x onerror=alert('XSS')>",
+            "<svg onload=alert('XSS')>",
+            "javascript:alert('XSS')",
+            "<iframe src='javascript:alert(\"XSS\")'></iframe>",
+            "<body onload=alert('XSS')>",
+            "<input onfocus=alert('XSS') autofocus>",
+        ]
+
+        # Render through the production Jinja environment. from_string()
+        # autoescapes because the env is configured with
+        # default_for_string=True (same effective behaviour as Flask's
+        # render_template_string).
+        template = jinja_env.from_string("{{ user_input }}")
+
+        for payload in xss_payloads:
+            rendered = template.render(user_input=payload)
+            # Check that dangerous characters are escaped
+            assert (
+                "&lt;" in rendered
+                or "&gt;" in rendered
+                or payload not in rendered
+            )
+            # Should not contain executable script tags
+            assert "<script>" not in rendered.lower()
+
+    def test_json_response_escaping(self, client):
+        """A JSON API response must be served as application/json.
+
+        That content-type is the ENTIRE reason a payload like
+        ``<script>alert(1)</script>`` in a JSON body is not an XSS vector: the
+        browser parses it as data instead of markup. Escaping the angle
+        brackets is not what saves you, and Python's json.dumps does not do it
+        anyway.
+
+        This test previously asserted ``json.loads(json.dumps(x)) == x``, with
+        the ``client`` fixture removed from its signature — a property of the
+        CPython standard library, holding no matter what this application does,
+        counted as XSS coverage. It now asks the real app.
+        """
+        # Any authenticated-or-not JSON endpoint will do; /api/v1/health is
+        # public and always mounted.
+        resp = client.get("/api/v1/health")
+        assert resp.headers.get("content-type", "").startswith(
+            "application/json"
+        ), (
+            f"JSON endpoint served as {resp.headers.get('content-type')!r}; if "
+            f"an API response is served as text/html a reflected payload in it "
+            f"becomes executable markup"
+        )
+
+        # Positive control: prove the assertion above can distinguish, by
+        # checking a route that genuinely returns HTML does NOT claim JSON.
+        html = client.get("/auth/login")
+        assert not html.headers.get("content-type", "").startswith(
+            "application/json"
+        ), (
+            "the content-type assertion cannot discriminate — it passes for HTML too"
+        )
+
+    def test_research_query_xss_prevention(self, client):
+        """Test that research queries containing XSS are handled safely."""
+        malicious_query = "<script>alert(document.cookie)</script>"
+
+        # Attempt to submit malicious query
+        response = client.post(
+            "/api/v1/research",
+            json={"query": malicious_query},
+        )
+
+        # Response should be JSON with escaped content
+        if response.status_code == 200:
+            data = response.json()
+            # If query is echoed back, it should be escaped
+            if "query" in data:
+                assert "<script>" not in data["query"] or "<" in str(data)
+
+    @pytest.mark.skip(
+        reason="placeholder: body is `assert True` guarded by `import markdown`, which is not installed, so it skips today and would silently pass the moment markdown became a transitive dependency. Marked to match the 21 sibling placeholders this branch already skipped."
+    )
+    def test_markdown_rendering_xss_prevention(self):
+        """Document that Markdown requires additional sanitization for XSS prevention."""
+        # CRITICAL SECURITY NOTE:
+        # The standard markdown library provides NO XSS protection by default.
+        # It passes through HTML and javascript: URLs as-is.
+        #
+        # Applications MUST use additional sanitization layers:
+        # 1. bleach.clean() to sanitize HTML output
+        # 2. bleach.linkify() with allowed_protocols=['http', 'https', 'mailto']
+        # 3. Content Security Policy headers to block inline scripts
+        # 4. Jinja2 auto-escaping when rendering markdown output in templates
+
+        try:
+            import markdown
+
+            md = markdown.Markdown(extensions=["extra", "codehilite"])
+
+            # Demonstrate that markdown passes through dangerous HTML
+            dangerous_samples = {
+                "script_tag": "<script>alert('XSS')</script>",
+                "onerror": "<img src=x onerror=alert('XSS')>",
+                "javascript_link": "[Click](javascript:alert('XSS'))",
+            }
+
+            for name, sample in dangerous_samples.items():
+                _rendered = md.convert(sample)
+                # Markdown does NOT sanitize these - they remain dangerous
+                # Applications must sanitize the output before displaying
+
+            # This test documents that markdown needs additional sanitization
+            # The application should use bleach or similar before displaying
+            # markdown-rendered content to users
+            assert True  # Documentation test
+        except ImportError:
+            pytest.skip("markdown library not installed")
+
+    @pytest.mark.skip(
+        reason="vacuous: probes /search and /research/<x>, neither of which exists on this branch (unified search is mounted at /library/search), so the `if status == 200` guard never fires and the payload never reaches a renderer. Needs rewriting against a real route with an authenticated client before it asserts anything."
+    )
+    def test_url_parameter_xss(self, client):
+        """Test that URL parameters are sanitized against XSS."""
+        xss_in_url = "<script>alert('XSS')</script>"
+
+        # Test various endpoints with malicious URL parameters
+        endpoints = [
+            f"/search?q={xss_in_url}",
+            f"/research/{xss_in_url}",
+        ]
+
+        for endpoint in endpoints:
+            response = client.get(endpoint)
+            # Response should escape the XSS payload
+            if response.status_code == 200:
+                html = response.text
+                # Script tags should be escaped in HTML output
+                assert "<script>alert" not in html or "&lt;script&gt;" in html
+
+    def test_content_type_headers(self, client):
+        """Test that responses have proper Content-Type headers to prevent XSS."""
+        response = client.get("/")
+
+        # HTML responses should have correct Content-Type
+        content_type = response.headers.get("content-type", "")
+        if "text/html" in content_type:
+            assert "charset" in content_type.lower()
+
+        # API responses should be application/json
+        api_response = client.get("/api/v1/health")
+        if api_response.status_code == 200:
+            assert "application/json" in api_response.headers.get(
+                "content-type", ""
+            )
+
+    @pytest.mark.skip(
+        reason="vacuous: reimplements a sanitizer inline with BeautifulSoup and then asserts on its own output, exercising no application code. There is no sanitization helper in src/ for it to call; write the test when there is one."
+    )
+    def test_html_sanitization_in_research_content(self):
+        """Test that research content from external sources is sanitized."""
+        # LDR retrieves content from web sources - this content should be sanitized
+
+        malicious_html_content = """
+        <h1>Legitimate Content</h1>
+        <script>alert('XSS')</script>
+        <img src=x onerror=alert('XSS')>
+        <p onclick="alert('XSS')">Click me</p>
+        """
+
+        try:
+            from bs4 import BeautifulSoup
+
+            # Simulate sanitization (remove script tags, event handlers)
+            soup = BeautifulSoup(malicious_html_content, "html.parser")
+
+            # Remove script tags
+            for script in soup.find_all("script"):
+                script.decompose()
+
+            # Remove event handlers from tags
+            for tag in soup.find_all():
+                for attr in list(tag.attrs):
+                    if attr.startswith("on"):  # onclick, onload, onerror, etc.
+                        del tag.attrs[attr]
+
+            cleaned = str(soup)
+
+            # Verify dangerous elements are removed
+            assert "<script>" not in cleaned.lower()
+            assert "onerror" not in cleaned.lower()
+            assert "onclick" not in cleaned.lower()
+
+        except ImportError:
+            pytest.skip("BeautifulSoup not installed")
+
+    @pytest.mark.skip(reason="documentation/placeholder test - not implemented")
+    def test_dom_based_xss_prevention(self):
+        """Test prevention of DOM-based XSS through JavaScript."""
+        # This is a documentation test for frontend security
+
+        # DOM-based XSS happens when client-side JavaScript uses untrusted data
+        # Common vulnerable patterns:
+        # - document.write(user_input)
+        # - element.innerHTML = user_input
+        # - element.outerHTML = user_input
+        # - eval(user_input)
+
+        # Safe alternatives:
+        # - element.textContent = user_input (safely escapes)
+        # - element.setAttribute('data-value', user_input)
+        # - Use framework's built-in escaping (React, Vue, etc.)
+
+        # This test documents that frontend code should:
+        # 1. Use textContent instead of innerHTML for user data
+        # 2. Never use eval() with user input
+        # 3. Validate and sanitize before inserting into DOM
+        # 4. Use Content Security Policy (CSP) headers
+
+        assert True  # Documentation test
+
+    @pytest.mark.skip(reason="documentation/placeholder test - not implemented")
+    def test_stored_xss_prevention(self):
+        """
+        Test that stored XSS (persistent XSS) is prevented.
+        User-submitted content stored in database should be sanitized before display.
+        """
+        # Stored XSS workflow:
+        # 1. Attacker submits malicious content (e.g., research query with XSS)
+        # 2. Content is stored in database
+        # 3. Content is displayed to other users
+        # 4. XSS executes in victim's browser
+
+        # Prevention measures:
+        # 1. Escape output when rendering (Jinja2 auto-escape)
+        # 2. Sanitize input before storage (remove dangerous HTML)
+        # 3. Use Content Security Policy to block inline scripts
+        # 4. Validate content type before rendering
+
+        # This test documents our XSS prevention strategy
+        assert True  # Documentation test
+
+
+class TestContentSecurityPolicy:
+    """Test Content Security Policy (CSP) headers."""
+
+    @pytest.fixture
+    def client(self):
+        """Create a FastAPI test client."""
+        return TestClient(app, raise_server_exceptions=False)
+
+    @pytest.mark.skip(reason="documentation/placeholder test - not implemented")
+    def test_csp_headers_present(self, client):
+        """Test that Content-Security-Policy headers are set (recommended)."""
+        client.get("/")
+
+        # Check if CSP header is present (it's a good security practice)
+        # Note: This test may fail if CSP is not yet implemented
+        # CSP headers prevent inline script execution and XSS
+
+        # Recommended CSP header:
+        # Content-Security-Policy: default-src 'self'; script-src 'self';
+
+        # This is a documentation test - CSP implementation is recommended
+        # but not critical if output escaping is properly implemented
+
+        # Uncomment when CSP is implemented:
+        # assert "Content-Security-Policy" in response.headers
+
+        pass  # Placeholder for future CSP implementation
+
+    @pytest.mark.skip(reason="documentation/placeholder test - not implemented")
+    def test_xframe_options_header(self, client):
+        """Test that X-Frame-Options header prevents clickjacking."""
+        client.get("/")
+
+        # X-Frame-Options prevents the page from being loaded in an iframe
+        # This prevents clickjacking attacks
+
+        # Recommended values:
+        # X-Frame-Options: DENY or SAMEORIGIN
+
+        # This is a recommended security header
+        # Uncomment when implemented:
+        # assert "X-Frame-Options" in response.headers
+
+        pass  # Placeholder for future implementation
+
+
+@pytest.mark.skip(reason="documentation/placeholder test - not implemented")
+def test_xss_prevention_documentation():
+    """
+    Documentation test explaining XSS prevention strategy in LDR.
+
+    XSS Prevention Layers:
+    1. Input Validation: Validate and sanitize user inputs
+    2. Output Escaping: Jinja2 auto-escaping (enabled by default)
+    3. JSON Encoding: Proper JSON serialization escapes HTML
+    4. HTML Sanitization: Clean HTML from external sources (BeautifulSoup)
+    5. CSP Headers: (Recommended) Block inline scripts
+    6. Safe Markdown: Sanitize markdown rendering
+
+    Primary Risk Areas for LDR:
+    1. Research queries (user input)
+    2. Research results (external content)
+    3. Saved reports (stored content)
+    4. API responses (JSON output)
+
+    Mitigation:
+    - FastAPI/Jinja2 auto-escaping handles most template XSS
+    - JSON responses are properly encoded
+    - External content should be sanitized
+    - No user-controlled eval() or innerHTML usage
+    """
+    assert True  # Documentation test

@@ -1,0 +1,335 @@
+"""
+Tests for PDF upload endpoint.
+
+Tests cover:
+- Authentication requirements
+- File validation (size, count, type)
+- Successful upload and text extraction
+- Error handling for invalid files
+"""
+
+import io  # noqa: E402
+
+
+class TestPDFUpload:
+    """Integration tests for /api/upload/pdf endpoint."""
+
+    def test_upload_requires_authentication(self, client):
+        """Test that unauthenticated requests are rejected."""
+        # Create a minimal PDF
+        pdf_content = b"%PDF-1.4\ntest content"
+        data = {"files": (io.BytesIO(pdf_content), "test.pdf")}
+
+        response = client.post(
+            "/api/upload/pdf",
+            data=data,
+            content_type="multipart/form-data",
+        )
+
+        # Should redirect to login or return 401/302
+        assert response.status_code in (401, 403), response.status_code
+
+    def test_upload_no_files_returns_error(self, authenticated_client):
+        """Test that requests without files return appropriate error."""
+        response = authenticated_client.post(
+            "/api/upload/pdf",
+            data={},
+            content_type="multipart/form-data",
+        )
+
+        assert response.status_code == 400
+        data = response.get_json()
+        assert "error" in data or "No files" in str(data)
+
+    def test_upload_empty_file_list_returns_error(self, authenticated_client):
+        """Test that empty file list returns appropriate error."""
+        data = {"files": (io.BytesIO(b""), "empty.pdf")}
+
+        response = authenticated_client.post(
+            "/api/upload/pdf",
+            data=data,
+            content_type="multipart/form-data",
+        )
+
+        assert response.status_code == 400
+
+    def test_upload_invalid_file_type_rejected(self, authenticated_client):
+        """Test that non-PDF files are rejected."""
+        # Create a text file masquerading as PDF
+        txt_content = b"This is not a PDF file"
+        data = {"files": (io.BytesIO(txt_content), "test.pdf")}
+
+        response = authenticated_client.post(
+            "/api/upload/pdf",
+            data=data,
+            content_type="multipart/form-data",
+        )
+
+        # Should fail validation
+        data = response.get_json()
+        # Either 400 with error or success with errors list
+        if response.status_code == 200:
+            assert len(data.get("errors", [])) > 0
+        else:
+            assert response.status_code == 400
+
+    def test_upload_file_with_wrong_extension_rejected(
+        self, authenticated_client
+    ):
+        """Test that files with wrong extension are rejected."""
+        # Valid PDF content but wrong extension
+        pdf_content = b"%PDF-1.4\n1 0 obj\n<<\n>>\nendobj\nxref\ntrailer\n"
+        data = {"files": (io.BytesIO(pdf_content), "test.txt")}
+
+        response = authenticated_client.post(
+            "/api/upload/pdf",
+            data=data,
+            content_type="multipart/form-data",
+        )
+
+        data = response.get_json()
+        # Should have errors due to extension
+        if response.status_code == 200:
+            assert len(data.get("errors", [])) > 0
+        else:
+            assert response.status_code == 400
+
+    def test_upload_oversized_file_rejected(self, authenticated_client):
+        """Test that files over size limit are rejected."""
+        # Create file over 10MB limit
+        large_content = b"%PDF-1.4\n" + (b"x" * (11 * 1024 * 1024))  # 11MB
+        data = {"files": (io.BytesIO(large_content), "large.pdf")}
+
+        response = authenticated_client.post(
+            "/api/upload/pdf",
+            data=data,
+            content_type="multipart/form-data",
+        )
+
+        # Should be rejected
+        data = response.get_json()
+        if response.status_code == 200:
+            # If 200, should have errors
+            assert len(data.get("errors", [])) > 0
+        else:
+            assert response.status_code == 400, response.status_code
+
+    def test_oversized_file_is_rejected_before_its_bytes_are_read(
+        self, authenticated_client, monkeypatch
+    ):
+        """GHSA-38fh finding 2: the size guard must fire BEFORE the read.
+
+        The request-level precheck keys off ``Content-Length``, which
+        chunked multipart bodies do not carry, and the validator saw the
+        bytes only after ``await file.read()`` had pulled the whole
+        spooled part into RAM — the buffered-then-rejected spike the
+        advisory demonstrates (a multi-GB allocation at the default cap
+        before the rejection goes out). Mirrors rag.py's per-file
+        pre-read guard: a part whose spooled size (``file.size``, the
+        byte count Starlette 1.3.x measured while spooling, not a
+        client-declared value) exceeds the cap is refused without a
+        single read call. The post-read validator's size check is
+        defence in depth for a size of None, which the pinned Starlette
+        range never produces.
+        """
+        import starlette.datastructures as starlette_ds
+        from local_deep_research.security import FileUploadValidator
+
+        # Patch the cap small (the advisory's PoC shape): the default
+        # multi-GB ceiling would need a multi-GB body to exercise.
+        monkeypatch.setattr(FileUploadValidator, "MAX_FILE_SIZE", 1024 * 1024)
+
+        read_files = []
+
+        async def _recording_read(self, size=-1):
+            read_files.append(self.filename)
+            return b""
+
+        monkeypatch.setattr(starlette_ds.UploadFile, "read", _recording_read)
+
+        big = b"%PDF-1.4\n" + (b"x" * (8 * 1024 * 1024))  # 8MB > 1MB cap
+        response = authenticated_client.post(
+            "/api/upload/pdf",
+            data={"files": (io.BytesIO(big), "big.pdf")},
+            content_type="multipart/form-data",
+        )
+
+        body = response.get_json()
+        assert response.status_code == 400 or body.get("errors"), (
+            f"unexpected response: {response.status_code} {body}"
+        )
+        assert any("File too large" in err for err in body.get("errors", [])), (
+            f"no size rejection in errors: {body.get('errors')}"
+        )
+        assert read_files == [], (
+            "file.read() was called for an oversized part — the size "
+            "guard must reject before reading (GHSA-38fh)"
+        )
+
+    def test_upload_too_many_files_rejected(self, authenticated_client):
+        """Test that more than MAX_FILES_PER_REQUEST files are rejected."""
+        from werkzeug.datastructures import MultiDict  # noqa: E402
+
+        from local_deep_research.security.file_upload_validator import (  # noqa: E402
+            FileUploadValidator,
+        )
+
+        file_list = []
+        for i in range(FileUploadValidator.MAX_FILES_PER_REQUEST + 1):
+            pdf_content = b"%PDF-1.4\ntest"
+            file_list.append(
+                ("files", (io.BytesIO(pdf_content), f"test_{i}.pdf"))
+            )
+
+        response = authenticated_client.post(
+            "/api/upload/pdf",
+            data=MultiDict(file_list),
+            content_type="multipart/form-data",
+        )
+
+        assert response.status_code == 400
+        data = response.get_json()
+        assert "error" in data or "errors" in data or "status" in data
+
+    def test_upload_malformed_pdf_handled(self, authenticated_client):
+        """Test that malformed PDFs are handled gracefully."""
+        # PDF magic bytes but invalid structure
+        malformed_pdf = b"%PDF-1.4\nthis is not valid pdf structure"
+        data = {"files": (io.BytesIO(malformed_pdf), "malformed.pdf")}
+
+        response = authenticated_client.post(
+            "/api/upload/pdf",
+            data=data,
+            content_type="multipart/form-data",
+        )
+
+        # Should not crash - either 200 with errors or 400
+        data = response.get_json()
+        assert response.status_code == 400, response.status_code
+        if response.status_code == 200:
+            # Should report errors for the malformed file
+            assert (
+                data.get("processed_files", 0) == 0
+                or len(data.get("errors", [])) > 0
+            )
+
+    def test_upload_returns_correct_structure(self, authenticated_client):
+        """Test that successful upload returns expected response structure."""
+        # Note: This test may fail if pdfplumber can't parse minimal PDF
+        # In that case, it should at least not crash
+        pdf_content = b"%PDF-1.4\nminimal pdf"
+        data = {"files": (io.BytesIO(pdf_content), "test.pdf")}
+
+        response = authenticated_client.post(
+            "/api/upload/pdf",
+            data=data,
+            content_type="multipart/form-data",
+        )
+
+        # Response should have expected keys
+        data = response.get_json()
+        assert "status" in data or "error" in data
+
+    def test_upload_multiple_files(self, authenticated_client):
+        """Test uploading multiple files at once."""
+        from werkzeug.datastructures import MultiDict  # noqa: E402
+
+        file_list = []
+        for i in range(3):
+            pdf_content = b"%PDF-1.4\ntest " + str(i).encode()
+            file_list.append(
+                ("files", (io.BytesIO(pdf_content), f"test_{i}.pdf"))
+            )
+
+        response = authenticated_client.post(
+            "/api/upload/pdf",
+            data=MultiDict(file_list),
+            content_type="multipart/form-data",
+        )
+
+        # Should process all files (may have errors for invalid PDFs)
+        data = response.get_json()
+        assert "status" in data or "error" in data
+
+
+class TestPDFUploadSecurity:
+    """Security-focused tests for PDF upload."""
+
+    def test_path_traversal_in_filename_sanitized(self, authenticated_client):
+        """Test that path traversal attempts in filenames are handled."""
+        pdf_content = b"%PDF-1.4\ntest"
+        malicious_filename = "../../../etc/passwd.pdf"
+        data = {"files": (io.BytesIO(pdf_content), malicious_filename)}
+
+        response = authenticated_client.post(
+            "/api/upload/pdf",
+            data=data,
+            content_type="multipart/form-data",
+        )
+
+        # Should not crash and should sanitize filename
+        assert response.status_code == 400, response.status_code
+        if response.status_code == 200:
+            data = response.get_json()
+            # Check filename is sanitized in response
+            for text in data.get("extracted_texts", []):
+                assert "../" not in text.get("filename", "")
+
+    def test_null_byte_in_filename_handled(self, authenticated_client):
+        """Test that null bytes in filenames are handled."""
+        pdf_content = b"%PDF-1.4\ntest"
+        null_filename = "test\x00.exe.pdf"
+        data = {"files": (io.BytesIO(pdf_content), null_filename)}
+
+        response = authenticated_client.post(
+            "/api/upload/pdf",
+            data=data,
+            content_type="multipart/form-data",
+        )
+
+        # Should handle gracefully
+        assert response.status_code == 400, response.status_code
+
+    def test_very_long_filename_handled(self, authenticated_client):
+        """Test that very long filenames are handled."""
+        pdf_content = b"%PDF-1.4\ntest"
+        long_filename = "a" * 1000 + ".pdf"
+        data = {"files": (io.BytesIO(pdf_content), long_filename)}
+
+        response = authenticated_client.post(
+            "/api/upload/pdf",
+            data=data,
+            content_type="multipart/form-data",
+        )
+
+        # Should handle gracefully
+        assert response.status_code == 400, response.status_code
+
+
+def test_upload_pdf_docs_match_configured_limits():
+    """The upload route's docstring is the operation description surfaced by
+    the API docs, so it must point at the configured sources of truth rather
+    than duplicating numeric defaults that drift (#5991)."""
+    import inspect
+
+    from local_deep_research.security.file_upload_validator import (
+        FileUploadValidator,
+    )
+    from local_deep_research.web.routers.research import upload_pdf
+
+    doc = inspect.getdoc(upload_pdf)
+    assert doc is not None
+
+    # The obsolete 10/min-100/hr, 50MB, and 100-file figures must not return.
+    for stale in ("10 uploads/min", "100/hour", "50MB", "50 MB", "100 files"):
+        assert stale not in doc
+
+    # The description must reference the live sources of truth ...
+    assert "security.rate_limit_upload_user" in doc
+    assert "security.rate_limit_upload_ip" in doc
+    assert "FileUploadValidator.MAX_FILE_SIZE" in doc
+    assert "FileUploadValidator.MAX_FILES_PER_REQUEST" in doc
+
+    # ... and those names must still exist where the doc points.
+    assert FileUploadValidator.MAX_FILE_SIZE > 0
+    assert FileUploadValidator.MAX_FILES_PER_REQUEST > 0

@@ -1,0 +1,348 @@
+# Notifications System
+
+The Local Deep Research (LDR) notifications system provides a flexible way to send notifications to various services when important events occur, such as research completion, failures, or subscription updates.
+
+## Overview
+
+The notification system uses [Apprise](https://github.com/caronc/apprise) to support multiple notification services with a unified API. It allows users to configure comma-separated service URLs to receive notifications for different events.
+
+## Server-Side Opt-In Required
+
+> **Outbound notifications are disabled by default.** The deployment operator must explicitly enable them by setting an environment variable on the server:
+>
+> ```bash
+> LDR_NOTIFICATIONS_ALLOW_OUTBOUND=true
+> ```
+>
+> Without this, every `send_notification` call returns a falsy `NotificationResult` (`reason=server_disabled`) and the "Send Test Notification" button returns an error. This applies to **all** users on the deployment.
+
+### Why?
+
+Validating a notification URL once does not control where a later DNS lookup connects. LDR therefore sends notifications synchronously under `pinned_notification_send`: it pins supported webhook hosts and checks unpinned plugin destinations against the DNS answer used for connection. Every notification send requires the operator's separate `LDR_NOTIFICATIONS_ALLOW_PRIVATE_IPS=true` opt-in before it connects to a private or loopback address, whether that is a LAN destination or a private forward proxy (`HTTPS_PROXY`) in front of a fixed vendor endpoint. Without the opt-in, such a send is refused as a security block and is not retried. Link-local and metadata destinations remain blocked. A validation-time lookup failure does not bypass these send-time checks, and delivery is refused if the DNS guard is unavailable.
+
+Outbound delivery can send research data to an external service, so the server gate keeps that capability an explicit operator choice on a multi-user instance. The DNS guard covers resolution in the sending thread; a configured forward proxy selects its own destinations and needs equivalent network restrictions. See [SECURITY.md](../SECURITY.md#notification-webhook-ssrf) for destination policies, redirect handling and egress restrictions.
+
+### Symptoms when the gate is closed
+
+If you've configured a notification URL and aren't receiving messages, check the server logs first. You should see lines like:
+
+```
+WARNING  Notification refused: outbound notifications are disabled at the
+         server level. Set LDR_NOTIFICATIONS_ALLOW_OUTBOUND=true to enable.
+         See SECURITY.md 'Notification Webhook SSRF' for the rationale and
+         residual risk. (event=research_completed, user=...)
+```
+
+The "Send Test Notification" UI button returns the same message inline.
+
+## Supported Services
+
+LDR accepts selected Apprise URL forms. Direct prefixes verified against Apprise 1.12.0 (the reviewed dependency floor) include:
+
+- Discord (via webhooks)
+- Slack (via webhooks)
+- Telegram (via Apprise's `tgram://` scheme)
+- Email (SMTP)
+- Gotify
+- ntfy
+- Signal
+- Matrix
+- Generic JSON, XML, and form webhooks
+
+LDR does not currently accept every direct prefix registered by Apprise. Some native `http(s)://` service URLs may be converted by Apprise, but always use the Test button before relying on one. See the [direct scheme-prefix compatibility table](#webhook-url-was-rejected) below and the [Apprise documentation](https://github.com/caronc/apprise/wiki) for URL formats.
+
+## Configuration
+
+Notifications are configured per-user via the settings system:
+
+### Service URL Setting
+- **Key**: `notifications.service_url`
+- **Type**: String (comma-separated list of service URLs)
+- **Example**: `discord://webhook_id/webhook_token,mailto://user:password@smtp.gmail.com`
+- **Security**: Service URLs containing credentials are encrypted at rest using SQLCipher (AES-256) in your per-user encrypted database. The encryption key is derived from your login password, ensuring zero-knowledge security.
+
+### Event-Specific Settings
+- `notifications.on_research_completed` - Enable notifications for completed research (default: true)
+- `notifications.on_research_failed` - Enable notifications for failed research (default: true)
+- `notifications.on_research_queued` - Enable notifications when research is queued (default: false)
+- `notifications.on_subscription_update` - Enable notifications for subscription updates (default: true)
+- `notifications.on_subscription_error` - Enable notifications for subscription errors (default: false)
+- `notifications.on_api_quota_warning` - Enable notifications for API quota/rate limit warnings (default: false)
+- `notifications.on_auth_issue` - Enable notifications for authentication failures (default: false)
+
+### Rate Limiting Settings
+- `notifications.rate_limit_per_hour` - Max notifications per hour (per user, default: 10)
+- `notifications.rate_limit_per_day` - Max notifications per day (per user, default: 50)
+
+**Per-User Rate Limiting**: Each user can configure their own rate limits via their settings. Rate limits are enforced independently per user, so one user hitting their limit does not affect other users. This ensures fair resource allocation in multi-user deployments.
+
+**Note on process-local counters**: The rate limiting implementation uses in-memory storage and is process-local, so the counters only hold within a single server process. This is not a concern for LDR, which always runs a single uvicorn worker: `web/app.py` calls `uvicorn.run(..., workers=1)`, and that is not configurable — Socket.IO requires a single process unless a Redis message queue is added. Do not try to run LDR behind multiple workers or multiple replicas; besides multiplying these counters, real-time progress updates would break.
+
+### URL Configuration
+- `app.external_url` - Public URL where your LDR instance is accessible (e.g., `https://ldr.example.com`). Used to generate clickable links in notifications. If not set, defaults to `http://localhost:5000` or auto-constructs from `app.host` and `app.port`.
+
+## Service URL Format
+
+Multiple service URLs can be configured by separating them with commas:
+
+```
+discord://webhook1_id/webhook1_token,slack://token1/token2/token3,mailto://user:password@smtp.gmail.com
+```
+
+Each URL follows the Apprise format for the specific service.
+
+## Available Event Types
+
+### Research Events
+- `research_completed` - When research completes successfully
+- `research_failed` - When research fails (error details are sanitized in notifications for security)
+- `research_queued` - When research is added to the queue
+
+### Subscription Events
+- `subscription_update` - When a subscription completes
+- `subscription_error` - When a subscription fails
+
+### System Events
+- `api_quota_warning` - When API quota or rate limits are exceeded
+- `auth_issue` - When authentication fails for API services
+
+## Testing Notifications
+
+Use the test function to verify notification configuration:
+
+```python
+from local_deep_research.notifications.manager import NotificationManager
+
+# Create manager for testing (user_id is required)
+notification_manager = NotificationManager(
+    settings_snapshot={},
+    user_id="test_user"
+)
+
+# Test a service URL
+result = notification_manager.test_service("discord://webhook_id/webhook_token")
+print(result)  # {'success': True, 'message': 'Test notification sent successfully'}
+```
+
+## Programmatic Usage
+
+For detailed code examples, see the source files in `src/local_deep_research/notifications/`.
+
+### Basic Notification
+
+```python
+from local_deep_research.notifications.manager import NotificationManager
+from local_deep_research.notifications.templates import EventType
+from local_deep_research.settings import SettingsManager
+from local_deep_research.database.session_context import get_user_db_session
+
+# Get settings snapshot
+username = "your_username"
+with get_user_db_session(username, password) as session:
+    settings_manager = SettingsManager(session)
+    settings_snapshot = settings_manager.get_settings_snapshot()
+
+# Create notification manager with user_id for per-user rate limiting
+notification_manager = NotificationManager(
+    settings_snapshot=settings_snapshot,
+    user_id=username  # Enables per-user rate limit configuration
+)
+
+# Send notification (user_id already set in manager)
+notification_manager.send_notification(
+    event_type=EventType.RESEARCH_COMPLETED,
+    context={"query": "...", "summary": "...", "url": "/research/123"},
+)
+```
+
+**Important**: The `user_id` parameter is **required** when creating a `NotificationManager`. This ensures the user's configured rate limits from their settings are properly applied and enforces per-user isolation.
+
+### Building Full URLs
+
+Use `build_notification_url()` to convert relative paths to full URLs for clickable links in notifications.
+
+## Architecture
+
+The notification system consists of three main components:
+
+1. **NotificationManager** - High-level manager that handles rate limiting, settings, and user preferences
+2. **NotificationService** - Low-level service that uses Apprise to send notifications
+3. **Settings Integration** - User-specific configuration for services and event preferences
+
+The system fetches service URLs from user settings when needed, rather than maintaining persistent channels, making it more efficient and secure.
+
+### Security & Privacy
+
+- **Encrypted Storage**: All notification service URLs (including credentials like SMTP passwords or webhook tokens) are stored encrypted at rest in your per-user SQLCipher database using AES-256 encryption.
+- **Zero-Knowledge Architecture**: The encryption key is derived from your login password using PBKDF2-SHA512. Your password is never stored, and notification settings cannot be recovered without it.
+- **URL Masking**: Service URLs are automatically masked in logs to prevent credential exposure (e.g., `discord://webhook_id/***`).
+- **Per-User Isolation**: Each user's notification settings are completely isolated in their own encrypted database.
+
+### Performance Optimizations
+
+- **Temporary Apprise Instances**: Temporary Apprise instances are created for each send operation and automatically garbage collected by Python. This simple approach avoids memory management complexity.
+- **Shared Rate Limiter with Per-User Limits**: A single rate limiter instance is shared across all NotificationManager instances for efficiency, while maintaining separate rate limit configurations and counters for each user. This provides both memory efficiency (~24 bytes per user for limit storage) and proper per-user isolation.
+- **Thread-Safe**: The rate limiter uses threading locks for safe concurrent access within a single process.
+- **Exponential Backoff Retry**: Failed notifications are retried up to 3 times with exponential backoff (0.5s → 1.0s → 2.0s) to handle transient network issues.
+- **Dynamic Limit Updates**: User rate limits can be updated at runtime when creating a new NotificationManager instance with updated settings.
+
+## Thread Safety & Background Tasks
+
+The notification system is designed to work safely from background threads (e.g., research queue processors). Use the **settings snapshot pattern** to avoid thread-safety issues with database sessions.
+
+### Settings Snapshot Pattern
+
+**Key Principle**: Capture settings once with a database session, then pass the snapshot (not the session) to `NotificationManager`.
+
+- ✅ **Correct**: `NotificationManager(settings_snapshot=settings_snapshot, user_id=username)`
+- ❌ **Wrong**: `NotificationManager(session=session)` - Not thread-safe!
+
+See the source code in `web/queue/processor_v2.py` and `error_handling/error_reporter.py` for implementation examples.
+
+## Advanced Usage
+
+### Multiple Service URLs
+
+Configure multiple comma-separated service URLs to send notifications to multiple services simultaneously (Discord, Slack, email, etc.).
+
+### Custom Retry Behavior
+
+Use `force=True` parameter to bypass rate limits and disabled settings for critical notifications.
+
+### Event-Specific Configuration
+
+Each event type can be individually enabled/disabled via settings (see Event-Specific Settings above).
+
+### Per-User Rate Limiting
+
+The notification system supports independent rate limiting for each user:
+
+**How It Works:**
+- Each user configures their own rate limits via settings (e.g., `notifications.rate_limit_per_hour`)
+- Rate limits are enforced per-user, not globally
+- One user hitting their limit does not affect other users
+- Rate limits can be different for each user based on their settings
+
+**Example:**
+```python
+# User A with conservative limits (5/hour)
+snapshot_a = {"notifications.rate_limit_per_hour": 5}
+manager_a = NotificationManager(snapshot_a, user_id="user_a")
+
+# User B with generous limits (20/hour)
+snapshot_b = {"notifications.rate_limit_per_hour": 20}
+manager_b = NotificationManager(snapshot_b, user_id="user_b")
+
+# User A can send 5 notifications per hour
+# User B can send 20 notifications per hour
+# They don't interfere with each other
+```
+
+**Technical Details:**
+- The rate limiter maintains separate counters for each user
+- Each user's limits are stored in memory (~24 bytes per user)
+- Limits can be updated dynamically by creating a new NotificationManager for that user
+- The `user_id` parameter is required when creating a NotificationManager
+
+### Rate Limit Handling
+
+Rate limit exceptions (`RateLimitError`) can be caught and handled gracefully. See `notifications/exceptions.py` for available exception types.
+
+**Example:**
+```python
+from local_deep_research.notifications.exceptions import RateLimitError
+
+try:
+    notification_manager.send_notification(
+        event_type=EventType.RESEARCH_COMPLETED,
+        context=context,
+    )
+except RateLimitError as e:
+    # The manager already knows the user_id from initialization
+    logger.warning(f"Rate limit exceeded: {e}")
+    # Handle rate limit (e.g., queue for later, notify user)
+```
+
+## Troubleshooting
+
+### Notifications Not Sending
+
+1. **Check service URL configuration**: Use `SettingsManager.get_setting("notifications.service_url")` to verify the service URL is configured
+2. **Test service connection**: Use `notification_manager.test_service(service_url)` to verify connectivity
+3. **Check event-specific settings**: Verify the specific event type is enabled (e.g., `notifications.on_research_completed`)
+4. **Check rate limits**: Look for "Rate limit exceeded for user {user_id}" messages in logs
+
+### Common Issues
+
+**Issue**: "No notification service URLs configured"
+- **Cause**: `notifications.service_url` setting is empty or not set
+- **Fix**: Configure service URL in settings dashboard or via API
+
+**Issue**: "Rate limit exceeded"
+- **Cause**: User has sent too many notifications within their configured time window (hourly or daily limit)
+- **Fix**: Wait for rate limit window to expire (1 hour for hourly, 1 day for daily), adjust rate limit settings, or use `force=True` for critical notifications
+- **Note**: Rate limits are enforced per-user, so this only affects the specific user who exceeded their limit
+
+**Issue**: "Failed to send notification after 3 attempts"
+- **Cause**: Service is unreachable or credentials are invalid
+- **Fix**: Verify service URL is correct, test with `test_service()`, check network connectivity
+
+**Issue**: Notifications work in main thread but fail in background thread
+- **Cause**: Using database session in background thread (not thread-safe)
+- **Fix**: Use settings snapshot pattern as shown in migration guide above
+
+### Webhook URL Was Rejected
+
+The "Test" button in the notifications settings page returns the validator's reason directly. Common categories and the fix:
+
+**"Blocked private/internal IP address: \<host\>"**
+- **Cause**: The URL resolves to a loopback (`127.0.0.1`, `::1`), RFC1918 (`10.x`, `172.16-31.x`, `192.168.x`), CGNAT (`100.64.0.0/10`), or IPv6 unique-local (`fc00::/7`) address. The default SSRF policy blocks these for outbound webhooks. Link-local addresses (`169.254.0.0/16`, `fe80::/10`) are reported as `Blocked cloud-metadata / link-local IP address` instead (see below).
+- **Fix (operator-only, env-only)**: Set `LDR_NOTIFICATIONS_ALLOW_PRIVATE_IPS=true` in the server environment. This is intentionally not exposed in the user-writable settings API. Only enable it if the notification endpoints are on a trusted local network. In v2, this opt-in also applies to `json://`, `xml://`, `form://` and self-hosted Apprise plugins such as Signal, Gotify and ntfy private mode; older releases allowed private plugin hosts without the flag. Link-local hosts (for every scheme, `http(s)://` included) and cloud-metadata endpoints remain blocked even with opt-in.
+- **Fix (IPv6-only deployments using NAT64)**: If the host wraps IPv4 through `64:ff9b::/96` (RFC 6052 well-known) or `64:ff9b:1::/48` (RFC 8215 local-use), additionally set `LDR_SECURITY_ALLOW_NAT64=true`. The opt-in is scoped strictly to those two prefixes — 6to4 (`2002::/16`), Teredo (`2001::/32`), the discard prefix (`100::/64`), the deprecated IPv4-Compatible IPv6 form (`::/96`, except `::1` loopback which follows the loopback/private-IPs flags), and the IPv4-Translated SIIT form (`::ffff:0:0:0/96`, RFC 2765) remain blocked.
+- **Note (cloud-metadata IPs)**: If `\<host\>` is a cloud-metadata IP (see the next bullet), the env-var hint above is intentionally **not** surfaced by the "Test" button — neither flag re-opens metadata, so the hint would mislead. The validator reports it as `"Blocked cloud-metadata / link-local IP address: 169.254.169.254"` (see the next bullet).
+
+**"Blocked cloud-metadata / link-local IP address: \<host\>"**
+- **Cause**: A host-bearing notification URL names a cloud-metadata or link-local endpoint. Literal addresses are checked directly; hostnames get one bounded validation-time resolution and are checked again at send time. Fixed-destination token/topic modes (Discord, Slack, ntfy cloud, Matrix t2bot and Telegram) are not resolved as user-supplied hosts.
+- **Always blocked**: AWS IMDS / ECS, Azure, OCI, DigitalOcean, AlibabaCloud, Tencent — both as plain IPv4 and wrapped through any NAT64 prefix. No env var re-opens these. See [SECURITY.md](../SECURITY.md#cloud-metadata-endpoint-block-list). The rest of the link-local range is blocked for every notification URL as well; `LDR_NOTIFICATIONS_ALLOW_PRIVATE_IPS` does not reopen it.
+- **Fix**: Choose a different webhook destination. Metadata endpoints expose IAM/instance credentials and are never legitimate webhook targets.
+
+**"Blocked unsafe protocol: \<scheme\>"** / **"Unsupported protocol: \<scheme\>"**
+- **Cause**: The URL uses a scheme that is either denylisted (`file`, `ftp`, `ftps`, `data`, `javascript`, `vbscript`, `about`, `blob`) or not in LDR's URL-scheme allowlist.
+- **Fix**: Use one of the schemes in LDR's URL-scheme allowlist — `http`, `https`, `mailto`, `discord`, `slack`, `tgram`, `gotify`, `pushover`, `ntfy`, `ntfys`, `signal`, `matrix`, `mattermost`, `rocketchat`, `teams`, `json`, `xml`, `form` — and verify it with the Test button. Against Apprise 1.12.0 (the reviewed dependency floor), direct `discord://` and `slack://` URLs use fixed service endpoints; LDR blocks their `template` option so it cannot fetch a second resource. ntfy cloud (`ntfy://<topic>`) and Matrix t2bot (`matrix://<64-character-token>`) are fixed-destination modes too. `signal://`, `gotify://`, ntfy private, Matrix server/webhook, `json://`, `xml://`, and `form://` use a user-supplied authority host. `mailto://` uses its authority or Apprise's fixed SMTP mapping for a recognized provider; LDR rejects a mail URL that Apprise would send to any other SMTP host. The user-host cases remain subject to the send-time DNS guard described in [SECURITY.md](../SECURITY.md#notification-webhook-ssrf).
+
+  **Direct scheme-prefix gap (Apprise 1.12.0 floor vs LDR's URL-scheme allowlist).** Telegram is accepted under Apprise's own `tgram` prefix. Four other names in LDR's allowlist do not overlap the direct prefixes Apprise 1.12.0 registers, and LDR has no alias translation:
+
+  | Service | LDR allowlist name | Apprise 1.12.0 direct prefix(es) | Direct prefix overlap? |
+  | --- | --- | --- | --- |
+  | Pushover | `pushover` | `pover` | no |
+  | Microsoft Teams Workflows | `teams` | `workflow`, `workflows` | no |
+  | Mattermost | `mattermost` | `mmost`, `mmosts` | no |
+  | Rocket.Chat | `rocketchat` | `rocket`, `rockets` | no |
+
+  For those four, a name LDR accepts (for example `pushover://`) is not the prefix Apprise registers, while the Apprise prefix (for example `pover://`) is outside LDR's allowlist. Apprise can separately recognize some native service `http(s)://` URLs and convert them to plugins, so this table does not claim that every integration is unavailable. The validator applies its blocked-query and no-redirect policy before that conversion. Always use the Test button before relying on a candidate URL.
+
+**"Blocked unsafe notification parameter: \<name\>"**
+- **Cause**: The URL contains an Apprise option that can bypass validation of the visible authority. LDR rejects `template` because Discord, Slack, and Workflows can use it to read a local file or fetch another URL; `redirect` because it would re-enable redirect-based SSRF; and, for `mailto://`, `smtp`, `pgppub`/`pgpkey`, `pgpprv`, and `wkd` because they can select another SMTP destination, key resource, or recipient-derived HTTPS request.
+- **Fix**: Remove the option. Put a custom SMTP server in the `mailto://` authority instead of `?smtp=...`. Notification redirects and plugin-supplied template/PGP/WKD resources are intentionally unavailable; LDR's own notification body templates are unaffected.
+
+**"Malformed percent-encoding in notification parameter name"**
+- **Cause**: A query parameter name contains `%` without two hexadecimal digits. LDR rejects this before DNS resolution to avoid parser-version differences with Apprise.
+- **Fix**: Correct or remove the malformed parameter name.
+
+**"Notification destination is unsupported or ambiguous"**
+- **Cause**: LDR could not establish the one host Apprise would contact for this URL, so the URL is refused rather than checked against the wrong address. For example, an IPv6 literal host that Apprise's URL parser rewrites: Apprise 1.13 sends `json://[fd00::1]/hook` to `[fd00::]`, and drops the port of a literal written with uppercase hex digits (`json://[FD00:0:0:0:0:0:0:1]:8080/hook` goes to port 80). Other causes include an unsupported ntfy `mode=` value and a `mailto://` URL that Apprise would send to an SMTP host other than its authority or a built-in provider's.
+- **Fix**: Write an IPv6 literal in full and in lowercase (`json://[fd00:0:0:0:0:0:0:1]:8080/hook`), or use a hostname. Otherwise remove the ambiguous part of the URL and check it with the Test button.
+
+**"URL contains characters that are not allowed (whitespace, backslash, or control bytes)"**
+- **Cause**: Layer-1 defense against parser-differential SSRF bypasses (GHSA-g23j-2vwm-5c25) — RFC 3986 forbids these characters in URLs.
+- **Fix**: Remove the whitespace / backslash / control bytes. Percent-encode if a legitimate use case requires them.
+
+**"Outbound notifications are disabled. The server administrator must set LDR_NOTIFICATIONS_ALLOW_OUTBOUND=true …"**
+- **Cause**: Server-level master switch is off. See the "Server-Side Opt-In Required" section at the top of this document for the rationale (DNS-rebinding TOCTOU window in Apprise).
+- **Fix (operator-only)**: Set `LDR_NOTIFICATIONS_ALLOW_OUTBOUND=true` after reviewing the residual risk.
+
+## See Also
+
+- [Full Configuration Reference](CONFIGURATION.md) - All notification settings, defaults, and environment variables
+- [News Subscriptions](news-subscriptions.md) - News subscription system
+- [Features](features.md) - Feature overview
