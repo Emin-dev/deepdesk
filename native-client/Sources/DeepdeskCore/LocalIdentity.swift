@@ -18,6 +18,7 @@ public protocol IdentityMarkerStore: Sendable {
     func write(_ marker: IdentityMarker) async throws
 }
 
+/// Success means the authenticated session has been checked against this exact identity.
 public protocol LocalAccountClient: Sendable {
     func registerLocalIdentity(_ identity: LocalIdentity) async throws
     func loginLocalIdentity(_ identity: LocalIdentity) async throws
@@ -70,7 +71,9 @@ public actor LocalIdentityCoordinator {
         guard try await markers.read() == .prepared else { throw IdentityError.persistenceFailed }
     }
 
-    public func authenticate(using client: any LocalAccountClient) async throws {
+    /// Returns only the confirmed username, never the encryption credential.
+    @discardableResult
+    public func authenticate(using client: any LocalAccountClient) async throws -> String {
         guard !operationInProgress else { throw IdentityError.operationInProgress }
         operationInProgress = true
         defer { operationInProgress = false }
@@ -81,27 +84,39 @@ public actor LocalIdentityCoordinator {
             do {
                 try await client.registerLocalIdentity(identity)
                 try await markers.write(.registered)
-                return
+                return identity.username
             } catch {
                 // An account may exist even if the server lost the response. Reconcile only by sign-in.
                 do { try await client.loginLocalIdentity(identity) }
                 catch { throw IdentityError.reconciliationRequired }
                 try await markers.write(.registered)
-                return
+                return identity.username
             }
         }
         // Missing marker with existing Keychain material is also login-only; never infer a fresh account.
         try await client.loginLocalIdentity(identity)
         try await markers.write(.registered)
+        return identity.username
     }
 }
 
 extension ResearchAPI: LocalAccountClient {
     public func registerLocalIdentity(_ identity: LocalIdentity) async throws {
-        _ = try await register(username: identity.username, password: identity.password,
-                               confirmation: identity.password, acknowledgedNoRecovery: true)
+        let state = try await register(username: identity.username, password: identity.password,
+                                       confirmation: identity.password, acknowledgedNoRecovery: true)
+        try await verifyLocalIdentity(state, expectedUsername: identity.username)
     }
     public func loginLocalIdentity(_ identity: LocalIdentity) async throws {
-        _ = try await signIn(username: identity.username, password: identity.password)
+        let state = try await signIn(username: identity.username, password: identity.password)
+        try await verifyLocalIdentity(state, expectedUsername: identity.username)
+    }
+
+    private func verifyLocalIdentity(_ state: AuthState, expectedUsername: String) async throws {
+        guard state.authenticated, state.username == expectedUsername else {
+            // Never adopt another account's session or record bootstrap success.
+            // Clear its cookies and auth context without logging either identity or any secret.
+            await disconnect()
+            throw IdentityError.reconciliationRequired
+        }
     }
 }

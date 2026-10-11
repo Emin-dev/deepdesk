@@ -59,10 +59,9 @@ final class ResearchStore: ObservableObject {
             self.port = port
             let client = ResearchAPI(endpoint: try LocalEndpoint(port: port), expectedInstance: expectedInstance)
             api = client
-            try await identity.authenticate(using: client)
-            let state = try await client.checkAuthentication()
-            guard state.authenticated else { throw IdentityError.reconciliationRequired }
-            username = state.username ?? "Local research"
+            // The coordinator returns the exact identity already confirmed by the API adapter.
+            // Do not replace it with a second, independently returned account name.
+            username = try await identity.authenticate(using: client)
             await loadSession()
         } catch { handle(error) }
     }
