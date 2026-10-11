@@ -1,0 +1,34 @@
+# First-party-only diagnostic. Exact receipt approval is required before execution.
+name: Diagnose libmagic smoke exec canary
+on:
+  push:
+    branches:
+      - engine-libmagic-exec-diagnostic-ci
+    paths:
+      - 'packaging/libmagic-exec-diagnostic/**'
+      - '.github/workflows/engine-libmagic-exec-diagnostic-macos.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: deepdesk-libmagic-exec-diagnostic-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  exec-canary-diagnostic:
+    if: github.repository == 'Emin-dev/deepdesk' && github.ref == 'refs/heads/engine-libmagic-exec-diagnostic-ci' && github.event.repository.private == false
+    runs-on: macos-26
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Diagnose the exact exec-denial boundary without rebuilding native source
+        run: /usr/bin/python3 -I packaging/libmagic-exec-diagnostic/stage.py --repository "$GITHUB_WORKSPACE" --review-receipt packaging/libmagic-exec-diagnostic/review-receipt.json
+      - name: State precise diagnostic scope
+        if: always()
+        run: |
+          printf '%s\n' \
+            'Scope: a first-party Python entry/result marker under the unchanged build and smoke sandbox profiles. The fixed diagnostic receipt records the outcome.' \
+            'Only the previously reviewed harmless system true exec-denial attempt is included. No native source rebuild, library fixture, compiler, dependency/model download or provider query.' \
+            'No execution-policy expansion, credentials, cache or artifact uploads. This does not establish libmagic MIME behavior or full native closure.' >> "$GITHUB_STEP_SUMMARY"
