@@ -3,8 +3,6 @@ import AppKit
 import DeepdeskCore
 
 // This file belongs only to the separate UI test host target. It is never part of Deepdesk's package executable.
-extension Bundle { static var module: Bundle { .main } }
-
 private actor MemoryVault: IdentityVault {
     var value: LocalIdentity?
     func read() async throws -> LocalIdentity? { value }

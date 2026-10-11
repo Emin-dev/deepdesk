@@ -157,7 +157,7 @@ final class IdentityAndDownloadTests: XCTestCase {
         let first = Task { try await coordinator.authenticate(using: accounts) }
         let second = Task { try await coordinator.authenticate(using: accounts) }
         for task in [first, second] {
-            do { try await task.value }
+            do { _ = try await task.value }
             catch { XCTAssertEqual(error as? IdentityError, .operationInProgress) }
         }
         let counts = await accounts.counts()

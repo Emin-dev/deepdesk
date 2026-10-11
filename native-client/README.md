@@ -63,9 +63,15 @@ swift test
 
 The script builds an arm64 native app bundle and copies its SwiftPM resource bundle. It refuses to overwrite an existing app. It does not supply Python/Splash runtime binaries, sign, notarize, or create a DMG; repository packaging owns those stages.
 
+The production catalog resolver reads only `Deepdesk.app/Contents/Resources/Deepdesk_Deepdesk.bundle`. It uses Foundation to locate the catalog inside that resource bundle, then performs a bounded, no-follow regular-file read and validates the manifest. There is no SwiftPM build-directory fallback. Running the raw SwiftPM executable is not an installed-app resource test.
+
+`./scripts/test-relocated-resources.sh /new/absolute/output-directory` builds the native-only app and a separate read-only probe, prints the actual toolchain-generated resource accessor, relocates the app, and temporarily moves `.build` aside. The same production resolver must load both models from the moved app and fail cleanly when its packaged bundle is missing. The script restores the generated build outputs, does not launch the production app or helpers, and does not use Keychain, network, or model weights. This relocation check is pending its first reviewed macOS CI execution.
+
 Tests cover exact API payload names, login/CSRF rotation, unknown and terminal statuses, cancellation acknowledgement, history/report shapes, redirect/source URL constraints, no automatic start replay, instance identity, identity persistence/reconciliation/concurrency, catalog/path validation, metadata bounds, and strong-ETag range rules. They use synthetic identity fixtures and never create a real local account or Keychain item.
 
 **Verification:** [Commit e69107a703e3ec789677433b63df2bdcc13e7945](https://github.com/Emin-dev/deepdesk/commit/e69107a703e3ec789677433b63df2bdcc13e7945) passed all **28 core XCTest tests, 6 isolated synthetic UI tests, and arm64 release compilation** in [macOS run 38100079182](https://github.com/Emin-dev/deepdesk/actions/runs/38100079182). All six bounded screenshot receipts were hash-verified and visually inspected; horizontal clipping was fixed. Minor capture caveats remain: a Dock footer overlay and a partly toolbar-covered yellow synthetic report banner. The [verification record](docs/VERIFICATION.md) preserves the tested manifest and limits. These checks use a [separate synthetic UI host](UIHarness/README.md), not the production runtime. Full accessibility, Keychain behavior, actual backend HTTP integration, Splash inference, signed upgrades, notarization, and a real DMG install remain integration gates. An M1 cloud runner cannot establish M3+ model runtime compatibility.
+
+The subsequent exact-identity binding checkpoint `e9359594` passed **38 core tests, all 6 synthetic UI tests, and release compilation** in [run 38101177026](https://github.com/Emin-dev/deepdesk/actions/runs/38101177026). It binds the authenticated session to the Keychain identity and carries that validated username into ready state. These are still synthetic identity tests; live Keychain and native HTTP integration remain unproved.
 
 ## API and design references
 

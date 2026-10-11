@@ -8,7 +8,17 @@ All six allowlisted synthetic-window screenshot receipts were size/hash-verified
 
 The earlier [first UI run](https://github.com/Emin-dev/deepdesk/actions/runs/38098632449) passed 2 of 6 tests, and the [first correction](https://github.com/Emin-dev/deepdesk/actions/runs/38099207221) passed 5 of 6. The final run above supersedes those failed checkpoints for the tested source. No model download, real account creation, Keychain persistence, Python engine, inference, or real web research was performed by these synthetic checks.
 
-## Passed locally
+## Later identity-binding CI
+
+The later exact-identity binding checkpoint `e9359594`, source manifest `0a669a251dd53b9fdd8c0d4745ed992d7b12bad282fc930d6737c6d7303f0044`, passed **38 core tests, all 6 synthetic UI tests, and arm64 release compilation** in [run 38101177026](https://github.com/Emin-dev/deepdesk/actions/runs/38101177026). Ten new transport/coordinator tests cover incorrect or missing usernames, unauthenticated responses, validated success, and one final identity observation. No live Keychain or native-to-Python HTTP evidence is implied.
+
+## Packaged resource correction (execution pending)
+
+The production loader no longer calls SwiftPM's generated `Bundle.module`: it resolves only `Contents/Resources/Deepdesk_Deepdesk.bundle` inside the supplied app. The shared core resolver uses Foundation's resource layout support, bounded no-follow file reads, and catalog validation. Fifteen added tests cover both resource-bundle layouts, relocation, missing or misplaced bundle/catalog, invalid/empty/oversized JSON, and linked/FIFO paths. These new tests have not yet run on macOS.
+
+The separate `DeepdeskResourceSmoke` probe calls this same resolver. `scripts/test-relocated-resources.sh` builds a native-only app, emits the current runner's generated accessor as evidence, moves the app to a new location, and hides the complete original `.build` tree. It requires a successful two-model load, a clean rejection after removing the packaged resource bundle, and successful load after restoring it. Generated build outputs are restored with an exit trap. This does not exercise production app startup, Keychain, helpers, downloads, or inference. The current-toolchain accessor and relocation assertions still require actual cloud macOS execution; an upstream SwiftPM source reading alone is not that evidence.
+
+## Local static checks
 
 - Python JSON parsing of both shipped and test catalog copies; copies match.
 - Catalog deduplication: two target choices reference 31 unique immutable files, 36,011,825,235 bytes combined. The shared draft is represented once per on-disk path.

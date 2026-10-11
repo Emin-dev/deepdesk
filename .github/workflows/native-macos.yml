@@ -1,5 +1,5 @@
-# Native source, mock-core and isolated synthetic-UI verification.
-# No production app, upstream Python, model, packaging, signing secrets or upload.
+# Native source, mock-core, relocated bundle resources and synthetic-UI verification.
+# No production app launch, upstream Python, model, signing secrets or upload.
 name: Verify native Deepdesk
 on:
   push:
@@ -37,6 +37,8 @@ jobs:
         run: swift test --package-path native-client
       - name: Compile native executable without launching
         run: swift build --package-path native-client --configuration release --arch arm64
+      - name: Verify native resources in a relocated unsigned app
+        run: bash native-client/scripts/test-relocated-resources.sh "$RUNNER_TEMP/deepdesk-relocated-resources"
       - name: Exercise isolated synthetic native UI
         run: bash native-client/UIHarness/run-ui-tests.sh "$RUNNER_TEMP/deepdesk-synthetic-ui"
       - name: Emit bounded synthetic screenshot receipts to public job logs
@@ -46,8 +48,8 @@ jobs:
       - name: State validation boundaries
         run: |
           printf '%s\n' \
-            'Swift mock tests, native executable compilation and isolated synthetic UI tests completed.' \
-            'Only the isolated synthetic UI host was launched; the production app, Python engine, inference runtime and models were not executed.' \
+            'Swift mock tests, native compilation, relocated unsigned-app resource checks and synthetic UI tests completed.' \
+            'Only the resource smoke executable and isolated synthetic UI host were launched; the production app, Python engine, inference runtime and models were not executed.' \
             'Bundled integration, real research, Keychain, full accessibility, DMG and Gatekeeper tests remain unverified.' \
             'No binary was uploaded. This job does not provide a download.' >> "$GITHUB_STEP_SUMMARY"
 

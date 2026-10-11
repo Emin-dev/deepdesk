@@ -37,9 +37,7 @@ final class ModelManager: ModelManaging {
 
     init() {
         do {
-            guard let url = Bundle.module.url(forResource: "model-catalog", withExtension: "json") else { throw ModelCatalogError.notBundled }
-            let catalog = try JSONDecoder().decode(ModelCatalog.self, from: Data(contentsOf: url)).validated()
-            guard !catalog.models.isEmpty else { throw ModelCatalogError.notBundled }
+            let catalog = try BundledModelCatalog.load(applicationBundleURL: Bundle.main.bundleURL)
             models = catalog.models
             for model in models {
                 states[model.id] = (try? hasAllFiles(model)) == true ? .installed : .available
