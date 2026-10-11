@@ -1,0 +1,56 @@
+# Native-only source/mock verification. Independent YAML review is required
+# before copying this exact file into .github/workflows/native-macos.yml.
+# No application launch, upstream Python, model, packaging, signing or upload.
+name: Verify native Deepdesk
+on:
+  push:
+    branches:
+      - native-swiftui-ci
+    paths:
+      - 'native-client/**'
+      - '.github/workflows/native-macos.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: deepdesk-native-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  native:
+    if: github.repository == 'Emin-dev/deepdesk' && github.ref == 'refs/heads/native-swiftui-ci' && github.event.repository.private == false
+    runs-on: macos-26
+    timeout-minutes: 25
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.6.app/Contents/Developer
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Verify host and toolchain
+        run: |
+          test "$(uname -m)" = arm64
+          sw_vers
+          xcodebuild -version
+          xcrun swift --version
+          xcrun --sdk macosx --show-sdk-version
+      - name: Native core tests
+        run: swift test --package-path native-client
+      - name: Compile native executable without launching
+        run: swift build --package-path native-client --configuration release --arch arm64
+      - name: State validation boundaries
+        run: |
+          printf '%s\n' \
+            'Swift package mock tests and native executable compilation completed.' \
+            'No app was launched; no Python engine, inference runtime or model was executed.' \
+            'Bundled integration, real research, Keychain, visual accessibility, DMG and Gatekeeper tests remain unverified.' \
+            'No binary was uploaded. This job does not provide a download.' >> "$GITHUB_STEP_SUMMARY"
+
+# A separate full DMG workflow would require a new review after:
+# - reviewed hash-locked macOS arm64 wheelhouse/build environment exists;
+# - readonly-themes.patch and managed-ddg-defaults.patch are applied/tested;
+# - engine-provenance.json records verified hashes and review;
+# - freeze-engine.sh and build-dmg.sh have succeeded on the actual inputs;
+# - a no-spend artifact handback is verified (quota or authorized release).
+# No paid/larger runner, write token, persistent credential, or security grant is
+# a fallback when these gates are missing.
