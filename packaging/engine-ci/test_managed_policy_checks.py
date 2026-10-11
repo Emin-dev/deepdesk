@@ -23,8 +23,8 @@ spec.loader.exec_module(contract)
 
 
 def passed():
-    return {'schema': 1, 'kind': contract.KIND, 'status': 'passed', 'checks': list(contract.CHECKS),
-            'failed_check': 'none', 'error_class': 'none', 'forbidden_operation_attempted': False,
+    return {'schema': 2, 'kind': contract.KIND, 'status': 'passed', 'checks': list(contract.CHECKS),
+            'failed_check': 'none', 'error_class': 'none', 'forbidden_operation_attempted': False, 'blocked_operations': [],
             **dict.fromkeys(contract.FALSE_FIELDS, False)}
 
 
@@ -56,8 +56,8 @@ def exercise(*args):
     print('synthetic-private-python-output')
     os.write(1,b'synthetic-private-native-output\\n')
     os.write(2,b'synthetic-private-error-output\\n')
-    return {'schema':1,'kind':module.KIND,'status':'passed','checks':list(module.CHECKS),
-            'failed_check':'none','error_class':'none','forbidden_operation_attempted':False,
+    return {'schema':2,'kind':module.KIND,'status':'passed','checks':list(module.CHECKS),
+            'failed_check':'none','error_class':'none','forbidden_operation_attempted':False,'blocked_operations':[],
             **dict.fromkeys(module.FALSE_FIELDS,False)}
 module.exercise=exercise
 sys.argv=['fixture','--wrapper','/synthetic','--wrapper-sha256','0'*64,
@@ -101,6 +101,59 @@ os.write(1,b'synthetic-private-late-output\\n')
         state = {'forbidden': False}
         contract.operation_guard(state)('import', ('standard-import',))
         self.assertFalse(state['forbidden'])
+
+    def test_operation_diagnostics_are_fixed_bounded_and_secret_free(self):
+        state = {'forbidden': False, 'completed': [contract.CHECKS[0]]}
+        guard = contract.operation_guard(state)
+        for event in ('socket.__new__', 'socket.gethostname', 'socket.private-secret-event',
+                      'subprocess.Popen', 'socket.connect'):
+            with self.assertRaises(RuntimeError):
+                guard(event, ('private-secret-host-and-credential',))
+        operations = state['blocked_operations']
+        self.assertEqual(len(operations), 4)
+        self.assertEqual([item['event'] for item in operations],
+                         ['socket-create', 'hostname-read', 'socket-other', 'process-spawn'])
+        self.assertTrue(all(item['check'] == 'installed-wrapper-identity' for item in operations))
+        self.assertTrue(all(item['source'] == 'unknown' and item['line'] == 0 for item in operations))
+        result = {**passed(), 'status': 'failed', 'checks': list(contract.CHECKS[:-1]),
+                  'failed_check': contract.CHECKS[-1], 'error_class': 'AssertionError',
+                  'forbidden_operation_attempted': True, 'blocked_operations': operations}
+        raw = json.dumps(result).encode()
+        self.assertLessEqual(len(raw), 2048)
+        self.assertNotIn(b'private-secret', raw)
+        self.assertEqual(contract.parse_report(raw), result)
+        for mutation in ({'event': 'private-secret'}, {'check': 'private-secret'},
+                         {'source': '/private/secret.py'}, {'line': True}, {'line': 1}):
+            with self.subTest(mutation=mutation), self.assertRaises(RuntimeError):
+                contract.validate({**result, 'blocked_operations': [{**operations[0], **mutation}]})
+        for invalid in ([], operations + [operations[0]], 'private-secret'):
+            with self.subTest(invalid=invalid), self.assertRaises(RuntimeError):
+                contract.validate({**result, 'blocked_operations': invalid})
+
+    def test_origin_requires_exact_filename_and_hash_not_basename(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source = "def probe(callback, prefix):\n    return callback(prefix)\n"
+            path = root / 'lib/python3.12/probe.py'
+            path.parent.mkdir(parents=True)
+            path.write_text(source)
+            namespace = {}
+            exec(compile(source, str(path), 'exec'), namespace)
+            mapping = {'stdlib-platform': ('lib/python3.12/probe.py', hashlib.sha256(source.encode()).hexdigest())}
+            with patch.dict(contract.SOURCE_IDS, mapping, clear=True):
+                self.assertEqual(namespace['probe'](contract.blocked_origin, root), ('stdlib-platform', 2))
+                path.write_text(source + '# changed\n')
+                self.assertEqual(namespace['probe'](contract.blocked_origin, root), ('unknown', 0))
+                exec(compile(source, '/private/credential/probe.py', 'exec'), namespace)
+                self.assertEqual(namespace['probe'](contract.blocked_origin, root), ('unknown', 0))
+
+    def test_diagnostic_source_hashes_match_pinned_inventory_and_policy(self):
+        sources = contract.SOURCE_IDS
+        inventory = json.loads((HERE / 'asgi-diagnostic-source-allowlist.json').read_text())
+        for label in ('stdlib-platform', 'stdlib-subprocess'):
+            relative, expected = sources[label]
+            self.assertEqual(inventory['files']['stdlib'][relative.removeprefix('lib/python3.12/')], expected)
+        self.assertEqual(sources['upstream-egress-policy'][1], contract.POLICY_SHA256)
 
 
 @contextmanager

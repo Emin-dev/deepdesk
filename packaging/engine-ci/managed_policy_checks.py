@@ -43,10 +43,10 @@ def require(value):
 
 def validate(report):
     keys = {'schema', 'kind', 'status', 'checks', 'failed_check', 'error_class',
-            'forbidden_operation_attempted', *FALSE_FIELDS}
+            'forbidden_operation_attempted', 'blocked_operations', *FALSE_FIELDS}
     if not isinstance(report, dict) or set(report) != keys:
         raise RuntimeError('Invalid managed policy schema')
-    if type(report['schema']) is not int or report['schema'] != 1 or report['kind'] != KIND:
+    if type(report['schema']) is not int or report['schema'] != 2 or report['kind'] != KIND:
         raise RuntimeError('Invalid managed policy identity')
     if (type(report['status']) is not str or type(report['error_class']) is not str
             or report['status'] not in {'passed', 'failed'} or report['error_class'] not in ERRORS):
@@ -58,6 +58,22 @@ def validate(report):
         raise RuntimeError('Unexpected inference or transport claim')
     if type(report['forbidden_operation_attempted']) is not bool:
         raise RuntimeError('Invalid managed policy operation flag')
+    operations = report['blocked_operations']
+    if not isinstance(operations, list) or len(operations) > 4:
+        raise RuntimeError('Invalid managed policy operation bound')
+    if bool(operations) is not report['forbidden_operation_attempted']:
+        raise RuntimeError('Inconsistent managed policy operation flag')
+    for operation in operations:
+        if not isinstance(operation, dict) or set(operation) != {'event', 'check', 'source', 'line'}:
+            raise RuntimeError('Invalid blocked operation schema')
+        for key, values in (('event', set(EVENTS.values()) | {'socket-other', 'provider-factory'}),
+                            ('check', set(CHECKS)), ('source', set(SOURCE_IDS) | {'unknown', 'fixture'})):
+            if type(operation[key]) is not str or operation[key] not in values:
+                raise RuntimeError('Invalid blocked operation enum')
+        if type(operation['line']) is not int or not 0 <= operation['line'] <= 100000:
+            raise RuntimeError('Invalid blocked operation line')
+        if operation['source'] in {'unknown', 'fixture'} and operation['line'] != 0:
+            raise RuntimeError('Unexpected unverified source line')
     if report['status'] == 'passed':
         if checks != list(CHECKS) or report['failed_check'] != 'none' or report['error_class'] != 'none' or report['forbidden_operation_attempted']:
             raise RuntimeError('Incomplete managed policy success')
@@ -86,6 +102,68 @@ def parse_report(raw):
     return validate(report)
 
 
+# Diagnostic-only public labels. No audit arguments, paths, messages or locals
+# are retained. These exact immutable source hashes identify likely call sites;
+# all other frames map to unknown. A label never permits an operation.
+EVENTS = {
+    'socket.__new__': 'socket-create', 'socket.bind': 'socket-bind',
+    'socket.connect': 'socket-connect', 'socket.getaddrinfo': 'socket-resolve',
+    'socket.gethostbyname': 'socket-resolve', 'socket.gethostbyaddr': 'socket-resolve',
+    'socket.getnameinfo': 'socket-resolve', 'socket.gethostname': 'hostname-read',
+    'subprocess.Popen': 'process-spawn', 'os.system': 'process-system',
+    'os.posix_spawn': 'process-spawn', 'os.exec': 'process-exec',
+    'os.fork': 'process-fork', 'os.forkpty': 'process-fork',
+}
+SOURCE_IDS = {
+    'urllib3-ipv6-probe': ('lib/python3.12/site-packages/urllib3/util/connection.py',
+        '2633bbdb69731e5ccb5cf4e4afd65605d86c7979cc5633126f50c92d5ad74a74'),
+    'langchain-socket-options': ('lib/python3.12/site-packages/langchain_openai/chat_models/_client_utils.py',
+        '1486a89c1ac2609fcfb52a9070d9a3379aae2cc225bb83f8186b2015a4ec3483'),
+    'upstream-egress-policy': ('lib/python3.12/site-packages/local_deep_research/security/egress/policy.py', POLICY_SHA256),
+    'stdlib-platform': ('lib/python3.12/platform.py',
+        'f5ff83f15c841792be42709a6710dc8d7a9f72791c1ae4cad719b1fb0abe0a05'),
+    'stdlib-subprocess': ('lib/python3.12/subprocess.py',
+        '85d29b2bf0249f5436838298c9a60ee93508b1102e9ac43b001f8a7e7ae8f375'),
+}
+
+
+def blocked_origin(prefix):
+    """Only exact pinned filenames and bytes can become public source IDs."""
+    if prefix is None:
+        return 'unknown', 0
+    frame = sys._getframe(1)
+    try:
+        for _ in range(32):
+            if frame is None:
+                break
+            for label, (relative, expected) in SOURCE_IDS.items():
+                path = prefix / relative
+                if frame.f_code.co_filename != str(path):
+                    continue
+                try:
+                    if path.is_symlink() or not path.is_file() or path.stat().st_size > 1024 * 1024:
+                        continue
+                    if hashlib.sha256(path.read_bytes()).hexdigest() != expected:
+                        continue
+                except OSError:
+                    continue
+                return label, min(max(frame.f_lineno, 0), 100000)
+            frame = frame.f_back
+    finally:
+        del frame
+    return 'unknown', 0
+
+
+def record_blocked(state, event):
+    state['forbidden'] = True
+    operations = state.setdefault('blocked_operations', [])
+    if len(operations) < 4:
+        completed = state.get('completed', [])
+        check = CHECKS[min(len(completed), len(CHECKS) - 1)]
+        source, line = ('fixture', 0) if event == 'provider-factory' else blocked_origin(state.get('prefix'))
+        operations.append({'event': event, 'check': check, 'source': source, 'line': line})
+
+
 def operation_guard(state):
     """Fail before socket/DNS/process actions, even if an import regresses.
 
@@ -96,14 +174,15 @@ def operation_guard(state):
         if (event.startswith('socket.') or event in {
             'subprocess.Popen', 'os.system', 'os.posix_spawn', 'os.exec', 'os.fork', 'os.forkpty'
         }):
-            state['forbidden'] = True
+            record_blocked(state, EVENTS.get(event, 'socket-other'))
             raise RuntimeError('Forbidden managed policy fixture operation')
     return guard
 
 
 def exercise(wrapper, wrapper_sha256, runtime_prefix, fixture_root):
     completed = []
-    state = {'forbidden': False, 'factory_calls': 0}
+    state = {'forbidden': False, 'factory_calls': 0, 'blocked_operations': [],
+             'completed': completed, 'prefix': None}
     try:
         # A fresh child-only directory; never open real account/model data.
         require(fixture_root.is_absolute() and fixture_root.parent.resolve() == Path.cwd().resolve()
@@ -132,6 +211,7 @@ def exercise(wrapper, wrapper_sha256, runtime_prefix, fixture_root):
         require(hashlib.sha256(wrapper.read_bytes()).hexdigest() == wrapper_sha256)
         prefix = runtime_prefix.resolve(strict=True)
         require(prefix == Path(sys.prefix).resolve() and wrapper.parent / 'Python' == prefix)
+        state['prefix'] = prefix
         module = runpy.run_path(str(wrapper), run_name='managed_policy_installed_wrapper')
         installed = module['runtime_resources']()
         require(installed.resolve().is_relative_to(prefix / 'lib/python3.12/site-packages'))
@@ -146,7 +226,7 @@ def exercise(wrapper, wrapper_sha256, runtime_prefix, fixture_root):
         # accidentally removed. This sentinel is captured by the real wrapper.
         def forbidden_factory(cls, *args, **kwargs):
             state['factory_calls'] += 1
-            state['forbidden'] = True
+            record_blocked(state, 'provider-factory')
             raise RuntimeError('Provider creation forbidden in policy fixture')
         CustomOpenAIEndpointProvider.create_llm = classmethod(forbidden_factory)
         completed.append(CHECKS[len(completed)])
@@ -229,9 +309,10 @@ def exercise(wrapper, wrapper_sha256, runtime_prefix, fixture_root):
         checkpoint = CHECKS[len(completed)]
         name = type(exc).__name__
         error = name if name in ERRORS else 'OtherException'
-    return validate({'schema': 1, 'kind': KIND, 'status': status, 'checks': completed,
+    return validate({'schema': 2, 'kind': KIND, 'status': status, 'checks': completed,
                      'failed_check': checkpoint, 'error_class': error,
                      'forbidden_operation_attempted': state['forbidden'],
+                     'blocked_operations': state['blocked_operations'],
                      **dict.fromkeys(FALSE_FIELDS, False)})
 
 
