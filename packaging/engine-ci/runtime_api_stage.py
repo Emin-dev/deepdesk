@@ -111,8 +111,9 @@ def validate_built_wheel(wheel, name, version, source_contract, *, app=False):
             parser.read_string(archive.read(prefix + 'entry_points.txt').decode('utf-8'))
             expected_scripts = {'ldr-web':'local_deep_research.web.app:main',
                                 'ldr-mcp':'local_deep_research.mcp:run_server'}
-            require(not parser.defaults() and parser.sections() == ['console_scripts']
-                    and dict(parser.items('console_scripts')) == expected_scripts,
+            require(not parser.defaults() and parser.sections() == ['console_scripts', 'gui_scripts']
+                    and dict(parser.items('console_scripts')) == expected_scripts
+                    and dict(parser.items('gui_scripts')) == {},
                     'Generated application entry points differ from reviewed pyproject declarations')
             expected_payload = {path[4:] for path in source_contract if path.startswith('src/local_deep_research/')}
             require(set(records) == expected_payload, 'Application package resource set changed')

@@ -93,7 +93,7 @@ class ApplicationMetadataTests(unittest.TestCase):
         self.contract={'src/'+path:{'sha256':hashlib.sha256(data).hexdigest()} for path,data in self.payload.items()}
         self.contract['LICENSE']={'sha256':hashlib.sha256(self.license).hexdigest()}
         self.contract['NOTICE']={'sha256':hashlib.sha256(b'extra').hexdigest()}
-        self.entries='[console_scripts]\nldr-web = local_deep_research.web.app:main\nldr-mcp = local_deep_research.mcp:run_server\n'
+        self.entries='[console_scripts]\nldr-web = local_deep_research.web.app:main\nldr-mcp = local_deep_research.mcp:run_server\n\n[gui_scripts]\n'
 
     def write(self,entries='default',licenses='default'):
         prefix='local_deep_research-1.10.7.dist-info/'
@@ -114,11 +114,27 @@ class ApplicationMetadataTests(unittest.TestCase):
         self.write();self.assertTrue(self.validate()['source_payload_matches'])
 
     def test_added_console_script_refused(self):
-        self.write(entries=self.entries+'surprise = subprocess:check_call\n')
+        self.write(entries=self.entries.replace('[gui_scripts]', 'surprise = subprocess:check_call\n\n[gui_scripts]'))
         with self.assertRaises(RuntimeError):self.validate()
 
     def test_changed_script_target_refused(self):
         self.write(entries=self.entries.replace('local_deep_research.mcp:run_server','subprocess:check_call'))
+        with self.assertRaises(RuntimeError):self.validate()
+
+    def test_pdm_empty_gui_section_accepted(self):
+        self.write(entries=self.entries)
+        self.assertTrue(self.validate()['source_payload_matches'])
+
+    def test_populated_gui_section_refused(self):
+        self.write(entries=self.entries+'unexpected = subprocess:check_call\n')
+        with self.assertRaises(RuntimeError):self.validate()
+
+    def test_unknown_entry_point_group_refused(self):
+        self.write(entries=self.entries+'\n[unknown_group]\n')
+        with self.assertRaises(RuntimeError):self.validate()
+
+    def test_missing_pdm_gui_group_refused(self):
+        self.write(entries=self.entries.replace('\n[gui_scripts]\n',''))
         with self.assertRaises(RuntimeError):self.validate()
 
     def test_omitted_entry_points_refused(self):
