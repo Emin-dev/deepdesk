@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "execution_approved": true,
+  "scope": "single-versus-nested-offline-profile-diagnostic",
+  "review_status": "independent-exact-input-GO-and-approved-task-scope",
+  "base_commit": "8663a4f8d884554e0f3107ecdf3b1c35e4098793",
+  "destination_branch": "engine-sandbox-diagnostic-ci",
+  "profile_changed": false,
+  "dependency_download_or_execution": false,
+  "sha256": {
+    "packaging/engine-ci/diagnose_nested_sandbox.py": "d30119cb83e04d5b7681c310cb834f462ae8326def7920922f0a3b20f7a7a6ee",
+    "packaging/engine-ci/test_nested_sandbox_diagnostic.py": "671efc34b5590995d24bbc53fdf0474e8cd5e8c44608420363f6d42ca4d38912",
+    "packaging/engine-ci/diagnose_seatbelt.py": "8d3c8c5f710a6904f0007f74a6d6b708e0eebb84761de52df47adc760e66ed5a",
+    "packaging/engine-ci/test_seatbelt_diagnostic.py": "8bee9fb76614ad570526d49ad8d1cc24c7ed6ac1b9c6cf2be29abfe6cfe27311",
+    "packaging/engine-ci/runtime-offline.sb": "9d4f464140e5bb35efb2f937e820349b6f7a47482d4fcb2a618cc489b9bf4710",
+    "packaging/engine-ci/sandbox-diagnostic-macos.yml.template": "56201b864ef645111ec89be6a97c508a2eb7082e7263ece60574d8adeef232f9",
+    ".github/workflows/engine-sandbox-diagnostic-macos.yml": "56201b864ef645111ec89be6a97c508a2eb7082e7263ece60574d8adeef232f9"
+  },
+  "approved_by": "approved project-task scope",
+  "reviewer": "independent exact-input review",
+  "approval_recorded_utc": "2026-10-11T02:31:31Z",
+  "reviewed_candidate_manifest_sha256": "39f70dbb4be50aebff90d76cc4f60e692ea6527aeae8e6a6703e730938987ce2",
+  "independent_review_sha256": "760b6a67b913abc2d592a29d09297c2181b79702e69f7b79bb4e8eabb9b4197f",
+  "approval_scope_note": "Only single-versus-nested application of the unchanged offline profile with system true. No runtime, dependency, socket, profile expansion or fallback."
+}

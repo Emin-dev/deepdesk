@@ -1,11 +1,11 @@
-name: Diagnose unchanged Deepdesk sandbox profile
+name: Diagnose Deepdesk nested offline sandbox
 on:
   push:
     branches:
       - engine-sandbox-diagnostic-ci
     paths:
-      - 'packaging/engine-ci/diagnose_seatbelt.py'
-      - 'packaging/engine-ci/sandbox-diagnostic-review-receipt.json'
+      - 'packaging/engine-ci/diagnose_nested_sandbox.py'
+      - 'packaging/engine-ci/nested-sandbox-review-receipt.json'
       - 'packaging/engine-ci/sandbox-diagnostic-macos.yml.template'
       - '.github/workflows/engine-sandbox-diagnostic-macos.yml'
 permissions:
@@ -14,7 +14,7 @@ concurrency:
   group: deepdesk-sandbox-diagnostic-${{ github.ref }}
   cancel-in-progress: true
 jobs:
-  unchanged-profile-diagnostic:
+  nested-profile-diagnostic:
     if: github.repository == 'Emin-dev/deepdesk' && github.ref == 'refs/heads/engine-sandbox-diagnostic-ci' && github.event.repository.private == false
     runs-on: macos-26
     timeout-minutes: 3
@@ -23,5 +23,5 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 1
-      - name: Classify unchanged profile using only system true
-        run: python3 -I packaging/engine-ci/diagnose_seatbelt.py --repository "$GITHUB_WORKSPACE" --review-receipt packaging/engine-ci/sandbox-diagnostic-review-receipt.json
+      - name: Classify single and nested profiles using only system true
+        run: python3 -I packaging/engine-ci/diagnose_nested_sandbox.py --repository "$GITHUB_WORKSPACE" --review-receipt packaging/engine-ci/nested-sandbox-review-receipt.json
