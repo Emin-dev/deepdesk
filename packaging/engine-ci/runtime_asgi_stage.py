@@ -197,6 +197,8 @@ def main():
             'Separate exact full-runtime review has not approved execution')
     require(receipt.get('transport') == 'in-process-ASGI' and receipt.get('network_policy_changed') is False
             and receipt.get('real_http_execution_approved') is False, 'Unexpected ASGI transport or network scope')
+    require(receipt.get('fixture_containment') == 'single-inherited-deny-profile-fixture-only-writes',
+            'Unexpected fixture containment design')
     require(receipt.get('torch_selection') == 'distinct-official-PyPI-wheel-explicit-override',
             'Explicit Torch origin selection missing')
     required = {'packaging/engine-ci/runtime_asgi_stage.py', 'packaging/engine-ci/bounded_runtime.py',
@@ -290,8 +292,9 @@ def main():
             'TOKENIZERS_PARALLELISM':'false', 'OMP_NUM_THREADS':'1', 'OPENBLAS_NUM_THREADS':'1',
             'PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD':'1', 'LDR_DATA_DIR':str(work / 'isolated-data')}
         readonly_env = work / 'not-yet-sealed'
-        def run(command, *, cwd=work, timeout=180):
-            command = ['/usr/bin/sandbox-exec', '-D', 'WORK_DIR=' + str(work),
+        def run(command, *, cwd=work, timeout=180, writable=work):
+            require(writable.resolve().is_relative_to(work), 'Sandbox write root must remain inside the fresh stage work tree')
+            command = ['/usr/bin/sandbox-exec', '-D', 'WORK_DIR=' + str(writable),
                 '-D', 'IMMUTABLE_DIR=' + str(immutable), '-D', 'READONLY_ENV=' + str(readonly_env),
                 '-f', str(helpers / 'runtime-offline.sb'), *map(str, command)]
             return bounded.run_bounded(command, cwd=cwd, env=env, work=work, timeout=min(timeout,budget()))
@@ -392,10 +395,14 @@ def main():
                 'SQLCipher result mismatch')
         # The same kernel network denial remains active for the in-process ASGI
         # fixture. No numeric-IP/localhost profile or TCP listener is used.
+        fixture_scope = work / 'asgi-fixture-scope'
+        fixture_scope.mkdir(mode=0o700)
+        # Apply the same profile once, already narrowed to fixture-only writes.
+        # Every direct worker/seed child must prove inherited denial before imports.
         api = json.loads(run([python,'-I',helpers / 'smoke_asgi_authenticated.py',
             '--engine',root / 'packaging/engine_entry.py','--runtime-python',runtime_python,
-            '--offline-profile',helpers / 'runtime-offline.sb',
-            '--fixture-root',work / 'fixture','--immutable-root',immutable],timeout=360))
+            '--fixture-root',fixture_scope / 'fixture','--immutable-root',immutable],
+            cwd=fixture_scope,writable=fixture_scope,timeout=360))
         if api.get('status') == 'failed':
             print(json.dumps(diagnostics.validate(api),sort_keys=True))
             raise RuntimeError('In-process ASGI fixture failed; see fixed diagnostic fields only')
@@ -405,6 +412,7 @@ def main():
                 and api.get('tcp_listener_tested') is False and api.get('owned_listener_identity_tested') is False
                 and api.get('native_transport_tested') is False
                 and api.get('fresh_process_database_reopen') is True and api.get('lifespan_completed_twice') is True
+                and api.get('inherited_denial_verified_each_phase') is True
                 and api.get('research_execution_tested') is False and api.get('model_loaded') is False
                 and api.get('provider_queried') is False, 'Synthetic ASGI result mismatch')
         require(snapshot(immutable) == immutable_before and snapshot(runtime_env) == runtime_before,
@@ -419,6 +427,7 @@ def main():
             'transport':'in-process-ASGI','client_backend':'httpx2-2.13.1','real_http_tested':False,'tcp_listener_tested':False,
             'owned_listener_identity_tested':False,'native_transport_tested':False,
             'fresh_process_database_reopen':True,'lifespan_completed_twice':True,
+            'inherited_denial_verified_each_phase':True,
             'network_checks':['external-connect-denied','fixture-connect-denied','fixture-bind-denied',
                               'asyncio-internal-event-loop']},sort_keys=True))
 

@@ -6,6 +6,8 @@ All workers and the offline seed remain under the unchanged deny-network profile
 """
 from __future__ import annotations
 import argparse
+import errno
+import socket
 from contextlib import redirect_stdout
 import importlib.util
 import json
@@ -191,6 +193,37 @@ def exercise(client,config,phase):
     client.logout()
 
 
+def verify_inherited_denial():
+    """Actual fresh-worker canaries before any installed application import."""
+    mark('inherited-denial')
+    home=Path(os.environ['HOME']).resolve(strict=True)
+    scope=Path(os.environ['DEEPDESK_CI_FIXTURE_SCOPE']).resolve(strict=True)
+    immutable=Path(os.environ['DEEPDESK_CI_IMMUTABLE_ROOT']).resolve(strict=True)
+    runtime=Path(sys.prefix).resolve(strict=True)
+    require(home.parent==scope and (home/'deepdesk-ci-fixture-only').is_file(), 'Unexpected inherited fixture boundary')
+    for address in (('192.0.2.1',9),('127.0.0.1',PORT)):
+        try:
+            with socket.socket() as channel:
+                channel.settimeout(1)
+                result=channel.connect_ex(address)
+        except OSError as exc: result=exc.errno
+        require(result in (errno.EPERM,errno.EACCES),'Inherited network connect denial missing')
+    try:
+        with socket.socket() as channel: channel.bind(('127.0.0.1',PORT))
+    except OSError as exc:
+        require(exc.errno in (errno.EPERM,errno.EACCES),'Inherited network bind denial missing')
+    else: raise RuntimeError('Inherited network bind denial missing')
+    # The stage work root is outside the fixture-only write allowance. Immutable
+    # runtime/downloads and first-party control files remain independently denied.
+    for parent in (scope.parent,immutable,runtime,Path(__file__).resolve().parent):
+        target=parent/('deepdesk-inherited-denial-'+secrets.token_hex(12))
+        try: target.open('xb').close()
+        except OSError as exc:
+            require(exc.errno in (errno.EPERM,errno.EACCES),'Inherited protected-write denial missing')
+        else: raise RuntimeError('Inherited protected-write denial missing')
+        require(not target.exists(),'Inherited protected-write probe mutated input')
+
+
 def run_worker(engine,phase):
     mark('fixture-input')
     raw=sys.stdin.buffer.read(16385)
@@ -233,14 +266,13 @@ def run_worker(engine,phase):
         uvicorn.run=original
     require(calls==['lifespan-entered-routes-checked-lifespan-exited'],'ASGI lifecycle did not complete exactly once')
     return {'status':'passed','phase':phase,'transport':'in-process-ASGI','checks':CHECKS[phase],
-            'lifespan_completed':True,'real_http_tested':False,'client_backend':'httpx2-2.13.1','pid':os.getpid()}
+            'lifespan_completed':True,'real_http_tested':False,'client_backend':'httpx2-2.13.1','inherited_denial_verified':True,'pid':os.getpid()}
 
 
 def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--engine',type=Path,required=True)
     parser.add_argument('--runtime-python',type=Path)
-    parser.add_argument('--offline-profile',type=Path)
     parser.add_argument('--fixture-root',type=Path)
     parser.add_argument('--immutable-root',type=Path)
     parser.add_argument('--phase',choices=(*CHECKS,'seed'))
@@ -250,23 +282,23 @@ def main():
     if args.phase:
         with redirect_stdout(sys.stderr):
             try:
+                verify_inherited_denial()
                 if args.phase=='seed':
                     mark('seed-main')
                     seed=runpy.run_path(str(Path(__file__).with_name('seed_fixture.py')),run_name='deepdesk_offline_seed')
                     seed['main']()
-                    result={'status':'seeded','synthetic':True,'model_executed':False,'provider_queried':False}
+                    result={'status':'seeded','synthetic':True,'model_executed':False,'provider_queried':False,'inherited_denial_verified':True}
                 else:
                     result=run_worker(engine,args.phase)
             except BaseException as exc:
                 diag.private_context(exc,args.phase)
                 result=diag.failure(exc,args.phase,checkpoint,engine)
         print(json.dumps(result,sort_keys=True));return
-    require(all((args.runtime_python,args.offline_profile,args.fixture_root,args.immutable_root)), 'Missing controller arguments')
+    require(all((args.runtime_python,args.fixture_root,args.immutable_root)), 'Missing controller arguments')
     require(not args.fixture_root.exists() and args.fixture_root.parent.is_dir(),'Fixture root must be new')
     runtime_env=args.runtime_python.parent.parent.resolve(strict=True)
     runtime_python=runtime_env/'bin/python'
     immutable=args.immutable_root.resolve(strict=True)
-    profile=args.offline_profile.resolve(strict=True)
     spec=importlib.util.spec_from_file_location('asgi_fixture_bounds',Path(__file__).with_name('bounded_runtime.py'))
     bounds=importlib.util.module_from_spec(spec);spec.loader.exec_module(bounds)
     with tempfile.TemporaryDirectory(prefix=args.fixture_root.name+'-',dir=args.fixture_root.parent) as temporary:
@@ -274,6 +306,7 @@ def main():
         (root/'deepdesk-ci-fixture-only').write_text(marker)
         env={'PATH':'/usr/bin:/bin:/usr/sbin:/sbin','HOME':str(root),'TMPDIR':str(root),
             'LDR_DATA_DIR':str(root/'engine-data'),'LDR_BOOTSTRAP_ALLOW_UNENCRYPTED':'false',
+            'DEEPDESK_CI_FIXTURE_SCOPE':str(root.parent),'DEEPDESK_CI_IMMUTABLE_ROOT':str(immutable),
             'LDR_ENABLE_FILE_LOGGING':'false','LDR_APP_DEBUG':'false','LDR_LOGURU_DIAGNOSE':'false',
             'HF_HUB_OFFLINE':'1','TRANSFORMERS_OFFLINE':'1','HF_HUB_DISABLE_TELEMETRY':'1',
             'ANONYMIZED_TELEMETRY':'false','PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD':'1',
@@ -281,11 +314,12 @@ def main():
             'PYTHONDONTWRITEBYTECODE':'1','PYTHONNOUSERSITE':'1'}
         config={'fixture_marker':marker,'username':'deepdesk_fixture_'+secrets.token_hex(6),
             'password':'fixture1-&+=%'+secrets.token_hex(32),'research_id':str(uuid.uuid4())}
-        prefix=['/usr/bin/sandbox-exec','-D','WORK_DIR='+str(root),'-D','IMMUTABLE_DIR='+str(immutable),
-            '-D','READONLY_ENV='+str(runtime_env),'-f',str(profile),str(runtime_python),'-I']
+        # Direct descendants inherit the already-applied, fixture-only profile.
+        # Reapplying sandbox-exec here is rejected by macOS before Python starts.
+        prefix=[str(runtime_python),'-I']
         def invoke(command,timeout):
             return json.loads(bounds.run_bounded(prefix+command,input_data=json.dumps(config).encode(),
-                env=env,cwd=root,work=root,disk_limit=128*1024**2,timeout=timeout,
+                env=env,cwd=root,work=root.parent,disk_limit=128*1024**2,timeout=timeout,
                 own_session=False,public_summary=False))
         def phase_result(phase,timeout):
             global active_phase
@@ -298,18 +332,19 @@ def main():
         if before.get('status')=='failed': print(json.dumps(before,sort_keys=True));return
         seeded=phase_result('seed',90)
         if seeded.get('status')=='failed': print(json.dumps(seeded,sort_keys=True));return
-        require(seeded=={'status':'seeded','synthetic':True,'model_executed':False,'provider_queried':False},'Fixture seed failed')
+        require(seeded=={'status':'seeded','synthetic':True,'model_executed':False,'provider_queried':False,'inherited_denial_verified':True},'Fixture seed failed')
         after=phase_result('persisted',120)
         if after.get('status')=='failed': print(json.dumps(after,sort_keys=True));return
         mark('worker-result')
         for result,phase in ((before,'register'),(after,'persisted')):
             require(result=={'status':'passed','phase':phase,'transport':'in-process-ASGI','checks':CHECKS[phase],
-                'lifespan_completed':True,'real_http_tested':False,'client_backend':'httpx2-2.13.1','pid':result.get('pid')}
+                'lifespan_completed':True,'real_http_tested':False,'client_backend':'httpx2-2.13.1','inherited_denial_verified':True,'pid':result.get('pid')}
                 and isinstance(result.get('pid'),int) and result['pid']>0,'Unexpected ASGI worker result')
         require(before['pid']!=after['pid'],'Expected distinct ASGI worker processes')
     print(json.dumps({'status':'passed','kind':'installed-authenticated-synthetic-ASGI',
         'checks':CHECKS['register']+CHECKS['persisted'],'transport':'in-process-ASGI','client_backend':'httpx2-2.13.1',
         'fresh_process_database_reopen':True,'lifespan_completed_twice':True,'real_http_tested':False,
+        'inherited_denial_verified_each_phase':True,
         'tcp_listener_tested':False,'owned_listener_identity_tested':False,'native_transport_tested':False,
         'research_execution_tested':False,'model_loaded':False,'provider_queried':False},sort_keys=True))
 

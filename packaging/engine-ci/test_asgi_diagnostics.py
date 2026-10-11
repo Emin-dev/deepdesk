@@ -92,6 +92,7 @@ class DiagnosticTests(unittest.TestCase):
             output=io.StringIO()
             with patch.object(sys,'argv',['fixture','--engine',str(self.engine),'--phase',phase]), \
                  patch.object(api.platform,'system',return_value='Darwin'),patch.object(api.platform,'machine',return_value='arm64'), \
+                 patch.object(api,'verify_inherited_denial',return_value=None), \
                  patch.object(api,'run_worker',side_effect=fail),patch.dict(os.environ,{'HOME':str(self.root)}), \
                  contextlib.redirect_stdout(output):
                 api.main()
@@ -104,6 +105,7 @@ class DiagnosticTests(unittest.TestCase):
         output=io.StringIO()
         with patch.object(sys,'argv',['fixture','--engine',str(self.engine),'--phase','seed']), \
              patch.object(api.platform,'system',return_value='Darwin'),patch.object(api.platform,'machine',return_value='arm64'), \
+                 patch.object(api,'verify_inherited_denial',return_value=None), \
              patch.object(api.runpy,'run_path',return_value={'main':fail}),patch.dict(os.environ,{'HOME':str(self.root)}), \
              contextlib.redirect_stdout(output):
             api.main()
@@ -115,6 +117,7 @@ class DiagnosticTests(unittest.TestCase):
         expected={'status':'passed','phase':'register'};output=io.StringIO()
         with patch.object(sys,'argv',['fixture','--engine',str(self.engine),'--phase','register']), \
              patch.object(api.platform,'system',return_value='Darwin'),patch.object(api.platform,'machine',return_value='arm64'), \
+                 patch.object(api,'verify_inherited_denial',return_value=None), \
              patch.object(api,'run_worker',return_value=expected),contextlib.redirect_stdout(output): api.main()
         self.assertEqual(json.loads(output.getvalue()),expected)
 
