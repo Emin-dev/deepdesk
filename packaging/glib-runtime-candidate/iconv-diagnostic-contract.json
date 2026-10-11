@@ -1,0 +1,24 @@
+{
+  "configure_sha256": "fe3a1c8715f3a3b3feb8ec3b897d1f412afce89804a68eb30a3a7d64d6a77267",
+  "diagnostic_only": true,
+  "job": 114487313754,
+  "maximum_config_header_bytes": 1048576,
+  "maximum_config_log_bytes": 2097152,
+  "maximum_makefile_bytes": 1048576,
+  "maximum_record_bytes": 4096,
+  "parent_frozen_manifest_sha256": "533a6d1976907fd2f1187ea16b537a13665f8de20336f8da313805abbc7f2d84",
+  "published_commit": "3859ae2946cb77d65dfca9430da34a3922c23acc",
+  "published_log_sha256": "e244323f643909372eeb105dfbf002937935ec4ed336b1d00160d03500b63291",
+  "run": 38145315109,
+  "schema": 1,
+  "stop_before_libtextstyle_make": true,
+  "unchanged_execute_prefix_sha256": "573867dd059987cb49241ea5950e74b0030de822c72dfdc8e6be6a7bf1c360e2",
+  "working_iconv_test_bits": [
+    1,
+    2,
+    4,
+    8,
+    32
+  ],
+  "working_iconv_test_call_line": 26816
+}

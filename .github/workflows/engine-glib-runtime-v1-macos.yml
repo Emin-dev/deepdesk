@@ -1,5 +1,5 @@
 # INACTIVE REVIEW CANDIDATE. All execution approvals are closed.
-name: Validate bounded GLib runtime prerequisites
+name: Diagnose bounded libtextstyle iconv configuration
 on:
   push:
     branches:
@@ -23,14 +23,14 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 1
-      - name: Execute only the separately approved exact combined candidate
+      - name: Execute only the separately approved configure-only diagnostic
         run: /usr/bin/python3 -I packaging/glib-runtime-candidate/stage.py --repository "$GITHUB_WORKSPACE"
-      - name: State the prerequisite proof boundary
+      - name: State the configure-only diagnostic boundary
         if: success()
         run: |
           printf '%s\n' \
-            'The rebuilt foundation, source libffi, gettext tools, GLib/GObject/GModule/GIO and GIRepository passed bounded synthetic checks.' \
-            'All 102 GLib catalogs and the downstream enum generator were retained and checked.' \
-            'This prerequisite subset is not a full GLib installation, Pango/rendering/font closure, relocation or release proof.' \
-            'Generated GIR/typelibs and optional profiling instrumentation remain outside the tested feature boundary.' \
+            'The configure-only diagnostic completed and emitted fixed iconv configuration observations.' \
+            'It stopped before libtextstyle make; no libtextstyle/gettext-tools/GLib runtime success is claimed.' \
+            'Unknown or rejected diagnostic facts remain inconclusive; job completion is not a repaired native build.' \
+            'The source-libffi executable closure and every Pango/rendering/font/relocation/release check remain unproven.' \
             'No paid runner, cache, uploaded artifact, explicit codesign, personal identity, model or provider query was used.' >> "$GITHUB_STEP_SUMMARY"

@@ -420,6 +420,46 @@
       "path": "source-review/meson/mesonbuild/programs.py",
       "sha256": "ce28e75a7dc7de52cb0259c95f54fffaf85b7871d40dc2856f4d00eb90d9bc68",
       "size": 19255
+    },
+    {
+      "input_id": "gettext",
+      "source_member": "gettext-1.0/libtextstyle/lib/iconv-ostream.c",
+      "path": "source-review/gettext/libtextstyle/lib/iconv-ostream.c",
+      "sha256": "deee0f117f65bd4a77f5817a698251775352f0e02fdea583ae4fe31ac979db17",
+      "size": 10192,
+      "mtime": 1769605481
+    },
+    {
+      "input_id": "gettext",
+      "source_member": "gettext-1.0/libtextstyle/lib/iconv-ostream.oo.c",
+      "path": "source-review/gettext/libtextstyle/lib/iconv-ostream.oo.c",
+      "sha256": "ba2c82d661247f80decbfaaf545733fd62fe72afe0029bb5f9d643c5a0281306",
+      "size": 7908,
+      "mtime": 1769605186
+    },
+    {
+      "input_id": "gettext",
+      "source_member": "gettext-1.0/libtextstyle/lib/libtextstyle.sym.in",
+      "path": "source-review/gettext/libtextstyle/lib/libtextstyle.sym.in",
+      "sha256": "443996299a6d696823da432a18d7bef8094bcc16260a7414f0bfe6ac7b338adb",
+      "size": 3525,
+      "mtime": 1769500212
+    },
+    {
+      "input_id": "gettext",
+      "source_member": "gettext-1.0/libtextstyle/lib/textstyle.h",
+      "path": "source-review/gettext/libtextstyle/lib/textstyle.h",
+      "sha256": "d77aa2c6cec4c1ad0744b6ad6b528a4adbc7a7c912c8ff7ea31a77d02e54c370",
+      "size": 25846,
+      "mtime": 1769489113
+    },
+    {
+      "input_id": "gettext",
+      "source_member": "gettext-1.0/libtextstyle/gnulib-m4/iconv.m4",
+      "path": "source-review/gettext/libtextstyle/gnulib-m4/iconv.m4",
+      "sha256": "56b1f2de17e73f0e3a65634570b2c9032f912c54df09bfa6d40d1422f02b4d8f",
+      "size": 11044,
+      "mtime": 1767349023
     }
   ],
   "release_generated_outputs": [

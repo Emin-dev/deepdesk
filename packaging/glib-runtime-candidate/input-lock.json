@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "scope": "glib-runtime-prerequisites-v1",
+  "scope": "glib-runtime-iconv-diagnostic-v2",
   "source_changes_allowed": false,
   "inputs": [
     {
