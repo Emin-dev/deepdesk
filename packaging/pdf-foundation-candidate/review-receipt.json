@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "scope": "pdf-foundation-prerequisites-v1",
-  "review_status": "independent-exact-input-review-approved",
+  "review_status": "independent-exact-build-diagnostic-review-approved",
   "execution_approved": true,
   "independent_review_passed": true,
   "temporary_linker_adhoc_signing_approved": true,
@@ -34,9 +34,12 @@
     "cache_used": false
   },
   "sha256": {
-    "README.md": "1f0b3e824632a9d19c294b9a14c888bb8f0960d08f18990a358656e221f7262c",
+    "README.md": "02a37db55e36e17eb2fed36a487b9e74a851a58221ee9085066fd0a6ec171dba",
     "archive_tools.py": "d5273a166c7e3f3485cf8d0fd5f63551dee1b38a1cda3548f75e19553814a146",
     "bounds.py": "325f4f3811ce969eb90ae6e7ef7426a6af69fd875776a290027556bdb2b5349f",
+    "build-diagnostic-catalog.json": "714b19b45f5e9300177e1be09e3e5ec3596e5e7369480538e368c5a8247a053b",
+    "build-diagnostic-provenance.json": "d1441343337e09b02029cbccbddf7408f93fcbacaea00df402ddf38fdf95eddc",
+    "build_diagnostics.py": "bf245967bf26354087a8b061e27cb587159c3f6d5353a07bfbf9a16e7ee3f126",
     "canary.py": "12c74f2fcb5bdf872aa0b09fa6c448e734ca7a230a14fc998dbf60f3331197f2",
     "canonical-source-provenance.json": "397c31a051fe17df1263a15d247ae7e24d6db63665be8305031318481dce568a",
     "input-lock.json": "d6d14555c552cde2a390ed895a9adcd5a58c458e0e8a06cf3356710a468524bd",
@@ -147,19 +150,21 @@
     "provider-contract.json": "d9734c140167ed26226e9bb95963d285eba9653733ab6e4b97d8db8b74d61862",
     "provider_probe.c": "4ba95e36b2c925dbb08027dfaf1ea12f9a608512d8d947e8400e07e3927845cc",
     "sdk_probe.c": "bb5c817169a9983ba05e64b282e61b6fcb7aa3ef9944ab3d08ed42d15f0418fa",
-    "stage.py": "fa1b5167d26e8b7933e7258c983f663d66d8cf119a6a571766b91f7c034130d8",
+    "stage.py": "dc132b2a6dd1a9a7a141eba9af9001292dd61ba23db61bbadfc4364a782ec8a4",
+    "test_build_diagnostics.py": "d2c0710cd752dbed5cc8b04d47b3fb0b1b91ff119968324a8d4c57dd77008379",
     "test_helpers.py": "8d971d7027c955b298d7b6d0e24d6b98f94998e8255f8f084968e51bf54c168d",
-    "test_input_diagnostics.py": "30ca77ccb135343fa901e5cbb10e8ba5d69704ffc19c39b6a93c37a1926684d9",
+    "test_input_diagnostics.py": "6ea4be2f157fc04a923f7d0215faf3a6e7832f3f488a4622c0938fd668328a88",
     "utf8-contract.json": "d790625d7ddb5aa7a55ab052a126eedee780cade41f93b7b21359718f6c4c44c"
   },
-  "candidate_revision": 3,
-  "base_commit": "f52e37049b7d280e53e07013ccd14da3c3ac53d3",
+  "candidate_revision": 4,
+  "base_commit": "e886f6db7d0a6383aa91854378f08e2656d2fa42",
+  "base_tree": "90189ebc83b70c2c6b47df98a9c58685773a5189",
   "approval": {
-    "approved_scope": "Exact canonical GNU input revision with unchanged bounded foundation build and temporary compiler/linker effects",
-    "reviewed_manifest_sha256": "116a20033cbd86063a3e452a37dd7dd1c90d6aa9885c11a62bb755a4f5a74140",
-    "independent_review_sha256": "6e1be4ffa0def7ace1588e484716380123f0a1859909d6d2077df4e07855ff23",
+    "approved_scope": "Exact failed-build diagnostic amendment with unchanged bounded foundation commands, inputs, profiles, budgets and temporary compiler/linker effects",
+    "reviewed_manifest_sha256": "1adac61cc69e662650fe10035d9e9c6728aae5e103dca51d0f508ce61e129637",
+    "independent_review_sha256": "4182648e1b0122a52ad54d5858f00e5b4f329198df7916ff83e7ce510cf05106",
     "approved_by": "approved project-task scope",
     "reviewer": "independent exact-input review",
-    "approved_at_utc": "2026-10-11T09:50:28Z"
+    "approved_at_utc": "2026-10-11T10:20:26Z"
   }
 }

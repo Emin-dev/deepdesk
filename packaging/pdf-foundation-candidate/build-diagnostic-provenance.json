@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "candidate": "pdf-foundation-build-diagnostic-v4",
+  "candidate_revision": 4,
+  "repository": "Emin-dev/deepdesk",
+  "normal_parent_commit": "e886f6db7d0a6383aa91854378f08e2656d2fa42",
+  "normal_parent_tree": "90189ebc83b70c2c6b47df98a9c58685773a5189",
+  "destination_branch": "engine-pdf-foundation-v1-ci",
+  "workflow": ".github/workflows/engine-pdf-foundation-v1-macos.yml",
+  "baseline": {
+    "file_count": 119,
+    "manifest_sha256": "053b4b566aa450c2f9161bb05d2357472bbe5451f015ff6c41d2ff634a475d65",
+    "preserved": true
+  },
+  "prior_run": {
+    "run_id": 38130019693,
+    "job_id": 114442229585,
+    "commit": "e886f6db7d0a6383aa91854378f08e2656d2fa42",
+    "url": "https://github.com/Emin-dev/deepdesk/actions/runs/38130019693",
+    "failed_phase": "pkgconf-build",
+    "exit_code": 2,
+    "stderr_bytes": 2119,
+    "stderr_sha256": "4203bab61d68c9e9ded463123db86e0d45d9b140b202e04870d176391787a5e0",
+    "stdout_bytes": 849,
+    "stdout_sha256": "fbbd5a5217b4f3b3e13f47d33c86b1a1b8ecd8971b271fbf6df24b45ac0b6892",
+    "exact_cause_proven": false,
+    "raw_streams_available": false,
+    "all_six_inputs_passed": true,
+    "sdk_compile_inspect_run_passed": true,
+    "generic_permission_and_config_log_regeneration_markers_are_not_causal_proof": true
+  },
+  "catalog_source": {
+    "url": "https://distfiles.ariadne.space/pkgconf/pkgconf-3.0.8.tar.xz",
+    "size": 428240,
+    "sha256": "943f0bc88bcaeceb630b00262e2a8ad5ea4fac3fba72a4267d8b9ec6b35d1194",
+    "archive_read_as_data_only": true,
+    "selected_source_files": 46,
+    "make_targets": 43,
+    "dependency_output_paths": 50,
+    "selected_hashes_match_existing_member_manifest": true,
+    "catalog_sha256": "714b19b45f5e9300177e1be09e3e5ec3596e5e7369480538e368c5a8247a053b"
+  },
+  "unchanged": [
+    "workflow",
+    "build commands and targets",
+    "input and dependency graph",
+    "environment",
+    "sandbox profile",
+    "budgets",
+    "probes",
+    "cleanup",
+    "native assertions",
+    "false gates"
+  ],
+  "diagnostic_limits": {
+    "stream_bytes": 8388608,
+    "stream_lines": 32768,
+    "line_bytes": 8192,
+    "events_per_stream": 6,
+    "message_characters": 240,
+    "report_bytes": 16384
+  },
+  "authorization": {
+    "execution_approved": false,
+    "independent_review_passed": false,
+    "temporary_linker_adhoc_signing_approved": false,
+    "install_name_linker_assignment_approved": false,
+    "github_publication_approved": false
+  },
+  "preparation": {
+    "first_party_offline_tests_only": true,
+    "downloaded_code_executed": false,
+    "native_execution": false,
+    "configured": false,
+    "compiled": false,
+    "published": false,
+    "rerun": false
+  }
+}

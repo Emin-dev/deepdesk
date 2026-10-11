@@ -17,7 +17,7 @@ import tempfile
 import time
 sys.dont_write_bytecode=True
 SCOPE='pdf-foundation-prerequisites-v1'
-CANDIDATE_REVISION=3
+CANDIDATE_REVISION=4
 BRANCH='engine-pdf-foundation-v1-ci'
 WORKFLOW='.github/workflows/engine-pdf-foundation-v1-macos.yml'
 INPUT_HASHES={
@@ -153,6 +153,9 @@ class Lane:
         record,out,err=self.bounds.run(wrapped,cwd=p,env=env,work=self.work,deadline=min(self.deadline,time.monotonic()+timeout),
             output_remaining=8*1024**2-self.output,expected_codes=expected)
         self.output+=record['stdout_bytes']+record['stderr_bytes'];record={'phase':name,**record}
+        if record['status']=='failed' and name in ('pkgconf-build','pcre2-build','gettext-headers','gettext-gnulib-build','gettext-libintl-build'):
+            diagnostic=load_module('pdf_build_diagnostics',self.helpers/'build_diagnostics.py')
+            record['build_diagnostics']=diagnostic.summarize(name,out,err,self.helpers/'build-diagnostic-catalog.json',self.immutable,p,self.root)
         if record['status']=='failed' and name in ('sdk-probe-compile','provider-probe-compile'):
             record['required_api_mentions']=required_api_mentions(out+err)
         if record['status']=='failed' and name in ('sdk-probe-run','provider-probe-run'):

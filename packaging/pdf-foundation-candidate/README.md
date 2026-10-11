@@ -44,7 +44,7 @@ Process groups do not prevent a deliberately session-detaching program from esca
 
 Each subprocess emits a first-party record with the exact phase, status, numeric exit where available, captured byte counts/hashes, elapsed time, monitored peak workspace bytes, cleanup result and fixed allowlisted classifications. Child stdout/stderr are never printed. First-party probe compile failures additionally identify mentions from a fixed header/API allowlist, and probe exit codes map to fixed fixture-failure names. On failure, only hashes/counts/classifications from the expected config.log or Meson log are emitted; no arbitrary log line, workflow command, path or child-supplied JSON is exposed. Broad exception handling emits only a fixed failure classification and the current phase, never exception text or a traceback.
 
-This allows a failed configure, compile, sandbox canary, missing target or linker problem to be diagnosed without another blind source-build run. A failed phase is terminal; no automatic rerun or graph expansion occurs.
+These classifications are unscoped substring mentions, including from successful commands and configure feature tests. They do not establish a failure cause. Revision 4 below adds bounded grammar-aware observations for failed make build steps. A failed phase is terminal; no automatic rerun or graph expansion occurs.
 
 ## Review gates and local validation
 
@@ -70,7 +70,7 @@ This revision was copied from the exact frozen publication-v1 candidate. Its loc
 
 The new regression tests remain first-party mocks/static checks. They do not import Meson or execute any downloaded/runtime/native source locally. Real macOS internal-helper/regeneration and native behavior are future CI proofs, not claimed results.
 
-## Canonical GNU input revision 3, closed pending review
+## Preserved canonical GNU input revision 3 (historical)
 
 The proposed normal parent is `f52e37049b7d280e53e07013ccd14da3c3ac53d3`, on the unchanged `engine-pdf-foundation-v1-ci` branch and existing workflow. This is a separate candidate; the 116-file approved v2 freeze is untouched. All four review/execution/signing-effect approval flags are false. Prior approval metadata is removed and does not authorize this revision.
 
@@ -85,3 +85,22 @@ An input failure emits one fixed small record with download/extract/checkpoint s
 `test_input_diagnostics.py` adds only offline mocks and inert first-party tar data. It checks each pin's own host policy, same-host acceptance, denied redirects before following, fixed status/length/size/hash/network/extraction errors, hostile exception messages, trace restoration, retained checkpoints, and the real stage's fatal failure path with temporary-workspace cleanup. `test_helpers.py` remains unchanged. No downloaded package, configure script, source build, native fixture or macOS sandbox is executed locally.
 
 The workflow, sandbox, build targets, budgets, probes, dependency/source graph and native assertions remain unchanged. Foundation success, GLib/Pango/PDF rendering, relocation and release readiness remain unproven. An exact independent review and explicit root approval are required before any publication or runtime execution.
+
+
+## Build diagnostic revision 4, closed pending exact review
+
+The proposed normal parent is `e886f6db7d0a6383aa91854378f08e2656d2fa42`, tree `90189ebc83b70c2c6b47df98a9c58685773a5189`, on the same `engine-pdf-foundation-v1-ci` branch and unchanged workflow. The exact approved 119-file v3 snapshot is preserved. All four execution/review/temporary-linker-effect approvals are reclosed and earlier approval metadata is removed. This revision has not been published or executed.
+
+[Run 38130019693](https://github.com/Emin-dev/deepdesk/actions/runs/38130019693) reached `pkgconf-build`, which exited 2. All six inputs, containment canaries, pinned Python/Ninja checks, and the actual SDK compile/inspect/run probe had passed. Its private stderr/stdout are no longer available in the public log; their hashes and byte counts are retained there. The generic `permission_denied` marker also occurred in successful steps, and `source_regeneration_attempt` in config.log is not proof of a regeneration failure. No exact failure cause is claimed.
+
+`build_diagnostics.py` runs only after an already-failed declared make build phase. It interprets the already-bounded private stdout/stderr without another command, file capture, environment read, source execution, or request. The old byte/hash/classification metadata and terminal failure semantics are untouched. Stdout and stderr are analyzed independently; their order is not combined. It retains the first observed error and first failing make target in each stream even if warnings fill the small event list. An observed compiler command or target-derived rule role is explicitly not a proven failing executable or root cause.
+
+The receipt-bound `build-diagnostic-catalog.json` is derived from the exact pinned pkgconf 3.0.8 tar (SHA-256 `943f0bc88bcaeceb630b00262e2a8ad5ea4fac3fba72a4267d8b9ec6b35d1194`). Preparation read it only as archive data and independently matched all 46 selected file hashes to the existing member manifest. Its 43 explicit make targets carry exact Makefile.in rule-line evidence; 50 known dependency-output paths derive from those recipes. Public C identifiers exclude comments and quoted literals, and public header names come from literal includes. Source diagnostic locations must match a known relative source path or the exact immutable source root, and fit the source's line count. Only its public basename, role, bounded line/column, and pinned source hash are emitted. Known generated make targets/output paths are distinguished from pinned source files.
+
+Compiler severity and useful messages are preserved through fixed reviewed grammars (undeclared identifier/type/member/function, conflicting types, missing header, output-file or temporary-file failure, spawn denial, unsupported option, linker failure). Within a recognized message, only allowlisted public identifiers/header names/known target paths or fixed path roles are retained; other operands are replaced individually. An unrecognized message is identified as such and withheld. There is no raw tail or arbitrary fallback text. Standalone permission or regeneration markers are not promoted to failure evidence. Other declared make build phases use only generic fixed grammars; they cannot borrow pkgconf source/target names.
+
+The parser scans at most the existing 8 MiB capture ceiling per input stream and 32,768 lines, rejects lines over 8,192 bytes, non-ASCII/control characters and workflow-command markers, limits message text to 240 characters and event lists to six per stream, and enforces a 16 KiB encoded record ceiling. It reports truncation/rejection/omission counts without exposing the rejected content. Raw bytes, argv, environment values, unreviewed names, paths, URLs, credentials and exception messages remain private. Parser errors produce a fixed unavailable status while preserving the original failed subprocess record.
+
+The existing 43 offline tests remain, with only the expected revision and current-parent assertions updated. New first-party fixtures cover allowlisted and unknown source/target/message operands, secret-bearing paths/URLs/options, warnings versus fatal errors, ignored make failures, per-stream first-target ordering, malformed/control/oversized diagnostics, output caps and mocked Lane.run integration. No downloaded dependency, configure script, compiler, make, native fixture or sandbox is executed locally.
+
+All build commands, target lists, environment construction, deadlines, worker counts, output/disk/free-space budgets, archive policies, dependency pins, probes, sandbox profile, cleanup and false gates remain unchanged. Exact independent review and a durable checkpoint must precede root approval and the sole publisher's one authorized rerun. This is a diagnostic amendment to the existing foundation lane, not a new diagnostic branch or a source/runtime expansion.
