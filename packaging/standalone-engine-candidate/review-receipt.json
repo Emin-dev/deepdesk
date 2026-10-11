@@ -4,11 +4,11 @@
     "R1-order"
   ],
   "approval": {
-    "approved_at_utc": "2026-10-11T11:02:17Z",
+    "approved_at_utc": "2026-10-11T11:34:35Z",
     "approved_by": "approved project-task scope",
-    "approved_scope": "Exact test-only fixture canonicalization with unchanged approved bundled-libmagic integration runtime, source build, overlays, profiles and budgets; temporary compiler/linker effects only",
-    "independent_review_sha256": "68682f60bc566510a4284eadf5692b9342a0a5c883002bdfb8d6b10200cd04d4",
-    "reviewed_manifest_sha256": "0134bdbdd0d3fe0e030394aa6a9e3c4ce5d1aaa9afa4b193d36d43dec4e84c57",
+    "approved_scope": "Exact test-only source-byte pin and mutation-guard correction with unchanged approved bundled-libmagic integration runtime, source build, overlays, profiles and budgets; temporary compiler/linker effects only",
+    "independent_review_sha256": "f85fb3fe6de5b70dbce5e9917264ad0b7975d169edf5cba082bee0de3076a189",
+    "reviewed_manifest_sha256": "293a9921282d946e80af99d59441eace2fb26b36bef193ef299c20a4738f1167",
     "reviewer": "independent exact-input review"
   },
   "base_commit": "109ce9dc56231f314e5a2fec558514652e20f502",
@@ -49,7 +49,7 @@
     "model/inference/research",
     "signing/notarization/DMG/release"
   ],
-  "review_status": "independent-exact-reconstructed-v5-portable-fixture-review-approved",
+  "review_status": "independent-exact-reconstructed-v8-portable-source-pin-review-approved",
   "schema": 1,
   "scope": "standalone-relocated-core-checks",
   "scope_notice": "New bytes, preparation only. Accepted core/policy bytes and denials retained. Adds a separately gated exact file-5.48 nofork/configure overlay, complete bundled native install, exact python-magic loader overlay and moved synthetic binding fixtures. No native/export/release completeness is claimed. Historical source-pilot GO does not authorize this integration.",
@@ -116,7 +116,7 @@
     "packaging/standalone-engine-candidate/standalone-offline.sb": "637bed3c29e86ae9b1640fe6edf018b50538ec597378113f7c1919bf255eee6e",
     "packaging/standalone-engine-candidate/standalone_stage.py": "44fffb7d93452dcf9af29cfc32d6547f158bd43413004c867adbcbdb1bbb7b66",
     "packaging/standalone-engine-candidate/test_assemble.py": "9508055457a2a0ad917e21b3374c1ea57e4360787bb427443e447d3ca24db61b",
-    "packaging/standalone-engine-candidate/test_engine_core_mode.py": "dbe8fcd7fd1595bb58f0ce43ba73722b1069d54e958257646fe71015c3a08949",
+    "packaging/standalone-engine-candidate/test_engine_core_mode.py": "4c2ac92a81fe7d2c6908b9577aa36aaa288c85aed14f9052e73a8a47d8df286c",
     "packaging/standalone-engine-candidate/test_launcher.py": "20c29b4294e77a7ef793163f476cfe292d7a49057649390097e9ecded8154f70",
     "packaging/standalone-engine-candidate/test_libmagic_integration.py": "ee50cca87866a7745dd0e3360519b3668dca31158af6fd82405fc4a4d5a50af3",
     "packaging/standalone-engine-candidate/test_managed_policy_wrapper.py": "c78c3beb815b1a0ac15ab422a189bda3b4c4bc34a60542e5ce01d4e3fe1f9db4",

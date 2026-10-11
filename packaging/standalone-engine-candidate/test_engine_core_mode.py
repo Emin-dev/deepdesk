@@ -16,15 +16,53 @@ ORIGINAL=HERE.parent/'engine_entry.py'
 
 class CoreModeTests(unittest.TestCase):
     def test_production_functions_ast_unchanged(self):
-        old=ast.parse(ORIGINAL.read_text());new=ast.parse((HERE/'engine_entry.py').read_text())
+        old=ast.parse(ORIGINAL.read_text());source=(HERE/'engine_entry.py').read_text();new=ast.parse(source)
         old_defs={n.name:ast.dump(n) for n in old.body if isinstance(n,(ast.FunctionDef,ast.ClassDef))}
         new_defs={n.name:ast.dump(n) for n in new.body if isinstance(n,(ast.FunctionDef,ast.ClassDef))}
         self.assertEqual(set(old_defs),set(new_defs))
-        self.assertEqual(hashlib.sha256(new_defs['install_managed_inference_provider'].encode()).hexdigest(),
-                         '82275ccb3095d70ce7208b90cc7835501cf7c2ef82ec8d3662485779431593a6')
+        # Pin reviewed source bytes, not ast.dump's host-version-specific format.
+        managed_defs=[n for n in new.body if isinstance(n,(ast.FunctionDef,ast.ClassDef)) and n.name=='install_managed_inference_provider']
+        self.assertEqual(len(managed_defs), 1, 'Exactly one reviewed managed provider is required')
+        managed=managed_defs[0]
+        self.assertIsInstance(managed, ast.FunctionDef)
+        self.assertEqual(managed.decorator_list, [], 'Reviewed managed provider must have no decorators')
+        self.assertEqual(hashlib.sha256(ast.get_source_segment(source,managed).encode()).hexdigest(),
+                         '5b004b96378ceb0ebd347d9e7f3055ce11ae8dcbc1003e07cf634b704570423e')
+        self.assertEqual(hashlib.sha256(source.encode()).hexdigest(),
+                         'ad8fc34f04809ad9b6a43922d47709a112e6aaedf04ddc427cae968edc5264d2')
         for name in old_defs:
             if name not in {'self_test', 'install_managed_inference_provider'}:
                 self.assertEqual(old_defs[name],new_defs[name],name)
+    def test_function_pin_independent_of_ast_dump_format(self):
+        original_dump=ast.dump
+        with patch.object(ast,'dump',side_effect=lambda node: 'changed-host-format:'+original_dump(node)):
+            self.test_production_functions_ast_unchanged()
+    def test_added_decorator_rejected_without_execution(self):
+        target=HERE/'engine_entry.py';source=target.read_text()
+        decorated=source.replace('def install_managed_inference_provider(',
+                                 '@(lambda function: (lambda *args, **kwargs: None))\ndef install_managed_inference_provider(',1)
+        self.assertNotEqual(source,decorated)
+        original_read=Path.read_text
+        def read(path,*args,**kwargs):
+            return decorated if path==target else original_read(path,*args,**kwargs)
+        with patch.object(Path,'read_text',read),self.assertRaisesRegex(AssertionError,'must have no decorators'):
+            self.test_production_functions_ast_unchanged()
+    def test_duplicate_definition_rejected_without_execution(self):
+        target=HERE/'engine_entry.py';source=target.read_text()
+        duplicated=source+'\ndef install_managed_inference_provider():\n    pass\n'
+        original_read=Path.read_text
+        def read(path,*args,**kwargs):
+            return duplicated if path==target else original_read(path,*args,**kwargs)
+        with patch.object(Path,'read_text',read),self.assertRaisesRegex(AssertionError,'Exactly one reviewed'):
+            self.test_production_functions_ast_unchanged()
+    def test_same_name_class_rejected_without_execution(self):
+        target=HERE/'engine_entry.py';source=target.read_text()
+        duplicated=source+'\nclass install_managed_inference_provider:\n    pass\n'
+        original_read=Path.read_text
+        def read(path,*args,**kwargs):
+            return duplicated if path==target else original_read(path,*args,**kwargs)
+        with patch.object(Path,'read_text',read),self.assertRaisesRegex(AssertionError,'Exactly one reviewed'):
+            self.test_production_functions_ast_unchanged()
     def run_mode(self,core):
         module=runpy.run_path(str(HERE/'engine_entry.py'),run_name='synthetic_wrapper_contract')
         with tempfile.TemporaryDirectory() as d:
