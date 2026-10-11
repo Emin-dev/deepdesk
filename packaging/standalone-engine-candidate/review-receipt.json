@@ -4,7 +4,7 @@
   "scope": "standalone-relocated-core-checks",
   "review_status": "independent-exact-input-GO-and-approved-task-scope",
   "source_import_commit": "1ae0aba0da096f88db4a44ef76f7ba7e1d3fd33b",
-  "base_commit": "099340e2803381f0196f00a02790c3ad34a8fe72",
+  "base_commit": "393dc17881927634415def500a3363e308262f73",
   "destination_branch": "engine-standalone-core-ci",
   "torch_selection": "distinct-official-PyPI-wheel-explicit-override",
   "pdm_lock_unchanged": true,
@@ -49,7 +49,7 @@
     "packaging/standalone-engine-candidate/LAUNCHER_ASSEMBLY.md": "19cdcfb16f44c97090c61bf6c0047f637aa19004ba636e0bf14c7fe6d670c21d",
     "packaging/standalone-engine-candidate/assemble.py": "8a444cfee903d4f1d82a0edcd4dfc82f60090730af5c4093dc5d74a9ba674cd9",
     "packaging/standalone-engine-candidate/engine_entry.py": "4e04e34edf6255938122596ac933482670424049ad00ac547462ac3db993ed13",
-    "packaging/standalone-engine-candidate/launcher.c": "b23fc0b7c2d5a3bf0ed88a99521128518d770f2878024da50a867725d499738a",
+    "packaging/standalone-engine-candidate/launcher.c": "148b2cddcedcc8b1d23daccd29bd834b900baf5e3a4d1dc7e0d534a50cbcbe1b",
     "packaging/standalone-engine-candidate/native_audit.py": "24d841edd3b620bb833f9625d87859a56615c494505dac933cf721bef4127c93",
     "packaging/standalone-engine-candidate/relocate_check.py": "283bbf2900f6afe441aa7e4e48d2dcea786a6ceffbefc996d33a14a648ee586a",
     "packaging/standalone-engine-candidate/standalone-core-macos.yml.template": "9870afce90c36e42dec504a01eefe0266b05589402b7aac95a0dfbb63176670a",
@@ -115,10 +115,9 @@
   "scope_notice": "Temporary complete-payload core bundle only; all native/export and redistribution completeness flags remain false.",
   "reviewer": "independent exact-input review",
   "approved_by": "approved project-task scope",
-  "approval_recorded_utc": "2026-10-11T03:24:41.402428+00:00",
-  "approved_candidate_manifest_sha256": "ca1e0a33f7650961b0975b5e30febf57c3e71f81aa1a63ce455a8c6218271b09",
+  "approval_recorded_utc": "2026-10-11T04:03:05.287240+00:00",
+  "approved_candidate_manifest_sha256": "14fa4810f28f307ed5d08155e546f398456ff66fbc152fa0c0f470eeb35d6ad7",
   "independent_review_artifacts": {
-    "independent-standalone-core-v1-ci-review.json": "e36a2642cbecf2076b7a10dab936c7838b181e96114249a68b93e4039856f602",
-    "independent-standalone-core-v1-launcher-assembly-review.json": "328682442309f973413bdbf031ee3a698ab7aae7573471b24100540cb90ba467"
+    "independent-standalone-core-v2-review.json": "daa52bf08a9712db67cb23d25301ef44b4c5a694c954b7b2632a2a33852add27"
   }
 }
