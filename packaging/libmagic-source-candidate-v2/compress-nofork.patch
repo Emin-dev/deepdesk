@@ -1,0 +1,18 @@
+--- a/src/compress.c
++++ b/src/compress.c
+@@ -1142,11 +1142,11 @@
+ 		return makeerror(newch, n, "No buffer, %s", strerror(errno));
+ 
+ 	if (decompress) {
+-		if (nofork) {
+-			return makeerror(newch, n,
+-			    "Fork is required to uncompress, but disabled");
+-		}
+ 		return (*decompress)(old, newch, bytes_max, n, 1);
++	}
++	if (nofork) {
++		return makeerror(newch, n,
++		    "Fork is required to uncompress, but disabled");
+ 	}
+ 
+ 	(void)fflush(stdout);

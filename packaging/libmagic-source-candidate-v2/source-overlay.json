@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "scope": "exact-single-compress-nofork-guard-move",
+  "archive_sha256": "ed14656883b23a364b4057c05595d93252da9bc473d30106519519d0da141283",
+  "member": "file-5.48/src/compress.c",
+  "relative_path": "src/compress.c",
+  "before_sha256": "f174166d37224e093cadfdde70efc9b2d467c22f99709349782df392157f789a",
+  "after_sha256": "f7b5bb8420a17d9b6cd14983adf20f77a2bbf0f9704ecc8ccda68f0b302d62eb",
+  "before_size": 31086,
+  "after_size": 31082,
+  "patch_filename": "compress-nofork.patch",
+  "patch_sha256": "cd8e4f541ca74e3018a2b14bd2797cf1faf33f1cfd066435ed65eb47353489d7",
+  "before_block": "\tif (decompress) {\n\t\tif (nofork) {\n\t\t\treturn makeerror(newch, n,\n\t\t\t    \"Fork is required to uncompress, but disabled\");\n\t\t}\n\t\treturn (*decompress)(old, newch, bytes_max, n, 1);\n\t}\n",
+  "after_block": "\tif (decompress) {\n\t\treturn (*decompress)(old, newch, bytes_max, n, 1);\n\t}\n\tif (nofork) {\n\t\treturn makeerror(newch, n,\n\t\t    \"Fork is required to uncompress, but disabled\");\n\t}\n",
+  "changed_members_allowed": 1,
+  "source_license_notice_retained": true
+}
