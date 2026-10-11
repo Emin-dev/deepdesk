@@ -198,6 +198,7 @@ private struct DeepdeskUITestHost: App {
             .preferredColorScheme(dark ? .dark : .light)
             .environment(\.openURL, OpenURLAction { _ in fixture.sourceWasHandled = true; return .handled })
         }
+        .windowResizability(.contentMinSize)
         .defaultSize(width: 1180, height: 850)
         .commands {
             CommandGroup(replacing: .newItem) {

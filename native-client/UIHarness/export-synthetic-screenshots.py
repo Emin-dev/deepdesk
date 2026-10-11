@@ -7,6 +7,7 @@ import base64
 import hashlib
 import json
 from pathlib import Path
+import re
 import stat
 import subprocess
 import sys
@@ -20,6 +21,9 @@ NAMES = (
     "synthetic-download-error-dark",
     "synthetic-model-chooser-dark",
 )
+# Xcode appends an index and UUID to manual attachment names on export.
+EXPORTED_NAME = re.compile(r"^(" + "|".join(re.escape(name) for name in NAMES)
+    + r")_[0-9]{1,6}_[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}\.(?:png|jpeg|jpg)$")
 MAX_SOURCE_BYTES = 25 * 1024 * 1024
 MAX_JPEG_BYTES = 120 * 1024
 MAX_LOG_BYTES = 1024 * 1024
@@ -33,6 +37,9 @@ def candidates(value):
         filename = value.get("exportedFileName")
         if isinstance(name, str) and isinstance(filename, str):
             normalized = name.removesuffix(".png").removesuffix(".jpeg").removesuffix(".jpg")
+            generated = EXPORTED_NAME.fullmatch(name)
+            if generated:
+                normalized = generated.group(1)
             if normalized in NAMES and filename == Path(filename).name:
                 yield normalized, filename
         for child in value.values():
@@ -93,6 +100,10 @@ def main():
             sys.stdout.write(block)
             output_bytes += size
         if not selected:
+            # Only allowlisted synthetic base names, not arbitrary attachment titles/desktop metadata.
+            raw = json.dumps(metadata)
+            diagnostics = re.findall(r'"((?:' + "|".join(re.escape(name) for name in NAMES) + r')[A-Za-z0-9_.-]{0,100})"', raw)
+            print("Synthetic screenshot metadata matched base names: " + ", ".join(sorted(set(diagnostics))[:6]))
             print("Synthetic screenshot review unavailable: no allowlisted named attachments were exported.")
 
 

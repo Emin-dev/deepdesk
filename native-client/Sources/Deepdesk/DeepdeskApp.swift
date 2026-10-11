@@ -40,6 +40,7 @@ struct DeepdeskApp: App {
                 .frame(minWidth: 980, minHeight: 660)
                 .onAppear { delegate.engine = engine; delegate.inference = inference }
         }
+        .windowResizability(.contentMinSize)
         .defaultSize(width: 1180, height: 800)
         .commands {
             CommandGroup(replacing: .newItem) {
@@ -54,6 +55,6 @@ struct DeepdeskApp: App {
 import Foundation
 @main
 struct DeepdeskUnsupportedPlatform {
-    static func main() { print("Deepdesk is a native macOS application. Build on macOS 15 or later.") }
+    static func main() { print("Deepdesk is a native macOS application. Build on macOS 26.4 or later.") }
 }
 #endif

@@ -65,7 +65,7 @@ The script builds an arm64 native app bundle and copies its SwiftPM resource bun
 
 Tests cover exact API payload names, login/CSRF rotation, unknown and terminal statuses, cancellation acknowledgement, history/report shapes, redirect/source URL constraints, no automatic start replay, instance identity, identity persistence/reconciliation/concurrency, catalog/path validation, metadata bounds, and strong-ETag range rules. They use synthetic identity fixtures and never create a real local account or Keychain item.
 
-**Verification:** The reviewed baseline passed 28 mocked XCTest tests and arm64 release compilation on [macOS CI at commit 3f35953a](https://github.com/Emin-dev/deepdesk/actions/runs/38097545856). The subsequent [separate synthetic UI host](UIHarness/README.md) is not yet compiled or run. UI accessibility, Keychain behavior, actual backend HTTP integration, Splash inference, signed upgrades, notarization, and a real DMG install remain integration gates. An M1 cloud runner cannot establish M3+ model runtime compatibility.
+**Verification:** The reviewed baseline passed 28 mocked XCTest tests and arm64 release compilation on [macOS CI at commit 3f35953a](https://github.com/Emin-dev/deepdesk/actions/runs/38097545856). The [separate synthetic UI host](UIHarness/README.md) also compiled/launched and executed six UI tests: two passed and four assertions failed in its first run; corrections await rerun. UI accessibility, Keychain behavior, actual backend HTTP integration, Splash inference, signed upgrades, notarization, and a real DMG install remain integration gates. An M1 cloud runner cannot establish M3+ model runtime compatibility.
 
 ## API and design references
 

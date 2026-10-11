@@ -4,7 +4,11 @@ This is a separate, permanently labeled test app. It compiles the same SwiftUI v
 
 The test host is sandboxed without network entitlements. It has no bundled helper, inference runtime, model weights, real credentials, or Keychain calls. Model verification returns only a host-private temporary path. Source links are intercepted inside the host. Fixture setup bypasses neither the release app's signing gate nor its hardware checks: it supplies separate in-memory services to the separate target. The inert process-supervisor objects are never started. All fixture questions and reports are synthetic.
 
-## Planned coverage (not a test result)
+## Actual first run and pending correction
+
+[Run 38098632449](https://github.com/Emin-dev/deepdesk/actions/runs/38098632449) compiled and launched the synthetic host and executed all six UI tests: two passed (model error/retry/dark dismissal and queued cancellation), four failed (terminal text assertions, research-error text lookup, and resize). The 28 core tests and release compilation still passed. The corrected native AX label/value predicates, edge resize gesture, explicit minimum-size window policy, and strict Xcode attachment-name suffix handling await rerun. No screenshot pixels have been recovered or visually reviewed yet.
+
+## Intended coverage (not a blanket pass)
 
 - First-use encryption disclosure must be accepted before setup.
 - Splash is selected by default; model download progress, pause/resume, use, second-model error/retry, queued-download cancellation, sheet disappearance and reopening.

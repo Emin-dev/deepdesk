@@ -2,7 +2,7 @@
 
 Initial source checkpoint was prepared on 2026-10-10 in Linux. The subsequent reviewed signing-API correction passed 28 XCTest tests (15 core, 13 identity/download) and arm64 release compilation on macOS 26.6.2 / Xcode 26.6 / Swift 6.3.3 at [commit 3f35953a](https://github.com/Emin-dev/deepdesk/actions/runs/38097545856).
 
-The current synthetic UI-host changes have not yet been compiled or launched. No model download, real account creation, Keychain persistence, or inference was performed by these checks.
+The first synthetic UI-host checkpoint compiled and launched in [run 38098632449](https://github.com/Emin-dev/deepdesk/actions/runs/38098632449): all six UI tests executed, two passed and four assertions failed. Corrections await rerun. No screenshot pixels have been visually reviewed. No model download, real account creation, Keychain persistence, or inference was performed by these checks.
 
 ## Passed locally
 
@@ -14,7 +14,7 @@ The current synthetic UI-host changes have not yet been compiled or launched. No
 
 ## Not yet established
 
-- Compilation/tests of the subsequent UI-host changes, resource-bundle loading, or native UI/accessibility behavior. The baseline source compilation and 28 mock tests passed as recorded above.
+- A passing complete UI suite, pixel-level visual review, and full accessibility behavior. The first synthetic host compiled/loaded its catalog, but four of six UI checks failed; pending corrections need rerun.
 - Real URLSession cookie behavior against the actual Python engine. Core transport tests are mocks; do not count them as live integration.
 - Keychain persistence, unlock/denial UI, application identity upgrades, signing entitlements, or data recovery.
 - Splash runtime execution, both actual 27B models, thinking output, sustained memory usage, model switch teardown, GPU-child cleanup, pause/resume against live large files, and live web search.

@@ -12,6 +12,20 @@ final class DeepdeskUITests: XCTestCase {
     @MainActor private func element(_ identifier: String) -> XCUIElement {
         app.descendants(matching: .any).matching(identifier: identifier).firstMatch
     }
+    @MainActor private func visibleText(_ element: XCUIElement) -> String {
+        // AppKit static text commonly exposes AXValue rather than AXLabel.
+        if let value = element.value as? String, !value.isEmpty { return value }
+        return element.label
+    }
+    @MainActor private func expectText(_ identifier: String, equals expected: String, timeout: TimeInterval) {
+        let target = element(identifier)
+        let predicate = NSPredicate(format: "label == %@ OR value == %@", expected, expected)
+        let result = XCTWaiter.wait(for: [XCTNSPredicateExpectation(predicate: predicate, object: target)], timeout: timeout)
+        if target.exists {
+            print("DEEPDESK_SYNTHETIC_AX id=\(identifier) label=\(target.label.prefix(150)) value=\(String(describing: target.value).prefix(200))")
+        }
+        XCTAssertEqual(result, .completed, "Expected exact visible text: \(expected)")
+    }
     @MainActor private func screenshot(_ name: String) {
         XCTAssertTrue(element("synthetic-host-banner").exists)
         let attachment = XCTAttachment(screenshot: app.windows.firstMatch.screenshot())
@@ -68,13 +82,14 @@ final class DeepdeskUITests: XCTestCase {
         let stop = element("research.stop")
         XCTAssertTrue(stop.waitForExistence(timeout: 8))
         XCTAssertTrue(element("research.progress").exists)
-        XCTAssertNotEqual(element("research.progress").label, "0%")
+        XCTAssertTrue(visibleText(element("research.progress")).contains("%"))
+        XCTAssertNotEqual(visibleText(element("research.progress")), "0%")
         screenshot("synthetic-research-progress")
         stop.click()
-        XCTAssertTrue(element("research.phase").wait(for: \.label, toEqual: "Stopped", timeout: 8))
+        expectText("research.phase", equals: "Stopped", timeout: 8)
         element("history.synthetic-history").click()
         XCTAssertTrue(app.staticTexts["Synthetic history report"].waitForExistence(timeout: 5))
-        XCTAssertEqual(element("research.selected-query").label, "Synthetic history question")
+        XCTAssertEqual(visibleText(element("research.selected-query")), "Synthetic history question")
         XCTAssertTrue(app.staticTexts["Link unavailable: unsupported URL."].exists)
         XCTAssertEqual(app.webViews.count, 0)
         let source = element("source.link.0")
@@ -120,7 +135,7 @@ final class DeepdeskUITests: XCTestCase {
         element("research.question").typeText("Synthetic failing research question")
         element("research.network-consent").click()
         app.typeKey(.return, modifierFlags: .command)
-        let error = app.staticTexts.containing(NSPredicate(format: "label CONTAINS %@", "Synthetic research failure")).firstMatch
+        let error = app.staticTexts.containing(NSPredicate(format: "label CONTAINS %@ OR value CONTAINS %@", "Synthetic research failure", "Synthetic research failure")).firstMatch
         XCTAssertTrue(error.waitForExistence(timeout: 5))
         XCTAssertTrue(element("research.question").isHittable)
         screenshot("synthetic-research-error-light")
@@ -135,7 +150,7 @@ final class DeepdeskUITests: XCTestCase {
         element("research.question").typeText("Synthetic research completion")
         element("research.network-consent").click()
         app.typeKey(.return, modifierFlags: .command)
-        XCTAssertTrue(element("research.phase").wait(for: \.label, toEqual: "Completed", timeout: 25))
+        expectText("research.phase", equals: "Completed", timeout: 25)
         XCTAssertTrue(app.staticTexts["Synthetic completed report"].waitForExistence(timeout: 5))
         XCTAssertTrue(element("research.stop").waitForNonExistence(timeout: 3))
         screenshot("synthetic-completed-report")
@@ -169,8 +184,9 @@ final class DeepdeskUITests: XCTestCase {
         let before = window.frame
         guard before.width > 1000 else { throw XCTSkip("Runner screen leaves no room above the host's minimum width; resize is not verified.") }
         let reduction = min(100, before.width - 985)
-        let corner = window.coordinate(withNormalizedOffset: CGVector(dx: 1, dy: 1)).withOffset(CGVector(dx: -2, dy: -2))
-        corner.click(forDuration: 0.2, thenDragTo: corner.withOffset(CGVector(dx: -reduction, dy: -20)))
+        let edge = window.coordinate(withNormalizedOffset: CGVector(dx: 1, dy: 0.5)).withOffset(CGVector(dx: -0.5, dy: 0))
+        edge.click(forDuration: 0.6, thenDragTo: edge.withOffset(CGVector(dx: -reduction, dy: 0)))
+        print("DEEPDESK_SYNTHETIC_RESIZE before=\(before) after=\(window.frame)")
         XCTAssertLessThan(window.frame.width, before.width)
         XCTAssertTrue(element("onboarding.consent").isHittable)
         screenshot("synthetic-onboarding-resized-light")
