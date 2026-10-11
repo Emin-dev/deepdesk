@@ -4,6 +4,8 @@ independent receipt hashes and review are required. No downloaded imports.
 """
 from __future__ import annotations
 import hashlib
+import json
+import math
 import os
 from pathlib import Path
 import selectors
@@ -15,6 +17,7 @@ import subprocess
 import time
 
 GIB=1024**3
+MAX_SUPERVISOR_DIAGNOSTIC_BYTES=2048
 FLAGS={
  'meson_isolation_required':(b'deepdesk_meson_isolation_required',),
  'meson_command_contract_failed':(b'deepdesk_meson_command_contract_failed',),
@@ -79,63 +82,132 @@ def private_file_record(path,tag):
         for fd in reversed(fds):os.close(fd)
 
 
-def run(command,*,cwd,env,work,deadline,output_remaining,expected_codes=(0,),clock=time.monotonic):
+def diagnostic_error(error):
+    """Fixed exception/errno vocabulary; never expose an exception message."""
+    kind = ('timeout_expired' if isinstance(error, subprocess.TimeoutExpired) else
+            'os_error' if isinstance(error, OSError) else
+            'subprocess_error' if isinstance(error, subprocess.SubprocessError) else
+            'value_error' if isinstance(error, ValueError) else 'other')
+    names = ('EPERM', 'EACCES', 'ESRCH', 'ECHILD', 'EINTR', 'EIO', 'ENOENT',
+             'ENOMEM', 'ENOSPC', 'EMFILE', 'ENFILE', 'EINVAL', 'EAGAIN', 'ETIMEDOUT')
+    code = getattr(error, 'errno', None)
+    name = next((name for name in names if type(code) is int and code == getattr(errno, name)), None)
+    return {'kind': kind, 'errno': name if name is not None else 'other' if code is not None else None}
+
+
+def bounded_diagnostic(detail):
+    # Checked only after mandatory cleanup. A contract violation remains fatal.
+    if len(json.dumps(detail, sort_keys=True, allow_nan=False).encode('utf-8')) > MAX_SUPERVISOR_DIAGNOSTIC_BYTES:
+        raise ValueError('supervisor_diagnostic_bound')
+    return detail
+
+
+def remaining_ms(deadline, now):
+    value = deadline - now
+    return max(0, min(1500000, round(value * 1000))) if math.isfinite(value) else None
+
+
+def run(command,*,cwd,env,work,deadline,output_remaining,expected_codes=(0,),clock=time.monotonic,
+        deadline_source='unspecified',requested_timeout=None):
     start=clock(); output=bytearray();errors=bytearray();counts=[0,0];hashes=[hashlib.sha256(),hashlib.sha256()]
     reason=None;exit_code=None;peak=0;cleanup='not_started';process=None;selector=selectors.DefaultSelector()
+    operation='preflight_deadline';primary=None;supervisor_error=None
+    detail={'schema':1,'primary_failure_class':None,'primary_operation':None,'primary_exception':None,
+        'leader_exit_before_cleanup':None,'supervisor_error':None,
+        'deadline':{'source':deadline_source if deadline_source in ('command','shared_lane','unspecified') else 'unspecified',
+            'requested_timeout_seconds':requested_timeout if type(requested_timeout) is int and 0 <= requested_timeout <= 1500 else None,
+            'effective_remaining_ms_at_start':remaining_ms(deadline,start)},
+        'cleanup':{'signal':{'result':'not_started','error':None},
+                   'leader_wait':{'result':'not_started','error':None,'returncode':None},
+                   'group_probe':{'result':'not_started','error':None,'operation':None}}}
+    def observe(name, function, *args, **kwargs):
+        nonlocal operation
+        operation=name
+        return function(*args, **kwargs)
     try:
         if deadline<=start:reason='deadline_exceeded'
-        elif output_remaining<=0:reason='output_limit'
-        elif disk_bytes(work)>4*GIB:reason='workspace_limit'
-        elif shutil.disk_usage(work).free<GIB:reason='free_space_floor'
+        elif output_remaining<=0:reason='output_limit';operation='preflight_output_limit'
+        elif observe('preflight_workspace_scan',disk_bytes,work)>4*GIB:reason='workspace_limit'
+        elif observe('preflight_free_space',shutil.disk_usage,work).free<GIB:reason='free_space_floor'
         else:
-            process=subprocess.Popen(list(map(str,command)),cwd=cwd,env=env,stdin=subprocess.DEVNULL,
+            process=observe('spawn',subprocess.Popen,list(map(str,command)),cwd=cwd,env=env,stdin=subprocess.DEVNULL,
                 stdout=subprocess.PIPE,stderr=subprocess.PIPE,start_new_session=True)
-            selector.register(process.stdout,selectors.EVENT_READ,0);selector.register(process.stderr,selectors.EVENT_READ,1)
+            observe('register_stdout',selector.register,process.stdout,selectors.EVENT_READ,0)
+            observe('register_stderr',selector.register,process.stderr,selectors.EVENT_READ,1)
             next_scan=0
-            while selector.get_map() or process.poll() is None:
-                now=clock()
-                if now>=deadline:reason='deadline_exceeded';break
+            while observe('pipe_state',selector.get_map) or observe('leader_poll',process.poll) is None:
+                now=observe('monitor_clock',clock)
+                if now>=deadline:reason='deadline_exceeded';operation='monitor_deadline';break
                 if now>=next_scan:
-                    used=disk_bytes(work);peak=max(peak,used);next_scan=now+0.5
+                    used=observe('monitor_workspace_scan',disk_bytes,work);peak=max(peak,used);next_scan=now+0.5
                     if used>4*GIB:reason='workspace_limit';break
-                    if shutil.disk_usage(work).free<GIB:reason='free_space_floor';break
-                for key,_ in selector.select(timeout=0.05):
-                    chunk=os.read(key.fileobj.fileno(),65536)
-                    if not chunk:selector.unregister(key.fileobj);continue
+                    if observe('monitor_free_space',shutil.disk_usage,work).free<GIB:reason='free_space_floor';break
+                for key,_ in observe('pipe_select',selector.select,timeout=0.05):
+                    chunk=observe('pipe_read',os.read,key.fileobj.fileno(),65536)
+                    if not chunk:observe('pipe_unregister',selector.unregister,key.fileobj);continue
                     idx=key.data;counts[idx]+=len(chunk);hashes[idx].update(chunk)
-                    if sum(counts)>output_remaining:reason='output_limit';break
+                    if sum(counts)>output_remaining:reason='output_limit';operation='monitor_output_limit';break
                     (output if idx==0 else errors).extend(chunk)
                 if reason:break
-            exit_code=process.poll()
+            if reason is not None:primary=(reason,operation,None)
+            exit_code=observe('leader_poll_after_loop',process.poll)
             if reason is None:
-                exit_code=process.wait(timeout=max(0.1,deadline-clock()))
-                used=disk_bytes(work);peak=max(peak,used)
+                exit_code=observe('normal_leader_wait',process.wait,timeout=max(0.1,deadline-clock()))
+                used=observe('post_exit_workspace_scan',disk_bytes,work);peak=max(peak,used)
                 if used>4*GIB:reason='workspace_limit'
-                elif shutil.disk_usage(work).free<GIB:reason='free_space_floor'
-                elif exit_code not in expected_codes:reason='child_exit'
-    except (OSError,ValueError,subprocess.SubprocessError):reason='supervisor_or_spawn_failure'
+                elif observe('post_exit_free_space',shutil.disk_usage,work).free<GIB:reason='free_space_floor'
+                elif exit_code not in expected_codes:reason='child_exit';operation='child_exit_contract'
+    except (OSError,ValueError,subprocess.SubprocessError) as error:
+        reason='supervisor_or_spawn_failure'
+        supervisor_error={'operation':operation,'error':diagnostic_error(error)}
+        if primary is None:primary=(reason,operation,diagnostic_error(error))
     finally:
+        if primary is None:primary=(reason,operation if reason is not None else None,None)
+        detail['primary_failure_class'],detail['primary_operation'],detail['primary_exception']=primary
+        detail['supervisor_error']=supervisor_error
+        detail['leader_exit_before_cleanup']=exit_code
+        observed_now=clock()
+        detail['deadline']['effective_remaining_ms_before_cleanup']=remaining_ms(deadline,observed_now)
+        detail['deadline']['reached_before_cleanup']=observed_now>=deadline
         selector.close()
         if process is not None:
-            try:os.killpg(process.pid,signal.SIGKILL)
-            except ProcessLookupError:pass
-            except OSError:reason='cleanup_failure'
+            try:
+                os.killpg(process.pid,signal.SIGKILL)
+                detail['cleanup']['signal']['result']='sent'
+            except ProcessLookupError:detail['cleanup']['signal']['result']='group_absent'
+            except OSError as error:
+                reason='cleanup_failure';detail['cleanup']['signal']={'result':'error','error':diagnostic_error(error)}
+            cleanup_operation='leader_wait'
             try:
                 process.wait(timeout=3)
+                detail['cleanup']['leader_wait']={'result':'reaped','error':None,'returncode':process.returncode}
                 if exit_code is None:exit_code=process.returncode
                 cleanup='process_group_killed_and_leader_reaped'
+                cleanup_operation='group_deadline_clock'
                 cleanup_deadline=time.monotonic()+2
                 while True:
+                    cleanup_operation='group_probe'
                     try:os.killpg(process.pid,0)
-                    except ProcessLookupError:break
+                    except ProcessLookupError:
+                        detail['cleanup']['group_probe']['result']='absent';break
+                    detail['cleanup']['group_probe']['result']='present'
+                    cleanup_operation='group_deadline_clock'
                     if time.monotonic()>=cleanup_deadline:
-                        reason='cleanup_failure';cleanup='process_group_still_present';break
+                        reason='cleanup_failure';cleanup='process_group_still_present'
+                        detail['cleanup']['group_probe']['result']='still_present_at_deadline';break
+                    cleanup_operation='group_probe_sleep'
                     time.sleep(0.02)
-            except (OSError,subprocess.SubprocessError):reason='cleanup_failure';cleanup='leader_not_reaped'
+            except (OSError,subprocess.SubprocessError) as error:
+                reason='cleanup_failure';cleanup='leader_not_reaped'  # Legacy field retained; precise result below.
+                if cleanup_operation=='leader_wait':
+                    detail['cleanup']['leader_wait']={'result':'timeout' if isinstance(error,subprocess.TimeoutExpired) else 'error',
+                        'error':diagnostic_error(error),'returncode':None}
+                else:
+                    detail['cleanup']['group_probe']={'result':'error','error':diagnostic_error(error),'operation':cleanup_operation}
             for stream in (process.stdout,process.stderr):
                 if stream is not None:stream.close()
     record={'status':'failed' if reason else 'passed','failure_class':reason,'exit_code':exit_code,
         'seconds':round(clock()-start,3),'stdout_bytes':counts[0],'stdout_sha256':hashes[0].hexdigest(),
         'stderr_bytes':counts[1],'stderr_sha256':hashes[1].hexdigest(),'classifications':classify(bytes(output)+bytes(errors)),
-        'peak_monitored_workspace_bytes':peak,'cleanup':cleanup}
+        'peak_monitored_workspace_bytes':peak,'cleanup':cleanup,'supervisor_diagnostics':bounded_diagnostic(detail)}
     return record,bytes(output),bytes(errors)

@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "scope": "glib-runtime-scope-contract-v5",
+  "scope": "glib-runtime-supervisor-diagnostic-v6",
   "source_changes_allowed": false,
   "inputs": [
     {

@@ -32,7 +32,7 @@ def load(name, path):
 foundation = load('foundation_stage', HERE / 'foundation_stage.py')
 safe_reads = load('glib_safe_reads', HERE / 'safe_reads.py')
 need, digest = foundation.need, foundation.digest
-SCOPE = 'glib-runtime-scope-contract-v5'
+SCOPE = 'glib-runtime-supervisor-diagnostic-v6'
 BRANCH = 'engine-glib-runtime-v1-ci'
 WORKFLOW = '.github/workflows/engine-glib-runtime-v1-macos.yml'
 INPUT_HASHES = dict(foundation.INPUT_HASHES,
@@ -114,7 +114,7 @@ def validate_input_lock(lock):
 
 def validate(root, receipt, execute=False):
     need(receipt.get('schema') == 1 and receipt.get('scope') == SCOPE)
-    need(receipt.get('candidate_revision') == 5 and receipt.get('destination_branch') == BRANCH)
+    need(receipt.get('candidate_revision') == 6 and receipt.get('destination_branch') == BRANCH)
     need(receipt.get('input_sha256') == INPUT_HASHES and receipt.get('false_gates') == FALSE_GATES)
     need(receipt.get('source_changes_allowed') is False)
     need(not any(p.is_symlink() for p in HERE.rglob('*')))
@@ -167,9 +167,12 @@ class Lane(foundation.Lane):
         wrapped = ['/usr/bin/sandbox-exec', '-D', 'PHASE_DIR=' + str(phase),
                    '-D', 'IMMUTABLE_DIR=' + str(self.immutable), '-D', 'CONTROL_DIR=' + str(self.root),
                    '-f', str(self.helpers / 'offline.sb'), *map(str, command)]
+        command_deadline = time.monotonic() + timeout
         record, out, err = self.bounds.run(wrapped, cwd=cwd, env=env, work=self.work,
-            deadline=min(self.deadline, time.monotonic() + timeout),
-            output_remaining=OUTPUT_LIMIT - self.output, expected_codes=expected)
+            deadline=min(self.deadline, command_deadline),
+            output_remaining=OUTPUT_LIMIT - self.output, expected_codes=expected,
+            deadline_source='shared_lane' if self.deadline <= command_deadline else 'command',
+            requested_timeout=timeout)
         self.output += record['stdout_bytes'] + record['stderr_bytes']
         record = {'phase': name, **record}
         if record['status'] == 'failed':

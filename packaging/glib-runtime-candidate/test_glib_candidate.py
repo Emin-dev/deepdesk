@@ -305,9 +305,20 @@ class CandidateTests(unittest.TestCase):
         self.assertEqual(diagnostics.MAX_EXCERPT_BYTES, 6144)
         self.assertEqual(diagnostics.MAX_REPORT_BYTES, 16384)
 
-    def test_bounds_change_only_explicit_workspace_ceiling(self):
-        expected = (HERE / 'bounds.py').read_text().replace('2*GIB', '4*GIB').replace('First-party bounded process supervisor.', 'First-party bounded process supervisor; reviewed new 4 GiB workspace ceiling.')
-        self.assertEqual((HERE / 'glib_bounds.py').read_text(), expected)
+    def test_bounds_keep_original_helpers_ceilings_and_cleanup_with_diagnostics(self):
+        old = ast.parse((HERE / 'bounds.py').read_text())
+        code = (HERE / 'glib_bounds.py').read_text()
+        new = ast.parse(code)
+        for name in ('classify', 'disk_bytes', 'private_file_record'):
+            original = next(node for node in old.body if isinstance(node, ast.FunctionDef) and node.name == name)
+            current = next(node for node in new.body if isinstance(node, ast.FunctionDef) and node.name == name)
+            self.assertEqual(ast.dump(original), ast.dump(current))
+        self.assertEqual(bounds.GIB, 1024**3)
+        self.assertEqual(bounds.MAX_SUPERVISOR_DIAGNOSTIC_BYTES, 2048)
+        for retained in ('>4*GIB', '.free<GIB', 'sum(counts)>output_remaining',
+                         'process.wait(timeout=3)', 'cleanup_deadline=time.monotonic()+2',
+                         'os.killpg(process.pid,signal.SIGKILL)', 'time.sleep(0.02)'):
+            self.assertIn(retained, code)
 
     def test_meson_python_flags_are_not_put_in_truncating_entry(self):
         source = (HERE / 'source-review/meson/mesonbuild/modules/python.py').read_text()

@@ -1,6 +1,18 @@
-# Inactive GLib scope-contract correction v5
+# Inactive GLib supervisor diagnostic v6
 
 This receipt-closed candidate preserves the passed foundation, adds official source GNU Make 4.4.1 and GNU libiconv 1.19, rebuilds a separate iconv-enabled GNU libintl, then resumes the reviewed gettext-tools/GLib/NLS/native checks. It has not run on macOS. No downloaded source, configure script, compiler input, wheel or native payload has been executed during preparation. Independent review and exact root approval are required before activation.
+
+## Narrow v6 supervisor diagnostics
+
+Published v5 commit `6e7f4020400f314326df87de540334fd3cc58fbc`, run [38155137915](https://github.com/Emin-dev/deepdesk/actions/runs/38155137915), passed all six libiconv exports, both upstream iconv semantic variants and origins, corrected libintl UTF-8/Latin-1 behavior, and libtextstyle build/native inspection. It failed in gettext-tools configure with `cleanup_failure`, legacy `leader_not_reaped`, exit -9 and 66.865 seconds. The log SHA-256 is `edb4c305789713975e3a6185254cdc907e8851e57eac555fd0c51fa76c4a7fd8`. GLib was not reached.
+
+The old cleanup exception region covers both the leader wait and later group-presence probes. It can label a probe error as `leader_not_reaped` after successful waits, and replaces the earlier failure reason. The observed -9 may have been seen before cleanup or obtained after the supervisor's mandatory kill. Fourteen sanitized Bison cache-write denials do not establish the initial cause. The visible contained wall interval is approximately 14m24s, below the 1,500-second cap, but effective monotonic deadline state was not recorded.
+
+V6 adds `supervisor_diagnostics` to each process record. It preserves the first observed failure reason, fixed operation and allowlisted errno; pre-cleanup leader exit observation; command versus shared-lane deadline source, requested command timeout, effective budget at entry and remaining budget before cleanup; and separate signal, wait/reap and group-probe outcomes. Only fixed enums, bounded timing numbers and process return codes are disclosed. Exception messages, arbitrary errno values, commands, paths, environment and raw config logs are not added. Unknown errno values become `other`. Timing values are capped at the existing 1,500-second lane ceiling. The additive block has a separately enforced 2 KiB encoded ceiling checked after mandatory cleanup; a serialization/bound violation stays fatal. This is separate from the unchanged 16 KiB build-diagnostic report and 6 KiB stderr-excerpt ceilings.
+
+Existing top-level fields remain byte-compatible for the same observations, including the legacy ambiguous cleanup label. Read the new nested wait/probe results for precise attribution. Existing consumers select status, counts, final failure class and exit code; they do not reject extra keys. The final terminal summary retains its existing selected fields; the preceding phase record carries the added detail. The compatibility report checks identical legacy results and identical kill/wait/probe/sleep calls in 23 inert scenarios.
+
+The same process-group SIGKILL, three-second leader wait, two-second group-disappearance limit and 20ms probe sleep remain mandatory. EPERM remains fatal and is never treated as absence. Source inputs, payload commands, locale/environment, sandbox/profile, resource ceilings and every native fixture stay unchanged. This is a diagnostic-only code change to the full existing lane, not a configure-only stop and not evidence of a repaired native build. Publication/execution gates are closed pending exact review and approval.
 
 ## Narrow v5 metadata correction
 

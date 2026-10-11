@@ -1,0 +1,89 @@
+{
+  "consumer_scope_limit": "This checks the candidate and its inherited first-party consumers; it does not certify unspecified external JSON consumers.",
+  "consumers_reviewed": [
+    {
+      "behavior": "Reads status and stdout/stderr counts, attaches existing build diagnostics on failures and prints the entire record. Extra nested field is retained; fatal gate is unchanged.",
+      "consumer": "Lane.run",
+      "path": "stage.py"
+    },
+    {
+      "behavior": "Reads existing phase/failure_class/exit_code keys for the terminal summary. Additional detail stays in the preceding phase JSON record.",
+      "consumer": "main PhaseError handler",
+      "path": "stage.py"
+    },
+    {
+      "behavior": "No exact-key schema check; legacy keys and run defaults remain available. Source bytes are unchanged.",
+      "consumer": "Lane.run / PhaseError / inherited helpers",
+      "path": "foundation_stage.py"
+    },
+    {
+      "behavior": "Uses process exit status and GitHub success condition, not a JSON key allowlist. File bytes are unchanged.",
+      "consumer": "job outcome and success-only summary",
+      "path": "glib-runtime-macos.yml.template"
+    }
+  ],
+  "deadline_source_values": [
+    "command",
+    "shared_lane",
+    "unspecified"
+  ],
+  "deadline_values": "0..1500000 milliseconds or null; requested timeout 0..1500 seconds or null; reached-before-cleanup boolean",
+  "encoded_bound_enforced_after_mandatory_cleanup": true,
+  "encoded_maximum_bytes": 2048,
+  "existing_build_diagnostic_report_maximum_bytes_unchanged": 16384,
+  "existing_stderr_excerpt_maximum_bytes_unchanged": 6144,
+  "fixed_errno_names": [
+    "EPERM",
+    "EACCES",
+    "ESRCH",
+    "ECHILD",
+    "EINTR",
+    "EIO",
+    "ENOENT",
+    "ENOMEM",
+    "ENOSPC",
+    "EMFILE",
+    "ENFILE",
+    "EINVAL",
+    "EAGAIN",
+    "ETIMEDOUT",
+    "other",
+    null
+  ],
+  "fixed_exception_kinds": [
+    "timeout_expired",
+    "os_error",
+    "subprocess_error",
+    "value_error",
+    "other"
+  ],
+  "inference_limit": "Earlier cleanup fields do not disclose the original failure, actual errno, kill origin or remaining monotonic deadline. Bison cache-denial mentions remain noncausal observations.",
+  "legacy_top_level_fields_unchanged": [
+    "status",
+    "failure_class",
+    "exit_code",
+    "seconds",
+    "stdout_bytes",
+    "stdout_sha256",
+    "stderr_bytes",
+    "stderr_sha256",
+    "classifications",
+    "peak_monitored_workspace_bytes",
+    "cleanup"
+  ],
+  "local_inert_compatibility_scenarios": 23,
+  "local_new_inert_tests": 20,
+  "native_execution": false,
+  "new_field": "supervisor_diagnostics",
+  "observed_v5_log_sha256": "edb4c305789713975e3a6185254cdc907e8851e57eac555fd0c51fa76c4a7fd8",
+  "precision_rule": "The legacy leader_not_reaped value is retained for compatibility; consult nested cleanup.leader_wait and cleanup.group_probe for actual operation/result separation.",
+  "preserved_cleanup": {
+    "eperm": "fatal error; never treated as absence",
+    "group_disappearance_seconds": 2,
+    "leader_wait_seconds": 3,
+    "probe_sleep_seconds": 0.02,
+    "signal": "SIGKILL to original process group"
+  },
+  "purpose": "Additive fixed supervisor/cleanup/deadline evidence; no payload or containment correction",
+  "schema": 1
+}
