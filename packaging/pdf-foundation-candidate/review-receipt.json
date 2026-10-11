@@ -34,11 +34,13 @@
     "cache_used": false
   },
   "sha256": {
-    "README.md": "c91b474da7aa9e8741b0cbb185bad9ecf9e68d77885797960e24c96137c2e485",
+    "README.md": "1f0b3e824632a9d19c294b9a14c888bb8f0960d08f18990a358656e221f7262c",
     "archive_tools.py": "d5273a166c7e3f3485cf8d0fd5f63551dee1b38a1cda3548f75e19553814a146",
     "bounds.py": "325f4f3811ce969eb90ae6e7ef7426a6af69fd875776a290027556bdb2b5349f",
     "canary.py": "12c74f2fcb5bdf872aa0b09fa6c448e734ca7a230a14fc998dbf60f3331197f2",
-    "input-lock.json": "e8220aeba8dfd36a0ddd93b6f48b17b4f1aef451fed248393f0293cc13236f2a",
+    "canonical-source-provenance.json": "397c31a051fe17df1263a15d247ae7e24d6db63665be8305031318481dce568a",
+    "input-lock.json": "d6d14555c552cde2a390ed895a9adcd5a58c458e0e8a06cf3356710a468524bd",
+    "input_diagnostics.py": "dc99c6f013af276d2c01af91ef5eb332af5984f4dc5b378748d2d1ae125642b1",
     "members/gettext.json": "ffaf3c8ff6702d9fff652114204d251c1bd76a762018533619d7e449b0a77c6f",
     "members/meson.json": "05fd495e5ec27cd1542935f9419bdb5aa6a94cfc59f534d6421a9969e30edca3",
     "members/ninja.json": "7cc7c0e98b7a42f3f25bb8a6080023c45a709dadeaba22f8944ab8423876963d",
@@ -145,16 +147,19 @@
     "provider-contract.json": "d9734c140167ed26226e9bb95963d285eba9653733ab6e4b97d8db8b74d61862",
     "provider_probe.c": "4ba95e36b2c925dbb08027dfaf1ea12f9a608512d8d947e8400e07e3927845cc",
     "sdk_probe.c": "bb5c817169a9983ba05e64b282e61b6fcb7aa3ef9944ab3d08ed42d15f0418fa",
-    "stage.py": "c69bb32a40dee809008c1647bb8501d47c681b16e6900a1d23b593b588f1c2fd",
+    "stage.py": "fa1b5167d26e8b7933e7258c983f663d66d8cf119a6a571766b91f7c034130d8",
     "test_helpers.py": "8d971d7027c955b298d7b6d0e24d6b98f94998e8255f8f084968e51bf54c168d",
+    "test_input_diagnostics.py": "30ca77ccb135343fa901e5cbb10e8ba5d69704ffc19c39b6a93c37a1926684d9",
     "utf8-contract.json": "d790625d7ddb5aa7a55ab052a126eedee780cade41f93b7b21359718f6c4c44c"
   },
-  "candidate_revision": 2,
-  "reviewer": "independent exact-input review",
-  "approved_by": "approved project-task scope",
-  "approval_recorded_utc": "2026-10-11T05:23:55.367997+00:00",
-  "approved_candidate_manifest_sha256": "5bcebc0b7ea0f30a2f6cf32b3bfa34ec828888e916c7cf9781eec8d584d69726",
-  "independent_review_artifacts": {
-    "pdf-foundation-independent-review-v2.json": "f378ce651c60b8ee5681731edfcc5d146af57d75019fefce16885c1b22d44117"
+  "candidate_revision": 3,
+  "base_commit": "f52e37049b7d280e53e07013ccd14da3c3ac53d3",
+  "approval": {
+    "approved_scope": "Exact canonical GNU input revision with unchanged bounded foundation build and temporary compiler/linker effects",
+    "reviewed_manifest_sha256": "116a20033cbd86063a3e452a37dd7dd1c90d6aa9885c11a62bb755a4f5a74140",
+    "independent_review_sha256": "6e1be4ffa0def7ace1588e484716380123f0a1859909d6d2077df4e07855ff23",
+    "approved_by": "approved project-task scope",
+    "reviewer": "independent exact-input review",
+    "approved_at_utc": "2026-10-11T09:50:28Z"
   }
 }

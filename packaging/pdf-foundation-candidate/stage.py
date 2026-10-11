@@ -17,7 +17,7 @@ import tempfile
 import time
 sys.dont_write_bytecode=True
 SCOPE='pdf-foundation-prerequisites-v1'
-CANDIDATE_REVISION=2
+CANDIDATE_REVISION=3
 BRANCH='engine-pdf-foundation-v1-ci'
 WORKFLOW='.github/workflows/engine-pdf-foundation-v1-macos.yml'
 INPUT_HASHES={
@@ -109,6 +109,24 @@ class InputChecks:
             self.scan();self.scan_count+=1
             now=self.clock();need(now<self.deadline);self.next_scan=now+2.0
 
+
+def read_input(archive, diagnostics, pin, target, destination, manifest, deadline, input_checks):
+    """Keep the exact input operations/checkpoints; add only fixed failure metadata."""
+    observer=diagnostics.Observer(archive,pin,(LaneError,));subphase='input_checkpoint'
+    previous_trace=sys.gettrace()
+    try:
+        input_checks(force=True);subphase='download'
+        try:
+            sys.settrace(observer.trace);archive.download(pin,target,deadline)
+        finally:sys.settrace(previous_trace)
+        subphase='download_checkpoint';input_checks(force=True)
+        subphase='extract';tree=archive.extract(pin,target,destination,manifest,input_checks)
+        subphase='extraction_checkpoint';input_checks(force=True)
+        return tree
+    except Exception as error:
+        record=observer.failure_record(error,subphase)
+        print(json.dumps(record,sort_keys=True),flush=True)
+        raise PhaseError(record) from None
 
 class Lane:
     def __init__(self,root,helpers,work,modules):
@@ -281,6 +299,7 @@ def main():
         event=json.loads(event_path.read_text());need(event.get('repository',{}).get('private') is False and event.get('repository',{}).get('full_name')=='Emin-dev/deepdesk')
         need(Path('/usr/bin/sandbox-exec').is_file() and str(Path(sys.executable).resolve()).startswith(('/Applications/','/Library/Developer/','/usr/bin/')))
         modules=tuple(load_module('pdf_'+x,helpers/(x+'.py')) for x in ('archive_tools','bounds','native_checks'))
+        diagnostics=load_module('pdf_input_diagnostics',helpers/'input_diagnostics.py')
         lock=json.loads((helpers/'input-lock.json').read_text());need(lock['scope']==SCOPE and lock['source_changes_allowed'] is False)
         need({x['id']:x['sha256'] for x in lock['inputs']}==INPUT_HASHES and len(lock['inputs'])==6 and lock['total_compressed_bytes']==61858201 and lock['total_expanded_bytes']==335134815)
         temp=os.environ.get('RUNNER_TEMP');need(temp and Path(temp).is_dir() and shutil.disk_usage(temp).free>=4*1024**3)
@@ -294,8 +313,8 @@ def main():
             previous=signal.signal(signal.SIGALRM,alarm);signal.setitimer(signal.ITIMER_REAL,120)
             try:
                 for pin in lock['inputs']:
-                    phase='input-'+pin['id'];target=lane.immutable/pin['filename'];input_checks(force=True);modules[0].download(pin,target,deadline);input_checks(force=True)
-                    trees[pin['id']]=modules[0].extract(pin,target,lane.immutable/('tree-'+pin['id']),helpers/pin['member_manifest'],input_checks);input_checks(force=True)
+                    phase='input-'+pin['id'];target=lane.immutable/pin['filename']
+                    trees[pin['id']]=read_input(modules[0],diagnostics,pin,target,lane.immutable/('tree-'+pin['id']),helpers/pin['member_manifest'],deadline,input_checks)
                     print(json.dumps({'phase':phase,'status':'passed','archive_bytes':pin['size'],'archive_sha256':pin['sha256'],'member_count':pin['member_count']}),flush=True)
                 write_mo(lane.immutable/'catalog/fr/LC_MESSAGES/deepdesk-proof.mo')
                 sentinel=lane.immutable/'host-pc/deepdesk_unreviewed_host_only.pc';sentinel.parent.mkdir();sentinel.write_text('Name: deepdesk_unreviewed_host_only\nDescription: First-party search exclusion sentinel\nVersion: 1.0\n')

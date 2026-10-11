@@ -19,7 +19,7 @@ GLib/GObject/GIO, Pango, font closure, PDF rendering, relocation, signed applica
 
 `notices-manifest.json` hashes 89 notice/author files preserved from these exact archives. `notices/` is execution-review evidence, not a declaration that redistribution obligations are fully discharged. GNU libintl/header licensing is LGPL-2.1-or-later with included-code notices; other gettext build/program portions include GPL-3.0-or-later. PCRE2's core and JIT notices, pkgconf COPYING/AUTHORS, Meson and Ninja Apache-2.0 notices and the existing Python-distribution notices are preserved.
 
-The Ninja input is the scikit-build PyPI distribution, not an assertion that its binary equals Ninja's GitHub release. Its exact binary contains the native version string `1.13.2.git.kitware.jobserver-pipe-1`; the candidate checks that value rather than mistakenly expecting a plain upstream version string. The GNU and GitHub official redirects are bounded to the exact previously observed host sets. A changed mirror/redirect, length, hash or member is a stop; there is no alternate-route retry.
+The Ninja input is the scikit-build PyPI distribution, not an assertion that its binary equals Ninja's GitHub release. Its exact binary contains the native version string `1.13.2.git.kitware.jobserver-pipe-1`; the candidate checks that value rather than mistakenly expecting a plain upstream version string. GNU gettext now uses the canonical ftp.gnu.org URL and only that hostname. Other inputs retain their exact previously reviewed redirect host sets. A changed mirror/redirect, length, hash or member is a stop; there is no alternate-route retry.
 
 ## Containment and immutability
 
@@ -56,9 +56,9 @@ The first-party static integrity command is:
 
 `test_helpers.py` uses stdlib, mocked processes and tiny first-party archive fixtures only. It does not execute any downloaded package/source/native bytes. Tests cover raw-output suppression, bounded failure metadata, deadline/output limits, negative exits, path/redirect rejection, exact fixture extraction, catalog data, sandbox shape and the closed receipt. Native C fixtures are prepared but not compiled locally.
 
-Before activation: independently review exact source/generator/build prerequisites and all receipt-bound candidate bytes, review the adapted security helpers/profile, verify standard public-runner eligibility, and explicitly approve the closed execution gate. No workflow has been copied into `.github/workflows` by this preparation.
+Before activation: independently review exact source/generator/build prerequisites and all receipt-bound candidate bytes, review the adapted security helpers/profile, verify standard public-runner eligibility, and explicitly approve the closed execution gate. The existing frozen workflow is retained byte-for-byte; this revision has not been published or activated.
 
-## Isolated v2 corrections, still inactive
+## Preserved v2 corrections (historical)
 
 This revision was copied from the exact frozen publication-v1 candidate. Its local review directory is `packaging/pdf-foundation-candidate-v2`; publication must map it to the unchanged deployed `packaging/pdf-foundation-candidate` path and existing dedicated branch/workflow. Frozen v1 and its evidence remain untouched. The receipt has candidate_revision=2 and all approvals reclosed.
 
@@ -69,3 +69,19 @@ This revision was copied from the exact frozen publication-v1 candidate. Its loc
 - Invalid byte 0xff must return the exact PCRE2 10.49 header/source error `PCRE2_ERROR_UTF8_ERR21` (-23). A separate valid non-match must return `PCRE2_ERROR_NOMATCH` (-1), so an arbitrary negative cannot satisfy the UTF-8 rejection check.
 
 The new regression tests remain first-party mocks/static checks. They do not import Meson or execute any downloaded/runtime/native source locally. Real macOS internal-helper/regeneration and native behavior are future CI proofs, not claimed results.
+
+## Canonical GNU input revision 3, closed pending review
+
+The proposed normal parent is `f52e37049b7d280e53e07013ccd14da3c3ac53d3`, on the unchanged `engine-pdf-foundation-v1-ci` branch and existing workflow. This is a separate candidate; the 116-file approved v2 freeze is untouched. All four review/execution/signing-effect approval flags are false. Prior approval metadata is removed and does not authorize this revision.
+
+The [GNU gettext 1.0 release announcement](https://lists.gnu.org/archive/html/info-gnu/2026-01/msg00007.html) identifies `https://ftp.gnu.org/gnu/gettext/gettext-1.0.tar.gz` and the already pinned SHA-256 `85d99b79c981a404874c02e0342176cf75c7698e2b51fe41031cf6526d974f1a`. Only that URL and gettext's redirect list change in the lock; the list is now solely `ftp.gnu.org`. No previously denied mirror is contacted or added. Versions, sizes, hashes, member manifests, notices and every other pin remain unchanged. An optional local no-redirect data-only archive fetch did not produce response metadata or archive bytes; fresh archive/member verification is not claimed.
+
+The separate input-only diagnostic run [38128686839](https://github.com/Emin-dev/deepdesk/actions/runs/38128686839), at commit `38278848c86340ac09fd93673ada31773ebcadae`, rejected an HTTP 302 host outside its old allowlist before downloading bytes. This establishes that request's failure. It does not retrospectively establish the exact cause of the earlier generic foundation failure in run 38126636047.
+
+`archive_tools.py` remains byte-for-byte unchanged. The small input wrapper preserves download/extract ordering and all checkpoints. A passive observer, derived from the reviewed input-only diagnostic, reads only the exact helper's download/redirect frames. Each of all six pins supplies its own origin and existing host policy. The observer never follows a redirect, changes a request, patches a helper, retries, or relaxes a condition. Tracing is restored in `finally` before extraction and any downloaded execution.
+
+An input failure emits one fixed small record with download/extract/checkpoint subphase, fixed failure class, numeric helper line/status/byte count and at most four host-category redirect decisions. No URL, headers, response body, filesystem path, exception text or traceback is emitted. The existing terminal failure summary retains that class; failure still stops the lane. Classification covers host/redirect policy, status, Content-Length, size, hash, network, extraction and input-boundary failures. Line-based classification is tied to the receipt-bound unchanged helper hash.
+
+`test_input_diagnostics.py` adds only offline mocks and inert first-party tar data. It checks each pin's own host policy, same-host acceptance, denied redirects before following, fixed status/length/size/hash/network/extraction errors, hostile exception messages, trace restoration, retained checkpoints, and the real stage's fatal failure path with temporary-workspace cleanup. `test_helpers.py` remains unchanged. No downloaded package, configure script, source build, native fixture or macOS sandbox is executed locally.
+
+The workflow, sandbox, build targets, budgets, probes, dependency/source graph and native assertions remain unchanged. Foundation success, GLib/Pango/PDF rendering, relocation and release readiness remain unproven. An exact independent review and explicit root approval are required before any publication or runtime execution.
