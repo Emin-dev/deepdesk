@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "execution_approved": true,
+  "scope": "unchanged-seatbelt-profile-diagnostic-only",
+  "review_status": "independent-exact-input-GO-and-approved-task-scope",
+  "base_commit": "976662a6ddab65bf43d9af6e2b54b1f9397a7884",
+  "destination_branch": "engine-sandbox-diagnostic-ci",
+  "profile_changed": false,
+  "dependencies_downloaded_or_executed": false,
+  "sockets_created": false,
+  "sha256": {
+    "packaging/engine-ci/diagnose_seatbelt.py": "8d3c8c5f710a6904f0007f74a6d6b708e0eebb84761de52df47adc760e66ed5a",
+    "packaging/engine-ci/test_seatbelt_diagnostic.py": "8bee9fb76614ad570526d49ad8d1cc24c7ed6ac1b9c6cf2be29abfe6cfe27311",
+    "packaging/engine-ci/runtime-loopback.sb": "8895066a9bce3f8e7aa4500aed8978b4a652f8c89e1677d2d37fd9d3c7e6f2e8",
+    "packaging/engine-ci/sandbox-diagnostic-macos.yml.template": "0d79aefbaef1a852edc8508885635698435d907af414c11944a9f0121d59ff26",
+    ".github/workflows/engine-sandbox-diagnostic-macos.yml": "0d79aefbaef1a852edc8508885635698435d907af414c11944a9f0121d59ff26"
+  },
+  "approved_by": "approved project-task scope",
+  "reviewer": "independent exact-input review",
+  "approval_recorded_utc": "2026-10-11T01:44:10Z",
+  "reviewed_candidate_manifest_sha256": "4f15c11c7fbcdb714a0ae543191fa05567419374da18fbce795fc9905041dcf2",
+  "independent_review_sha256": "ec057d3f47f056bca49d7b8311164b6221d39fad5c05df85ddad823205126778",
+  "approval_scope_note": "Only unchanged-profile system-tool diagnostic. No network rule expansion, downloaded dependency execution or API run."
+}
