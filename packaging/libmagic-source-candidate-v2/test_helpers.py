@@ -1,6 +1,8 @@
 """First-party synthetic helper tests. No download or third-party execution."""
 import ast
 import copy
+import contextlib
+import traceback
 import difflib
 import errno
 import hashlib
@@ -242,6 +244,77 @@ class CandidateTests(unittest.TestCase):
         self.assertIn('MAGIC_COMPRESS_TRANSP | MAGIC_NO_COMPRESS_FORK',c)
         self.assertIn('external_compress_helper_rejected',c)
         self.assertIn('application/x-decompression-error-gzip-Fork-is-required-to-uncompress--but-disabled',c)
+
+    def test_lipo_verify_arch_file_precedes_terminal_architecture_list(self):
+        # Apple cctools misc/lipo.c:432-451 consumes the complete trailing argv
+        # as architecture names; man/lipo.1:101-109 requires the file first.
+        text=(HERE/'stage.py').read_text()
+        def assert_exact_command(source):
+            tree=ast.parse(source)
+            commands=[node.args[0] for node in ast.walk(tree) if isinstance(node,ast.Call)
+                and isinstance(node.func,ast.Name) and node.func.id=='run' and node.args
+                and isinstance(node.args[0],ast.List) and node.args[0].elts
+                and isinstance(node.args[0].elts[0],ast.Constant)
+                and node.args[0].elts[0].value=='/usr/bin/lipo']
+            self.assertEqual(len(commands),1)
+            expected=ast.parse("['/usr/bin/lipo',p,'-verify_arch','arm64']",mode='eval').body
+            self.assertEqual(ast.dump(commands[0]),ast.dump(expected))
+        assert_exact_command(text)
+        correct="['/usr/bin/lipo',p,'-verify_arch','arm64']"
+        self.assertEqual(text.count(correct),1)
+        for bad in ["['/usr/bin/lipo','-verify_arch','arm64',p]",
+                    "['/usr/bin/lipo',p,'-verify_arch','x86_64']",
+                    "['/usr/bin/lipo',p,'-archs']"]:
+            with self.assertRaises(AssertionError):assert_exact_command(text.replace(correct,bad))
+
+    def test_bounded_failures_emit_only_fixed_phase_and_category_then_fail(self):
+        expected={
+            'Bounded subprocess failed; raw output withheld':'nonzero_exit',
+            'Bounded subprocess timed out':'timeout',
+            'No subprocess time budget remains':'timeout',
+            'Private output limit exceeded':'output_limit',
+            'Bounded working-set limit exceeded':'work_limit',
+            'Bounded working-set limit exceeded at completion':'work_limit',
+        }
+        self.assertEqual(stage.FAILURE_CATEGORIES,expected)
+        for message,category in expected.items():
+            with self.subTest(category=category,message=message):
+                capture=io.StringIO();fake=types.SimpleNamespace(run_bounded=mock.Mock(side_effect=RuntimeError(message)))
+                with contextlib.redirect_stdout(capture), self.assertRaisesRegex(RuntimeError,'^Bounded pilot phase failed; details withheld$') as raised:
+                    stage.run_private_step(fake,['synthetic'],phase='configure')
+                self.assertEqual(json.loads(capture.getvalue()),{'pilot_step':'configure','failure_category':category})
+                self.assertEqual(len(capture.getvalue().splitlines()),1)
+                self.assertTrue(raised.exception.__suppress_context__)
+                self.assertIsNone(raised.exception.__cause__)
+                fake.run_bounded.assert_called_once_with(['synthetic'])
+    def test_unknown_failure_with_secret_suppresses_message_and_trace_context(self):
+        secret='synthetic-secret-do-not-emit-7e4a'
+        for failure in [RuntimeError(secret),ValueError(secret),RuntimeError('Bounded subprocess timed out '+secret),
+                        RuntimeError('Bounded subprocess timed out',secret)]:
+            capture=io.StringIO();errors=io.StringIO()
+            def fail(*args,**kwargs):
+                print(secret)
+                raise failure
+            with contextlib.redirect_stdout(capture),contextlib.redirect_stderr(errors):
+                try:stage.run_private_step(types.SimpleNamespace(run_bounded=fail),['synthetic'],phase='arm64-libmagic.1.dylib')
+                except RuntimeError as error:
+                    self.assertEqual(str(error),'Bounded pilot phase failed; details withheld')
+                    formatted=traceback.format_exc()
+                else:self.fail('Failure was incorrectly accepted')
+            self.assertEqual(json.loads(capture.getvalue()),{'pilot_step':'arm64-libmagic.1.dylib','failure_category':'unknown'})
+            self.assertNotIn(secret,capture.getvalue()+errors.getvalue()+formatted)
+            self.assertEqual(errors.getvalue(),'')
+            self.assertNotIn('During handling',formatted)
+    def test_classification_never_prints_unreviewed_phase_or_changes_success(self):
+        capture=io.StringIO();fake=types.SimpleNamespace(run_bounded=mock.Mock(return_value=b'synthetic'))
+        with contextlib.redirect_stdout(capture),self.assertRaisesRegex(RuntimeError,'^Unreviewed pilot phase$'):
+            stage.run_private_step(fake,[],phase='synthetic-secret-phase')
+        self.assertEqual(capture.getvalue(),'');fake.run_bounded.assert_not_called()
+        def success(*args,**kwargs):print('{"bounded_step":"passed"}');return b'synthetic'
+        with contextlib.redirect_stdout(capture):
+            output,private=stage.run_private_step(types.SimpleNamespace(run_bounded=success),['synthetic'],phase='make-all',timeout=1)
+        self.assertEqual(output,b'synthetic');self.assertEqual(json.loads(private),{'bounded_step':'passed'})
+        self.assertEqual(capture.getvalue(),'')
 
     def test_workflow_inert_and_scoped(self):
         s=(HERE/'libmagic-source-macos.yml.template').read_text()

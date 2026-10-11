@@ -44,11 +44,44 @@ EXPECTED_FIXTURES = {'fixture_pass=plain:text/plain','fixture_pass=pdf:applicati
     'fixture_pass=bzip2_text_no_external_helper:text/plain','fixture_pass=missing_database_rejected',
     'fixture_pass=external_compress_helper_rejected:application/x-decompression-error-gzip-Fork-is-required-to-uncompress--but-disabled'}
 DISK_LIMIT = 1024**3
+FAILURE_CATEGORIES = {
+    'Bounded subprocess failed; raw output withheld':'nonzero_exit',
+    'Bounded subprocess timed out':'timeout',
+    'No subprocess time budget remains':'timeout',
+    'Private output limit exceeded':'output_limit',
+    'Bounded working-set limit exceeded':'work_limit',
+    'Bounded working-set limit exceeded at completion':'work_limit',
+}
+REVIEWED_PHASES = frozenset({
+    'external-network-denied','local-connect-denied','local-bind-denied',
+    'outside-write-denied','immutable-write-denied','work-write-allowed','homebrew-read-denied',
+    'sdk-path','compiler-path','compiler-version','os-version',
+    'codec-preflight-compile','codec-preflight-loads','codec-preflight-run',
+    'configure','make-all','install-staged-prefix','smoke-compile','smoke-external-exec-denied',
+    'synthetic-mime-codec-database-and-external-rejection',
+} | {kind+'-'+name for kind in ('arm64','loads','commands')
+     for name in ('libmagic.1.dylib','smoke-fixture','file')})
 
 
 def require(ok, message):
     if not ok:
         raise RuntimeError(message)
+
+
+
+def run_private_step(bounded, command, *, phase, **kwargs):
+    require(phase in REVIEWED_PHASES, 'Unreviewed pilot phase')
+    capture = io.StringIO()
+    try:
+        with contextlib.redirect_stdout(capture):
+            output = bounded.run_bounded(command, **kwargs)
+    except Exception as error:
+        category = (FAILURE_CATEGORIES.get(error.args[0], 'unknown')
+                    if type(error) is RuntimeError and len(error.args) == 1
+                    and type(error.args[0]) is str else 'unknown')
+        print(json.dumps({'pilot_step':phase,'failure_category':category}),flush=True)
+        raise RuntimeError('Bounded pilot phase failed; details withheld') from None
+    return output, capture.getvalue()
 
 
 def digest(path):
@@ -337,11 +370,9 @@ def main():
                          *(['-D','FIXTURE_PATH='+str(smoke_exec)] if smoke_exec else []),
                          '-f',str(helpers/('smoke-no-exec.sb' if smoke_exec else 'offline.sb')),*map(str,command)]
             before=time.monotonic()
-            capture=io.StringIO()
-            with contextlib.redirect_stdout(capture):
-                output=bounded.run_bounded(command,cwd=cwd,env=env,work=work,timeout=min(timeout,remaining),
-                    disk_limit=DISK_LIMIT,output_limit=2*1024**2,public_summary=True)
-            summary=json.loads(capture.getvalue())
+            output,private_summary=run_private_step(bounded,command,phase=name,cwd=cwd,env=env,work=work,
+                timeout=min(timeout,remaining),disk_limit=DISK_LIMIT,output_limit=2*1024**2,public_summary=True)
+            summary=json.loads(private_summary)
             require(summary.get('bounded_step')=='passed' and summary.get('stdout_bytes')==len(output),
                     'Bounds summary differs')
             output_total+=summary['stdout_bytes']+summary['stderr_bytes']
@@ -397,7 +428,7 @@ def main():
         native_records=[]
         for p in [library,fixture,prefix/'bin/file']:
             require(p.is_file(),'Expected native output absent')
-            run(['/usr/bin/lipo','-verify_arch','arm64',p],name='arm64-'+p.name)
+            run(['/usr/bin/lipo',p,'-verify_arch','arm64'],name='arm64-'+p.name)
             loads=parse_otool_loads(run(['/usr/bin/otool','-L',p],name='loads-'+p.name).decode())
             validate_loads(loads,prefix,True)
             commands=run(['/usr/bin/otool','-l',p],name='commands-'+p.name).decode()

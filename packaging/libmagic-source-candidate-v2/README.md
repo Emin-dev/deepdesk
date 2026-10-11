@@ -41,3 +41,17 @@ Execution approval, exact source-overlay approval, install-ID assignment approva
 Run `python -B -I packaging/libmagic-source-candidate-v2/test_helpers.py` for first-party synthetic helper tests only. Static archive materialization and patch verification do not execute source. Independent review and root GO must precede any approval change or workflow activation; any changed candidate byte requires re-freezing.
 
 Success means only the exact patched-source build, matching database, synthetic MIME, two builtin codec checks and one external-only refusal fixture passed. Full decompression, external helpers, optional codec coverage, relocation, WeasyPrint, complete native closure, engine freeze, clean-machine app and redistribution clearance remain unestablished.
+
+
+## Publication v3: lipo command-order correction
+
+The first v3 runtime delta is one Python command-vector reorder: `/usr/bin/lipo INPUT -verify_arch arm64`. The prior vector put INPUT after `arm64`; Apple's parser treats all trailing values after `-verify_arch` as architecture names. The architecture requirement remains mandatory, and no binary validation, source input/overlay, fixture expectation, sandbox profile, timeout, output bound or workflow is relaxed.
+
+Primary sources read on 2026-10-11:
+
+- [Apple cctools lipo parser](https://raw.githubusercontent.com/apple-oss-distributions/cctools/main/misc/lipo.c), lines 432–451: computes the number of architecture values from the remaining argument count and validates each remaining argument as an architecture. Lines 467–470 separately recognize input filenames before that terminal option.
+- [Apple lipo manual](https://raw.githubusercontent.com/apple-oss-distributions/cctools/main/man/lipo.1), lines 101–109: documents the required file-before-option order and zero/nonzero verification status.
+
+A first-party AST regression pins the single lipo invocation to the exact corrected list and rejects the previous ordering, an alternate architecture, and replacement with a non-verifying inspection command. This source-backed correction has not been run on macOS in the v3 preparation step. The preceding v2 CI report reached configure, make, staged installation and fixture compilation before its first lipo command failed; that is partial build evidence, not completed native/fixture proof.
+
+The v3 receipt is reset closed pending independent exact review and root approval. A second, separately identified small v3 delta wraps the unchanged bounded helper with fixed failure classification. Exact known first-party RuntimeError messages map to nonzero_exit, timeout, output_limit or work_limit. Other exceptions or non-exact messages map to unknown. Only a hardcoded reviewed phase name and fixed category are printed; arbitrary exception text and prior trace context are suppressed, and the step still raises a fixed failure. Successful output, source inputs, sandbox, process cleanup and all runtime assertions remain unchanged. First-party tests cover every mapped message, secret-bearing unknown failures, no leakage from captured helper stdout, rejected unreviewed phase names and failure after the fixed summary. No raw child stderr is exposed.

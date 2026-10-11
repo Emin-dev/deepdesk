@@ -16,7 +16,7 @@
   "standalone_engine_or_app_approved": false,
   "model_or_provider_execution_approved": false,
   "sha256": {
-    "README.md": "4f5aca270b15fe7a5096a4e177369424d878ada14e7839d0b88d57a206f490bc",
+    "README.md": "a8656d499a6d89b0900935538c2c727d1c9ebb16908d8e136175cc2ed0325019",
     "bounded_runtime.py": "a94a58ba7e45f203fafd4d4d7a0d60ec91cd8366ac7ae8d55909c7d8b1d128f4",
     "compress-nofork.patch": "cd8e4f541ca74e3018a2b14bd2797cf1faf33f1cfd066435ed65eb47353489d7",
     "libmagic-source-macos.yml.template": "97bf79bdbc1991494d35d29b31125eed38ea13c7a6039de21b80ba1bdbed6fa8",
@@ -27,9 +27,9 @@
     "source-members.json": "98b2114e31e92c3faf911d88138e002b5ef3fe94cd052790ca24d0ef0b1a4b1e",
     "source-overlay.json": "f474cc6c5f138b08ac3d41200c293a734983d478d68ffa91320ddc18d64b1ce0",
     "source-pin.json": "fb0f2b362dae27545563fef48dc83f5af5617534fb4822d26cd9729efb742e56",
-    "stage.py": "946c5a66978978b49659682b0da2f0bdb31abc014e963ca90d8ccef146010076",
+    "stage.py": "b2ba14087414b2b0ea51428efbfb306bac289969faa34f7b4940a6a0dbae8802",
     "synthetic_fixtures.h": "f992e1b664f27ab949e34936ddf1d77ea39b526529877e2d799262d7d3fbe472",
-    "test_helpers.py": "da7798a2fac5c1dcaef0fd70b384e1ca76c21e7151fbd309bcba74a1b248c536"
+    "test_helpers.py": "7bcc70fd2796f42bd6612e864f43f1043f5f296339dfae7433e66633a80c0dba"
   },
   "source_overlay_approved": true,
   "source_overlay_before_sha256": "f174166d37224e093cadfdde70efc9b2d467c22f99709349782df392157f789a",
@@ -37,9 +37,9 @@
   "source_overlay_patch_sha256": "cd8e4f541ca74e3018a2b14bd2797cf1faf33f1cfd066435ed65eb47353489d7",
   "reviewer": "independent exact-input review",
   "approved_by": "approved project-task scope",
-  "approval_recorded_utc": "2026-10-11T03:50:05.416187+00:00",
-  "approved_candidate_manifest_sha256": "d64f7847c318e79dd5596b2dd166db79e5fa96770584fce004b051634f013790",
+  "approval_recorded_utc": "2026-10-11T04:05:51.396556+00:00",
+  "approved_candidate_manifest_sha256": "078c0109c4119eb9fbe56694ba3d1f25f1ad94b9ca3c3969164a3457d45ec8c9",
   "independent_review_artifacts": {
-    "independent-libmagic-source-v2-review.json": "6b3862e6bbcaf5f893ec408b8cb65323904e6236ab4ee2027326607f3fd83703"
+    "independent-libmagic-source-v3-review.json": "ce237fcf8bf2aa426ed19e9ca4fb388a22cd2073aa107d307d1a7aef28ec2440"
   }
 }
