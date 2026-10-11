@@ -2206,5 +2206,9 @@
       "zoneinfo/_tzpath.py": "5dc473af6f6ae35e5531cc9705a1e4923aa07e7d35f6b4c275b90c6a3c2591c4",
       "zoneinfo/_zoneinfo.py": "ebb9b679519a23252eb90541003a2fdbb3f2d7bc36713fd70672baa575dcdcb6"
     }
+  },
+  "managed_wrapper_sha256": {
+    "packaging/engine_entry.py": "7e4fdbe84458f1e8aed760d44852ff3a9823c729f56d161f3dd163120f118f65",
+    "packaging/standalone-engine-candidate/engine_entry.py": "ad8fc34f04809ad9b6a43922d47709a112e6aaedf04ddc427cae968edc5264d2"
   }
 }

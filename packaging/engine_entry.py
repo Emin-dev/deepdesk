@@ -109,6 +109,11 @@ def install_managed_inference_provider():
     ):
         raise RuntimeError("Invalid managed inference configuration")
     if configured:
+        # Re-establish native managed-inference policy after the launcher's fixed
+        # environment allowlist. Bind it only to the validated managed tuple;
+        # unrelated, explicitly selected providers keep their existing policy.
+        os.environ["LDR_LLM_REQUIRE_LOCAL_ENDPOINT"] = "true"
+        os.environ["LDR_EMBEDDINGS_REQUIRE_LOCAL"] = "true"
         os.environ["LDR_LLM_PROVIDER"] = "openai_endpoint"
         os.environ["LDR_LLM_MODEL"] = model
         os.environ["LDR_LLM_OPENAI_ENDPOINT_URL"] = endpoint

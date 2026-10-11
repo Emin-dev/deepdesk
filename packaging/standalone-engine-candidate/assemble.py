@@ -17,7 +17,7 @@ import stat
 from typing import Any
 
 MANIFEST_SCHEMA = "deepdesk-content-v1"
-WRAPPER_SHA256 = "c150823f009f0a9f004923413444894e95f3681d81f0fb94537be75cf7f778b9"
+WRAPPER_SHA256 = "7e4fdbe84458f1e8aed760d44852ff3a9823c729f56d161f3dd163120f118f65"
 INTERPRETER_RELATIVE = "bin/python3.12"
 
 
@@ -172,7 +172,7 @@ def assemble_bundle(prefix: Path, wrapper: Path, launcher: Path, destination: Pa
                     expected_wrapper_sha256: str = WRAPPER_SHA256) -> dict[str, Any]:
     """Copy exact approved local inputs without pruning or executing payloads.
 
-    The default wrapper hash pins the frozen original. A separately reviewed
+    The default wrapper hash pins the reviewed managed-policy wrapper. A separately reviewed
     candidate wrapper requires its exact explicit expected_wrapper_sha256.
     The destination must not exist and its parent must already exist. Do not run
     with concurrently mutable/adversarial inputs or output directories: this is

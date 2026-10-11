@@ -1,3 +1,5 @@
+Integration note: this document records the earlier core baseline. The current candidate additionally includes conditional managed-policy restoration and a separately gated installed-policy probe; see `MANAGED-POLICY-REVIEW.md`. Earlier statements that production wrapper bytes are unchanged apply to that historical baseline.
+
 # Standalone core lane v1: exact scope for review
 
 Execution remains false. Base: `099340e2803381f0196f00a02790c3ad34a8fe72`; proposed dedicated branch `engine-standalone-core-ci`. Existing successful branches and immutable upstream/PDM are unchanged.

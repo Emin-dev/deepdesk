@@ -44,6 +44,7 @@ jobs:
           printf '%s\n' \
             'Full reviewed Python prefix preserved in a relocated helper app; real relative launcher and explicit core self-test passed.' \
             'Relocated bundled Python passed SQLCipher and in-process authenticated ASGI fixture checks under TCP denial.' \
+            'Separate installed managed-policy checks rejected cloud routes and retained exact local policy decisions without inference, DNS or HTTP.' \
             'All package payloads remain present. Native PDF/libmagic closure and the known x86 Pandoc payload remain unresolved.' \
             'No real HTTP/native transport, model/research/provider query, native source build, explicit signing, DMG or release was tested.' \
             'Compiler/linker may emit its ordinary ad-hoc ARM64 launcher signature; no personal signing identity is used.' \

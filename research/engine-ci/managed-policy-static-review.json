@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "status": "static-preparation-not-runtime-executed",
+  "execution_approved": false,
+  "upstream_commit": "b0ac4dea5a407c51e465e802b9928d34569a8db1",
+  "policy_context": "explicit-public_only-false-snapshot-flags-allow_dns_false",
+  "policy_evaluators_unmodified": true,
+  "resolver_or_dns_cache_modified": false,
+  "provider_factory": "first-party-rejecting-sentinel-only-for-negative-guard-safety",
+  "runtime_probe_executed": false,
+  "source_evidence": [
+    {
+      "source": "src/local_deep_research/security/egress/policy.py",
+      "sha256": "b2046d1402a2ceab865fc1457b199ca7894a37bf7090c05d95cdcde44542b085",
+      "functions": {
+        "context_from_snapshot": {
+          "start_line": 2121,
+          "end_line": 2267
+        },
+        "evaluate_llm_endpoint": {
+          "start_line": 1409,
+          "end_line": 1473
+        },
+        "evaluate_embeddings": {
+          "start_line": 1476,
+          "end_line": 1529
+        },
+        "_classify_host": {
+          "start_line": 327,
+          "end_line": 443
+        }
+      }
+    },
+    {
+      "source": "src/local_deep_research/settings/manager.py",
+      "sha256": "cc41fe68342f7b04ea213b0a2ff0e0c6d03521f24ffcf1109048c713c5aa53bc",
+      "functions": {
+        "check_env_setting": {
+          "start_line": 560,
+          "end_line": 599
+        }
+      }
+    },
+    {
+      "source": "src/local_deep_research/llm/llm_registry.py",
+      "sha256": "54e00432de8a16941326e88ea78ae56924f08cca5aba9da476f9e55febaa5bda",
+      "functions": {
+        "register_llm": {
+          "start_line": 193,
+          "end_line": 205
+        },
+        "get_llm_from_registry": {
+          "start_line": 218,
+          "end_line": 231
+        }
+      }
+    }
+  ]
+}

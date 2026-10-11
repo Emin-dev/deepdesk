@@ -194,6 +194,9 @@ def main():
     receipt = json.loads(args.review_receipt.read_text())
     require(receipt.get('execution_approved') is True and receipt.get('scope') == 'standalone-relocated-core-checks',
             'Separate exact standalone core review has not approved execution')
+    require(receipt.get('managed_policy_execution_approved') is True
+            and receipt.get('managed_policy_contract') == 'installed-wrapper-public-only-context-no-inference',
+            'Separate exact managed policy review has not approved execution')
     require(receipt.get('native_features_complete') is False and receipt.get('pandoc_override_approved') is False
             and receipt.get('explicit_codesign_approved') is False
             and receipt.get('compiler_linker_adhoc_signature_permitted') is True, 'Unexpected standalone scope')
@@ -214,6 +217,8 @@ def main():
         '.github/workflows/engine-standalone-core-macos.yml', 'packaging/engine-ci/bounded_runtime.py',
         'packaging/engine-ci/runtime_checks.py', 'packaging/engine-ci/smoke_asgi_authenticated.py',
         'packaging/engine-ci/asgi_diagnostics.py', 'packaging/engine-ci/asgi-diagnostic-source-allowlist.json',
+        'packaging/engine-ci/managed_policy_checks.py', 'packaging/engine-ci/test_managed_policy_checks.py',
+        'packaging/standalone-engine-candidate/test_managed_policy_wrapper.py',
         'packaging/engine-ci/seed_fixture.py', 'packaging/engine-ci/runtime-offline.sb',
         'packaging/engine-ci/stage_a.py',
         'packaging/engine-ci/audit_archives.py', 'packaging/engine-ci/check_sqlcipher.py',
@@ -239,6 +244,7 @@ def main():
     archive = load_helper(helpers / 'audit_archives.py', 'deepdesk_archive_helpers')
     bounded = load_helper(helpers / 'bounded_runtime.py', 'deepdesk_bounded_helpers')
     diagnostics = load_helper(helpers / 'asgi_diagnostics.py', 'deepdesk_diagnostic_helpers')
+    policy_contract = load_helper(helpers / 'managed_policy_checks.py', 'deepdesk_policy_contract')
     proposal = json.loads((root / 'research/engine-ci/all-pypi-input-proposal.json').read_text())
     candidate = json.loads((root / 'research/engine-ci/python-candidate.json').read_text())
     sources = json.loads((root / 'research/engine-ci/source-build-manifest.json').read_text())
@@ -462,6 +468,24 @@ def main():
         cipher = json.loads(run([runtime_python,'-I',helpers / 'check_sqlcipher.py']))
         require(cipher.get('checks') == ['encrypted-header','correct-key-reopen','wrong-key-refused','ordinary-sqlite-refused'],
                 'SQLCipher result mismatch')
+        # Separate installed-policy contract. No provider/model construction,
+        # DNS, listener, real HTTP or research. Same deny profile, tighter writes.
+        policy_scope = work / 'managed-policy-fixture-scope'
+        policy_scope.mkdir(mode=0o700)
+        previous_env = env
+        env = {**env, 'HOME':str(policy_scope), 'TMPDIR':str(policy_scope),
+               'LDR_DATA_DIR':str(policy_scope / 'fixture/data')}
+        try:
+            managed_policy = policy_contract.parse_report(run([
+                runtime_python,'-I','-B',helpers / 'managed_policy_checks.py',
+                '--wrapper',wrapper,'--wrapper-sha256',digest(wrapper),
+                '--runtime-prefix',runtime_env,'--fixture-root',policy_scope / 'fixture'],
+                cwd=policy_scope,writable=policy_scope,timeout=120))
+        finally:
+            env = previous_env
+        if managed_policy['status'] != 'passed':
+            print(json.dumps(managed_policy,sort_keys=True))
+            raise RuntimeError('Installed managed policy contract failed; fixed diagnostics only')
         # The same kernel network denial remains active for the in-process ASGI
         # fixture. No numeric-IP/localhost profile or TCP listener is used.
         fixture_scope = work / 'asgi-fixture-scope'
@@ -498,6 +522,7 @@ def main():
             'python':'3.12.15','installed_identity_count':277,'built_wheels':built,
             'runtime_lock_sha256':digest(lock),'torch_origin':'explicit-official-PyPI-override',
             'torch_version':checks['torch_version'],'sqlcipher_checks':cipher['checks'],'api_checks':api['checks'],
+            'managed_policy_contract':managed_policy,
             'model_loaded':False,'provider_queried':False,'research_execution_tested':False,
             'standalone_bundle_created':True,'pdf_tested':False,'libmagic_tested':False,
             'native_bundle_tested':False,'artifact_uploaded':False,

@@ -2,7 +2,7 @@
   "schema": "deepdesk-asgi-transport-static-review-v1",
   "reviewed_at_utc": "2026-10-11T01:51:00Z",
   "status": "static-source-review-only; no downloaded package installed, imported, or executed; no macOS runtime result",
-  "conclusion": "The unchanged managed wrapper can reach the real ASGI app through an intercepted uvicorn.run and context-managed TestClient. This removes TCP HTTP serving and connecting, but is not literally socket-free because the default asyncio loop uses an internal AF_UNIX socketpair. Full-runtime TestClient selects httpx2 2.13.1, not httpx 0.28.1.",
+  "conclusion": "The managed wrapper with conditional local-policy restoration can reach the real ASGI app through an intercepted uvicorn.run and context-managed TestClient. This removes TCP HTTP serving and connecting, but is not literally socket-free because the default asyncio loop uses an internal AF_UNIX socketpair. Full-runtime TestClient selects httpx2 2.13.1, not httpx 0.28.1.",
   "archives": {
     "anyio": {
       "version": "4.15.1",
@@ -343,11 +343,11 @@
           67
         ],
         [
-          190,
-          229
+          195,
+          234
         ]
       ],
-      "member_sha256": "c150823f009f0a9f004923413444894e95f3681d81f0fb94537be75cf7f778b9"
+      "member_sha256": "7e4fdbe84458f1e8aed760d44852ff3a9823c729f56d161f3dd163120f118f65"
     },
     {
       "id": "upstream_launcher",
@@ -568,5 +568,6 @@
     "fresh_interpreter_phases_completed": "Record observed successful phase count, not a planned value",
     "network_research_tested": false,
     "provider_or_model_tested": false
-  }
+  },
+  "managed_policy_integration_note": "Wrapper hash and shifted serve() lines refreshed for conditional managed-only local policy; ASGI serve() AST is unchanged. Installed policy probe is separate from this ASGI evidence."
 }
