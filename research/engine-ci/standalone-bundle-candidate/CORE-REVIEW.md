@@ -1,0 +1,28 @@
+# Standalone core lane v1: exact scope for review
+
+Execution remains false. Base: `099340e2803381f0196f00a02790c3ad34a8fe72`; proposed dedicated branch `engine-standalone-core-ci`. Existing successful branches and immutable upstream/PDM are unchanged.
+
+The actual ASGI v3 installed-runtime proof is reused as a source/build/input baseline. This lane changes assembly, launch and relocation, not research behavior. All 277 installed identities and their payloads remain present, including the known x86_64 Pandoc and incomplete PDF/libmagic native stack. It must not claim that all features work merely because all Python payloads are present.
+
+## New execution
+
+- Build the same five exact source wheels; inspect every generated payload/license/entry point, then offline hash-install the whole previously reviewed set into a second full standalone CPython prefix (no copied venv). The bootstrap pip is the exact pinned interpreter's pip. `--no-compile` avoids new installation-time bytecode; `-I` still processes the exact reviewed setuptools .pth file, which stays explicitly allowlisted.
+- Compile only the new first-party launcher with `/usr/bin/clang -std=c11 -O2 -Wall -Wextra -Werror`, under the existing deny-network/write-contained profile. The Mac compiler/linker may emit its ordinary ad-hoc ARM64 signature. No explicit codesign, signing identity, keychain operation or final signature is performed. Compiler/SDK versions appear in the job preflight logs. This is an environment-specific compiler proof, not a reproducible launcher-byte claim.
+- Copy the complete installed prefix into an explicit helper app. Exact file/mode/link manifests before and after copying prove no payload pruning. The first-party assembly does not execute the payload. The existing wrapper source remains unchanged at its original path.
+- The candidate wrapper is a separate copy with only an explicit `--core-self-test` branch. All existing production functions/classes except self_test have byte-equivalent ASTs; serve() and the full `--self-test` behavior remain intact. The new mode excludes only WeasyPrint from this particular smoke test and labels its result `packaging-core-self-test`. It does not remove or rewrite any distribution. The diff and mocked branch tests are included.
+- Move the helper into a path containing spaces and Unicode, with the original helper path absent. Run the actual relative launcher/core self-test, then the exact passed import/census, four SQLCipher checks and ASGI fixture through the relocated bundled interpreter. The ASGI fixture itself is unchanged. It intercepts only uvicorn.run and retains real application lifespan/auth/database behavior.
+- Post-relocation, retain TCP denial and protected writes, adding read denial for the original interpreter, original installed prefix, build environment, staged source and `/opt/local`. Canaries prove original files are unreadable, bundle writes are refused, and external/local TCP remains denied. No nested sandbox application is introduced. The real launcher preserves the owned PID by exec and cannot choose a host Python, shell or PATH executable.
+- The launcher allowlist strips arbitrary Python/dyld/loader/package-manager variables before exec, but cannot retroactively protect its own initial dynamic loader. The supervising process must supply a clean environment; production signing/hardened-runtime review remains separate. Dropping PATH is not proof that every downstream library avoids system tools. Incoming HF offline flags are dropped; unchanged self-test explicitly sets offline mode itself. The kernel network denial is the CI boundary.
+- Final full-bundle and immutable-input inventories must equal pre-test records. The core lane creates no artifact upload/release/DMG and deletes only its own temporary work tree after normal bounded cleanup.
+
+## Bounds and disclosure
+
+Public standard `macos-26` arm64, contents:read, exact checkout pin with persist-credentials:false, 25-minute job, 20-minute inner budget, initial free16GiB/work12GiB, source/input/network integrity controls unchanged. The first-party copy is preceded by an exact prefix-byte preflight against the disk cap and followed by the global budget check. Downloaded execution is continuously bounded by the previously reviewed private-output runner. ASGI fixture retains its120/90/120-second phases, combined360seconds,128MiB entire fixture scope and2MiB private output cap.
+
+The source wheel/PyPI Torch approval must be extended explicitly to this new bundle scope. The Pandoc arm64 candidate is not selected or downloaded by this lane. No native source/bottle install, models, provider queries, user credentials, external research, actual TCP service/native URLSession/Keychain or final-M5 work occurs.
+
+The layout-aware `native_audit.py` is included and tested statically against441 arm64 wheel members plus11 CPython members, and rejects the known x86 Pandoc. It is not used to pass a full-native gate here because its known absolute RPATH/native-input/collision findings remain unresolved. The receipt must say native_features_complete=false, native_linkage_audit_passed=false, distribution_notices_complete=false, distributable_release=false. Full native features will have separate exact manifests and tests.
+
+## First-party checks
+
+84 current local tests cover assembly/preservation, compiled C launcher contract/header handling, spaces/Unicode relocation, fixed output schema, scope/receipt refusal, AST preservation, Mach-O parsing/context resolution/collision rejection, and workflow/profile bounds. These are Linux/synthetic helper tests, not macOS bundle success. Independent exact review and project approval are still required before the dedicated workflow is activated.

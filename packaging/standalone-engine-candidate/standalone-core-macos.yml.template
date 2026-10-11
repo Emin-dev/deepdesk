@@ -1,0 +1,50 @@
+# Candidate only: requires separate exact standalone-core review/approval.
+name: Validate Deepdesk relocated standalone core
+on:
+  push:
+    branches:
+      - engine-standalone-core-ci
+    paths:
+      - 'packaging/standalone-engine-candidate/**'
+      - 'packaging/engine-ci/**'
+      - 'packaging/engine_entry.py'
+      - 'packaging/patches/**'
+      - 'research/engine-ci/**'
+      - '.github/workflows/engine-standalone-core-macos.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: deepdesk-standalone-core-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  relocated-core:
+    if: github.repository == 'Emin-dev/deepdesk' && github.ref == 'refs/heads/engine-standalone-core-ci' && github.event.repository.private == false
+    runs-on: macos-26
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Verify standard arm64 host and compiler
+        run: |
+          test "$(uname -m)" = arm64
+          test -x /usr/bin/sandbox-exec
+          test -x /usr/bin/clang
+          sw_vers
+          /usr/bin/clang --version
+          /usr/bin/xcrun --show-sdk-version
+          df -h "$RUNNER_TEMP"
+      - name: Separately reviewed complete-prefix relocation and core checks
+        run: python3 -I packaging/standalone-engine-candidate/standalone_stage.py --repository "$GITHUB_WORKSPACE" --review-receipt packaging/standalone-engine-candidate/review-receipt.json
+      - name: Record precise validation boundary
+        if: success()
+        run: |
+          printf '%s\n' \
+            'Full reviewed Python prefix preserved in a relocated helper app; real relative launcher and explicit core self-test passed.' \
+            'Relocated bundled Python passed SQLCipher and in-process authenticated ASGI fixture checks under TCP denial.' \
+            'All package payloads remain present. Native PDF/libmagic closure and the known x86 Pandoc payload remain unresolved.' \
+            'No real HTTP/native transport, model/research/provider query, native source build, explicit signing, DMG or release was tested.' \
+            'Compiler/linker may emit its ordinary ad-hoc ARM64 launcher signature; no personal signing identity is used.' \
+            'No cache or artifact uploads. This helper is a temporary core-validation prototype, not a distributable app.' >> "$GITHUB_STEP_SUMMARY"

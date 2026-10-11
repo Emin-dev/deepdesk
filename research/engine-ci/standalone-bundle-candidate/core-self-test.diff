@@ -1,0 +1,39 @@
+--- packaging/engine_entry.py
++++ packaging/standalone-engine-candidate/engine_entry.py
+@@ -143,7 +143,7 @@
+     register_llm("openai_endpoint", CustomOpenAIEndpointProvider.create_llm)
+ 
+ 
+-def self_test() -> None:
++def self_test(*, core_only: bool = False) -> None:
+     # Isolate any package initialization. Never read the user's real LDR data.
+     with tempfile.TemporaryDirectory(prefix="deepdesk-engine-self-test-") as temporary:
+         os.environ["LDR_DATA_DIR"] = temporary
+@@ -155,7 +155,8 @@
+         for module in (
+             "fastapi", "starlette", "uvicorn", "pydantic", "sqlalchemy",
+             "sqlcipher3", "lxml.etree", "cryptography", "numpy", "pandas",
+-            "pyarrow", "torch", "faiss", "sentence_transformers", "weasyprint",
++            "pyarrow", "torch", "faiss", "sentence_transformers",
++            *(("weasyprint",) if not core_only else ()),
+         ):
+             importlib.import_module(module)
+             imported.append(module)
+@@ -178,7 +179,7 @@
+             raise RuntimeError("Encrypted database round-trip failed")
+         connection.close()
+         print(json.dumps({
+-            "status": "passed", "kind": "packaging-self-test",
++            "status": "passed", "kind": ("packaging-core-self-test" if core_only else "packaging-self-test"),
+             "python": sys.version.split()[0],
+             "sqlcipher": cipher_version[0], "imported": imported,
+             "provider_sources": len(list((root / "llm/providers/implementations").glob("*.py"))),
+@@ -235,6 +236,8 @@
+     sys.dont_write_bytecode = True
+     if sys.argv[1:] == ["--self-test"]:
+         self_test()
++    elif sys.argv[1:] == ["--core-self-test"]:
++        self_test(core_only=True)
+     elif sys.argv[1:]:
+         raise SystemExit("Unsupported engine arguments")
+     else:
