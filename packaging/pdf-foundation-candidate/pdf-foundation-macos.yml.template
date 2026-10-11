@@ -1,0 +1,34 @@
+# INACTIVE CANDIDATE. Requires independent exact review and a separate activation decision.
+name: Validate bounded PDF foundation prerequisites
+on:
+  push:
+    branches:
+      - engine-pdf-foundation-v1-ci
+    paths:
+      - 'packaging/pdf-foundation-candidate/**'
+      - '.github/workflows/engine-pdf-foundation-v1-macos.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: deepdesk-pdf-foundation-v1-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  prerequisites:
+    if: github.repository == 'Emin-dev/deepdesk' && github.ref == 'refs/heads/engine-pdf-foundation-v1-ci' && github.event.repository.private == false
+    runs-on: macos-26
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Execute only a separately reviewed exact prerequisite candidate
+        run: /usr/bin/python3 -I packaging/pdf-foundation-candidate/stage.py --repository "$GITHUB_WORKSPACE"
+      - name: State partial proof boundary
+        if: success()
+        run: |
+          printf '%s\n' \
+            'The exact PCRE2 Unicode/JIT and GNU libintl provider prerequisites passed bounded synthetic checks on standard macos-26.' \
+            'GLib/GObject/GIO, Pango, font closure, PDF rendering, relocation, release and model/provider checks remain false.' \
+            'No cache or artifacts were uploaded. No credentials, personal signing identity, explicit codesign or notarization were used.' >> "$GITHUB_STEP_SUMMARY"

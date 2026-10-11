@@ -1,0 +1,74 @@
+{
+  "status": "required_tests_not_executed",
+  "weasyprint_direct_gobject_calls": [
+    "g_type_init",
+    "g_object_unref"
+  ],
+  "glib_gobject_libffi_calls": [
+    "ffi_prep_cif",
+    "ffi_call"
+  ],
+  "glib_gobject_libffi_source_type_expressions": [
+    "ffi_type_void",
+    "ffi_type_pointer",
+    "ffi_type_float",
+    "ffi_type_double",
+    "ffi_type_sint",
+    "ffi_type_uint",
+    "ffi_type_slong",
+    "ffi_type_ulong",
+    "ffi_type_sint64",
+    "ffi_type_uint64"
+  ],
+  "glib_regex_code_unit_width": 8,
+  "glib_regex_pcre2_exports": [
+    "pcre2_code_free_8",
+    "pcre2_compile_8",
+    "pcre2_compile_context_create_8",
+    "pcre2_compile_context_free_8",
+    "pcre2_config_8",
+    "pcre2_dfa_match_8",
+    "pcre2_get_error_message_8",
+    "pcre2_get_ovector_count_8",
+    "pcre2_get_ovector_pointer_8",
+    "pcre2_jit_compile_8",
+    "pcre2_jit_match_8",
+    "pcre2_jit_stack_assign_8",
+    "pcre2_jit_stack_create_8",
+    "pcre2_jit_stack_free_8",
+    "pcre2_match_8",
+    "pcre2_match_context_create_8",
+    "pcre2_match_context_free_8",
+    "pcre2_match_data_create_8",
+    "pcre2_match_data_create_from_pattern_8",
+    "pcre2_match_data_free_8",
+    "pcre2_pattern_info_8",
+    "pcre2_set_bsr_8",
+    "pcre2_set_newline_8",
+    "pcre2_substring_get_byname_8",
+    "pcre2_substring_nametable_scan_8",
+    "pcre2_substring_number_from_name_8"
+  ],
+  "libintl_minimum_exports": [
+    "libintl_gettext",
+    "libintl_dgettext",
+    "libintl_dcgettext",
+    "libintl_ngettext",
+    "libintl_dngettext",
+    "libintl_dcngettext",
+    "libintl_bindtextdomain",
+    "libintl_bind_textdomain_codeset",
+    "libintl_textdomain"
+  ],
+  "required_behavior": [
+    "PCRE2_CONFIG_UNICODE is true",
+    "PCRE2_CONFIG_JIT is true and actual JIT match succeeds on arm64",
+    "Unicode property, named capture, normal match, JIT match, invalid UTF and invalid pattern coverage",
+    "Actual GNU MO catalog singular and plural translation, UTF-8/codeset binding, missing-key fallback",
+    "libffi prep_cif + ffi_call with scalar/pointer and argument values checked",
+    "Apple iconv non-ASCII roundtrip; zlib compress/uncompress roundtrip",
+    "New dylib outputs are arm64, deployment minimum recorded, and all load commands are staged provider or allowlisted Apple libraries/frameworks",
+    "No Homebrew, user-site, implicit subproject, ambient pkg-config, compiler cache or network dependency"
+  ],
+  "limit": "Provider-level tests do not establish WeasyPrint/PDF, shaping, NLS catalog packaging, or final signed application behavior."
+}
