@@ -1,0 +1,28 @@
+{
+  "schema": "deepdesk-launcher-compile-diagnostic-v1",
+  "approved_to_execute": true,
+  "scope": "one-exact-first-party-launcher-compile-diagnostic",
+  "destination_branch": "engine-launcher-compile-diagnostic-ci",
+  "review_status": "independent-exact-input-review-approved",
+  "temporary_compiler_linker_adhoc_effects_approved": true,
+  "generated_executable_execution_allowed": false,
+  "dependency_download_allowed": false,
+  "network_policy": "unchanged-runtime-offline-deny-network",
+  "explicit_codesign_allowed": false,
+  "personal_signing_identity_or_keychain_allowed": false,
+  "sha256": {
+    "packaging/engine-ci/runtime-offline.sb": "9d4f464140e5bb35efb2f937e820349b6f7a47482d4fcb2a618cc489b9bf4710",
+    "packaging/launcher-compile-diagnostic/README.md": "33943bca7ef2c58223dddfec3a8e8338455fcb6d29398c9cfb0ffd31157a3340",
+    "packaging/launcher-compile-diagnostic/diagnose_compile.py": "82b61be406a1d6f4f7740748f000e90fb4900bd28d97e8ef4c69ca4b6fd86560",
+    "packaging/launcher-compile-diagnostic/launcher-compile-diagnostic-macos.yml.template": "0f7dccfb662e10268ed35f8f822bbd354607349808eab6d7178d16d238c90b12",
+    "packaging/launcher-compile-diagnostic/test_diagnose_compile.py": "b2a8d0b267b2bd56f447cde0fb70d9d238292c7541006f0b14044ae51a6142c0",
+    "packaging/standalone-engine-candidate/launcher.c": "b23fc0b7c2d5a3bf0ed88a99521128518d770f2878024da50a867725d499738a"
+  },
+  "reviewer": "independent exact-input review",
+  "approved_by": "approved project-task scope",
+  "approval_recorded_utc": "2026-10-11T03:46:03.364682+00:00",
+  "approved_candidate_manifest_sha256": "4543866d3b045c1125efbc3254d0dff2b0ec4be06faa9ae89dd4e2e1ba948329",
+  "independent_review_artifacts": {
+    "independent-launcher-compile-diagnostic-v1-review.json": "1112499c2d56f4fa92947a92552baff83f2fbac1ccf69c582186a74ef84efae6"
+  }
+}

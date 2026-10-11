@@ -1,0 +1,37 @@
+# First-party diagnostic only. Activation requires its exact approval receipt.
+name: Diagnose Deepdesk launcher compiler
+on:
+  push:
+    branches:
+      - engine-launcher-compile-diagnostic-ci
+    paths:
+      - 'packaging/launcher-compile-diagnostic/**'
+      - 'packaging/standalone-engine-candidate/launcher.c'
+      - 'packaging/engine-ci/runtime-offline.sb'
+      - '.github/workflows/engine-launcher-compile-diagnostic-macos.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: deepdesk-launcher-compile-diagnostic-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  compiler-only:
+    if: github.repository == 'Emin-dev/deepdesk' && github.ref == 'refs/heads/engine-launcher-compile-diagnostic-ci' && github.event.repository.private == false
+    runs-on: macos-26
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Compile only the exact first-party launcher under the original profile
+        run: python3 -I packaging/launcher-compile-diagnostic/diagnose_compile.py --repository "$GITHUB_WORKSPACE" --review-receipt packaging/launcher-compile-diagnostic/review-receipt.json
+      - name: State exact diagnostic boundary
+        if: always()
+        run: |
+          printf '%s\n' \
+            'Scope: one exact first-party launcher compilation under the existing deny-network profile and clean environment. The diagnostic receipt records the outcome.' \
+            'Only bounded, classified and redacted compiler diagnostics are permitted; no resulting launcher or Python runtime payload may execute.' \
+            'No dependency/model download, provider query, cache/artifact upload, personal signing identity, explicit codesign, notarization or release.' \
+            'Ordinary temporary compiler/linker ad-hoc signature effects are covered only by this separately approved scope.' >> "$GITHUB_STEP_SUMMARY"
