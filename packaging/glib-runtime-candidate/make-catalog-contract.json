@@ -1,0 +1,217 @@
+{
+  "schema": 1,
+  "languages": [
+    {
+      "language": "be",
+      "source_member": "make-4.4.1/po/be.gmo",
+      "sha256": "91a6db8c9dbcde20881045cc58922f58ffab91e15d4c5bb9e58ebb2fd58db9ca",
+      "bytes": 6136,
+      "catalog_entries": 69
+    },
+    {
+      "language": "bg",
+      "source_member": "make-4.4.1/po/bg.gmo",
+      "sha256": "4e3004d77a92ad2dfc4006f56415eb462ad265b185427920231e083a434b9c37",
+      "bytes": 67139,
+      "catalog_entries": 478
+    },
+    {
+      "language": "cs",
+      "source_member": "make-4.4.1/po/cs.gmo",
+      "sha256": "ae1f3a1ae6989a72bd310e2df992c2a09b5c84c4a1d4a9bec178ca5d46184b76",
+      "bytes": 51630,
+      "catalog_entries": 478
+    },
+    {
+      "language": "da",
+      "source_member": "make-4.4.1/po/da.gmo",
+      "sha256": "185be2d62c07ea08d9113eed39a88fd5f795d1853672bf43f82361c2f9a03705",
+      "bytes": 46271,
+      "catalog_entries": 459
+    },
+    {
+      "language": "de",
+      "source_member": "make-4.4.1/po/de.gmo",
+      "sha256": "89caeb7cd1950ece3af7b387ecb4939217c0763a9601a22d10e9b311006789e3",
+      "bytes": 53393,
+      "catalog_entries": 478
+    },
+    {
+      "language": "es",
+      "source_member": "make-4.4.1/po/es.gmo",
+      "sha256": "55109abf73e06b2d2996364ac77fa1b11f29cdd8c3b66823eaf84931728cbed5",
+      "bytes": 41139,
+      "catalog_entries": 388
+    },
+    {
+      "language": "fi",
+      "source_member": "make-4.4.1/po/fi.gmo",
+      "sha256": "2250dbcc83f5f0b45509c95b07a30d34ec002124d3e9be085f760b6ebefe2edc",
+      "bytes": 30675,
+      "catalog_entries": 310
+    },
+    {
+      "language": "fr",
+      "source_member": "make-4.4.1/po/fr.gmo",
+      "sha256": "dd9f6c8d75cf94c0f4a01e4ad3ee2b833b4b552f13d0adf461b83a1356ed17a4",
+      "bytes": 41529,
+      "catalog_entries": 388
+    },
+    {
+      "language": "ga",
+      "source_member": "make-4.4.1/po/ga.gmo",
+      "sha256": "8ee19bc1fc2d06726989097180b4a611fe9ff99af8e2eead4695f622a72d5d87",
+      "bytes": 38653,
+      "catalog_entries": 375
+    },
+    {
+      "language": "gl",
+      "source_member": "make-4.4.1/po/gl.gmo",
+      "sha256": "9bd1e22f81c87cfa60f58b8dcdcdc98515c7592116e82724ee91f0bbb4cbdd88",
+      "bytes": 20076,
+      "catalog_entries": 200
+    },
+    {
+      "language": "he",
+      "source_member": "make-4.4.1/po/he.gmo",
+      "sha256": "a0c4407e00ef2f0ac1574b2c19166a79e3532c798a2836b85c171fb27964a272",
+      "bytes": 9710,
+      "catalog_entries": 136
+    },
+    {
+      "language": "hr",
+      "source_member": "make-4.4.1/po/hr.gmo",
+      "sha256": "830dc63cc74c2fe25182ce913690120a66467de79e7a66bea142198dfb73944e",
+      "bytes": 51679,
+      "catalog_entries": 478
+    },
+    {
+      "language": "id",
+      "source_member": "make-4.4.1/po/id.gmo",
+      "sha256": "234cff35e232e2705a8ddbfd809473836c511908c20e3bdf0ce4fa8c02c021e8",
+      "bytes": 39250,
+      "catalog_entries": 389
+    },
+    {
+      "language": "it",
+      "source_member": "make-4.4.1/po/it.gmo",
+      "sha256": "4333c255c4c82b17b1a71aa7a895b1f32395d86367a730c0eb56ca4c53678b46",
+      "bytes": 40756,
+      "catalog_entries": 388
+    },
+    {
+      "language": "ja",
+      "source_member": "make-4.4.1/po/ja.gmo",
+      "sha256": "d70ac36466b5a450077004349818a4a2f0dcaf699e7caca70822b95307bdbe49",
+      "bytes": 55400,
+      "catalog_entries": 478
+    },
+    {
+      "language": "ko",
+      "source_member": "make-4.4.1/po/ko.gmo",
+      "sha256": "af10c0e82e85ea8bd166392c52fccceba8db2f3520c3a36a8823a5af7fd4d00e",
+      "bytes": 53067,
+      "catalog_entries": 478
+    },
+    {
+      "language": "lt",
+      "source_member": "make-4.4.1/po/lt.gmo",
+      "sha256": "eee7c3ca541a7856fd815fb8dd3d0dbe77d046a6af856d53df6fcd38a524c6c9",
+      "bytes": 6827,
+      "catalog_entries": 90
+    },
+    {
+      "language": "nl",
+      "source_member": "make-4.4.1/po/nl.gmo",
+      "sha256": "7948cb6755d761ba94723c4d8c50d68a12adf358e310196c4c0fef4176fecb6c",
+      "bytes": 48248,
+      "catalog_entries": 463
+    },
+    {
+      "language": "pl",
+      "source_member": "make-4.4.1/po/pl.gmo",
+      "sha256": "41a2c390ea69bff2c35ecb154092c9b170f1f5cb08ff36346a47f1d8608a7d1d",
+      "bytes": 50247,
+      "catalog_entries": 478
+    },
+    {
+      "language": "pt",
+      "source_member": "make-4.4.1/po/pt.gmo",
+      "sha256": "a093700ce1de3d9b5fbe61a7f8194b9f9ebeb5f041c516361ce8ef3dad8efe2b",
+      "bytes": 38893,
+      "catalog_entries": 388
+    },
+    {
+      "language": "pt_BR",
+      "source_member": "make-4.4.1/po/pt_BR.gmo",
+      "sha256": "a42a7c6f01d2a43b01567beeb6784b28b3a9048ea7ddf741ef89994ca5eb4f72",
+      "bytes": 39328,
+      "catalog_entries": 387
+    },
+    {
+      "language": "ro",
+      "source_member": "make-4.4.1/po/ro.gmo",
+      "sha256": "b4f6997befc6532e81f60fcfe8fe01347c75b4c3a76d64f2970bf8e0d0684db7",
+      "bytes": 53348,
+      "catalog_entries": 478
+    },
+    {
+      "language": "ru",
+      "source_member": "make-4.4.1/po/ru.gmo",
+      "sha256": "1f56b5cacd036fba8234f9d407edd9f1c76f12d04cbb5ba31f7a98ad64b3fcc0",
+      "bytes": 64005,
+      "catalog_entries": 478
+    },
+    {
+      "language": "sr",
+      "source_member": "make-4.4.1/po/sr.gmo",
+      "sha256": "ba8dcb4e44fdcb049b2a47c00cc9eb9039d59de9edc8570b0be31e4e2e5c4d9a",
+      "bytes": 62502,
+      "catalog_entries": 478
+    },
+    {
+      "language": "sv",
+      "source_member": "make-4.4.1/po/sv.gmo",
+      "sha256": "30a73e65e64d003c1051be8486de575552bfc985983ad9a85b63d1af4e511451",
+      "bytes": 49313,
+      "catalog_entries": 478
+    },
+    {
+      "language": "tr",
+      "source_member": "make-4.4.1/po/tr.gmo",
+      "sha256": "e27505575514fb1c83bc985e8b92f7042ad604da2f7d400a34aa3cdf3dad688f",
+      "bytes": 17599,
+      "catalog_entries": 182
+    },
+    {
+      "language": "uk",
+      "source_member": "make-4.4.1/po/uk.gmo",
+      "sha256": "675ca698a15b69f64af86be07e1a0d091b2b4a44052d207802293a8355463612",
+      "bytes": 63561,
+      "catalog_entries": 478
+    },
+    {
+      "language": "vi",
+      "source_member": "make-4.4.1/po/vi.gmo",
+      "sha256": "10a7bb114a828f92675365f226871f4808df52e7d85e80e2bc6ee8bec8ece77d",
+      "bytes": 42231,
+      "catalog_entries": 388
+    },
+    {
+      "language": "zh_CN",
+      "source_member": "make-4.4.1/po/zh_CN.gmo",
+      "sha256": "ab07c67c3a291d99daf57c2f29fb211f32a7c5dda09190e2334466ec38347cfe",
+      "bytes": 40272,
+      "catalog_entries": 417
+    },
+    {
+      "language": "zh_TW",
+      "source_member": "make-4.4.1/po/zh_TW.gmo",
+      "sha256": "cd1fc10ec03e3295532d43ab28342890ba65602bad1fabffef6628f4a16ebc3c",
+      "bytes": 47740,
+      "catalog_entries": 478
+    }
+  ],
+  "nls_enabled_required": true,
+  "msgfmt_bootstrap_execution": false
+}

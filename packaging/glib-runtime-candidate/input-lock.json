@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "scope": "glib-runtime-iconv-diagnostic-v2",
+  "scope": "glib-runtime-iconv-correction-v3",
   "source_changes_allowed": false,
   "inputs": [
     {
@@ -215,9 +215,51 @@
           "notices/libffi/LICENSE"
         ]
       }
+    },
+    {
+      "id": "make",
+      "version": "4.4.1",
+      "url": "https://ftp.gnu.org/gnu/make/make-4.4.1.tar.gz",
+      "sha256": "dd16fb1d67bfab79a72f5e8390735c49e3e8e70b4945a15ab1f81ddb78658fb3",
+      "size": 2348200,
+      "redirect_hosts": [
+        "ftp.gnu.org"
+      ],
+      "license": {
+        "description": "GPL-3.0-or-later; bundled gnulib notices and documentation licenses retained"
+      },
+      "format": "tar",
+      "root": "make-4.4.1",
+      "filename": "make-4.4.1.tar.gz",
+      "expanded_bytes": 8780526,
+      "member_count": 416,
+      "max_member_bytes": 525891,
+      "member_manifest": "members/make.json",
+      "member_manifest_sha256": "2cd6cee35703b596b395b41db2a0a00addb0162d3dc7e21c6bb2f177331a9231"
+    },
+    {
+      "id": "libiconv",
+      "version": "1.19",
+      "url": "https://ftp.gnu.org/gnu/libiconv/libiconv-1.19.tar.gz",
+      "sha256": "88dd96a8c0464eca144fc791ae60cd31cd8ee78321e67397e25fc095c4a19aa6",
+      "size": 5921103,
+      "redirect_hosts": [
+        "ftp.gnu.org"
+      ],
+      "license": {
+        "description": "LGPL-2.1-or-later libraries and headers; GPL-3.0-or-later tool/build portions and exact notices retained"
+      },
+      "format": "tar",
+      "root": "libiconv-1.19",
+      "filename": "libiconv-1.19.tar.gz",
+      "expanded_bytes": 22755006,
+      "member_count": 1142,
+      "max_member_bytes": 1112375,
+      "member_manifest": "members/libiconv.json",
+      "member_manifest_sha256": "ac42bf36602a9465a8ee2e2eccf48d79c1e96a7fbfbb37545d404f6f848babf7"
     }
   ],
-  "total_compressed_bytes": 69310939,
-  "total_expanded_bytes": 394983369,
+  "total_compressed_bytes": 77580242,
+  "total_expanded_bytes": 426518901,
   "foundation_inputs": 6
 }

@@ -72,6 +72,15 @@ int main(int argc, char **argv) {
   g_object_unref(file);
   puts("gio_private_local_file_roundtrip_passed");
 
+  gsize bytes_read = 0, bytes_written = 0;
+  char *latin1 = g_convert("caf\xc3\xa9", -1, "ISO-8859-1", "UTF-8", &bytes_read, &bytes_written, &error);
+  if (!latin1 || error || bytes_written != 4 || memcmp(latin1, "caf\xe9", 4)) return 71;
+  g_free(latin1);
+  latin1 = g_convert("\xc5\x82", -1, "ISO-8859-1", "UTF-8", &bytes_read, &bytes_written, &error);
+  if (latin1 || !error || error->domain != G_CONVERT_ERROR || error->code != G_CONVERT_ERROR_ILLEGAL_SEQUENCE) return 72;
+  g_error_free(error); error = NULL;
+  puts("glib_source_iconv_conversion_passed");
+
   /* Force GLib's own gettext initialization; do not manually rebind its domain.
      GDateTime on Darwin correctly prefers nl_langinfo and is not a catalog test. */
   GRegex *invalid = g_regex_new("(", 0, 0, &error);

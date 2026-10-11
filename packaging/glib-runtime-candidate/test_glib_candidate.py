@@ -48,12 +48,12 @@ def macho_bytes(name, provider, *, rpaths=(), loads=(), minimum=26 << 16, cpu=0x
 
 
 class CandidateTests(unittest.TestCase):
-    def test_exact_eight_input_pins_and_totals(self):
+    def test_exact_ten_input_pins_and_totals(self):
         lock = json.loads((HERE / 'input-lock.json').read_text())
-        self.assertEqual(len(lock['inputs']), 8)
+        self.assertEqual(len(lock['inputs']), 10)
         self.assertEqual({x['id']: x['sha256'] for x in lock['inputs']}, stage.INPUT_HASHES)
-        self.assertEqual(sum(x['size'] for x in lock['inputs']), 69310939)
-        self.assertEqual(sum(x['expanded_bytes'] for x in lock['inputs']), 394983369)
+        self.assertEqual(sum(x['size'] for x in lock['inputs']), 77580242)
+        self.assertEqual(sum(x['expanded_bytes'] for x in lock['inputs']), 426518901)
         self.assertFalse(lock['source_changes_allowed'])
         self.assertNotIn('pango', stage.INPUT_HASHES)
 
@@ -345,7 +345,8 @@ class CandidateTests(unittest.TestCase):
         for forbidden in ('install_name_tool', 'codesign', 'make install', 'pip install', 'brew install'):
             self.assertNotIn(forbidden, values)
         self.assertIn('--disable-builddir', values)
-        self.assertNotIn('gettext-tools-configure', [n.args[0].value for n in ast.walk(tree) if isinstance(n, ast.Call) and isinstance(n.func, ast.Attribute) and n.func.attr == 'run' and n.args and isinstance(n.args[0], ast.Constant)])
+        self.assertIn('--with-included-libxml', values)
+        self.assertIn('--with-included-libunistring', values)
 
     def test_retains_accepted_gettext_layout_guard(self):
         with tempfile.TemporaryDirectory() as td:
@@ -377,7 +378,7 @@ class CandidateTests(unittest.TestCase):
         members = json.loads((HERE / 'members/glib.json').read_text())['members']
         entry = next(x for x in members if x['path'] == 'glib-2.90.1/tools/gen-visibility-macros.py')
         self.assertNotEqual(entry['mode'] & 0o111, 0)
-        self.assertNotIn('native_file.write_text', (HERE / 'stage.py').read_text())
+        self.assertIn("'gen-visibility-macros.py = ' + repr([str(py), '-I', '-S'", (HERE / 'stage.py').read_text())
 
     def test_configured_mkenums_and_template_are_source_consistent(self):
         meson = (HERE / 'source-review/glib/gobject/meson.build').read_text()
@@ -386,7 +387,7 @@ class CandidateTests(unittest.TestCase):
         self.assertIn("python_tools_conf.set('PYTHON', python_shebang)", meson)
         self.assertIn("python_shebang = '/usr/bin/env python3'", top)
         self.assertIn("prod = eprod", script)
-        self.assertNotIn('glib-mkenums-functional', (HERE / 'stage.py').read_text())
+        self.assertIn("--eprod=@EnumName@", (HERE / 'stage.py').read_text())
 
     def test_glib_catalog_probe_does_not_rebind_or_use_native_date_locale(self):
         code = (HERE / 'glib_probe.c').read_text()

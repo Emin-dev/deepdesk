@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "copied_historical_report": "SOURCE-INPUT.json",
+  "historical_regular_files_count_is_clerical_error": 0,
+  "verified_regular_files": 1109,
+  "verified_directories": 33,
+  "verified_total_members": 1142,
+  "verified_links": 0,
+  "authoritative_candidate_member_inventory": "members/libiconv.json",
+  "member_inventory_sha256": "ac42bf36602a9465a8ee2e2eccf48d79c1e96a7fbfbb37545d404f6f848babf7",
+  "note": "The source worker report is retained byte-for-byte as historical evidence, including its former task stop gates. Current candidate authority is only its separate closed review receipt. Candidate full member validation and data-only extraction independently establish these corrected counts; no source/input bytes changed."
+}

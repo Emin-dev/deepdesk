@@ -1,0 +1,13 @@
+[GNUPG:] NEWSIG
+gpg: Signature made Sat Mar  7 12:31:01 2026 +04
+gpg:                using EDDSA key E0FFBD975397F77A32AB76ECB6301D9E1BBEAC08
+[GNUPG:] KEY_CONSIDERED E0FFBD975397F77A32AB76ECB6301D9E1BBEAC08 0
+[GNUPG:] SIG_ID lbq8YpdbUfyHvou3tXUEJ5ahGK8 2026-03-07 1772872261
+gpg: /workspace/shared/local_deep_research_macos_20261010/recovery/libiconv-contingency/evidence/gnupg-empty/trustdb.gpg: trustdb created
+[GNUPG:] GOODSIG B6301D9E1BBEAC08 Bruno Haible (Free Software Development) <bruno@clisp.org>
+gpg: Good signature from "Bruno Haible (Free Software Development) <bruno@clisp.org>" [unknown]
+[GNUPG:] VALIDSIG E0FFBD975397F77A32AB76ECB6301D9E1BBEAC08 2026-03-07 1772872261 0 4 0 22 10 00 E0FFBD975397F77A32AB76ECB6301D9E1BBEAC08
+[GNUPG:] TRUST_UNDEFINED 0 pgp
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: E0FF BD97 5397 F77A 32AB  76EC B630 1D9E 1BBE AC08

@@ -20,7 +20,14 @@ BUILD_PHASES = ('pkgconf-build', 'pcre2-build', 'gettext-headers',
                 'gettext-tools-configure', 'gettext-tools-gnulib', 'gettext-tools-headers',
                 'gettext-tools-build', 'glib-configure', 'glib-build',
                 'glib-probe-compile', 'glib-module-compile', 'glib-probe-run',
-                'ncurses-probe-compile', 'ncurses-probe-run')
+                'ncurses-probe-compile', 'ncurses-probe-run',
+                'gnu-make-configure', 'gnu-make-bootstrap', 'gnu-make-functional', 'gnu-make-nls',
+                'libiconv-configure', 'libcharset-build', 'libcharset-phase-stage', 'libiconv-build',
+                'iconv-semantic-compile-nonconst', 'iconv-semantic-compile-const',
+                'iconv-semantic-link-nonconst', 'iconv-semantic-link-const',
+                'iconv-semantic-run-nonconst', 'iconv-semantic-run-const',
+                'gettext-iconv-configure', 'gettext-iconv-headers', 'gettext-iconv-gnulib', 'gettext-iconv-build',
+                'gettext-iconv-probe-compile', 'gettext-iconv-probe-run')
 MAX_STREAM_BYTES = 8 * 1024**2  # Existing aggregate capture limit; never recapture.
 MAX_LINES = 32768
 MAX_LINE_BYTES = 8192

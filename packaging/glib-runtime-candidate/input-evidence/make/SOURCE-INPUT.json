@@ -1,0 +1,22 @@
+{
+  "as_of_utc": "2026-10-11",
+  "bootstrap": "release configure and documented build.sh; no dependency on host Make syntax or msgfmt",
+  "good_signature": true,
+  "keyring_sha256": "0fe55175b96a8ea1c4b670cc3fe11d56b341e4eff81b161ea49958ae550be6ca",
+  "keyring_url": "https://ftp.gnu.org/gnu/gnu-keyring.gpg",
+  "native_execution_preparation": false,
+  "nls": "GNU libintl enabled, all 30 release GNU MO catalogs retained",
+  "official_index": "https://ftp.gnu.org/gnu/make/",
+  "optional_guile": "disabled only for ephemeral build tool; no Guile runtime claim",
+  "primary_fingerprint": "6D4EEB02AD834703510B117680CB727A20C79BB2",
+  "schema": 1,
+  "signature_fingerprint": "B2508A90102F8AE3B12A0090DEACCAAEDB78137A",
+  "signature_sha256": "b0085e6c3f9a7461e739786a8d28dec9aeb090335bb8818e42b497fdeb73b929",
+  "signature_url": "https://ftp.gnu.org/gnu/make/make-4.4.1.tar.gz.sig",
+  "source_bytes": 2348200,
+  "source_execution_preparation": false,
+  "source_sha256": "dd16fb1d67bfab79a72f5e8390735c49e3e8e70b4945a15ab1f81ddb78658fb3",
+  "source_url": "https://ftp.gnu.org/gnu/make/make-4.4.1.tar.gz",
+  "trust_scope": "Official HTTPS GNU keyring; no personal-keyring change, automatic key lookup or independent web-of-trust certification",
+  "version": "4.4.1"
+}

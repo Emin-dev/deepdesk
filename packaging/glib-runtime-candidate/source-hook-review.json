@@ -422,6 +422,646 @@
       "size": 19255
     },
     {
+      "input_id": "make",
+      "source_member": "make-4.4.1/README",
+      "path": "source-review/make/README",
+      "sha256": "21e8a99fb97a6f175d25eafe67d6b8645c11077ba9a7c54d8e37ecea00045004",
+      "size": 8712,
+      "mtime": 1677437208
+    },
+    {
+      "input_id": "make",
+      "source_member": "make-4.4.1/NEWS",
+      "path": "source-review/make/NEWS",
+      "sha256": "4fadadce9c89d801d87c0e4cf6c817e3ba47701d6b2dea71a793b2ddf3cbd6fe",
+      "size": 85390,
+      "mtime": 1677437182
+    },
+    {
+      "input_id": "make",
+      "source_member": "make-4.4.1/configure",
+      "path": "source-review/make/configure",
+      "sha256": "0fd000c85684992cab5d42c05cabb5bdbb4ae0b71cccc7771b55b35109c28776",
+      "size": 482239,
+      "mtime": 1677437198
+    },
+    {
+      "input_id": "make",
+      "source_member": "make-4.4.1/configure.ac",
+      "path": "source-review/make/configure.ac",
+      "sha256": "07bdf08ef2a7339f9c2b3a7c9b47cdfb3e93053f485db172de282ea1079101b1",
+      "size": 19530,
+      "mtime": 1677437182
+    },
+    {
+      "input_id": "make",
+      "source_member": "make-4.4.1/Makefile.am",
+      "path": "source-review/make/Makefile.am",
+      "sha256": "e755a26b89d2b4367165b8c763dcb894caf18f4c5585d70a65d207120d888e41",
+      "size": 7667,
+      "mtime": 1676930682
+    },
+    {
+      "input_id": "make",
+      "source_member": "make-4.4.1/Makefile.in",
+      "path": "source-review/make/Makefile.in",
+      "sha256": "cff0a15f0921377aade456a02fbbf79a55f84d4ef6d6d608f5e0ffae81b078e8",
+      "size": 60568,
+      "mtime": 1677437198
+    },
+    {
+      "input_id": "make",
+      "source_member": "make-4.4.1/build.sh",
+      "path": "source-review/make/build.sh",
+      "sha256": "21f5b940e68da33ce933cfe11a7778ef40c42a23b331a855931e9495aecee618",
+      "size": 5333,
+      "mtime": 1673192738
+    },
+    {
+      "input_id": "make",
+      "source_member": "make-4.4.1/build.cfg.in",
+      "path": "source-review/make/build.cfg.in",
+      "sha256": "6cc60744c060d88591b6b4442043c3ef9a8e87d85272ee1ab2b746961c47b235",
+      "size": 1217,
+      "mtime": 1672585561
+    },
+    {
+      "input_id": "make",
+      "source_member": "make-4.4.1/lib/Makefile.am",
+      "path": "source-review/make/lib/Makefile.am",
+      "sha256": "ba1e41cf388c4b702464709f5b8ec81b82cfa5a59332d3543226195effb2eab7",
+      "size": 5573,
+      "mtime": 1677427472
+    },
+    {
+      "input_id": "make",
+      "source_member": "make-4.4.1/lib/Makefile.in",
+      "path": "source-review/make/lib/Makefile.in",
+      "sha256": "e61088bf66e0c19ce0ff142bd96781e7072e5f3520730875bfda866126e05f3b",
+      "size": 41879,
+      "mtime": 1677437198
+    },
+    {
+      "input_id": "make",
+      "source_member": "make-4.4.1/po/Makefile.in.in",
+      "path": "source-review/make/po/Makefile.in.in",
+      "sha256": "fda41c837ebf2de985752fb56650a4eb9c4da7b49144f44d06503204bdbc7841",
+      "size": 17259,
+      "mtime": 1677427470
+    },
+    {
+      "input_id": "make",
+      "source_member": "make-4.4.1/po/LINGUAS",
+      "path": "source-review/make/po/LINGUAS",
+      "sha256": "234d2dec059992e0a6c826deb60054357602249bdc61d17bf5de1efc3f238cd3",
+      "size": 99,
+      "mtime": 1677427468
+    },
+    {
+      "input_id": "make",
+      "source_member": "make-4.4.1/m4/gettext.m4",
+      "path": "source-review/make/m4/gettext.m4",
+      "sha256": "6c279c958f980621dfeb725cb79173dbe93534aef2a4377a6fafa666c3c0b677",
+      "size": 15245,
+      "mtime": 1677427470
+    },
+    {
+      "input_id": "make",
+      "source_member": "make-4.4.1/src/main.c",
+      "path": "source-review/make/src/main.c",
+      "sha256": "7f0b8a02a6449507c751cdf3315a11bb0e99f22dc75a33a8b82b9e78c9f0bff0",
+      "size": 121118,
+      "mtime": 1676955831
+    },
+    {
+      "input_id": "make",
+      "source_member": "make-4.4.1/src/makeint.h",
+      "path": "source-review/make/src/makeint.h",
+      "sha256": "d8f03f738878a93e747cf497082019adafa20474db4fc97d8d8e81bdffdea951",
+      "size": 25753,
+      "mtime": 1676814715
+    },
+    {
+      "input_id": "make",
+      "source_member": "make-4.4.1/src/config.h.in",
+      "path": "source-review/make/src/config.h.in",
+      "sha256": "660a6951f365c98ef8ccbe1d51d2bfe917d96cb2b349a3f8768b145d52c60347",
+      "size": 41894,
+      "mtime": 1677437207
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/DEPENDENCIES",
+      "path": "source-review/libiconv/DEPENDENCIES",
+      "sha256": "c53f2353c770c881c4863dc65ff547024251e525a6e9446a04315b67beeb0470",
+      "size": 2371,
+      "mtime": 1772871871
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/configure.ac",
+      "path": "source-review/libiconv/configure.ac",
+      "sha256": "6f1f9e57818243853d4511ae894f888482cf08b3781eed27a090bf7e54fd5a81",
+      "size": 7083,
+      "mtime": 1772871871
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/aclocal.m4",
+      "path": "source-review/libiconv/aclocal.m4",
+      "sha256": "d677756ff2a31ad4a8d9f4afd442786a4801752965e2575fe4a2e72ecb30b0d7",
+      "size": 54226,
+      "mtime": 1772871974
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/HACKING",
+      "path": "source-review/libiconv/HACKING",
+      "sha256": "721babc0751b9bee83075d00359a308b5e1ef2edd64e2a4eb09b50b6c467a2a6",
+      "size": 1867,
+      "mtime": 1658142488
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/config.h.in",
+      "path": "source-review/libiconv/config.h.in",
+      "sha256": "9d5519ac12105c8bd22cbec6b59184b72b59ed9559778c4a3b21444baf06a577",
+      "size": 84126,
+      "mtime": 1772871976
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/README",
+      "path": "source-review/libiconv/README",
+      "sha256": "4ae66e61d1c6593c84c47105b368d579bcee1af566dbb959ec63a0c48425dcf4",
+      "size": 5741,
+      "mtime": 1772871871
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/autogen.sh",
+      "path": "source-review/libiconv/autogen.sh",
+      "sha256": "ebe1424b3ad308b65975fb8ea24ef9ed5747d62dd92c94b66e2920da9a655cac",
+      "size": 4094,
+      "mtime": 1766749681
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/NEWS",
+      "path": "source-review/libiconv/NEWS",
+      "sha256": "8cc359791e2e43088a6274087c843c1553803d4286f87680cd4738a20944052d",
+      "size": 11067,
+      "mtime": 1772871871
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/Makefile.devel",
+      "path": "source-review/libiconv/Makefile.devel",
+      "sha256": "27041520cbe4d2ea9ed94c6c722584f5dea502080c80df7a756eb063916daa50",
+      "size": 12710,
+      "mtime": 1772809724
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/Makefile.in",
+      "path": "source-review/libiconv/Makefile.in",
+      "sha256": "967c1081c256d3e94b98842a8452adab8303c5916f0a45de8160033826e8c593",
+      "size": 11417,
+      "mtime": 1749509330
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/COPYING.LIB",
+      "path": "source-review/libiconv/COPYING.LIB",
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95",
+      "size": 26419,
+      "mtime": 1726670009
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/ChangeLog",
+      "path": "source-review/libiconv/ChangeLog",
+      "sha256": "328102c972dd19de8924039e42d62e243f814aabd45b48d5c1ba1eb5a6cb01ef",
+      "size": 248259,
+      "mtime": 1772871871
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/NOTES",
+      "path": "source-review/libiconv/NOTES",
+      "sha256": "7dd816575fdd75d925bde6987ec85eb66eb601bdfd0f61bf39dbe7a878c0fd58",
+      "size": 17653,
+      "mtime": 1729592153
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/COPYING",
+      "path": "source-review/libiconv/COPYING",
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+      "size": 35147,
+      "mtime": 1245583053
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/configure",
+      "path": "source-review/libiconv/configure",
+      "sha256": "baa212741ec24518d16ee459b365f1d838b26d2c8ccf06c57175bc4c17ee6570",
+      "size": 1085943,
+      "mtime": 1772871975
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/install-tests/Makefile.in",
+      "path": "source-review/libiconv/install-tests/Makefile.in",
+      "sha256": "db77922b25910a989038794ebce3a4cb96b9f4425b56610c3c90c3399ea94de5",
+      "size": 1906,
+      "mtime": 1749582257
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/src/iconv.c",
+      "path": "source-review/libiconv/src/iconv.c",
+      "sha256": "72ce245f940fa948854b042ef9c2e496eff81f659f0da0e23c48447bb643ca81",
+      "size": 40506,
+      "mtime": 1772871871
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/src/Makefile.in",
+      "path": "source-review/libiconv/src/Makefile.in",
+      "sha256": "c844f9d0de4ba342958892c6f727e9ae5cf0d4e4c44fe1ca4a2d2bca6aaf241e",
+      "size": 6318,
+      "mtime": 1751880382
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/tests/Makefile.in",
+      "path": "source-review/libiconv/tests/Makefile.in",
+      "sha256": "e9e3a6c8bd37612206889c130a63cc41e3f4b345b64bcd6567d7ac880640cbcb",
+      "size": 22033,
+      "mtime": 1734263595
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/build-aux/ar-lib",
+      "path": "source-review/libiconv/build-aux/ar-lib",
+      "sha256": "8e211dd0df621bf4985c1d3466548564a835e379acfc12dc0c1009ced4f90417",
+      "size": 6465,
+      "mtime": 1748695673
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/build-aux/ltmain.sh",
+      "path": "source-review/libiconv/build-aux/ltmain.sh",
+      "sha256": "72f63716bd90c9dcd476fcd770a2be7150d22ba5ff60bfd2afd16fb86bcd0e24",
+      "size": 337737,
+      "mtime": 1732293965
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/build-aux/config.guess",
+      "path": "source-review/libiconv/build-aux/config.guess",
+      "sha256": "50205cf3ec5c7615b17f937a0a57babf4ec5cd0aade3d7b3cccbe5f1bf91a7ef",
+      "size": 50850,
+      "mtime": 1766749503
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/build-aux/install-sh",
+      "path": "source-review/libiconv/build-aux/install-sh",
+      "sha256": "776876b3909b096439109a4c7642eb0f9100f6ba3fb42fa93d05351e50a0a7ef",
+      "size": 15442,
+      "mtime": 1772871975
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/build-aux/config.sub",
+      "path": "source-review/libiconv/build-aux/config.sub",
+      "sha256": "26b852f75a637448360a956931439f7e818bf63150eaadb9b85484347628d1fd",
+      "size": 39943,
+      "mtime": 1766749503
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/build-aux/compile",
+      "path": "source-review/libiconv/build-aux/compile",
+      "sha256": "92ed7feeda61ad958dc3c4cc4efd724e1414482f1cad60b74b09e0633a93dfd6",
+      "size": 8064,
+      "mtime": 1751881395
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/build-aux/missing",
+      "path": "source-review/libiconv/build-aux/missing",
+      "sha256": "4f17c4a66ec5b8000d44573a576f6b5d9c0c84848e8fd1286f84a52f439db4e9",
+      "size": 7733,
+      "mtime": 1772871975
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/build-aux/config.rpath",
+      "path": "source-review/libiconv/build-aux/config.rpath",
+      "sha256": "fc70d6138bc62e8ea8080602b607f38d56c4def03ec4d523d516b338cff41df9",
+      "size": 19708,
+      "mtime": 1772808205
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/srcm4/iconv.m4",
+      "path": "source-review/libiconv/srcm4/iconv.m4",
+      "sha256": "56b1f2de17e73f0e3a65634570b2c9032f912c54df09bfa6d40d1422f02b4d8f",
+      "size": 11044,
+      "mtime": 1772804211
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/include/iconv.h.in",
+      "path": "source-review/libiconv/include/iconv.h.in",
+      "sha256": "eeecdd8d98e9a189201a99299e094e149ca14a246e90d848507d30815d4bf8e4",
+      "size": 9741,
+      "mtime": 1772871871
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/include/export.h",
+      "path": "source-review/libiconv/include/export.h",
+      "sha256": "b0d2413ba5571d80ebdb89e6e98d93035d2f6fab1982626a3b8d51e0e0b22ac5",
+      "size": 1732,
+      "mtime": 1694857721
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/include/iconv.h.build.in",
+      "path": "source-review/libiconv/include/iconv.h.build.in",
+      "sha256": "9d4d0d2f0217f3b271614a8a74b034a2d9a522980925be9f2ba97929a972de78",
+      "size": 10920,
+      "mtime": 1772871976
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/po/Makefile.in.in",
+      "path": "source-review/libiconv/po/Makefile.in.in",
+      "sha256": "57578892f3f9d93708357c65c66a7929b9073e52aeef061e4142ec9f0ef6eb2a",
+      "size": 23883,
+      "mtime": 1772809724
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/m4/ltversion.m4",
+      "path": "source-review/libiconv/m4/ltversion.m4",
+      "sha256": "40207e691ec7d3f06cedd592e50e44d7bc187b21ad791aeabdd50871b6606799",
+      "size": 714,
+      "mtime": 1732293962
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/m4/libtool.m4",
+      "path": "source-review/libiconv/m4/libtool.m4",
+      "sha256": "cac15c6c53419e4e02caa0908f3812ac56c97aaeecce23c7d8a8cc281dee97af",
+      "size": 310997,
+      "mtime": 1732293962
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/man/iconv.3",
+      "path": "source-review/libiconv/man/iconv.3",
+      "sha256": "3e31238c90fb530c7291958fb5ae3ad2553f310dded2297e4f6145aa293d0b87",
+      "size": 7037,
+      "mtime": 1748643837
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/man/iconv_close.3",
+      "path": "source-review/libiconv/man/iconv_close.3",
+      "sha256": "d59d41078c4b6eccaaf3e4c70c576a08567ac3097ccf60a0d6cff75e27f3effa",
+      "size": 1019,
+      "mtime": 1734263595
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/man/iconv_open.3",
+      "path": "source-review/libiconv/man/iconv_open.3",
+      "sha256": "5e7df8c8eaca2772152c7017782cc4949f762c5bb2075f4906def7850ba345c3",
+      "size": 5487,
+      "mtime": 1734263595
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/man/iconvctl.3",
+      "path": "source-review/libiconv/man/iconvctl.3",
+      "sha256": "e589823845bbbc4eef13dcc350eb950e1fbb204bb21c75e78f6f33753570b24f",
+      "size": 4428,
+      "mtime": 1734263595
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/man/Makefile.in",
+      "path": "source-review/libiconv/man/Makefile.in",
+      "sha256": "7f3b3778f3dc41f16525587355943fc6096e5e505f5cfe2b8aecba59dd05294c",
+      "size": 3192,
+      "mtime": 1548626833
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/libcharset/configure.ac",
+      "path": "source-review/libiconv/libcharset/configure.ac",
+      "sha256": "86ffc643f6fcedcaabe0a70842e5202c8c9c0cc37024e7bcabf7038ffe064392",
+      "size": 1997,
+      "mtime": 1677413328
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/libcharset/config.h.in",
+      "path": "source-review/libiconv/libcharset/config.h.in",
+      "sha256": "29db533a5089e15661e09546b38f10ecc7ed2fbd2df02125eb194055166b0bf2",
+      "size": 5894,
+      "mtime": 1772871982
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/libcharset/README",
+      "path": "source-review/libiconv/libcharset/README",
+      "sha256": "c163a695cdc22f0f9e7aaba7fddf4799dbcb51dd896f39f311f0fe0257a4c3e3",
+      "size": 1850,
+      "mtime": 1537615941
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/libcharset/Makefile.devel",
+      "path": "source-review/libiconv/libcharset/Makefile.devel",
+      "sha256": "a9b9452ac9869f9ba51a9886d6866c3bffcbd763f5a0eae9d4b6ff345b4b1312",
+      "size": 1448,
+      "mtime": 1748695436
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/libcharset/Makefile.in",
+      "path": "source-review/libiconv/libcharset/Makefile.in",
+      "sha256": "9ecc9466df5b31708b97369ecfb03978d8d8043c62cf6b33a1816e9155679a52",
+      "size": 4957,
+      "mtime": 1694857465
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/libcharset/COPYING.LIB",
+      "path": "source-review/libiconv/libcharset/COPYING.LIB",
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95",
+      "size": 26419,
+      "mtime": 1726670009
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/libcharset/configure",
+      "path": "source-review/libiconv/libcharset/configure",
+      "sha256": "a77b36d0f69df25bdd96f52406d5d82c3acd6c6c366311ef41b0c92a93319c28",
+      "size": 483707,
+      "mtime": 1772871982
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/srclib/Makefile.in",
+      "path": "source-review/libiconv/srclib/Makefile.in",
+      "sha256": "1773b74e97a9fb514c791cc1f6f3d992bbe9d7ee57ec14d8a14c3b05575583ae",
+      "size": 204365,
+      "mtime": 1772871975
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/srclib/Makefile.am",
+      "path": "source-review/libiconv/srclib/Makefile.am",
+      "sha256": "ffe2a1aaba8aac7253d33d622362e464c014f1ff342fd3b854402bbf6e1437bf",
+      "size": 1042,
+      "mtime": 1562098218
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/lib/iconv.c",
+      "path": "source-review/libiconv/lib/iconv.c",
+      "sha256": "af028d1aeb837e05ecf8a6e3a480ef1497d2b5545a14985f463eea7b49280afe",
+      "size": 19206,
+      "mtime": 1772802862
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/lib/loop_unicode.h",
+      "path": "source-review/libiconv/lib/loop_unicode.h",
+      "sha256": "1395b84355f2748589186cfd11d184e3958b3aa32b45070c7bc2b110fd35f359",
+      "size": 17336,
+      "mtime": 1734263595
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/lib/config.h.in",
+      "path": "source-review/libiconv/lib/config.h.in",
+      "sha256": "5d0f480329dbcb6c77bbb1406a95e2bd250912ac9dc0d37055d65289d209c50e",
+      "size": 2688,
+      "mtime": 1622973048
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/lib/compat.c",
+      "path": "source-review/libiconv/lib/compat.c",
+      "sha256": "1798743831f704fdae30190d8700c43d2849798be2cb30b4b8fc5587f306cd52",
+      "size": 1079,
+      "mtime": 1694619456
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/lib/Makefile.in",
+      "path": "source-review/libiconv/lib/Makefile.in",
+      "sha256": "f0ddc9fd34987fd16ad3b1c929025052822ff346cfbde44686298d78c57af8a8",
+      "size": 11487,
+      "mtime": 1772871871
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/libcharset/build-aux/ltmain.sh",
+      "path": "source-review/libiconv/libcharset/build-aux/ltmain.sh",
+      "sha256": "72f63716bd90c9dcd476fcd770a2be7150d22ba5ff60bfd2afd16fb86bcd0e24",
+      "size": 337737,
+      "mtime": 1732294014
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/libcharset/autoconf/aclocal.m4",
+      "path": "source-review/libiconv/libcharset/autoconf/aclocal.m4",
+      "sha256": "770554f267c2daa532168048f77c73bf1cc7fd5ed09b8b02e95aab3f5e1f1384",
+      "size": 2727,
+      "mtime": 1772871982
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/libcharset/include/libcharset.h.build.in",
+      "path": "source-review/libiconv/libcharset/include/libcharset.h.build.in",
+      "sha256": "df583a66576780f846483d38908a4e2bbfc6905b78dba749034c1e1aaa03240e",
+      "size": 2511,
+      "mtime": 1772871982
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/libcharset/include/export.h",
+      "path": "source-review/libiconv/libcharset/include/export.h",
+      "sha256": "55681a5586c74980aa71f4d3fb26281ecf9372ea4222735ff4c44a6dc06e1dc4",
+      "size": 1746,
+      "mtime": 1694857737
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/libcharset/include/localcharset.h.build.in",
+      "path": "source-review/libiconv/libcharset/include/localcharset.h.build.in",
+      "sha256": "b12720a728188604bd016a4b322f8e9776291d1d4cf693f8637a3052fdbb8758",
+      "size": 7339,
+      "mtime": 1772871982
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/libcharset/include/libcharset.h.in",
+      "path": "source-review/libiconv/libcharset/include/libcharset.h.in",
+      "sha256": "180d05ba6adb348e150c6973ab795fe422da0b05e09f8ba7c369746ed1901702",
+      "size": 1510,
+      "mtime": 1586004622
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/libcharset/include/localcharset.h.in",
+      "path": "source-review/libiconv/libcharset/include/localcharset.h.in",
+      "sha256": "67f01a81a41eab468313b34fb153aa11fe273b829c529e3a820a3877438d20e4",
+      "size": 6338,
+      "mtime": 1586004622
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/libcharset/m4/libtool.m4",
+      "path": "source-review/libiconv/libcharset/m4/libtool.m4",
+      "sha256": "cac15c6c53419e4e02caa0908f3812ac56c97aaeecce23c7d8a8cc281dee97af",
+      "size": 310997,
+      "mtime": 1732293987
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/libcharset/lib/relocatable-stub.c",
+      "path": "source-review/libiconv/libcharset/lib/relocatable-stub.c",
+      "sha256": "04a1fd965d379981beb30996023d80c04a00497a7a75570b31e90333d73e15dd",
+      "size": 1117,
+      "mtime": 1694857483
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/libcharset/lib/Makefile.in",
+      "path": "source-review/libiconv/libcharset/lib/Makefile.in",
+      "sha256": "dfc88f86cb947766e5decff11d85f37dae8650e68fd41fa5570476d11493251b",
+      "size": 3692,
+      "mtime": 1694857496
+    },
+    {
+      "input_id": "libiconv",
+      "source_member": "libiconv-1.19/libcharset/lib/localcharset.c",
+      "path": "source-review/libiconv/libcharset/lib/localcharset.c",
+      "sha256": "c76245773a28b361208591a5d0fdeb0d8e408a230feea647bf960ab702a8035b",
+      "size": 39878,
+      "mtime": 1586004622
+    },
+    {
       "input_id": "gettext",
       "source_member": "gettext-1.0/libtextstyle/lib/iconv-ostream.c",
       "path": "source-review/gettext/libtextstyle/lib/iconv-ostream.c",
@@ -460,6 +1100,52 @@
       "sha256": "56b1f2de17e73f0e3a65634570b2c9032f912c54df09bfa6d40d1422f02b4d8f",
       "size": 11044,
       "mtime": 1767349023
+    },
+    {
+      "input_id": "gettext",
+      "source_member": "gettext-1.0/gettext-runtime/po/Makefile.in.in",
+      "path": "source-review/gettext/gettext-runtime/po/Makefile.in.in",
+      "sha256": "836f5377869d055cff4c1995c3ed93421fa1eada1108d0961a9933ca1764edbe",
+      "size": 23883,
+      "mtime": 1769643379
+    },
+    {
+      "input_id": "gettext",
+      "source_member": "gettext-1.0/gettext-runtime/intl/configure",
+      "path": "source-review/gettext/gettext-runtime/intl/configure",
+      "sha256": "3719fe178c44eaf6c60915585faf7866d3688113801808b49a762caa6b1d4f92",
+      "size": 1375062,
+      "mtime": 1769643562
+    },
+    {
+      "input_id": "gettext",
+      "source_member": "gettext-1.0/gettext-runtime/intl/dcigettext.c",
+      "path": "source-review/gettext/gettext-runtime/intl/dcigettext.c",
+      "sha256": "45207e8ae3149af68a73de267e46ec05a996d6b0ca0fee0ed8f9e56f7e5de6b4",
+      "size": 45904,
+      "mtime": 1769489113
+    },
+    {
+      "input_id": "gettext",
+      "source_member": "gettext-1.0/gettext-runtime/intl/Makefile.in",
+      "path": "source-review/gettext/gettext-runtime/intl/Makefile.in",
+      "sha256": "0e2ed81808e778a58cbaec376988fadd47aeece4e94b88420bb677d4b96afdac",
+      "size": 142579,
+      "mtime": 1769643563
+    },
+    {
+      "input_id": "meson",
+      "source_member": "mesonbuild/dependencies/misc.py",
+      "path": "source-review/meson/mesonbuild/dependencies/misc.py",
+      "sha256": "c0cf974b3ac444de07bbb1a5f9e38d5bd2e94bcdea5ed35bf293d990e962d4e5",
+      "size": 27864
+    },
+    {
+      "input_id": "meson",
+      "source_member": "mesonbuild/compilers/mixins/clike.py",
+      "path": "source-review/meson/mesonbuild/compilers/mixins/clike.py",
+      "sha256": "0b55f2a7c5b7c94d5a3bbdbd3fe7c0d8ddd2082c8e70bccc91c8ecb71e5f2fc3",
+      "size": 62339
     }
   ],
   "release_generated_outputs": [
@@ -499,7 +1185,7 @@
     "gettext libtextstyle and included XML/Unicode/tree-sitter selected target closure",
     "GLib Meson generators/default build and included GVDB",
     "Meson isolated Python and immutable rpaths",
-    "no installation hooks or downloaded fallback"
+    "No downloaded fallback; the sole selected upstream install helper is phase-local libcharset staging through lib/localcharset.h, guarded by unique main Libtool CONFIG/.la checks for shared-only output, exact libdir and absent relink/postinstall/finish hooks, with generated-script hashes and staged-byte equality."
   ],
   "unproved": [
     "macOS configure/build success",

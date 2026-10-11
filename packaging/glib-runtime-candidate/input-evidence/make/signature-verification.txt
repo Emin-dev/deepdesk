@@ -1,0 +1,16 @@
+[GNUPG:] NEWSIG
+gpg: Signature made Mon Feb 27 00:06:19 2023 +04
+gpg:                using RSA key B2508A90102F8AE3B12A0090DEACCAAEDB78137A
+[GNUPG:] KEY_CONSIDERED 6D4EEB02AD834703510B117680CB727A20C79BB2 0
+[GNUPG:] SIG_ID eG+e6IrGtmI+3KuhlE1RcpAfmlc 2023-02-26 1677441979
+gpg: /workspace/shared/local_deep_research_macos_20261010/recovery/glib-runtime-iconv-correction-v3/evidence/gnupg-empty/trustdb.gpg: trustdb created
+[GNUPG:] GOODSIG DEACCAAEDB78137A Paul D. Smith <paul@mad-scientist.net>
+gpg: Good signature from "Paul D. Smith <paul@mad-scientist.net>" [unknown]
+gpg:                 aka "Paul D. Smith <psmith@gnu.org>" [unknown]
+[GNUPG:] VALIDSIG B2508A90102F8AE3B12A0090DEACCAAEDB78137A 2023-02-26 1677441979 0 4 0 1 10 00 6D4EEB02AD834703510B117680CB727A20C79BB2
+[GNUPG:] KEY_CONSIDERED 6D4EEB02AD834703510B117680CB727A20C79BB2 0
+[GNUPG:] TRUST_UNDEFINED 0 pgp
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: 6D4E EB02 AD83 4703 510B  1176 80CB 727A 20C7 9BB2
+     Subkey fingerprint: B250 8A90 102F 8AE3 B12A  0090 DEAC CAAE DB78 137A

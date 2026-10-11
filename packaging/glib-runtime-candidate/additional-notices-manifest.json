@@ -108,6 +108,54 @@
       "size": 1132,
       "sha256": "17b64dc60f3b6897a60f971e288b973f655c2edcdf08b25f3c3dd5549857881c",
       "source_member": "libffi-3.8.0/LICENSE"
+    },
+    {
+      "path": "notices/make/AUTHORS",
+      "size": 4466,
+      "sha256": "602720d79792fc690cc90e36507385299e86279a9947b0d188e90477917c6db7",
+      "source_member": "make-4.4.1/AUTHORS"
+    },
+    {
+      "path": "notices/make/COPYING",
+      "size": 35151,
+      "sha256": "e79e9c8a0c85d735ff98185918ec94ed7d175efc377012787aebcf3b80f0d90b",
+      "source_member": "make-4.4.1/COPYING"
+    },
+    {
+      "path": "notices/make/doc/fdl.texi",
+      "size": 23434,
+      "sha256": "297ad42928811894f3abc955526431b1e7856e6766eecb7de2a5a0aa2915e5cf",
+      "source_member": "make-4.4.1/doc/fdl.texi"
+    },
+    {
+      "path": "notices/libiconv/COPYING.LIB",
+      "size": 26419,
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95",
+      "source_member": "libiconv-1.19/COPYING.LIB"
+    },
+    {
+      "path": "notices/libiconv/AUTHORS",
+      "size": 31,
+      "sha256": "ed10ef2a01effb12849006d43262ffde5cf72a7d5423bbc8aa66fc6959774c0c",
+      "source_member": "libiconv-1.19/AUTHORS"
+    },
+    {
+      "path": "notices/libiconv/libcharset/COPYING.LIB",
+      "size": 26419,
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95",
+      "source_member": "libiconv-1.19/libcharset/COPYING.LIB"
+    },
+    {
+      "path": "notices/libiconv/libcharset/AUTHORS",
+      "size": 31,
+      "sha256": "ed10ef2a01effb12849006d43262ffde5cf72a7d5423bbc8aa66fc6959774c0c",
+      "source_member": "libiconv-1.19/libcharset/AUTHORS"
+    },
+    {
+      "path": "notices/libiconv/COPYING",
+      "size": 35147,
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+      "source_member": "libiconv-1.19/COPYING"
     }
   ],
   "status": "exact source notice inventory; no legal completeness claim"

@@ -1,0 +1,157 @@
+{
+  "status": "CONTINGENCY_ONLY_NOT_APPROVED_FOR_EXECUTION_OR_PROVIDER_ACTIVATION",
+  "as_of_utc": "2026-10-11",
+  "package": "GNU libiconv",
+  "version": "1.19",
+  "release_date": "2026-03-07",
+  "source_url": "https://ftp.gnu.org/gnu/libiconv/libiconv-1.19.tar.gz",
+  "source": {
+    "path": "input/libiconv-1.19.tar.gz",
+    "bytes": 5921103,
+    "sha256": "88dd96a8c0464eca144fc791ae60cd31cd8ee78321e67397e25fc095c4a19aa6"
+  },
+  "signature_url": "https://ftp.gnu.org/gnu/libiconv/libiconv-1.19.tar.gz.sig",
+  "signature": {
+    "path": "input/libiconv-1.19.tar.gz.sig",
+    "bytes": 228,
+    "sha256": "30374a9cf2846418fc34977eb2b92094c3edb76021d57de541699e2b5e32dc9b"
+  },
+  "keyring_url": "https://ftp.gnu.org/gnu/gnu-keyring.gpg",
+  "keyring": {
+    "path": "evidence/gnu-keyring.gpg",
+    "bytes": 3698125,
+    "sha256": "0fe55175b96a8ea1c4b670cc3fe11d56b341e4eff81b161ea49958ae550be6ca"
+  },
+  "signature_verification": {
+    "result": "GOODSIG and VALIDSIG; exit 0",
+    "fingerprint": "E0FFBD975397F77A32AB76ECB6301D9E1BBEAC08",
+    "uid": "Bruno Haible (Free Software Development) <bruno@clisp.org>",
+    "trust": "GNU HTTPS keyring provenance; TRUST_UNDEFINED in isolated empty GnuPG home; no independent identity or web-of-trust certification",
+    "evidence": "evidence/signature-verification.txt",
+    "existing_tool": "/usr/bin/gpg",
+    "personal_keyring_modified": false,
+    "automatic_key_retrieval": false
+  },
+  "release_metadata": [
+    {
+      "url": "https://ftp.gnu.org/gnu/libiconv/",
+      "saved": {
+        "path": "evidence/official-directory.html",
+        "bytes": 7833,
+        "sha256": "ed4311a156fc2515074b32fc18ab04b7896b489eb070d0adb43901e4a0302de7"
+      },
+      "observation": "1.19 highest release listed"
+    },
+    {
+      "url": "https://www.gnu.org/software/libiconv/",
+      "saved": {
+        "path": "evidence/official-project.html",
+        "bytes": 11430,
+        "sha256": "8713f12384204294c1546dc9c3bb2345428e34af857e26a3682a8020bc9e216f"
+      },
+      "observation": "current download is 1.19"
+    },
+    {
+      "url": "https://lists.gnu.org/archive/html/bug-gnu-libiconv/2026-03/index.html",
+      "observation": "2026-03-07 release announcement link to msg00005.html observed with web tool"
+    },
+    {
+      "url": "https://lists.gnu.org/archive/html/bug-gnu-libiconv/2026-03/msg00005.html",
+      "observation": "HTTP 502 from curl; web timeout. No announcement checksum claimed."
+    }
+  ],
+  "archive_layout": {
+    "members": 1142,
+    "regular_files": 0,
+    "directories": 33,
+    "links": 0,
+    "member_inventory": "evidence/archive-1.19-members.json",
+    "selected_source_copies": "evidence/source-1.19",
+    "selected_copy_mode": "0644; archive mtimes preserved"
+  },
+  "license_evidence": [
+    {
+      "path": "libiconv-1.19/COPYING",
+      "size": 35147,
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+      "mtime_epoch": 1245583053
+    },
+    {
+      "path": "libiconv-1.19/COPYING.LIB",
+      "size": 26419,
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95",
+      "mtime_epoch": 1726670009
+    },
+    {
+      "path": "libiconv-1.19/libcharset/COPYING.LIB",
+      "size": 26419,
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95",
+      "mtime_epoch": 1726670009
+    },
+    {
+      "path": "libiconv-1.19/lib/iconv.c",
+      "size": 19206,
+      "sha256": "af028d1aeb837e05ecf8a6e3a480ef1497d2b5545a14985f463eea7b49280afe",
+      "mtime_epoch": 1772802862
+    },
+    {
+      "path": "libiconv-1.19/include/iconv.h.in",
+      "size": 9741,
+      "sha256": "eeecdd8d98e9a189201a99299e094e149ca14a246e90d848507d30815d4bf8e4",
+      "mtime_epoch": 1772871871
+    },
+    {
+      "path": "libiconv-1.19/libcharset/lib/localcharset.c",
+      "size": 39878,
+      "sha256": "c76245773a28b361208591a5d0fdeb0d8e408a230feea647bf960ab702a8035b",
+      "mtime_epoch": 1586004622
+    },
+    {
+      "path": "libiconv-1.19/libcharset/lib/relocatable-stub.c",
+      "size": 1117,
+      "sha256": "04a1fd965d379981beb30996023d80c04a00497a7a75570b31e90333d73e15dd",
+      "mtime_epoch": 1694857483
+    },
+    {
+      "path": "libiconv-1.19/libcharset/include/libcharset.h.in",
+      "size": 1510,
+      "sha256": "180d05ba6adb348e150c6973ab795fe422da0b05e09f8ba7c369746ed1901702",
+      "mtime_epoch": 1586004622
+    },
+    {
+      "path": "libiconv-1.19/libcharset/include/localcharset.h.in",
+      "size": 6338,
+      "sha256": "67f01a81a41eab468313b34fb153aa11fe273b829c529e3a820a3877438d20e4",
+      "mtime_epoch": 1586004622
+    },
+    {
+      "path": "libiconv-1.19/src/iconv.c",
+      "size": 40506,
+      "sha256": "72ce245f940fa948854b042ef9c2e496eff81f659f0da0e23c48447bb643ca81",
+      "mtime_epoch": 1772871871
+    }
+  ],
+  "superseded_research": {
+    "version": "1.18",
+    "archive": "input/libiconv-1.18.tar.gz",
+    "source_copies": "evidence/source",
+    "inventory": "evidence/archive-members.json",
+    "disposition": "not the proposed input; superseded by current 1.19; ChangeLog identifies GB18030 buffer-overrun correction in 1.19"
+  },
+  "execution_performed": {
+    "source": false,
+    "configure": false,
+    "make": false,
+    "native": false,
+    "install": false,
+    "package": false,
+    "provider_activation": false,
+    "github_mutation": false
+  },
+  "stop_gates": [
+    "No approval for provider/build execution exists.",
+    "Confirm exact accepted runner Make version/capability before default recursive targets. Do not acquire GNU Make or any new source here.",
+    "Do not enter src/all or top-level all/install-lib: src/all contains chmod 777.",
+    "Any new source/tool/hook/permission requires a bounded review; do not patch or force cache values."
+  ]
+}

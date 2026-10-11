@@ -1,0 +1,32 @@
+{
+  "required_exit_codes": [
+    0,
+    0
+  ],
+  "schema": 1,
+  "sdk_v2_observed_converted_bytes": null,
+  "sdk_v2_observed_exit_codes": [
+    2,
+    2
+  ],
+  "sdk_v2_observed_function_origins": null,
+  "source_archive_sha256": "85d99b79c981a404874c02e0342176cf75c7698e2b51fe41031cf6526d974f1a",
+  "source_member": "gettext-1.0/libtextstyle/configure",
+  "source_member_sha256": "fe3a1c8715f3a3b3feb8ec3b897d1f412afce89804a68eb30a3a7d64d6a77267",
+  "template_sha256": "42b4b0ca9ef53fc1a299c4fc89f92de1b0c5b100ee2cef19dc6eee7e4ea8bb5d",
+  "transformation": "exact configure heredoc substitution of $ac_iconv_const; compiler-only main symbol rename for first-party origin driver",
+  "variants": [
+    {
+      "label": "nonconst",
+      "path": "iconv-upstream-nonconst.c",
+      "sha256": "8ed11622d5f706f69820771e89b396a3e9f934294485d0b3ff120f7b92757c70",
+      "substitution": ""
+    },
+    {
+      "label": "const",
+      "path": "iconv-upstream-const.c",
+      "sha256": "83ed41820ffb58a3c78132f58e0f8b4508fb3082859a6b068f8a42d596810319",
+      "substitution": "const"
+    }
+  ]
+}

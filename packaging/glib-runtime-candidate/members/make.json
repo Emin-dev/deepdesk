@@ -1,0 +1,3313 @@
+{
+  "archive_sha256": "dd16fb1d67bfab79a72f5e8390735c49e3e8e70b4945a15ab1f81ddb78658fb3",
+  "expanded_bytes": 8780526,
+  "members": [
+    {
+      "path": "make-4.4.1",
+      "mode": 493,
+      "mtime": 1677437212,
+      "size": 0,
+      "kind": "directory"
+    },
+    {
+      "path": "make-4.4.1/ABOUT-NLS",
+      "mode": 420,
+      "mtime": 1677427470,
+      "size": 93787,
+      "kind": "file",
+      "sha256": "e97b73baef31710d510598584f5c0f5018cb0847770defa1347966909b7c1f5d"
+    },
+    {
+      "path": "make-4.4.1/AUTHORS",
+      "mode": 420,
+      "mtime": 1673484806,
+      "size": 4466,
+      "kind": "file",
+      "sha256": "602720d79792fc690cc90e36507385299e86279a9947b0d188e90477917c6db7"
+    },
+    {
+      "path": "make-4.4.1/Basic.mk",
+      "mode": 420,
+      "mtime": 1677437208,
+      "size": 14380,
+      "kind": "file",
+      "sha256": "41bfc6ccd7dd2348d04585f86fe2b90030ec756d44c664d061571e5e74364191"
+    },
+    {
+      "path": "make-4.4.1/COPYING",
+      "mode": 420,
+      "mtime": 1639950950,
+      "size": 35151,
+      "kind": "file",
+      "sha256": "e79e9c8a0c85d735ff98185918ec94ed7d175efc377012787aebcf3b80f0d90b"
+    },
+    {
+      "path": "make-4.4.1/ChangeLog",
+      "mode": 420,
+      "mtime": 1677437208,
+      "size": 274671,
+      "kind": "file",
+      "sha256": "c53dcabb807d72238b9cef1981bdd36270daa169d30278b8858713335ea49147"
+    },
+    {
+      "path": "make-4.4.1/INSTALL",
+      "mode": 420,
+      "mtime": 1654047611,
+      "size": 15766,
+      "kind": "file",
+      "sha256": "5a67dff7ba0908a1030e125174deeef1f02eb789c3c4202556b7806f2ebb8c4e"
+    },
+    {
+      "path": "make-4.4.1/Makefile.am",
+      "mode": 420,
+      "mtime": 1676930682,
+      "size": 7667,
+      "kind": "file",
+      "sha256": "e755a26b89d2b4367165b8c763dcb894caf18f4c5585d70a65d207120d888e41"
+    },
+    {
+      "path": "make-4.4.1/Makefile.in",
+      "mode": 420,
+      "mtime": 1677437198,
+      "size": 60568,
+      "kind": "file",
+      "sha256": "cff0a15f0921377aade456a02fbbf79a55f84d4ef6d6d608f5e0ffae81b078e8"
+    },
+    {
+      "path": "make-4.4.1/NEWS",
+      "mode": 420,
+      "mtime": 1677437182,
+      "size": 85390,
+      "kind": "file",
+      "sha256": "4fadadce9c89d801d87c0e4cf6c817e3ba47701d6b2dea71a793b2ddf3cbd6fe"
+    },
+    {
+      "path": "make-4.4.1/README",
+      "mode": 420,
+      "mtime": 1677437208,
+      "size": 8712,
+      "kind": "file",
+      "sha256": "21e8a99fb97a6f175d25eafe67d6b8645c11077ba9a7c54d8e37ecea00045004"
+    },
+    {
+      "path": "make-4.4.1/README.Amiga",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 2854,
+      "kind": "file",
+      "sha256": "aa51693264c51928326d4bd5aff0d973db57eda4128ebc97541cd82e43d221c9"
+    },
+    {
+      "path": "make-4.4.1/README.DOS",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 13738,
+      "kind": "file",
+      "sha256": "258095c81beb61dcf8fda91efd123e1901f89862e664ff4f35517bbba44d909b"
+    },
+    {
+      "path": "make-4.4.1/README.OS2",
+      "mode": 420,
+      "mtime": 1673484806,
+      "size": 6732,
+      "kind": "file",
+      "sha256": "1104364e6604dd6165d2c86a83c1475f24cef8ffcb99377ff4169f01ab4f12bf"
+    },
+    {
+      "path": "make-4.4.1/README.VMS",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 21219,
+      "kind": "file",
+      "sha256": "a4e9e6981585f354a428d044ec4540aa404ce68535a0f34b82d09444238025db"
+    },
+    {
+      "path": "make-4.4.1/README.W32",
+      "mode": 420,
+      "mtime": 1677030888,
+      "size": 15547,
+      "kind": "file",
+      "sha256": "494a0d55e3487c2fde204010e5802afaa4a7b5b40700cd16a8d5857b72e0a3a0"
+    },
+    {
+      "path": "make-4.4.1/README.customs",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 4496,
+      "kind": "file",
+      "sha256": "3eb07151ec1eb883e684b1f6b6d6a496cd7a804ff8b39bac78403d3ac769d24a"
+    },
+    {
+      "path": "make-4.4.1/README.zOS",
+      "mode": 420,
+      "mtime": 1673192738,
+      "size": 2671,
+      "kind": "file",
+      "sha256": "40bfccc70564a915be4ae9941ddeff0e37aa1e0929ee67d6fe934ffbab1be9dd"
+    },
+    {
+      "path": "make-4.4.1/SCOPTIONS",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 200,
+      "kind": "file",
+      "sha256": "3202eefc93f63ab763cb7b34db01e734984eb9e39a92d4636daca7ce943a9d9c"
+    },
+    {
+      "path": "make-4.4.1/aclocal.m4",
+      "mode": 420,
+      "mtime": 1677437197,
+      "size": 55098,
+      "kind": "file",
+      "sha256": "a102e805a66c03b988cf02b2ab8e6017c2bf0c4f079293d72f4d3d52e2f386b2"
+    },
+    {
+      "path": "make-4.4.1/build-aux",
+      "mode": 493,
+      "mtime": 1677437212,
+      "size": 0,
+      "kind": "directory"
+    },
+    {
+      "path": "make-4.4.1/build-aux/compile",
+      "mode": 493,
+      "mtime": 1677427476,
+      "size": 7400,
+      "kind": "file",
+      "sha256": "c207b390aac6323062b982214a6c63448e53e6911107993abe96f35fe7a30a18"
+    },
+    {
+      "path": "make-4.4.1/build-aux/config.guess",
+      "mode": 493,
+      "mtime": 1676734693,
+      "size": 49938,
+      "kind": "file",
+      "sha256": "bb14470dba3adf469b6e683307b783172b571abca13e7f5a77a4c94ea07b3811"
+    },
+    {
+      "path": "make-4.4.1/build-aux/config.rpath",
+      "mode": 493,
+      "mtime": 1677427470,
+      "size": 18574,
+      "kind": "file",
+      "sha256": "9fcac06e44bb214ec5ea21f950235c858de370c60b7b3e85b73f65edf51135aa"
+    },
+    {
+      "path": "make-4.4.1/build-aux/config.sub",
+      "mode": 493,
+      "mtime": 1676734693,
+      "size": 35818,
+      "kind": "file",
+      "sha256": "b45ba96fa578cfca60ed16e27e689f10812c3f946535e779229afe7a840763e6"
+    },
+    {
+      "path": "make-4.4.1/build-aux/depcomp",
+      "mode": 493,
+      "mtime": 1676734693,
+      "size": 23550,
+      "kind": "file",
+      "sha256": "127f263a5b84a13bb081cbe827a9a9bb66f4c9a8c186f5147a972f42f9df4b37"
+    },
+    {
+      "path": "make-4.4.1/build-aux/install-sh",
+      "mode": 493,
+      "mtime": 1616696252,
+      "size": 15358,
+      "kind": "file",
+      "sha256": "3d7488bebd0cfc9b5c440c55d5b44f1c6e2e3d3e19894821bae4a27f9307f1d2"
+    },
+    {
+      "path": "make-4.4.1/build-aux/mdate-sh",
+      "mode": 493,
+      "mtime": 1676734693,
+      "size": 6106,
+      "kind": "file",
+      "sha256": "b69b8348397c6c8e348c6b44f02acb15e519530cec1b18de008e640c1375c412"
+    },
+    {
+      "path": "make-4.4.1/build-aux/missing",
+      "mode": 493,
+      "mtime": 1677427476,
+      "size": 6878,
+      "kind": "file",
+      "sha256": "a9865db4f39574ff128c0312c367f070d20f81847817021ecce95fd70a610c9d"
+    },
+    {
+      "path": "make-4.4.1/build-aux/texinfo.tex",
+      "mode": 420,
+      "mtime": 1672602191,
+      "size": 377750,
+      "kind": "file",
+      "sha256": "54108c644722e60f47ec416c6312cc031852bf8b2b9e531f392009e80f574785"
+    },
+    {
+      "path": "make-4.4.1/build.cfg.in",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 1217,
+      "kind": "file",
+      "sha256": "6cc60744c060d88591b6b4442043c3ef9a8e87d85272ee1ab2b746961c47b235"
+    },
+    {
+      "path": "make-4.4.1/build.sh",
+      "mode": 493,
+      "mtime": 1673192738,
+      "size": 5333,
+      "kind": "file",
+      "sha256": "21f5b940e68da33ce933cfe11a7778ef40c42a23b331a855931e9495aecee618"
+    },
+    {
+      "path": "make-4.4.1/build_w32.bat",
+      "mode": 420,
+      "mtime": 1677030888,
+      "size": 12444,
+      "kind": "file",
+      "sha256": "32d25a487d9b54f9638952352c63fd05530d383c21f9d6f0502c2a7f829d574f"
+    },
+    {
+      "path": "make-4.4.1/builddos.bat",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 5582,
+      "kind": "file",
+      "sha256": "c26297a08e040eac09b5f207e1cbdd2aa293caeec519b92acc55366c6921cd7f"
+    },
+    {
+      "path": "make-4.4.1/configure",
+      "mode": 493,
+      "mtime": 1677437198,
+      "size": 482239,
+      "kind": "file",
+      "sha256": "0fd000c85684992cab5d42c05cabb5bdbb4ae0b71cccc7771b55b35109c28776"
+    },
+    {
+      "path": "make-4.4.1/configure.ac",
+      "mode": 420,
+      "mtime": 1677437182,
+      "size": 19530,
+      "kind": "file",
+      "sha256": "07bdf08ef2a7339f9c2b3a7c9b47cdfb3e93053f485db172de282ea1079101b1"
+    },
+    {
+      "path": "make-4.4.1/doc",
+      "mode": 493,
+      "mtime": 1677437214,
+      "size": 0,
+      "kind": "directory"
+    },
+    {
+      "path": "make-4.4.1/doc/Makefile.am",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 901,
+      "kind": "file",
+      "sha256": "137b6b9f4b8d15744fb36d210da040f533bc097eb71fb90676c6e38511b19108"
+    },
+    {
+      "path": "make-4.4.1/doc/Makefile.in",
+      "mode": 420,
+      "mtime": 1677437198,
+      "size": 27570,
+      "kind": "file",
+      "sha256": "de6768df249ece05b68b92364f8b7d64d0c685ccd5f296d8694a702fbb9d472d"
+    },
+    {
+      "path": "make-4.4.1/doc/fdl.texi",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 23434,
+      "kind": "file",
+      "sha256": "297ad42928811894f3abc955526431b1e7856e6766eecb7de2a5a0aa2915e5cf"
+    },
+    {
+      "path": "make-4.4.1/doc/make-stds.texi",
+      "mode": 420,
+      "mtime": 1672602191,
+      "size": 47509,
+      "kind": "file",
+      "sha256": "a4f552d2262cc7ac5f8511f92f6a20e3b200424c59aa547b6a4de94392bc25c6"
+    },
+    {
+      "path": "make-4.4.1/doc/make.1",
+      "mode": 420,
+      "mtime": 1677437182,
+      "size": 11853,
+      "kind": "file",
+      "sha256": "6cfb2259badbd3c770e1943e9a9950742fd6e9405596d69aadee325faf83726d"
+    },
+    {
+      "path": "make-4.4.1/doc/make.info",
+      "mode": 420,
+      "mtime": 1677437211,
+      "size": 6518,
+      "kind": "file",
+      "sha256": "f1c94cd2eaeacdd0825396e4f336701434380da93f8402b2eb64bd5249035a48"
+    },
+    {
+      "path": "make-4.4.1/doc/make.info-1",
+      "mode": 420,
+      "mtime": 1677437211,
+      "size": 301118,
+      "kind": "file",
+      "sha256": "50b1810947f3053d81dc1b5349369c31cc30c90d1bd8886f62ca9b360bbced55"
+    },
+    {
+      "path": "make-4.4.1/doc/make.info-2",
+      "mode": 420,
+      "mtime": 1677437211,
+      "size": 325102,
+      "kind": "file",
+      "sha256": "388254c7ed632acd86c4b6b65dd6eef4fb6cf62f982e526e78367d5236632399"
+    },
+    {
+      "path": "make-4.4.1/doc/make.info-3",
+      "mode": 420,
+      "mtime": 1677437211,
+      "size": 19654,
+      "kind": "file",
+      "sha256": "a80fbec33f1a6964cec008024032eafea729723a68485425b52b78e9cafaa714"
+    },
+    {
+      "path": "make-4.4.1/doc/make.texi",
+      "mode": 420,
+      "mtime": 1677437182,
+      "size": 525891,
+      "kind": "file",
+      "sha256": "4bc3c176c7eacefae7fdafd0665138372943f9e15cf6b6e816ad8062a31689dd"
+    },
+    {
+      "path": "make-4.4.1/doc/stamp-vti",
+      "mode": 420,
+      "mtime": 1677437210,
+      "size": 101,
+      "kind": "file",
+      "sha256": "e46be516b6360cbdff46e512a69af989568f2bf147c9c3ce1343e485ed50bbad"
+    },
+    {
+      "path": "make-4.4.1/doc/version.texi",
+      "mode": 420,
+      "mtime": 1677433572,
+      "size": 101,
+      "kind": "file",
+      "sha256": "e46be516b6360cbdff46e512a69af989568f2bf147c9c3ce1343e485ed50bbad"
+    },
+    {
+      "path": "make-4.4.1/lib",
+      "mode": 493,
+      "mtime": 1677437212,
+      "size": 0,
+      "kind": "directory"
+    },
+    {
+      "path": "make-4.4.1/lib/Makefile.am",
+      "mode": 420,
+      "mtime": 1677427472,
+      "size": 5573,
+      "kind": "file",
+      "sha256": "ba1e41cf388c4b702464709f5b8ec81b82cfa5a59332d3543226195effb2eab7"
+    },
+    {
+      "path": "make-4.4.1/lib/Makefile.in",
+      "mode": 420,
+      "mtime": 1677437198,
+      "size": 41879,
+      "kind": "file",
+      "sha256": "e61088bf66e0c19ce0ff142bd96781e7072e5f3520730875bfda866126e05f3b"
+    },
+    {
+      "path": "make-4.4.1/lib/alloca.c",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 4948,
+      "kind": "file",
+      "sha256": "6b7ff484937ce79da3891b0ae54563bfb9666c37db5505f7095e6efca23263d0"
+    },
+    {
+      "path": "make-4.4.1/lib/alloca.in.h",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 2492,
+      "kind": "file",
+      "sha256": "7025749bdefbb8cb36b192959660afae47a484700b1c52fa49b9608ad3e030d7"
+    },
+    {
+      "path": "make-4.4.1/lib/concat-filename.c",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 2556,
+      "kind": "file",
+      "sha256": "299d2728178b3060c77be51ec8f66fc4b6c536cb1c9fc145f6b893a85540230d"
+    },
+    {
+      "path": "make-4.4.1/lib/concat-filename.h",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 1711,
+      "kind": "file",
+      "sha256": "32ead5e765b0e4b92a7ffc2fdd7f6437cd4aeff37323e07e37e7cbebceed3a8c"
+    },
+    {
+      "path": "make-4.4.1/lib/filename.h",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 4678,
+      "kind": "file",
+      "sha256": "9ce9787854dfc3392f59221f1f1012d99973a452a4dc0ebefe9c3e8cd9dcc1c7"
+    },
+    {
+      "path": "make-4.4.1/lib/findprog-in.c",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 13631,
+      "kind": "file",
+      "sha256": "90591d56ae8dbb5d9d8c17e950daa7fc076f96a2ab9e519c31ebb688dd39bb7c"
+    },
+    {
+      "path": "make-4.4.1/lib/findprog.h",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 3277,
+      "kind": "file",
+      "sha256": "4ef568ad71939918a290f1e1e370b5cf9435b0aeeff89e5a63e855733050f961"
+    },
+    {
+      "path": "make-4.4.1/lib/fnmatch.c",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 12218,
+      "kind": "file",
+      "sha256": "713d67f6b6008794fe4e0db2a8ec5c921c3d98981b17613e606865192b633066"
+    },
+    {
+      "path": "make-4.4.1/lib/fnmatch.in.h",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 2308,
+      "kind": "file",
+      "sha256": "8ae63f0c9892fe75fde80bd357519d9f622b0aca783c4dd756e2e91d569f35e0"
+    },
+    {
+      "path": "make-4.4.1/lib/getloadavg.c",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 26045,
+      "kind": "file",
+      "sha256": "6d2ec4f5fb6b58066b1862c408114a381fac49ddd60a275df2c5ba134a31f039"
+    },
+    {
+      "path": "make-4.4.1/lib/glob.c",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 33366,
+      "kind": "file",
+      "sha256": "b3819103971f148a8089193555dd9e48469c53834e4385503f49aa3ec4b80646"
+    },
+    {
+      "path": "make-4.4.1/lib/glob.in.h",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 5990,
+      "kind": "file",
+      "sha256": "38cf20aca746dff807c57f7f810001243b5183fb34eb1e6aed1e4d5f842d8274"
+    },
+    {
+      "path": "make-4.4.1/lib/intprops-internal.h",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 17773,
+      "kind": "file",
+      "sha256": "f0f65043c35bc532d408cd0a9b9e34b0a55f58ba4126fc5ea99a68a70a7a626b"
+    },
+    {
+      "path": "make-4.4.1/lib/intprops.h",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 15528,
+      "kind": "file",
+      "sha256": "bce6bd3281739f0eb7d33ca6beb998fc2552d6c3b3efd800bbe18777d7e3a52a"
+    },
+    {
+      "path": "make-4.4.1/lib/warn-on-use.h",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 7002,
+      "kind": "file",
+      "sha256": "913767eeae7a529ee1cac5f9c2e995c6ef9b5e5f86d6d0d6ffddb3dfc399925a"
+    },
+    {
+      "path": "make-4.4.1/m4",
+      "mode": 493,
+      "mtime": 1677437212,
+      "size": 0,
+      "kind": "directory"
+    },
+    {
+      "path": "make-4.4.1/m4/00gnulib.m4",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 3593,
+      "kind": "file",
+      "sha256": "60b9bfe2cdb463018a3eca30eb15344adb87a6a6302824ddbbf6e9b05c77acd9"
+    },
+    {
+      "path": "make-4.4.1/m4/acinclude.m4",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 5106,
+      "kind": "file",
+      "sha256": "38c8e772e7b23d6f6d91d79dcd2f2027d49be7840d821e289ee2289b2d8ebc54"
+    },
+    {
+      "path": "make-4.4.1/m4/alloca.m4",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 3786,
+      "kind": "file",
+      "sha256": "90d17e485d5ebca9907e08d6f11c2e10f5e73752c1b552dbbdc22839a873740c"
+    },
+    {
+      "path": "make-4.4.1/m4/asm-underscore.m4",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 2744,
+      "kind": "file",
+      "sha256": "f01018d5998ff75361241c3e78d59e9f110101037840899c8e371535cacef1b1"
+    },
+    {
+      "path": "make-4.4.1/m4/c-bool.m4",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 1776,
+      "kind": "file",
+      "sha256": "57be3bf2ce6a1800f6dc7d9b39f39b6557a44d3d50d578a4047d0efec46350fb"
+    },
+    {
+      "path": "make-4.4.1/m4/dospaths.m4",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 1422,
+      "kind": "file",
+      "sha256": "aae32ba00a907b21c8fc0b6bcbce0820e1106738abeca613f504293f9c516d81"
+    },
+    {
+      "path": "make-4.4.1/m4/eaccess.m4",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 453,
+      "kind": "file",
+      "sha256": "0b23ef7029a4cb62ee24a1959b4de6791bc1e1a3192c34d4133d3b09e5ba83c7"
+    },
+    {
+      "path": "make-4.4.1/m4/extensions.m4",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 8598,
+      "kind": "file",
+      "sha256": "4f3fb16c001a1621bd75d081fc5b34e4d9a940e890898e224526251590f5607b"
+    },
+    {
+      "path": "make-4.4.1/m4/findprog-in.m4",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 392,
+      "kind": "file",
+      "sha256": "0cb6e438fc16d26bc12ba985ed6210f91e87f905131d1d7a191cdfeb64e0c9f9"
+    },
+    {
+      "path": "make-4.4.1/m4/getloadavg.m4",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 7332,
+      "kind": "file",
+      "sha256": "37a585b293890e5c55b4f31a407f29b590ea9be1ec85bd5b255a267d4365453b"
+    },
+    {
+      "path": "make-4.4.1/m4/gettext.m4",
+      "mode": 420,
+      "mtime": 1677427470,
+      "size": 15245,
+      "kind": "file",
+      "sha256": "6c279c958f980621dfeb725cb79173dbe93534aef2a4377a6fafa666c3c0b677"
+    },
+    {
+      "path": "make-4.4.1/m4/gnulib-cache.m4",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 2071,
+      "kind": "file",
+      "sha256": "d9ea378e7c1daee8eb0e019400030c4b8ca4d5e0654d00358dd53bbb1a01bcb2"
+    },
+    {
+      "path": "make-4.4.1/m4/gnulib-common.m4",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 44732,
+      "kind": "file",
+      "sha256": "7d9f6a7310dbfc5b7861002150519d97f42733a89fca716ee61b03ec051658aa"
+    },
+    {
+      "path": "make-4.4.1/m4/gnulib-comp.m4",
+      "mode": 420,
+      "mtime": 1677427472,
+      "size": 12909,
+      "kind": "file",
+      "sha256": "5b62dcd0ebcbf065321345f3be2e85ded33c66f9892a210e0b698885533b52d7"
+    },
+    {
+      "path": "make-4.4.1/m4/host-cpu-c-abi.m4",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 22480,
+      "kind": "file",
+      "sha256": "0045148254306fb801249d9e9ea5ea7744cf090369aa9b9e675ef84b7467483f"
+    },
+    {
+      "path": "make-4.4.1/m4/iconv.m4",
+      "mode": 420,
+      "mtime": 1677427470,
+      "size": 9268,
+      "kind": "file",
+      "sha256": "16bc5a5d8e491491a490d15272c69f39338327a4cb1b58e4f9bbbb2834ec6798"
+    },
+    {
+      "path": "make-4.4.1/m4/intlmacosx.m4",
+      "mode": 420,
+      "mtime": 1677427470,
+      "size": 2539,
+      "kind": "file",
+      "sha256": "d0e24c3c982ca2c8c00aaf7d0a27502c83a299660b00829b02159dd8b1917f95"
+    },
+    {
+      "path": "make-4.4.1/m4/largefile.m4",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 15276,
+      "kind": "file",
+      "sha256": "503d217bb180e99b1cd0c4d1ddb2ddd8dd12fcfbbcf7b1794db30e3e35ef37f1"
+    },
+    {
+      "path": "make-4.4.1/m4/lib-ld.m4",
+      "mode": 420,
+      "mtime": 1677427470,
+      "size": 3683,
+      "kind": "file",
+      "sha256": "b9625b301655214df17e9b7e9fac9292707dc10b9df572cdee4a90d7a83af8b3"
+    },
+    {
+      "path": "make-4.4.1/m4/lib-link.m4",
+      "mode": 420,
+      "mtime": 1677427470,
+      "size": 33059,
+      "kind": "file",
+      "sha256": "998a5c2d2ca268a2dc7a22f2b6c8791ab26318ba66c77cf0df1dd2122d071976"
+    },
+    {
+      "path": "make-4.4.1/m4/lib-prefix.m4",
+      "mode": 420,
+      "mtime": 1677427470,
+      "size": 8466,
+      "kind": "file",
+      "sha256": "b23f4661e2c6081496bc34586caaee8afdc0935ac77aa9b8d8497d14028315d9"
+    },
+    {
+      "path": "make-4.4.1/m4/longlong.m4",
+      "mode": 420,
+      "mtime": 1677427470,
+      "size": 4739,
+      "kind": "file",
+      "sha256": "ea2776cabb0b0d93a8634f5daea16f32a73da72b53d06148958af848c1d0bbb1"
+    },
+    {
+      "path": "make-4.4.1/m4/nls.m4",
+      "mode": 420,
+      "mtime": 1677427470,
+      "size": 1229,
+      "kind": "file",
+      "sha256": "6d231fb983fcb7c8f833b7c32eeea00a578b46837ab774fd417603a857c67a38"
+    },
+    {
+      "path": "make-4.4.1/m4/po.m4",
+      "mode": 420,
+      "mtime": 1677427470,
+      "size": 18975,
+      "kind": "file",
+      "sha256": "4b6d815fbce0a17bc1b17eb2999ea83f1b34931847fc82ce5b744f7458e7d75f"
+    },
+    {
+      "path": "make-4.4.1/m4/progtest.m4",
+      "mode": 420,
+      "mtime": 1677427470,
+      "size": 3104,
+      "kind": "file",
+      "sha256": "2b63243f5e160602a1411eed30a4abd66ce29a5d4c8664711465059362ef7353"
+    },
+    {
+      "path": "make-4.4.1/m4/sig_atomic_t.m4",
+      "mode": 420,
+      "mtime": 1672602191,
+      "size": 579,
+      "kind": "file",
+      "sha256": "492205bc9714977d5f40c27d9efd75f4f407b105ec15c6d890181c76e8a6c760"
+    },
+    {
+      "path": "make-4.4.1/m4/warn-on-use.m4",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 2899,
+      "kind": "file",
+      "sha256": "7571bddfddbfe10d6137ab2ef77a743e08b74e1267881e6570289f9a5ec4d500"
+    },
+    {
+      "path": "make-4.4.1/m4/zzgnulib.m4",
+      "mode": 420,
+      "mtime": 1677427471,
+      "size": 850,
+      "kind": "file",
+      "sha256": "2f5c1e8b39cc69e67de87ae8ab8b153a6a6cc145bd64fa255ea006ede3879e0b"
+    },
+    {
+      "path": "make-4.4.1/makefile.com",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 5330,
+      "kind": "file",
+      "sha256": "42a662676cfc56d3a3aa6e6095d2fbdf1efb85baefefb1c3648e415f1d7ec4c9"
+    },
+    {
+      "path": "make-4.4.1/mk",
+      "mode": 493,
+      "mtime": 1677437212,
+      "size": 0,
+      "kind": "directory"
+    },
+    {
+      "path": "make-4.4.1/mk/Amiga.mk",
+      "mode": 420,
+      "mtime": 1672610712,
+      "size": 1358,
+      "kind": "file",
+      "sha256": "48af45e45a673d2a373763eb14bc6cdd111f7b7730fc3cdfae386d6504639548"
+    },
+    {
+      "path": "make-4.4.1/mk/VMS.mk",
+      "mode": 420,
+      "mtime": 1672610712,
+      "size": 2466,
+      "kind": "file",
+      "sha256": "53eb04c4dab6b4c6bb971afd498754c0882588d6f393267e459643283e7587c5"
+    },
+    {
+      "path": "make-4.4.1/mk/Windows32.mk",
+      "mode": 420,
+      "mtime": 1672610712,
+      "size": 3566,
+      "kind": "file",
+      "sha256": "3c559bac98d3ee5ce09973f5e06731a3ba1233d27315f8fc9da5b1195ac83ef3"
+    },
+    {
+      "path": "make-4.4.1/mk/msdosdjgpp.mk",
+      "mode": 420,
+      "mtime": 1672610712,
+      "size": 1435,
+      "kind": "file",
+      "sha256": "397fbcea3ef38a9723dfe023a39f88c73a49500800a474665f56037461a0c486"
+    },
+    {
+      "path": "make-4.4.1/po",
+      "mode": 493,
+      "mtime": 1677437214,
+      "size": 0,
+      "kind": "directory"
+    },
+    {
+      "path": "make-4.4.1/po/LINGUAS",
+      "mode": 420,
+      "mtime": 1677427468,
+      "size": 99,
+      "kind": "file",
+      "sha256": "234d2dec059992e0a6c826deb60054357602249bdc61d17bf5de1efc3f238cd3"
+    },
+    {
+      "path": "make-4.4.1/po/Makefile.in.in",
+      "mode": 420,
+      "mtime": 1677427470,
+      "size": 17259,
+      "kind": "file",
+      "sha256": "fda41c837ebf2de985752fb56650a4eb9c4da7b49144f44d06503204bdbc7841"
+    },
+    {
+      "path": "make-4.4.1/po/Makevars",
+      "mode": 420,
+      "mtime": 1677427477,
+      "size": 3762,
+      "kind": "file",
+      "sha256": "6afc894a95e983b44652c90c18239a267794101b75688387a6578ced4d9f965e"
+    },
+    {
+      "path": "make-4.4.1/po/POTFILES.in",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 1184,
+      "kind": "file",
+      "sha256": "34b06e7c3ac23fbe2c4b49f2ef278e3c249b7423c06f046dfd677c1e0ddf5b93"
+    },
+    {
+      "path": "make-4.4.1/po/Rules-quot",
+      "mode": 420,
+      "mtime": 1677427470,
+      "size": 2165,
+      "kind": "file",
+      "sha256": "4099caf90551399bb1a3d2122d5949704d1a675593daa94774e6a11733f7d0ab"
+    },
+    {
+      "path": "make-4.4.1/po/be.gmo",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 6136,
+      "kind": "file",
+      "sha256": "91a6db8c9dbcde20881045cc58922f58ffab91e15d4c5bb9e58ebb2fd58db9ca"
+    },
+    {
+      "path": "make-4.4.1/po/be.po",
+      "mode": 420,
+      "mtime": 1677427506,
+      "size": 52951,
+      "kind": "file",
+      "sha256": "03cd7bed3ade15bdd5146a464c887ffbf08a83f69594a7c37bb75bb1389ef228"
+    },
+    {
+      "path": "make-4.4.1/po/bg.gmo",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 67139,
+      "kind": "file",
+      "sha256": "4e3004d77a92ad2dfc4006f56415eb462ad265b185427920231e083a434b9c37"
+    },
+    {
+      "path": "make-4.4.1/po/bg.po",
+      "mode": 420,
+      "mtime": 1677427506,
+      "size": 81153,
+      "kind": "file",
+      "sha256": "f2cc8b86aaf723a8fbe9a3925c3e7cbe411f88ac2b1f134d44649a953338dcba"
+    },
+    {
+      "path": "make-4.4.1/po/boldquot.sed",
+      "mode": 420,
+      "mtime": 1677427470,
+      "size": 217,
+      "kind": "file",
+      "sha256": "33234736a58f1610c73e1c8c08faf1b2ef1397d878dd7d2cbd888ca0f2da4ffc"
+    },
+    {
+      "path": "make-4.4.1/po/cs.gmo",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 51630,
+      "kind": "file",
+      "sha256": "ae1f3a1ae6989a72bd310e2df992c2a09b5c84c4a1d4a9bec178ca5d46184b76"
+    },
+    {
+      "path": "make-4.4.1/po/cs.po",
+      "mode": 420,
+      "mtime": 1677427506,
+      "size": 71039,
+      "kind": "file",
+      "sha256": "a2da09d5298fdd34dc98290fc4d403132cef42373a51fd7cd1d008c909909645"
+    },
+    {
+      "path": "make-4.4.1/po/da.gmo",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 46271,
+      "kind": "file",
+      "sha256": "185be2d62c07ea08d9113eed39a88fd5f795d1853672bf43f82361c2f9a03705"
+    },
+    {
+      "path": "make-4.4.1/po/da.po",
+      "mode": 420,
+      "mtime": 1677427506,
+      "size": 68651,
+      "kind": "file",
+      "sha256": "ac36eb33e462db9eda8cbfcf371ce268e655e6deccb904df849a41515abd4463"
+    },
+    {
+      "path": "make-4.4.1/po/de.gmo",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 53393,
+      "kind": "file",
+      "sha256": "89caeb7cd1950ece3af7b387ecb4939217c0763a9601a22d10e9b311006789e3"
+    },
+    {
+      "path": "make-4.4.1/po/de.po",
+      "mode": 420,
+      "mtime": 1677427506,
+      "size": 68611,
+      "kind": "file",
+      "sha256": "a8695978d71596917bee5042d0bf23bf5c29e7d5f0776015a3490a46d6cdc671"
+    },
+    {
+      "path": "make-4.4.1/po/en@boldquot.header",
+      "mode": 420,
+      "mtime": 1677427470,
+      "size": 1337,
+      "kind": "file",
+      "sha256": "3b0b89aa6625c051e69cce1e341f973f62ca94aff62cbb36b4a452ce67eb261c"
+    },
+    {
+      "path": "make-4.4.1/po/en@quot.header",
+      "mode": 420,
+      "mtime": 1677427470,
+      "size": 1203,
+      "kind": "file",
+      "sha256": "90e35325bf9b6b9562bd0882128ea4650b65c9389b35edf9ff534dc3a48e8bed"
+    },
+    {
+      "path": "make-4.4.1/po/es.gmo",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 41139,
+      "kind": "file",
+      "sha256": "55109abf73e06b2d2996364ac77fa1b11f29cdd8c3b66823eaf84931728cbed5"
+    },
+    {
+      "path": "make-4.4.1/po/es.po",
+      "mode": 420,
+      "mtime": 1677427506,
+      "size": 92031,
+      "kind": "file",
+      "sha256": "e293caf53281cbcbb5e76ff48a38da0c2a3a724555a50b994b6faea3d82c28f7"
+    },
+    {
+      "path": "make-4.4.1/po/fi.gmo",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 30675,
+      "kind": "file",
+      "sha256": "2250dbcc83f5f0b45509c95b07a30d34ec002124d3e9be085f760b6ebefe2edc"
+    },
+    {
+      "path": "make-4.4.1/po/fi.po",
+      "mode": 420,
+      "mtime": 1677427506,
+      "size": 65824,
+      "kind": "file",
+      "sha256": "80524d974b3730dcfdc6983432a2117a4b97a3fbe441b7d83fdcf28c5e135b1e"
+    },
+    {
+      "path": "make-4.4.1/po/fr.gmo",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 41529,
+      "kind": "file",
+      "sha256": "dd9f6c8d75cf94c0f4a01e4ad3ee2b833b4b552f13d0adf461b83a1356ed17a4"
+    },
+    {
+      "path": "make-4.4.1/po/fr.po",
+      "mode": 420,
+      "mtime": 1677427506,
+      "size": 77087,
+      "kind": "file",
+      "sha256": "0eabc9b242d57d7fa5566a6f4db85cb13320c4391532d1e1b7991fa5bca2f442"
+    },
+    {
+      "path": "make-4.4.1/po/ga.gmo",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 38653,
+      "kind": "file",
+      "sha256": "8ee19bc1fc2d06726989097180b4a611fe9ff99af8e2eead4695f622a72d5d87"
+    },
+    {
+      "path": "make-4.4.1/po/ga.po",
+      "mode": 420,
+      "mtime": 1677427506,
+      "size": 67584,
+      "kind": "file",
+      "sha256": "3aad4902aaf0c873d097bf47bb6099ffa36c4551b5c50b54eaa3ca80d0274151"
+    },
+    {
+      "path": "make-4.4.1/po/gl.gmo",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 20076,
+      "kind": "file",
+      "sha256": "9bd1e22f81c87cfa60f58b8dcdcdc98515c7592116e82724ee91f0bbb4cbdd88"
+    },
+    {
+      "path": "make-4.4.1/po/gl.po",
+      "mode": 420,
+      "mtime": 1677427506,
+      "size": 71887,
+      "kind": "file",
+      "sha256": "55e24a5b52aa2f826696b12a661cfc73f2cea2b650c027a01608eb9fb3ab76ec"
+    },
+    {
+      "path": "make-4.4.1/po/he.gmo",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 9710,
+      "kind": "file",
+      "sha256": "a0c4407e00ef2f0ac1574b2c19166a79e3532c798a2836b85c171fb27964a272"
+    },
+    {
+      "path": "make-4.4.1/po/he.po",
+      "mode": 420,
+      "mtime": 1677427507,
+      "size": 61564,
+      "kind": "file",
+      "sha256": "d1d526bda3d86f30f6542daa06941703666009950eae69eb9dfb65b9055b6441"
+    },
+    {
+      "path": "make-4.4.1/po/hr.gmo",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 51679,
+      "kind": "file",
+      "sha256": "830dc63cc74c2fe25182ce913690120a66467de79e7a66bea142198dfb73944e"
+    },
+    {
+      "path": "make-4.4.1/po/hr.po",
+      "mode": 420,
+      "mtime": 1677427507,
+      "size": 76192,
+      "kind": "file",
+      "sha256": "e7cade5d7a9376e248f8bb4faff08d072d7516019f0bdeb9715963a93bc8f0a6"
+    },
+    {
+      "path": "make-4.4.1/po/id.gmo",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 39250,
+      "kind": "file",
+      "sha256": "234cff35e232e2705a8ddbfd809473836c511908c20e3bdf0ce4fa8c02c021e8"
+    },
+    {
+      "path": "make-4.4.1/po/id.po",
+      "mode": 420,
+      "mtime": 1677427507,
+      "size": 69467,
+      "kind": "file",
+      "sha256": "e25d645473ae2454598102c36425952758207c2f16c336e183927fc9a989ea94"
+    },
+    {
+      "path": "make-4.4.1/po/insert-header.sin",
+      "mode": 420,
+      "mtime": 1677427470,
+      "size": 672,
+      "kind": "file",
+      "sha256": "73e650aeccc3ef0a7c2e1bbab934b0882b61f19569e96e4615d069dc50b6becd"
+    },
+    {
+      "path": "make-4.4.1/po/it.gmo",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 40756,
+      "kind": "file",
+      "sha256": "4333c255c4c82b17b1a71aa7a895b1f32395d86367a730c0eb56ca4c53678b46"
+    },
+    {
+      "path": "make-4.4.1/po/it.po",
+      "mode": 420,
+      "mtime": 1677427507,
+      "size": 65353,
+      "kind": "file",
+      "sha256": "ae161dc68201691dea6337851789fd7037526e5503f286e1b4e267e7ab9144ba"
+    },
+    {
+      "path": "make-4.4.1/po/ja.gmo",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 55400,
+      "kind": "file",
+      "sha256": "d70ac36466b5a450077004349818a4a2f0dcaf699e7caca70822b95307bdbe49"
+    },
+    {
+      "path": "make-4.4.1/po/ja.po",
+      "mode": 420,
+      "mtime": 1677427507,
+      "size": 76410,
+      "kind": "file",
+      "sha256": "5d71ab4cac2bc5e924b9e1050203e1e80d0e8f5a05d82c1bee41f1e31ff7d343"
+    },
+    {
+      "path": "make-4.4.1/po/ko.gmo",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 53067,
+      "kind": "file",
+      "sha256": "af10c0e82e85ea8bd166392c52fccceba8db2f3520c3a36a8823a5af7fd4d00e"
+    },
+    {
+      "path": "make-4.4.1/po/ko.po",
+      "mode": 420,
+      "mtime": 1677427507,
+      "size": 68131,
+      "kind": "file",
+      "sha256": "466856ebd8c23bb5456eeba38bb1ce141b835c86b6294c0c75f21a3aa05433c2"
+    },
+    {
+      "path": "make-4.4.1/po/lt.gmo",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 6827,
+      "kind": "file",
+      "sha256": "eee7c3ca541a7856fd815fb8dd3d0dbe77d046a6af856d53df6fcd38a524c6c9"
+    },
+    {
+      "path": "make-4.4.1/po/lt.po",
+      "mode": 420,
+      "mtime": 1677427507,
+      "size": 51279,
+      "kind": "file",
+      "sha256": "8e8c9f5f193dcc4e0efed109568f653c2c8f1da2ec4b7bdcb1e89951297b53c4"
+    },
+    {
+      "path": "make-4.4.1/po/make.pot",
+      "mode": 420,
+      "mtime": 1677427506,
+      "size": 42259,
+      "kind": "file",
+      "sha256": "10d5fbf6994e99664b9625cdc7c0a04d8edd240f1b04ef4133989c451bfa4baa"
+    },
+    {
+      "path": "make-4.4.1/po/nl.gmo",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 48248,
+      "kind": "file",
+      "sha256": "7948cb6755d761ba94723c4d8c50d68a12adf358e310196c4c0fef4176fecb6c"
+    },
+    {
+      "path": "make-4.4.1/po/nl.po",
+      "mode": 420,
+      "mtime": 1677427507,
+      "size": 68152,
+      "kind": "file",
+      "sha256": "54ac77a92d03254292bac0615813ea50d3b51cfa4bb43d0e048f032ee56e62a7"
+    },
+    {
+      "path": "make-4.4.1/po/pl.gmo",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 50247,
+      "kind": "file",
+      "sha256": "41a2c390ea69bff2c35ecb154092c9b170f1f5cb08ff36346a47f1d8608a7d1d"
+    },
+    {
+      "path": "make-4.4.1/po/pl.po",
+      "mode": 420,
+      "mtime": 1677427507,
+      "size": 64160,
+      "kind": "file",
+      "sha256": "c867ff7526cb796cb1683c2b5b475a86c26f30fdc819ca7b54d561c92f8ef3f0"
+    },
+    {
+      "path": "make-4.4.1/po/pt.gmo",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 38893,
+      "kind": "file",
+      "sha256": "a093700ce1de3d9b5fbe61a7f8194b9f9ebeb5f041c516361ce8ef3dad8efe2b"
+    },
+    {
+      "path": "make-4.4.1/po/pt.po",
+      "mode": 420,
+      "mtime": 1677427507,
+      "size": 63807,
+      "kind": "file",
+      "sha256": "3d171a511efaa78382b4acc151cd0f7d57488f9efc84013bbe5b63c8ea869a76"
+    },
+    {
+      "path": "make-4.4.1/po/pt_BR.gmo",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 39328,
+      "kind": "file",
+      "sha256": "a42a7c6f01d2a43b01567beeb6784b28b3a9048ea7ddf741ef89994ca5eb4f72"
+    },
+    {
+      "path": "make-4.4.1/po/pt_BR.po",
+      "mode": 420,
+      "mtime": 1677427507,
+      "size": 68336,
+      "kind": "file",
+      "sha256": "c6d6c5c30cb386e1ee68b298a23bd70eefcbc37e2948870179c5c810de8cc740"
+    },
+    {
+      "path": "make-4.4.1/po/quot.sed",
+      "mode": 420,
+      "mtime": 1677427470,
+      "size": 153,
+      "kind": "file",
+      "sha256": "d19ab2cc69000c1206f1b8460952857f05d154158da8b89273ac2900a5c80ec0"
+    },
+    {
+      "path": "make-4.4.1/po/remove-potcdate.sin",
+      "mode": 420,
+      "mtime": 1677427470,
+      "size": 432,
+      "kind": "file",
+      "sha256": "9a36cf3e93b6374521c81fa4f302350d3c04b95573f5570717284107689188e6"
+    },
+    {
+      "path": "make-4.4.1/po/ro.gmo",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 53348,
+      "kind": "file",
+      "sha256": "b4f6997befc6532e81f60fcfe8fe01347c75b4c3a76d64f2970bf8e0d0684db7"
+    },
+    {
+      "path": "make-4.4.1/po/ro.po",
+      "mode": 420,
+      "mtime": 1677427507,
+      "size": 72725,
+      "kind": "file",
+      "sha256": "115fe7ffef8cd60283adb094df3a22f41ffc1ba3cfb2f8ee2cdfb861ce24cfcd"
+    },
+    {
+      "path": "make-4.4.1/po/ru.gmo",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 64005,
+      "kind": "file",
+      "sha256": "1f56b5cacd036fba8234f9d407edd9f1c76f12d04cbb5ba31f7a98ad64b3fcc0"
+    },
+    {
+      "path": "make-4.4.1/po/ru.po",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 84379,
+      "kind": "file",
+      "sha256": "0ce9474628ddbd1935e2d603dd45e9edf429ac18dccda31e3f687c4fb9a1b454"
+    },
+    {
+      "path": "make-4.4.1/po/sr.gmo",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 62502,
+      "kind": "file",
+      "sha256": "ba8dcb4e44fdcb049b2a47c00cc9eb9039d59de9edc8570b0be31e4e2e5c4d9a"
+    },
+    {
+      "path": "make-4.4.1/po/sr.po",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 78533,
+      "kind": "file",
+      "sha256": "6179957b8385b4f0b500a6dbc9529ace1e55cfccdeee45735e3f846bf27a4f00"
+    },
+    {
+      "path": "make-4.4.1/po/stamp-po",
+      "mode": 420,
+      "mtime": 1677427509,
+      "size": 10,
+      "kind": "file",
+      "sha256": "2cd8ec3de6a07e1fd39676100db57ba62372e820c19812fee55899f65746e192"
+    },
+    {
+      "path": "make-4.4.1/po/sv.gmo",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 49313,
+      "kind": "file",
+      "sha256": "30a73e65e64d003c1051be8486de575552bfc985983ad9a85b63d1af4e511451"
+    },
+    {
+      "path": "make-4.4.1/po/sv.po",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 63334,
+      "kind": "file",
+      "sha256": "0cf54ad9074513bb4f4a39dc3d2b2ce1af8ca44d9a59516bf2fde1afd07181a4"
+    },
+    {
+      "path": "make-4.4.1/po/tr.gmo",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 17599,
+      "kind": "file",
+      "sha256": "e27505575514fb1c83bc985e8b92f7042ad604da2f7d400a34aa3cdf3dad688f"
+    },
+    {
+      "path": "make-4.4.1/po/tr.po",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 68323,
+      "kind": "file",
+      "sha256": "440077f892de9f1c7b70b3ac176f71a9df8fffaa2a1c35267748bebead8e25d8"
+    },
+    {
+      "path": "make-4.4.1/po/uk.gmo",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 63561,
+      "kind": "file",
+      "sha256": "675ca698a15b69f64af86be07e1a0d091b2b4a44052d207802293a8355463612"
+    },
+    {
+      "path": "make-4.4.1/po/uk.po",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 82266,
+      "kind": "file",
+      "sha256": "97d56a945ef53a52640521f98e71eaadcee2523e24d01963c3482453a1189a01"
+    },
+    {
+      "path": "make-4.4.1/po/vi.gmo",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 42231,
+      "kind": "file",
+      "sha256": "10a7bb114a828f92675365f226871f4808df52e7d85e80e2bc6ee8bec8ece77d"
+    },
+    {
+      "path": "make-4.4.1/po/vi.po",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 72243,
+      "kind": "file",
+      "sha256": "f1bcddbe956bfdde4134af63ff1cd9ea613ccb8d68c867e9d7d610f3a99d67c4"
+    },
+    {
+      "path": "make-4.4.1/po/zh_CN.gmo",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 40272,
+      "kind": "file",
+      "sha256": "ab07c67c3a291d99daf57c2f29fb211f32a7c5dda09190e2334466ec38347cfe"
+    },
+    {
+      "path": "make-4.4.1/po/zh_CN.po",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 67589,
+      "kind": "file",
+      "sha256": "bb51eb699086e2e039607e8b983fcc62f88cac8057e31455e4eaae622a64e338"
+    },
+    {
+      "path": "make-4.4.1/po/zh_TW.gmo",
+      "mode": 420,
+      "mtime": 1677427509,
+      "size": 47740,
+      "kind": "file",
+      "sha256": "cd1fc10ec03e3295532d43ab28342890ba65602bad1fabffef6628f4a16ebc3c"
+    },
+    {
+      "path": "make-4.4.1/po/zh_TW.po",
+      "mode": 420,
+      "mtime": 1677427508,
+      "size": 62792,
+      "kind": "file",
+      "sha256": "6c684d63e9d7e4f0cfd83638832698c3da6edcfec278a8d3074234cf32c9fb80"
+    },
+    {
+      "path": "make-4.4.1/src",
+      "mode": 493,
+      "mtime": 1677437212,
+      "size": 0,
+      "kind": "directory"
+    },
+    {
+      "path": "make-4.4.1/src/amiga.c",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 2807,
+      "kind": "file",
+      "sha256": "c0a33583a43f92c1fc003f4f397005d744051e8af94727b29a8c75023888ae09"
+    },
+    {
+      "path": "make-4.4.1/src/amiga.h",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 817,
+      "kind": "file",
+      "sha256": "66c1026c06aac26653545ace1f2683fcc3284ac1b4a90f2ec488846ff1a18b25"
+    },
+    {
+      "path": "make-4.4.1/src/ar.c",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 8672,
+      "kind": "file",
+      "sha256": "6fe9c0244fcc4ecc572cb533245a4d4c1d5eae9cc72ef84513ac3c8b6e43728a"
+    },
+    {
+      "path": "make-4.4.1/src/arscan.c",
+      "mode": 420,
+      "mtime": 1673192738,
+      "size": 29276,
+      "kind": "file",
+      "sha256": "ba70e09c082ad5e6b9c85ed7cc090a8f42b8c3e502c9ac24c58eafce9082838f"
+    },
+    {
+      "path": "make-4.4.1/src/commands.c",
+      "mode": 420,
+      "mtime": 1674912877,
+      "size": 19079,
+      "kind": "file",
+      "sha256": "e54c84e29f77c6086f7b87aaac242eec9fbc04746ea53a2a4b1b9ed0db85851d"
+    },
+    {
+      "path": "make-4.4.1/src/commands.h",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 1984,
+      "kind": "file",
+      "sha256": "3b3efe1c5e81c8fff8dd97881bc557e83dad93e39bac3e3ac10416c427aff2b3"
+    },
+    {
+      "path": "make-4.4.1/src/config.ami",
+      "mode": 420,
+      "mtime": 1673192724,
+      "size": 9510,
+      "kind": "file",
+      "sha256": "1c8b95553ef2542cde498a2b76828c8e9842dbc9c9842437f5e7f9525e7b0cff"
+    },
+    {
+      "path": "make-4.4.1/src/config.h-vms",
+      "mode": 420,
+      "mtime": 1673192724,
+      "size": 12787,
+      "kind": "file",
+      "sha256": "104d16bf6eb3e4f8efb53683acab653cc2ee2e0c4f89fbbbd2674c47254b38a7"
+    },
+    {
+      "path": "make-4.4.1/src/config.h.W32",
+      "mode": 420,
+      "mtime": 1673192724,
+      "size": 17928,
+      "kind": "file",
+      "sha256": "ea76800177fb355fae34d3b143ee0e85f2fd23d5fb56b5da918462f6d534bf00"
+    },
+    {
+      "path": "make-4.4.1/src/config.h.in",
+      "mode": 420,
+      "mtime": 1677437207,
+      "size": 41894,
+      "kind": "file",
+      "sha256": "660a6951f365c98ef8ccbe1d51d2bfe917d96cb2b349a3f8768b145d52c60347"
+    },
+    {
+      "path": "make-4.4.1/src/configh.dos",
+      "mode": 420,
+      "mtime": 1673192724,
+      "size": 3296,
+      "kind": "file",
+      "sha256": "dcee11890fad41bfb7eb64f2accfabb5bcf267a1cc0ed0fee2054b518af716a0"
+    },
+    {
+      "path": "make-4.4.1/src/debug.h",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 1607,
+      "kind": "file",
+      "sha256": "8230c32932a262fb260d9146d9f03f07e624694bef709fe025f3ca3d1afa8652"
+    },
+    {
+      "path": "make-4.4.1/src/default.c",
+      "mode": 420,
+      "mtime": 1676923866,
+      "size": 21668,
+      "kind": "file",
+      "sha256": "273ed133a42792e666b058b0c4a362ca2bea89769d2ef9c11447a06b5c2cec44"
+    },
+    {
+      "path": "make-4.4.1/src/dep.h",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 5213,
+      "kind": "file",
+      "sha256": "93fb6640a8c086ff1c6b1d92d441ce30d4f2f1093544121e509cf33953216780"
+    },
+    {
+      "path": "make-4.4.1/src/dir.c",
+      "mode": 420,
+      "mtime": 1673484806,
+      "size": 36439,
+      "kind": "file",
+      "sha256": "748174d6a59e0c1d626854b76aefecea61025e38d810fe297fbf1e81026758ff"
+    },
+    {
+      "path": "make-4.4.1/src/expand.c",
+      "mode": 420,
+      "mtime": 1674919096,
+      "size": 19135,
+      "kind": "file",
+      "sha256": "2ac52234283cd37a70902735a857f8a195fd02a1632ac835a556b039d5e28f00"
+    },
+    {
+      "path": "make-4.4.1/src/file.c",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 36595,
+      "kind": "file",
+      "sha256": "b8b4079088e4d788f69a57b5d56cbedccb41b49dbc933348112e015fda6090c0"
+    },
+    {
+      "path": "make-4.4.1/src/filedef.h",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 10962,
+      "kind": "file",
+      "sha256": "c4b916ef95486e1087dc73136b48f575ec887efe540b27e16146481cca161165"
+    },
+    {
+      "path": "make-4.4.1/src/function.c",
+      "mode": 420,
+      "mtime": 1673484694,
+      "size": 74566,
+      "kind": "file",
+      "sha256": "06dc6c56725b83fca0e96e89badbfb4de57c3856ec25daccf79ab8d7e319cc15"
+    },
+    {
+      "path": "make-4.4.1/src/getopt.c",
+      "mode": 420,
+      "mtime": 1673484806,
+      "size": 29832,
+      "kind": "file",
+      "sha256": "1c14ad187c2bdf803d0f2bc6350a54042b580c5b49bfb41ea781765c5c5400c6"
+    },
+    {
+      "path": "make-4.4.1/src/getopt.h",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 4473,
+      "kind": "file",
+      "sha256": "61dff521e829f60024002a64ed921fde02face5accc08544edfc01eb8b18a54d"
+    },
+    {
+      "path": "make-4.4.1/src/getopt1.c",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 4300,
+      "kind": "file",
+      "sha256": "7cf3292cb9aa3e9fb682ef2e8a828ea363f223df1535269656cbfaad03a59d04"
+    },
+    {
+      "path": "make-4.4.1/src/gettext.h",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 2520,
+      "kind": "file",
+      "sha256": "c35de07c554e560396cbe7a3fed9edb9a32a9012a80adeb9cd7b44d11275db47"
+    },
+    {
+      "path": "make-4.4.1/src/gmk-default.h",
+      "mode": 420,
+      "mtime": 1677427505,
+      "size": 840,
+      "kind": "file",
+      "sha256": "dd7b1c1e2b11aebff77390ed8db3699a50407de479e486082a096c0928abaaf7"
+    },
+    {
+      "path": "make-4.4.1/src/gmk-default.scm",
+      "mode": 420,
+      "mtime": 1672610712,
+      "size": 1774,
+      "kind": "file",
+      "sha256": "352c9ef7e28ee85f2073ed44d41dcad566cef9c09afd81002f9c81f3243175eb"
+    },
+    {
+      "path": "make-4.4.1/src/gnumake.h",
+      "mode": 420,
+      "mtime": 1672610712,
+      "size": 2913,
+      "kind": "file",
+      "sha256": "3e38df96688ba32938ece2070219684616bd157750c8ba5042ccb790a49dcacc"
+    },
+    {
+      "path": "make-4.4.1/src/guile.c",
+      "mode": 420,
+      "mtime": 1672610712,
+      "size": 4008,
+      "kind": "file",
+      "sha256": "11e155957d2e01d2b7154c66ad90d45de6af9c65c69a8b1a4bdeb2921f4300f0"
+    },
+    {
+      "path": "make-4.4.1/src/hash.c",
+      "mode": 420,
+      "mtime": 1668353930,
+      "size": 13717,
+      "kind": "file",
+      "sha256": "dc8179380acece0dd443cb839a432d7536427376fdfd7e429a4ccc0a705ef81d"
+    },
+    {
+      "path": "make-4.4.1/src/hash.h",
+      "mode": 420,
+      "mtime": 1666536752,
+      "size": 8484,
+      "kind": "file",
+      "sha256": "668f03f57c7d72add9c90783cc0a987cb041f19c9a983ae2f5292c7af3985c85"
+    },
+    {
+      "path": "make-4.4.1/src/implicit.c",
+      "mode": 420,
+      "mtime": 1676787957,
+      "size": 41652,
+      "kind": "file",
+      "sha256": "483d4394495f4edefea74863b4f0cb8a72938d90d03c792f6de9e94b2dbdb5d1"
+    },
+    {
+      "path": "make-4.4.1/src/job.c",
+      "mode": 420,
+      "mtime": 1677030828,
+      "size": 117381,
+      "kind": "file",
+      "sha256": "c1c32d4bd7fd56d898e952ed094a488edf2d4333a02058a3302d28f5e3f8ca09"
+    },
+    {
+      "path": "make-4.4.1/src/job.h",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 3401,
+      "kind": "file",
+      "sha256": "72d25d7693c82031d716750becbc917eb434f026416aadc7e0a9fd3348585813"
+    },
+    {
+      "path": "make-4.4.1/src/load.c",
+      "mode": 420,
+      "mtime": 1672608396,
+      "size": 6855,
+      "kind": "file",
+      "sha256": "370cf630c6dce17de4bd2a769e6eaca87211baa109ffc9c3bee3997103c3581d"
+    },
+    {
+      "path": "make-4.4.1/src/loadapi.c",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 2058,
+      "kind": "file",
+      "sha256": "d23318cf7656331552067e7ab830802ed16ab6141be19652bb4516def66f1747"
+    },
+    {
+      "path": "make-4.4.1/src/main.c",
+      "mode": 420,
+      "mtime": 1676955831,
+      "size": 121118,
+      "kind": "file",
+      "sha256": "7f0b8a02a6449507c751cdf3315a11bb0e99f22dc75a33a8b82b9e78c9f0bff0"
+    },
+    {
+      "path": "make-4.4.1/src/makeint.h",
+      "mode": 420,
+      "mtime": 1676814715,
+      "size": 25753,
+      "kind": "file",
+      "sha256": "d8f03f738878a93e747cf497082019adafa20474db4fc97d8d8e81bdffdea951"
+    },
+    {
+      "path": "make-4.4.1/src/misc.c",
+      "mode": 420,
+      "mtime": 1676786536,
+      "size": 21095,
+      "kind": "file",
+      "sha256": "8722c8e925b618719fa6b8a5d1e8a7e0a24faadc8e14a1df7e432955b0335337"
+    },
+    {
+      "path": "make-4.4.1/src/mkconfig.h",
+      "mode": 420,
+      "mtime": 1677427505,
+      "size": 1438,
+      "kind": "file",
+      "sha256": "28321fe0be9dc34d539e6c39cbdef926ddf771d2b4625bb82b5d943806a91560"
+    },
+    {
+      "path": "make-4.4.1/src/mkcustom.h",
+      "mode": 420,
+      "mtime": 1673192724,
+      "size": 1888,
+      "kind": "file",
+      "sha256": "789f78921ee8d8196166eae100a38edcf6e602d74718a33b14e682e14ca21b0f"
+    },
+    {
+      "path": "make-4.4.1/src/os.h",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 5527,
+      "kind": "file",
+      "sha256": "3103468513eccb4e330c882fb1f489df7061106e8d9907ea356a5934f1177756"
+    },
+    {
+      "path": "make-4.4.1/src/output.c",
+      "mode": 420,
+      "mtime": 1672610712,
+      "size": 12882,
+      "kind": "file",
+      "sha256": "81877587a54072a3d170884f01855b676928b857218e56f85aad28766a8fd2ee"
+    },
+    {
+      "path": "make-4.4.1/src/output.h",
+      "mode": 420,
+      "mtime": 1672610712,
+      "size": 2109,
+      "kind": "file",
+      "sha256": "6f3fbbc224c36b9f1731a9b91ae099d5c337ff8711e67d911a8b4a1d0dc36128"
+    },
+    {
+      "path": "make-4.4.1/src/posixos.c",
+      "mode": 420,
+      "mtime": 1676735715,
+      "size": 21294,
+      "kind": "file",
+      "sha256": "569e850f2af9962344f54eea231866ed0e0f64af89a691fc9e7b5fa308cf5ba1"
+    },
+    {
+      "path": "make-4.4.1/src/read.c",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 106845,
+      "kind": "file",
+      "sha256": "fdfab1b43ccaad6816a7a89855051c95e2d023b599592929280b9274681c5203"
+    },
+    {
+      "path": "make-4.4.1/src/remake.c",
+      "mode": 420,
+      "mtime": 1676788042,
+      "size": 59543,
+      "kind": "file",
+      "sha256": "a51b44dd016bb13e32a8091763443e7077b2ba23849f76b1e323f26b5acd323f"
+    },
+    {
+      "path": "make-4.4.1/src/remote-cstms.c",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 8419,
+      "kind": "file",
+      "sha256": "26e8e7fa0419a7a053c2b7e89d8245730e90367f755c6453deebc04d9d6042a6"
+    },
+    {
+      "path": "make-4.4.1/src/remote-stub.c",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 2870,
+      "kind": "file",
+      "sha256": "1419827b40d748d930d2b008ef44414da6a818fd61953e8316b3218463287db3"
+    },
+    {
+      "path": "make-4.4.1/src/rule.c",
+      "mode": 420,
+      "mtime": 1674912875,
+      "size": 18582,
+      "kind": "file",
+      "sha256": "3627255f3daeb854a9622ebe801daeda48625f77b30c96a2ba3636822d1078ea"
+    },
+    {
+      "path": "make-4.4.1/src/rule.h",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 2238,
+      "kind": "file",
+      "sha256": "4931fc97ea675e4ffc25a72d67c7f24cd5b46012dca0cf4c8dfba1c3de1e3834"
+    },
+    {
+      "path": "make-4.4.1/src/shuffle.c",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 5736,
+      "kind": "file",
+      "sha256": "0d7d3ee4e86c2c9391f37faa217d1887e244df387193f03faaca628277c9ce6a"
+    },
+    {
+      "path": "make-4.4.1/src/shuffle.h",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1030,
+      "kind": "file",
+      "sha256": "49789a98bca55bd01a3f04de9eb83ce8b41ee79ae41a85d6a32d41ff3bacab21"
+    },
+    {
+      "path": "make-4.4.1/src/signame.c",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 6863,
+      "kind": "file",
+      "sha256": "d832ed2feeefc3cd06e5ac789996675b485f616dc2bf249b6d0af6dcddae028a"
+    },
+    {
+      "path": "make-4.4.1/src/strcache.c",
+      "mode": 420,
+      "mtime": 1672610712,
+      "size": 9386,
+      "kind": "file",
+      "sha256": "e1e22572cd03389bb6cd50d9391e5e67242a1c239c4692f5eb504a4c09c39644"
+    },
+    {
+      "path": "make-4.4.1/src/variable.c",
+      "mode": 420,
+      "mtime": 1674929087,
+      "size": 62926,
+      "kind": "file",
+      "sha256": "d1ef76d923b7dba96a09374c67d7ba0426509ed78d3ec3475d229008c312e9ea"
+    },
+    {
+      "path": "make-4.4.1/src/variable.h",
+      "mode": 420,
+      "mtime": 1674929087,
+      "size": 10426,
+      "kind": "file",
+      "sha256": "6cbb1588fe8ab8895d12cbe717a17c3de24146a45d76bbd125ace41bddb88b96"
+    },
+    {
+      "path": "make-4.4.1/src/version.c",
+      "mode": 420,
+      "mtime": 1672610712,
+      "size": 1178,
+      "kind": "file",
+      "sha256": "22ce214f6a76eb5cd7f981b1fa7ce9f46148d71a1fa0a011630e4540547870d4"
+    },
+    {
+      "path": "make-4.4.1/src/vms_exit.c",
+      "mode": 420,
+      "mtime": 1672610712,
+      "size": 3066,
+      "kind": "file",
+      "sha256": "12c91c5d462708268c25b2f19218d50451c2fdda92dc1cd1c83f91fc8d5112b4"
+    },
+    {
+      "path": "make-4.4.1/src/vms_export_symbol.c",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 14042,
+      "kind": "file",
+      "sha256": "05ef6133df1923863d1c5146dafd87a8a53e32eaf359f9c8baa2d358f9c299c2"
+    },
+    {
+      "path": "make-4.4.1/src/vms_progname.c",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 14611,
+      "kind": "file",
+      "sha256": "b60429a5746dd9a56bcc693a2740fcf540c9d208bdc469c5ea46b9a8eb2fd02b"
+    },
+    {
+      "path": "make-4.4.1/src/vmsdir.h",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 1717,
+      "kind": "file",
+      "sha256": "8c431435d7d1fa58bdbb2a5855262ad617a602d37a746c7ef1705c5fb8055437"
+    },
+    {
+      "path": "make-4.4.1/src/vmsfunctions.c",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 5930,
+      "kind": "file",
+      "sha256": "5c5149f907a5c82ee7473ce5d5695a28230316c69e387a01c5ec5ccb48cd8a32"
+    },
+    {
+      "path": "make-4.4.1/src/vmsify.c",
+      "mode": 420,
+      "mtime": 1674912872,
+      "size": 18630,
+      "kind": "file",
+      "sha256": "270dfaca98fd07fe2c90bba2cb964c4ec07504e496388cba0f85cb2a76ce3eb9"
+    },
+    {
+      "path": "make-4.4.1/src/vmsjobs.c",
+      "mode": 420,
+      "mtime": 1672610712,
+      "size": 42823,
+      "kind": "file",
+      "sha256": "f4a4cc972192406489744aee96d40eb904605673b1e44d58aa8d5b8dbc78af2b"
+    },
+    {
+      "path": "make-4.4.1/src/vpath.c",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 18376,
+      "kind": "file",
+      "sha256": "0c9037f00a0898cdca2088393ce630d123f651ea346dc086adb5be61ac145e9b"
+    },
+    {
+      "path": "make-4.4.1/src/w32",
+      "mode": 493,
+      "mtime": 1677437212,
+      "size": 0,
+      "kind": "directory"
+    },
+    {
+      "path": "make-4.4.1/src/w32/compat",
+      "mode": 493,
+      "mtime": 1677437212,
+      "size": 0,
+      "kind": "directory"
+    },
+    {
+      "path": "make-4.4.1/src/w32/compat/dirent.c",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 5431,
+      "kind": "file",
+      "sha256": "6e0b7a4fc4a691fa437be24c2910b934933c14ca5e716e43aaf610a80122ade8"
+    },
+    {
+      "path": "make-4.4.1/src/w32/compat/posixfcn.c",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 3273,
+      "kind": "file",
+      "sha256": "f3b643e1a93a05fcdce5cb7b0caf9a3f77d0e0badf04b6ec808231af787c8086"
+    },
+    {
+      "path": "make-4.4.1/src/w32/include",
+      "mode": 493,
+      "mtime": 1677437212,
+      "size": 0,
+      "kind": "directory"
+    },
+    {
+      "path": "make-4.4.1/src/w32/include/dirent.h",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 2107,
+      "kind": "file",
+      "sha256": "1bcc107c90c4f002e3e4cb60fe0c4476ff03880223ec719ac55b76ef1a4843e1"
+    },
+    {
+      "path": "make-4.4.1/src/w32/include/dlfcn.h",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 1009,
+      "kind": "file",
+      "sha256": "c06f9e9357a93cdf8738b8151a7e8778985a3b7a626e393012688e3ccf743f58"
+    },
+    {
+      "path": "make-4.4.1/src/w32/include/pathstuff.h",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 997,
+      "kind": "file",
+      "sha256": "eacac56e70ffb0b5db24b83546c80437b0fdda1d4a46cd29c2aa87828e576aae"
+    },
+    {
+      "path": "make-4.4.1/src/w32/include/sub_proc.h",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 2567,
+      "kind": "file",
+      "sha256": "068d2c0f7693305063c81e774165817021cc336ddd236b7fe8598099125337e2"
+    },
+    {
+      "path": "make-4.4.1/src/w32/include/w32err.h",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 948,
+      "kind": "file",
+      "sha256": "67a3596b23b99d85198de0c83f7c6017a97d5385f2300846d854f3e5f6f57be9"
+    },
+    {
+      "path": "make-4.4.1/src/w32/pathstuff.c",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 8514,
+      "kind": "file",
+      "sha256": "7d4ef353165a2795a3e8ac65738931d1ac8f41a24502b41c8a01d9e88a97f62f"
+    },
+    {
+      "path": "make-4.4.1/src/w32/subproc",
+      "mode": 493,
+      "mtime": 1677437212,
+      "size": 0,
+      "kind": "directory"
+    },
+    {
+      "path": "make-4.4.1/src/w32/subproc/misc.c",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 2403,
+      "kind": "file",
+      "sha256": "fa6e23af39adde3c64bbf0339881ecbdc82166f136552ad03d1685d97478674d"
+    },
+    {
+      "path": "make-4.4.1/src/w32/subproc/proc.h",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 981,
+      "kind": "file",
+      "sha256": "5219dbf34d8492554de54617f102fb5233b51fe756b5fe2267156653c1d9633f"
+    },
+    {
+      "path": "make-4.4.1/src/w32/subproc/sub_proc.c",
+      "mode": 420,
+      "mtime": 1673481958,
+      "size": 52550,
+      "kind": "file",
+      "sha256": "cf62c183fd51a91bd29a1f562256b12bdee1718cd3db1456bcfa81847f6e243b"
+    },
+    {
+      "path": "make-4.4.1/src/w32/subproc/w32err.c",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 2637,
+      "kind": "file",
+      "sha256": "799a14cff6ed686e95240fa08c0aec0f71d6e32eaed1b7ae20b50c8c72a3680e"
+    },
+    {
+      "path": "make-4.4.1/src/w32/w32os.c",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 14466,
+      "kind": "file",
+      "sha256": "2ad2c36257056f283c2511690dea8a39ce25dacc965598619f51cb4f16f263df"
+    },
+    {
+      "path": "make-4.4.1/tests",
+      "mode": 493,
+      "mtime": 1677437214,
+      "size": 0,
+      "kind": "directory"
+    },
+    {
+      "path": "make-4.4.1/tests/README",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 4454,
+      "kind": "file",
+      "sha256": "f1a0afbb5a579cccf1af6a9d961ea36ce7112b2a1192c03b5ffd2fd29cfdfb24"
+    },
+    {
+      "path": "make-4.4.1/tests/config-flags.pm.W32",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 123,
+      "kind": "file",
+      "sha256": "87b41c4d36be641775e241c4bcd7b6b810d921268a430468eb342e8431192c73"
+    },
+    {
+      "path": "make-4.4.1/tests/config-flags.pm.in",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 544,
+      "kind": "file",
+      "sha256": "28b28a6309dfec43997c118081be2260f5607af79579429f6b1b15c803f8a094"
+    },
+    {
+      "path": "make-4.4.1/tests/config_flags_pm.com",
+      "mode": 493,
+      "mtime": 1672585561,
+      "size": 1762,
+      "kind": "file",
+      "sha256": "a72da3d4947e8af66ccd6d69e57746af57978597f0c254377ee09cd25cc4e367"
+    },
+    {
+      "path": "make-4.4.1/tests/guile.supp",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 359,
+      "kind": "file",
+      "sha256": "8a5f7d45305e6ad6af24e369916edf417c412e99a6e2d57e4df484ebbe43f14c"
+    },
+    {
+      "path": "make-4.4.1/tests/mkshadow",
+      "mode": 493,
+      "mtime": 1672585561,
+      "size": 1425,
+      "kind": "file",
+      "sha256": "7db93edea868607771261b3fe6dafdd3eba39f39bae31be969aefd9ad3d38de7"
+    },
+    {
+      "path": "make-4.4.1/tests/run_make_tests",
+      "mode": 493,
+      "mtime": 1672585086,
+      "size": 36,
+      "kind": "file",
+      "sha256": "1c855067253ec6c54ea5e21f6054ad38a36a3c7f197772ab54d7efba63b1eeee"
+    },
+    {
+      "path": "make-4.4.1/tests/run_make_tests.bat",
+      "mode": 420,
+      "mtime": 1672585561,
+      "size": 814,
+      "kind": "file",
+      "sha256": "80478cf2767db815d6c2f342338029f5b4ec5d5fefe9de2f2863116f49577e92"
+    },
+    {
+      "path": "make-4.4.1/tests/run_make_tests.pl",
+      "mode": 420,
+      "mtime": 1676736790,
+      "size": 19863,
+      "kind": "file",
+      "sha256": "aa8ac4e2606cc448047a717556679b17aa5d9bf641e003910ed55768c6568dc9"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts",
+      "mode": 493,
+      "mtime": 1677437214,
+      "size": 0,
+      "kind": "directory"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features",
+      "mode": 493,
+      "mtime": 1677437214,
+      "size": 0,
+      "kind": "directory"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/archives",
+      "mode": 420,
+      "mtime": 1676836097,
+      "size": 8330,
+      "kind": "file",
+      "sha256": "cb6d55e3c0660b531febc0938782cfcc1245db121d645b862c0bee5ee7775fc4"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/comments",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1251,
+      "kind": "file",
+      "sha256": "31df206bcb211fc14822169fa5e06cb44fa418e9141a6cf066c5083f4319c46a"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/conditionals",
+      "mode": 420,
+      "mtime": 1672610712,
+      "size": 2617,
+      "kind": "file",
+      "sha256": "da6497cc2b4afc4181bfc6375241c99691509cf9aaf8dc3c65aaa65c13ed6d68"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/default_names",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1317,
+      "kind": "file",
+      "sha256": "b57028c6e04d5dea07f519974c30e511e4cb9d17e744957e6c2b93e4a76d9387"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/dircache",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 714,
+      "kind": "file",
+      "sha256": "a954116f1f07182f37b39a71313359a17ecceb568febcbbc9be3aea78286f8e1"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/double_colon",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 4656,
+      "kind": "file",
+      "sha256": "d2c2c6717747b8a5d2bca0d79d42770fc4661c87d873ea71af078cc4eeb43f08"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/echoing",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 2087,
+      "kind": "file",
+      "sha256": "220b5508b43bbc43fb0e46897ca45a36a8f5cc9f44c6e17ac7699ba643e3143b"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/errors",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 2980,
+      "kind": "file",
+      "sha256": "8b571a7dfb4504076c79456b6b4ed4577aae4b475376e5dc89a321b640601232"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/escape",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 2511,
+      "kind": "file",
+      "sha256": "b0ea8d3ed00f6a835d38eade83e71eeeeb656d7d8f668333db8cdebb5fc371f5"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/exec",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 2128,
+      "kind": "file",
+      "sha256": "065462db306460f84b4edb16620792f0fd99ec7d18a07b54a5c68fb2d68447ca"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/export",
+      "mode": 420,
+      "mtime": 1672610712,
+      "size": 4128,
+      "kind": "file",
+      "sha256": "bc274a73e7b361a1da1cbb952318ae6f3fbe2679ed4909675ca3c39cd3e0c075"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/grouped_targets",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 4255,
+      "kind": "file",
+      "sha256": "8f49088335fb9d27ed992b673d7c0b4a33a7c59fa972c47947d7731d9db67dc0"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/implicit_search",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 14016,
+      "kind": "file",
+      "sha256": "7f03bb7e6c8ea84c0dddb16399ea9ed144e63b6b5824bb3f895732414999a91e"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/include",
+      "mode": 420,
+      "mtime": 1676838909,
+      "size": 11715,
+      "kind": "file",
+      "sha256": "9a86b4f45e120185f9ffb7c7e612deb557ac837580218d641bc4bdda20a69fff"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/jobserver",
+      "mode": 420,
+      "mtime": 1677030828,
+      "size": 6445,
+      "kind": "file",
+      "sha256": "6fd915ec8cbe5e930b17d1083cb0c35c0b32bfa5f7c70c1152d6faf2c44af5ec"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/load",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 3833,
+      "kind": "file",
+      "sha256": "76d055ebff651857f3138690d341c6918521f2fb20e68660a712768b9d48ffd9"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/loadapi",
+      "mode": 420,
+      "mtime": 1672608396,
+      "size": 5385,
+      "kind": "file",
+      "sha256": "f9e4e4ec18461e6608e462905aa01b2271fa495b70a28f33f4c98f5eea52a6cc"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/mult_rules",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 2327,
+      "kind": "file",
+      "sha256": "19fe5e7c424b25a62fd8686de766cd3e6c1d4cbfe6656c019e799d3a72d117cc"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/mult_targets",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1295,
+      "kind": "file",
+      "sha256": "ec00f49ca12304cf6d46c28fae84e8bb7eedb7b2864f5747a073b34ca62bf0c1"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/order_only",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 2269,
+      "kind": "file",
+      "sha256": "0b7a09555b607ee2c2841f887a1792902689afb3e9088e3af56408a2e4e02d9a"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/output-sync",
+      "mode": 420,
+      "mtime": 1676787957,
+      "size": 10719,
+      "kind": "file",
+      "sha256": "be0a7743546a5f2221b4b90b56581d87dd2a97159ff3107694bab6183c622c1e"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/override",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 873,
+      "kind": "file",
+      "sha256": "695ad935a31cffefe07c1ebee82908a64e5386ecb1bc5873c4022ef5c13a525a"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/parallelism",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 7424,
+      "kind": "file",
+      "sha256": "a975ca64caea1c5f0799bc123635252118491086a12c057835a0b864a42fd37a"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/patspecific_vars",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 3193,
+      "kind": "file",
+      "sha256": "eb6ff7ae725e99808683450ef24c22462f4f4537fe6e04a2e824978e4cb24d5e"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/patternrules",
+      "mode": 420,
+      "mtime": 1672638608,
+      "size": 15953,
+      "kind": "file",
+      "sha256": "32a6725a24ee12d1aadf14ae21e540509ce8422c7b1629fb7785e0febba9fb18"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/quoting",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 698,
+      "kind": "file",
+      "sha256": "bf6710cfd97bebc3fa6a0ab066d7acf4c3cd9d1bc1c09d42d880887d738bb514"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/recursion",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1616,
+      "kind": "file",
+      "sha256": "0a5176029b675d1fb16bd6afd5c355c9736af1c897068d33b729bd9fbcd39c3c"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/reinvoke",
+      "mode": 420,
+      "mtime": 1673487307,
+      "size": 4865,
+      "kind": "file",
+      "sha256": "359ba3784c4721c455b32cfe937899ee763de70416e76eec43d9735211a02c67"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/rule_glob",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 916,
+      "kind": "file",
+      "sha256": "0adfbbf841b9b9ac82701ffde6ce59ac0326850e966f81ce684358ad29b12693"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/se_explicit",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 13185,
+      "kind": "file",
+      "sha256": "7e5f477c6d2ecf6ce7505baeef044c68fe964da27c4ec334c65c90e3aae9db59"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/se_implicit",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 10537,
+      "kind": "file",
+      "sha256": "39a21398f463b65d16109983960f81f5d501748c9a0d65d60eeafd58f0cedd5e"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/se_statpat",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 6007,
+      "kind": "file",
+      "sha256": "8903ab9be9d80bf9cee1f5f46b84769fa2a3be2c16bddc5a06183c64f577089c"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/shell_assignment",
+      "mode": 420,
+      "mtime": 1673192738,
+      "size": 1888,
+      "kind": "file",
+      "sha256": "938dc5fe5d76d0660c7750c6c8375381e1b8a0f617e18c3b764a70a1c56b924b"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/statipattrules",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 8269,
+      "kind": "file",
+      "sha256": "3ddd7b9e02886ece994d8b52e28095f635b0ecb148215571dd3b6b23b79c6be8"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/suffixrules",
+      "mode": 420,
+      "mtime": 1676924192,
+      "size": 3704,
+      "kind": "file",
+      "sha256": "079b536c7b2d420df598fdb7567a415967ca095ee8c959ee98a863abe4abe504"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/targetvars",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 10344,
+      "kind": "file",
+      "sha256": "fb9bfb8b7973121464362d77933088737d4bf1497e354a0284dd14bb0d3d1b13"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/temp_stdin",
+      "mode": 420,
+      "mtime": 1673818557,
+      "size": 4299,
+      "kind": "file",
+      "sha256": "befaaf2fa2fdc8ff24f49175106bff5d5ef39b4de68391bb34898b9116d71734"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/utf8",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 320,
+      "kind": "file",
+      "sha256": "f6880982a4fd2bdcd47582a9981af4f232de0bba23e41c0791162deb687b88c1"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/varnesting",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 624,
+      "kind": "file",
+      "sha256": "1b73f3abbacc0009e904a8b622246bc59d95981ce979e2fe2c05f1de00061a1d"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/vpath",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 2883,
+      "kind": "file",
+      "sha256": "94e691bf80431b119b5446569f85c23f80eae2601d314b7e102453298fc721c6"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/vpathgpath",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1094,
+      "kind": "file",
+      "sha256": "397281eecf4caac2c5a9c0ad98c7485d8bd9659da87c60cb9e3ef23cc2a31c9a"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/features/vpathplus",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 2098,
+      "kind": "file",
+      "sha256": "ec19baaade6423ae3f60b3109aaa9ec8b6dc5501d3bd0e806d8192d08c189699"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions",
+      "mode": 493,
+      "mtime": 1677437214,
+      "size": 0,
+      "kind": "directory"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/abspath",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1914,
+      "kind": "file",
+      "sha256": "e6100745dc5644e29cef73e816ae5dabf71734e6dbe375717a475ed82947c458"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/addprefix",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1156,
+      "kind": "file",
+      "sha256": "c9d8eee9d6382d82b6e58cf5cbe3ed83b19fe3e5bbe13e7b7fadc661dc9d9a67"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/addsuffix",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 737,
+      "kind": "file",
+      "sha256": "77f469f3b6b875d759b96512390a7f26ee9a234f38b2f6c49dfb6d0d13e79770"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/andor",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1362,
+      "kind": "file",
+      "sha256": "3a2e876c1a8b8ccefdccc727036e81220e7cd05b30732bf99bf316a473de73e0"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/basename",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1280,
+      "kind": "file",
+      "sha256": "14039ec96d91919ee5c1ec50c9b33e7b7b199532f05accf53f9316f0e7ab4639"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/call",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 2610,
+      "kind": "file",
+      "sha256": "920b0e21ef6f717ef3614ab646d0e1234a7f915feac523521b8aafe758569a20"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/dir",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1123,
+      "kind": "file",
+      "sha256": "faf11f6fee85a1ed37011f5c70d14f6f30f73caeac8883dc7349c3718b1eab39"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/error",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1678,
+      "kind": "file",
+      "sha256": "bea9608917a88e170faeb3811bbbb19e722b40fd28743669732dbc78ce84b948"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/eval",
+      "mode": 420,
+      "mtime": 1672610712,
+      "size": 3515,
+      "kind": "file",
+      "sha256": "c97f28688aba5a22d83408762d4e67e4a9625a4aefd60154e53d3621b0904200"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/file",
+      "mode": 420,
+      "mtime": 1673484694,
+      "size": 4545,
+      "kind": "file",
+      "sha256": "7d955ec470949a9dd1d0605b6b3ea903b3e99029be3c66df9c2991ef474f26d0"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/filter-out",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1989,
+      "kind": "file",
+      "sha256": "87fd633187686e8fa90362275fbd1e656089ff7782b2a72f301abfea7bfe156c"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/findstring",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1177,
+      "kind": "file",
+      "sha256": "d0ad4c616ab09b52a138cfd89c52bb1ad3dd8ec433eea85ab94279ab093d2b34"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/flavor",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 591,
+      "kind": "file",
+      "sha256": "e95cb924415c9b042ea42c9a09379a939154ea0a11b1a1623abce46bd6558f70"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/foreach",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 2372,
+      "kind": "file",
+      "sha256": "29c6d6980f6cded6a76e216b6b2332e6590d4cfe88da78f83b7c0ce1812c82bb"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/guile",
+      "mode": 420,
+      "mtime": 1672638606,
+      "size": 3015,
+      "kind": "file",
+      "sha256": "026876178594756ff6625de9c8ed5c00f4202845c9f7ad0e68cdb9e1c0a77eff"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/if",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 935,
+      "kind": "file",
+      "sha256": "bdf4403288b251427f5c67d10c0f36cc4755340e9502ea48fd241d1979187377"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/intcmp",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 2481,
+      "kind": "file",
+      "sha256": "ba53178d0d528d8f8548601a79179257ed7fad2cf7f1ad07edcd57c5ef8352b1"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/join",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1118,
+      "kind": "file",
+      "sha256": "5cd666b0ee5fa83b48a2a7f76338f026a35b4a1b590efeef14459486b43e5796"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/let",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 2951,
+      "kind": "file",
+      "sha256": "3032d2b7eac4a04ad904565aa2999fc736900875d2862183de3987c1bd521e91"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/notdir",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1125,
+      "kind": "file",
+      "sha256": "4e7e0ee3c2baac4a70f9405b83f360e091d75d8f3278dd1e67c4fe5a16e936c1"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/origin",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1299,
+      "kind": "file",
+      "sha256": "96e98ab30afe9e63384a0f624095091d55dbe18c3137dd02b2fc9a090a62748c"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/realpath",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1869,
+      "kind": "file",
+      "sha256": "4ce3896bd14ce302aae16c1f7cd4bdc7c8b77d48c9d4ef5f849edfec0f64a829"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/shell",
+      "mode": 420,
+      "mtime": 1673192738,
+      "size": 5012,
+      "kind": "file",
+      "sha256": "55276e34d443534514f15e8e514f3a9074d158a37edfc793318a02e0769e7af6"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/sort",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1758,
+      "kind": "file",
+      "sha256": "ca583362fa9008b5510f81cf8820fe8a027c067636ca9d6615c832b746534b80"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/strip",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1702,
+      "kind": "file",
+      "sha256": "d27541f1671ca25f20707ebc1b069bde26d0a5f93ab2c54889d3466868d90253"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/substitution",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 890,
+      "kind": "file",
+      "sha256": "6ab29a070d82bd43687f80a7e4a225654abf6ef53be3537e3eca855e539bc2f8"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/suffix",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 2087,
+      "kind": "file",
+      "sha256": "f75b0cc42542afea987ff9d050e83bb940fe1bc8f47162ad41667e63bef3b47c"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/value",
+      "mode": 420,
+      "mtime": 1672610712,
+      "size": 732,
+      "kind": "file",
+      "sha256": "effea9db7096d6444f699ae4d646a7d8826448b43d57c1c05a9e92b2bbe4b350"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/warning",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1871,
+      "kind": "file",
+      "sha256": "37ab73c56fe6ba914a02272bd406cc2c885aaf4b7626fd519e97b862df71c913"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/wildcard",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 4525,
+      "kind": "file",
+      "sha256": "f8552cc1cabcf46a7c3284ee008425d44605f157cec172e7425c9c130b6f15dd"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/functions/word",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 5158,
+      "kind": "file",
+      "sha256": "7501e34e2f3d206f87e73422fb75d51125516ff95d76c9ff2d06ad4fb06573b2"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/misc",
+      "mode": 493,
+      "mtime": 1677437214,
+      "size": 0,
+      "kind": "directory"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/misc/bs-nl",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 4264,
+      "kind": "file",
+      "sha256": "e9f9b6dd2a982a56775f39076b2872b2095068046a9153c9855536c5ec735780"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/misc/close_stdout",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 356,
+      "kind": "file",
+      "sha256": "2bc39152f770acdc82908d71b174ba99c57738d2a7667a7924047d0d27034913"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/misc/failure",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1040,
+      "kind": "file",
+      "sha256": "c1bc687b43776d218873bf216cf071241889dd7b0d68c839f648cf5c70ddf095"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/misc/fopen-fail",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 765,
+      "kind": "file",
+      "sha256": "98b649bdd6969ec17306d4f3b4c0fdb7557710742ecfdb15fc284047e3336977"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/misc/general1",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1534,
+      "kind": "file",
+      "sha256": "01ad3041a2c4c9c585a896bd04fc06773f65f7c7bacbf0b1fc66a0d49d051e23"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/misc/general2",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1526,
+      "kind": "file",
+      "sha256": "e7dd9545832ff4dbcb7debbc2a9c20b27022bf361922376e47e18149554a19da"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/misc/general3",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 4756,
+      "kind": "file",
+      "sha256": "7e85b87cf6073ee0fbf12cb2a7b8f006be854d1766e19a453752130ac854c23e"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/misc/general4",
+      "mode": 420,
+      "mtime": 1676909510,
+      "size": 3310,
+      "kind": "file",
+      "sha256": "fe815770e4283bcfab0322306f375db60e40594cb7d32735ae72117c96c43251"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/misc/utf8",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 322,
+      "kind": "file",
+      "sha256": "bee11da503f8cedf1b2575576b88138f96897cebec1c5e5f5c00b9da83164717"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/options",
+      "mode": 493,
+      "mtime": 1677437214,
+      "size": 0,
+      "kind": "directory"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/options/dash-B",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1789,
+      "kind": "file",
+      "sha256": "aafd56a03b061065a66c4350989fc89993f3fdf456dd50ac8a43ab863c451189"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/options/dash-C",
+      "mode": 420,
+      "mtime": 1672610712,
+      "size": 1332,
+      "kind": "file",
+      "sha256": "019fecf6bfd962087cd6892830d2bbc9eb422fe10d3cc45643e8d9e9aa46cfc9"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/options/dash-I",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 3630,
+      "kind": "file",
+      "sha256": "c6291c201a73d6eea19425ee5cd11ee0a8392393cf0458ff0e72dc8ab724d06d"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/options/dash-W",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1952,
+      "kind": "file",
+      "sha256": "b8f2c68089feee4177e2a8ece916892d70185bfde06b77622bf328e028b83bae"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/options/dash-d",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 270,
+      "kind": "file",
+      "sha256": "a18a7d14c7a772b42ea9b96d7f086456f6b82b85fd71a8880c4060de9823d511"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/options/dash-e",
+      "mode": 420,
+      "mtime": 1673213909,
+      "size": 604,
+      "kind": "file",
+      "sha256": "ebf5aec6df29315f474a15b5bfa2de0d9bba2715f2a477cc45b525ca87f118be"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/options/dash-f",
+      "mode": 420,
+      "mtime": 1673485450,
+      "size": 5263,
+      "kind": "file",
+      "sha256": "ebc2b8ce02ded2124ecd9712d74af2dd588618a7820c3323e3608066677baa70"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/options/dash-k",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 2927,
+      "kind": "file",
+      "sha256": "518f47e217c98eba45e6b620a514b4fa8131f6460349de0d0a1680fc602d641b"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/options/dash-l",
+      "mode": 420,
+      "mtime": 1677437162,
+      "size": 1585,
+      "kind": "file",
+      "sha256": "90b964ae66b0539d0fd891621e83143f504d6c59b6ed52b45b2812e014c99604"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/options/dash-n",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 2334,
+      "kind": "file",
+      "sha256": "ca66d2d06f09120fb737ddce5771a1db1caf01fe35c9a95a2dbd8532649d9130"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/options/dash-q",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1545,
+      "kind": "file",
+      "sha256": "0a71f6c2f8fefd7e34a623e2e2ae9726b6c0c703e811022bdbdd5aee2dbf70f3"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/options/dash-r",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 986,
+      "kind": "file",
+      "sha256": "a3211404320ac1b4c1e3ec01c4c5b7937d2eb6bbcd01fadeeb7041e78481f835"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/options/dash-s",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 966,
+      "kind": "file",
+      "sha256": "3f8e590d60e18406ea181c61f4085fb505e78c934f9dbe8058ab3d40b4561c61"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/options/dash-t",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1590,
+      "kind": "file",
+      "sha256": "f93cf163600745bbd4b70f6f3baff610c007a1e67426c4d39beafc0d6f2a266b"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/options/eval",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1238,
+      "kind": "file",
+      "sha256": "37e1d87182d9d0ba22e8e88e062ecc656968b7eacb73380eed2f6808f9da73cb"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/options/general",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 798,
+      "kind": "file",
+      "sha256": "27a6456a030d97f902364ad18d0113fae45c2a459d2a056060ecc990ffeb0241"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/options/print-directory",
+      "mode": 420,
+      "mtime": 1672610712,
+      "size": 1724,
+      "kind": "file",
+      "sha256": "c47a15d46c120973fd8f55c2556b988d69ab42add3f4f2f33678bc6246b9302c"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/options/shuffle",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 3001,
+      "kind": "file",
+      "sha256": "eada1bc7b295b4ecfed6ec58992cf6f5e186d38e7e3ecfa58e78ed9ff6702fa6"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/options/symlinks",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1956,
+      "kind": "file",
+      "sha256": "a350d68e426e3b25dc099413ac3027a8746f7f06f077aac10665902a077b7562"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/options/warn-undefined-variables",
+      "mode": 420,
+      "mtime": 1672729922,
+      "size": 1566,
+      "kind": "file",
+      "sha256": "dc52f4fa30b78e26b69030ee3be3000cfe193872a2849b3c0337030da444d9e7"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/targets",
+      "mode": 493,
+      "mtime": 1677437214,
+      "size": 0,
+      "kind": "directory"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/targets/DEFAULT",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1071,
+      "kind": "file",
+      "sha256": "86210cd49aa4532771893038543234b40650b6a722f9a1c6ea9d19dda062b0ac"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/targets/DELETE_ON_ERROR",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 562,
+      "kind": "file",
+      "sha256": "88d589e58cefb4b90977d3463d760e595f1abc1e3b6ecd76ad19564e48f5c4c2"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/targets/FORCE",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 484,
+      "kind": "file",
+      "sha256": "4c03a7644fd7cb42786ddf8508cbd1fc8ad853e99e1cb1d735d31cd867c4b555"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/targets/INTERMEDIATE",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 2684,
+      "kind": "file",
+      "sha256": "53a30c5179b0399539f29a2aa1dd4eaaef5a228e55bfb67008ede677c21337f6"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/targets/NOTINTERMEDIATE",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 2843,
+      "kind": "file",
+      "sha256": "c4c9c2fe61114d43c84a8b44243c203e20afbd340524f8d53050b290367798f1"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/targets/ONESHELL",
+      "mode": 420,
+      "mtime": 1673192738,
+      "size": 2926,
+      "kind": "file",
+      "sha256": "09b6f3d4b2a79b40e963ed9e925c74b9c54052c8b3a7a6ab23115bbb6b944448"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/targets/PHONY",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1291,
+      "kind": "file",
+      "sha256": "82c7649316f5137ee6a1ac8beb65fd483a565a1eaaf4be3d8bf5a72cbeccbe01"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/targets/POSIX",
+      "mode": 420,
+      "mtime": 1674929087,
+      "size": 2465,
+      "kind": "file",
+      "sha256": "834f70b72ae6e8a8c1d390ed7dc60a40585e787d63ef745b5005886fe67dd4a9"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/targets/SECONDARY",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 3926,
+      "kind": "file",
+      "sha256": "a41d1f88a2bb92b5778b3c28c8865225bcf86faf9ebe4a4fdeb89f1a54a5de5f"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/targets/SILENT",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 572,
+      "kind": "file",
+      "sha256": "b302d42b2b03a339c3bb51fe31120620d945338f1cec3723d5aa81d81bdf5991"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/targets/WAIT",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 5541,
+      "kind": "file",
+      "sha256": "fc17bc116843441b0a096c03af837c1698a5d9441957094c6d5905439f294c1c"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/targets/clean",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 911,
+      "kind": "file",
+      "sha256": "a3d28c25006f3dcb5490fefe8802ea26791b61c868fed017792404fcb39233bf"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/test_template",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1015,
+      "kind": "file",
+      "sha256": "ec3dc9da9fa651bcea732f7291d273a01f0aaec8459617a8b3fe83a8150c0e0f"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/variables",
+      "mode": 493,
+      "mtime": 1677437214,
+      "size": 0,
+      "kind": "directory"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/variables/CURDIR",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 313,
+      "kind": "file",
+      "sha256": "3dcd4e4e43cbbc0d9be39f34a615ded7a716b75d34aad28d8ddf1f9b18ef2f21"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/variables/DEFAULT_GOAL",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1196,
+      "kind": "file",
+      "sha256": "d1bab69f218e7fe7fb512b6b27e4f70c58db4a6773b9c648b49421b72864d8b6"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/variables/EXTRA_PREREQS",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 4727,
+      "kind": "file",
+      "sha256": "b86eb354c70b091b3bbd43f6509504c8e5b5f01d6b0d52bc10793acb797910ab"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/variables/GNUMAKEFLAGS",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1659,
+      "kind": "file",
+      "sha256": "657d1b7cc56342ee69925f9e2ef2ec612b6b634c2b0017aaecc88568cb07016b"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/variables/INCLUDE_DIRS",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1982,
+      "kind": "file",
+      "sha256": "4f1f47df6676b4375a563708ff40f1501896d494d03f9be07285ef78335b315a"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/variables/LIBPATTERNS",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 884,
+      "kind": "file",
+      "sha256": "a7c724585ea2cb8164264e2ff8ef8286d90926676757f5c0c043a40bf031448f"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/variables/MAKE",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 473,
+      "kind": "file",
+      "sha256": "92bd481aad711668a1788aa00e15a3bc770a1fe3f1aa1d8b2c2d1ac8c886a986"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/variables/MAKECMDGOALS",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1130,
+      "kind": "file",
+      "sha256": "509d648ca4620fa147798211720504fd43031f9f4f338ae4528e1dc48843ebac"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/variables/MAKEFILES",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 924,
+      "kind": "file",
+      "sha256": "708d7268eb297e743473be4c3a877b33ec76bb037916149d8a51dc2237602800"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/variables/MAKEFLAGS",
+      "mode": 420,
+      "mtime": 1675534215,
+      "size": 21063,
+      "kind": "file",
+      "sha256": "f5970b39bfc2d28e468e43245deb677151621f47b190e4baf43fc4f7bb72a0c0"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/variables/MAKELEVEL",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 641,
+      "kind": "file",
+      "sha256": "f00d14f7a1904bc2dec12204501a4174ce9f55013fe9ede916abedf2acffe9e5"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/variables/MAKE_RESTARTS",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1169,
+      "kind": "file",
+      "sha256": "942277132a7e1b27fcb25ed15ac27cc6973dea684bc5ba5b30f72f82e3da2cbb"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/variables/MFILE_LIST",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 817,
+      "kind": "file",
+      "sha256": "bbb2455cff578f62c989d6780ec82f9fada8fa59735585045fc617c5c05d9019"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/variables/SHELL",
+      "mode": 420,
+      "mtime": 1673192738,
+      "size": 2603,
+      "kind": "file",
+      "sha256": "6dbb97cd6aa50b4338c278bd2bcad393a4df62b74ca59f4ef407e5c8d144a48c"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/variables/automatic",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 3434,
+      "kind": "file",
+      "sha256": "b3c3b01d8245d9629ac1f263dd2500da776c488b4884d63e6c065178e99e1428"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/variables/define",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 4682,
+      "kind": "file",
+      "sha256": "bcd1bf49e5a3cd66df24e223093a6b976f9bfe4a0ace87e28c423f34557e509f"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/variables/flavors",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 3344,
+      "kind": "file",
+      "sha256": "ea90bb90b7e6deb0ee09fdd76072e3a6ea934fc63a569bf9c261a24f29b091cd"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/variables/negative",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1567,
+      "kind": "file",
+      "sha256": "35fb054c298f36a0ac43729e4ddf641c5512934dfce51a5cbd823183e9a32435"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/variables/private",
+      "mode": 420,
+      "mtime": 1672718057,
+      "size": 3310,
+      "kind": "file",
+      "sha256": "b50a2d57be2906f80801b50dc13e66cfa38e2ddd9735a9714ce9f391666e31b6"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/variables/special",
+      "mode": 420,
+      "mtime": 1672610712,
+      "size": 2156,
+      "kind": "file",
+      "sha256": "2d1e909763f82a8aec8c2513659e1cec1b333ec6b566043b403ab2236cdb5e04"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/variables/undefine",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 1205,
+      "kind": "file",
+      "sha256": "e4e7dabb37e1849cfeb010a3eefd8db92402be17b81f75c83a8b939b810df238"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/vms",
+      "mode": 493,
+      "mtime": 1677437214,
+      "size": 0,
+      "kind": "directory"
+    },
+    {
+      "path": "make-4.4.1/tests/scripts/vms/library",
+      "mode": 420,
+      "mtime": 1672610712,
+      "size": 1801,
+      "kind": "file",
+      "sha256": "79c4fd2cab4d1ae57942d88b8094a886d2b6156167e708c9a07772147843bf99"
+    },
+    {
+      "path": "make-4.4.1/tests/test_driver.pl",
+      "mode": 420,
+      "mtime": 1676909456,
+      "size": 42692,
+      "kind": "file",
+      "sha256": "cebcfef17c089e9b327065ccf93731de882d24f5780ee0689e9829488b162a4a"
+    },
+    {
+      "path": "make-4.4.1/tests/thelp.pl",
+      "mode": 493,
+      "mtime": 1677437162,
+      "size": 3966,
+      "kind": "file",
+      "sha256": "80dee9450ffa2775fe8bfc0990a44761b11e726afd83411caf71145f539ea748"
+    },
+    {
+      "path": "make-4.4.1/vms_export_symbol_test.com",
+      "mode": 420,
+      "mtime": 1672585086,
+      "size": 937,
+      "kind": "file",
+      "sha256": "c67e515fdff41ca7374c80b08b7f8a1a0e810a17ccf5b49fd0146469f7627882"
+    }
+  ]
+}

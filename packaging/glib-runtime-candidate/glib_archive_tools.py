@@ -1,4 +1,4 @@
-"""Data-only extension for the two exact new source archives. Never executes inputs."""
+"""Data-only extension for the four exact additional source archives. Never executes inputs."""
 from pathlib import Path, PurePosixPath
 import hashlib
 import importlib.util
@@ -18,7 +18,7 @@ SOURCE_LINKS = {
 
 
 def extract(pin, archive, destination, manifest_path, checkpoint=lambda: None):
-    if pin['id'] not in ('glib', 'libffi'):
+    if pin['id'] not in ('glib', 'libffi', 'make', 'libiconv'):
         return _base.extract(pin, archive, destination, manifest_path, checkpoint)
     need(digest(archive) == pin['sha256'] and digest(manifest_path) == pin['member_manifest_sha256'])
     manifest = json.loads(Path(manifest_path).read_text())

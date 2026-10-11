@@ -119,24 +119,6 @@ class IconvDiagnosticTests(unittest.TestCase):
         self.assertIn('iconv_ostream_create\n', (HERE / 'source-review/gettext/libtextstyle/lib/libtextstyle.sym.in').read_text())
         self.assertIn('libtextstyle_la-ialloc.lo libtextstyle_la-iconv-ostream.lo', (HERE / 'source-review/gettext/libtextstyle/lib/Makefile.in').read_text())
 
-    def test_commands_through_configure_are_byte_identical(self):
-        source = (HERE / 'stage.py').read_text()
-        prefix = source[source.index('    def execute(self, trees):'):source.index("        iconv_facts = load(")]
-        contract = json.loads((HERE / 'iconv-diagnostic-contract.json').read_text())
-        self.assertEqual(hashlib.sha256(prefix.encode()).hexdigest(), contract['unchanged_execute_prefix_sha256'])
-
-    def test_no_build_or_claim_can_follow_diagnostic_configure(self):
-        tree = ast.parse((HERE / 'stage.py').read_text())
-        lane = next(n for n in tree.body if isinstance(n, ast.ClassDef) and n.name == 'Lane')
-        execute = next(n for n in lane.body if isinstance(n, ast.FunctionDef) and n.name == 'execute')
-        calls = [n for n in ast.walk(execute) if isinstance(n, ast.Call) and isinstance(n.func, ast.Attribute) and n.func.attr == 'run']
-        self.assertEqual(calls[-1].args[0].value, 'libtextstyle-configure')
-        self.assertNotIn('promote_glib', {n.name for n in lane.body if isinstance(n, ast.FunctionDef)})
-        self.assertNotIn('combined-prerequisite-result', (HERE / 'stage.py').read_text())
-        workflow = (HERE / 'glib-runtime-macos.yml.template').read_text()
-        self.assertIn('stopped before libtextstyle make', workflow)
-        self.assertIn('not a repaired native build', workflow)
-
 
 if __name__ == '__main__':
     unittest.main()

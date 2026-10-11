@@ -32,18 +32,19 @@ def load(name, path):
 foundation = load('foundation_stage', HERE / 'foundation_stage.py')
 safe_reads = load('glib_safe_reads', HERE / 'safe_reads.py')
 need, digest = foundation.need, foundation.digest
-SCOPE = 'glib-runtime-iconv-diagnostic-v2'
+SCOPE = 'glib-runtime-iconv-correction-v3'
 BRANCH = 'engine-glib-runtime-v1-ci'
 WORKFLOW = '.github/workflows/engine-glib-runtime-v1-macos.yml'
 INPUT_HASHES = dict(foundation.INPUT_HASHES,
     glib='93c941aa17d5eb1d53fe838365f29a8b4e539c222a256d974ec8f30fc413e396',
-    libffi='7da3e2d9a171eb0a038f592ecad3ff2bb2550f3496d87b3b29ad0cf4430c0db4')
+    libffi='7da3e2d9a171eb0a038f592ecad3ff2bb2550f3496d87b3b29ad0cf4430c0db4',
+    make='dd16fb1d67bfab79a72f5e8390735c49e3e8e70b4945a15ab1f81ddb78658fb3',
+    libiconv='88dd96a8c0464eca144fc791ae60cd31cd8ee78321e67397e25fc095c4a19aa6')
 FALSE_GATES = {k: False for k in (
     'pango_runtime', 'pdf_rendering', 'font_closure', 'relocation', 'release_ready',
     'full_glib_install', 'generated_gir_typelibs', 'optional_profiling_instrumentation',
-    'model_loaded', 'provider_queried', 'artifact_uploaded', 'cache_used',
-    'libtextstyle_build', 'gettext_tools_runtime', 'glib_runtime', 'gobject_runtime',
-    'gmodule_runtime', 'gio_runtime', 'girepository_runtime', 'source_libffi_closure')}
+    'gnu_make_guile_embedding', 'libiconv_cli_install',
+    'model_loaded', 'provider_queried', 'artifact_uploaded', 'cache_used')}
 INPUT_SECONDS, BUILD_SECONDS = 180, 1500
 OUTPUT_LIMIT = 32 * 1024**2
 WORKSPACE_LIMIT = 4 * 1024**3
@@ -56,7 +57,7 @@ GLIB_OPTIONS = [
 GLIB_MARKERS = [
     'source_libffi_version_and_closure_passed', 'glib_regex_unicode_main_context_passed',
     'gobject_generic_ffi_marshalling_and_girepository_passed', 'gmodule_private_module_passed',
-    'gio_private_local_file_roundtrip_passed', 'glib_real_french_catalog_passed',
+    'gio_private_local_file_roundtrip_passed', 'glib_source_iconv_conversion_passed', 'glib_real_french_catalog_passed',
 ]
 NEW_PHASES = {
     'libffi-configure', 'libffi-build', 'libtextstyle-configure', 'libtextstyle-build',
@@ -97,9 +98,9 @@ def verify_python_commands(data, python, visibility_generator):
 
 def validate(root, receipt, execute=False):
     need(receipt.get('schema') == 1 and receipt.get('scope') == SCOPE)
-    need(receipt.get('candidate_revision') == 2 and receipt.get('destination_branch') == BRANCH)
+    need(receipt.get('candidate_revision') == 3 and receipt.get('destination_branch') == BRANCH)
     need(receipt.get('input_sha256') == INPUT_HASHES and receipt.get('false_gates') == FALSE_GATES)
-    need(receipt.get('source_changes_allowed') is False and receipt.get('diagnostic_only') is True)
+    need(receipt.get('source_changes_allowed') is False)
     need(not any(p.is_symlink() for p in HERE.rglob('*')))
     observed = {p.relative_to(HERE).as_posix() for p in HERE.rglob('*')
                 if p.is_file() and p != HERE / 'review-receipt.json'}
@@ -110,7 +111,9 @@ def validate(root, receipt, execute=False):
     if execute:
         for key in ('independent_review_passed', 'execution_approved',
                     'temporary_linker_adhoc_signing_approved', 'install_name_linker_assignment_approved',
-                    'new_libffi_provider_approved', 'runner_free_eligibility_verified'):
+                    'new_libffi_provider_approved', 'runner_free_eligibility_verified',
+                    'source_make_execution_approved', 'source_libiconv_provider_approved',
+                    'phase_libcharset_staging_approved', 'corrected_libintl_provider_approved'):
             need(receipt.get(key) is True)
         for key in ('explicit_codesign_allowed', 'personal_signing_allowed', 'source_patch_allowed',
                     'paid_runner_allowed', 'network_during_build_allowed', 'artifact_upload_allowed'):
@@ -128,8 +131,9 @@ class Lane(foundation.Lane):
         phase = directory or self.directory(name)
         cwd = phase
         if subdirectory is not None:
-            need(subdirectory == 'intl' and phase == self.phases / 'gettext-build' and
-                 name in ('gettext-configure', 'gettext-headers', 'gettext-gnulib-build', 'gettext-libintl-build'))
+            need(subdirectory == 'intl' and (
+                 (phase == self.phases / 'gettext-build' and name in ('gettext-configure', 'gettext-headers', 'gettext-gnulib-build', 'gettext-libintl-build')) or
+                 (phase == self.phases / 'gettext-iconv-build' and name in ('gettext-iconv-configure', 'gettext-iconv-headers', 'gettext-iconv-gnulib', 'gettext-iconv-build'))))
             cwd = phase / 'intl'
             need(cwd.is_dir() and not cwd.is_symlink() and cwd.resolve().parent == phase.resolve())
         env = dict(self.env, HOME=str(phase / 'home'), TMPDIR=str(phase / 'tmp'))
@@ -149,7 +153,14 @@ class Lane(foundation.Lane):
             record['private_diagnostics'] = [self.bounds.private_file_record(cwd / 'config.log', 'config_log'),
                 self.bounds.private_file_record(cwd / 'out/meson-logs/meson-log.txt', 'meson_log')]
             if name == 'glib-probe-run':
-                record['fixture_exit_contract'] = record['exit_code'] if record['exit_code'] in range(51, 71) else None
+                record['fixture_exit_contract'] = record['exit_code'] if record['exit_code'] in range(51, 73) else None
+        if record['status'] == 'failed' and name in ('iconv-semantic-run-nonconst', 'iconv-semantic-run-const'):
+            code = record['exit_code']
+            record['upstream_semantic_failure_mask'] = code if type(code) is int and 1 <= code <= 47 and code & 16 == 0 else None
+            record['origin_driver_failure'] = {82: 'argument_or_source_version', 83: 'iconv_function_origin',
+                84: 'charset_library_open', 85: 'charset_function_or_origin', 86: 'charset_library_close'}.get(code)
+        if record['status'] == 'failed' and name == 'gettext-iconv-probe-run':
+            record['intl_fixture_exit_contract'] = record['exit_code'] if record['exit_code'] in range(91, 98) else None
         self.steps.append(record)
         print(json.dumps(record, sort_keys=True), flush=True)
         if record['status'] != 'passed':
@@ -213,7 +224,13 @@ class Lane(foundation.Lane):
         record, loads = self.native.macho(source, self.provider, promoted_path=destination)
         print(json.dumps({'phase': 'native-inspect-' + label, 'status': 'passed',
                           'output_sha256': digest(source), 'output_bytes': source.stat().st_size, **record}, sort_keys=True))
+        need(str(self.provider / 'lib/libintl.8.dylib') not in loads)
         return loads
+
+    def inspect_runtime(self, label, path):
+        record, loads = self.inspect(label, path)
+        need(str(self.provider / 'lib/libintl.8.dylib') not in loads)
+        return record, loads
 
     def execute(self, trees):
         # Exact accepted providers are rebuilt first. The inherited final record only claims that foundation.
@@ -249,21 +266,213 @@ class Lane(foundation.Lane):
         self.symbols('source-libffi', self.provider / 'lib/libffi.8.dylib',
             ['ffi_prep_cif', 'ffi_call', 'ffi_closure_alloc', 'ffi_prep_closure_loc', 'ffi_closure_free', 'ffi_get_version'])
 
+        correction = load('iconv_make_stage', self.helpers / 'iconv_make_stage.py')
+        make, runtime_intl = correction.prepare(self, trees, flags, foundation.bind_gettext_config_header)
+
         phase = self.directory('libtextstyle-build')
         self.run('libtextstyle-configure', ['/bin/sh', trees['gettext'] / 'libtextstyle/configure',
                  '--prefix=' + str(self.provider), '--enable-shared', '--disable-static',
-                 '--without-libiconv-prefix', '--without-libncurses-prefix'], directory=phase, timeout=180)
-        iconv_facts = load('iconv_config_facts', self.helpers / 'iconv_config_facts.py')
-        facts = iconv_facts.collect(phase)
-        print(json.dumps({'phase': 'libtextstyle-iconv-configure-facts', 'status': 'observed', **facts}, sort_keys=True))
-        self.checkpoint()
+                 '--with-libiconv-prefix=' + str(self.provider), '--with-libintl-prefix=' + str(runtime_intl), '--without-libncurses-prefix'], directory=phase, timeout=180)
+        facts = load('iconv_config_facts', self.helpers / 'iconv_config_facts.py').collect(phase)
+        need(facts['facts_complete'] and facts['facts']['config_header_have_iconv']['value'] is True and
+             facts['facts']['am_cv_func_iconv_works']['value'] == 'yes' and
+             facts['facts']['working_iconv_run_exit_codes']['value'] == [0])
+        print(json.dumps({'phase': 'libtextstyle-iconv-configure-facts', 'status': 'passed', **facts}, sort_keys=True))
+        self.run('libtextstyle-build', [make, '-C', 'lib', '-j2', 'all'], directory=phase, timeout=240)
+        library = phase / 'lib/.libs/libtextstyle.0.dylib'
+        _, loads = self.native.macho(library, self.provider)
+        need('/usr/lib/libncurses.5.4.dylib' in loads)
+        self.inspect_runtime('libtextstyle', library)
+        need(str(self.provider / 'lib/libiconv.2.dylib') in loads)
+        headers = [('textstyle.h', trees['gettext'] / 'libtextstyle/lib/textstyle.h'),
+                   ('textstyle/version.h', phase / 'lib/textstyle/version.h'),
+                   ('textstyle/woe32dll.h', phase / 'lib/textstyle/woe32dll.h')]
+        # Reviewed public input header is staged through the phase for the trusted batch copier.
+        staged = phase / 'reviewed-textstyle.h'
+        with staged.open('xb') as output:
+            output.write(safe_reads.read(headers[0][1], (trees['gettext'],), 256 * 1024))
+        need(digest(staged) == digest(headers[0][1]))
+        headers[0] = ('textstyle.h', staged)
+        self.promote([(library, self.provider / 'lib/libtextstyle.0.dylib', False)] +
+                     [(source, self.provider / 'include' / name, False) for name, source in headers])
+        self.provider_alias(self.provider / 'lib/libtextstyle.dylib', 'libtextstyle.0.dylib')
+
+        phase = self.directory('gettext-tools-build')
+        self.run('gettext-tools-configure', ['/bin/sh', trees['gettext'] / 'gettext-tools/configure',
+                 '--prefix=' + str(self.provider), '--enable-shared', '--disable-static', '--enable-nls',
+                 '--with-libintl-prefix=' + str(runtime_intl), '--with-installed-libtextstyle',
+                 '--with-libtextstyle-prefix=' + str(self.provider), '--with-included-libxml',
+                 '--with-included-libunistring', '--with-libiconv-prefix=' + str(self.provider)], directory=phase, timeout=240)
+        config = safe_reads.read(phase / 'config.h', (phase,), 1024**2).decode()
+        need('#define ENABLE_NLS 1' in config and '#define HAVE_LIBTEXTSTYLE 1' in config and '#define HAVE_ICONV 1' in config)
+        self.run('gettext-tools-gnulib', [make, '-C', 'gnulib-lib', '-j2', 'all'], directory=phase, timeout=240)
+        self.run('gettext-tools-headers', [make, '-C', 'src', 'built-sources'], directory=phase, timeout=60)
+        self.run('gettext-tools-build', [make, '-C', 'src', '-j2', 'msgfmt', 'xgettext'], directory=phase, timeout=420)
+        items = []
+        for subdir, name in [('gnulib-lib', 'libgettextlib-1.0.dylib'), ('src', 'libgettextsrc-1.0.dylib')]:
+            source = phase / subdir / '.libs' / name
+            self.inspect_runtime(name, source)
+            items.append((source, self.provider / 'lib' / name, False))
+        for name in ('msgfmt', 'xgettext'):
+            source = phase / 'src/.libs' / name
+            self.inspect_runtime(name, source)
+            items.append((source, self.provider / 'bin' / name, True))
+        self.promote(items)
+        self.env['PATH'] = str(self.provider / 'bin') + ':' + self.env['PATH']
+        for name in ('msgfmt', 'xgettext'):
+            out, _, _ = self.run(name + '-version', [self.provider / 'bin' / name, '--version'], timeout=10)
+            need(out.splitlines()[0] == (name + ' (GNU gettext-tools) 1.0').encode())
+        phase = self.directory('gettext-tool-probes')
+        self.run('msgfmt-functional', [self.provider / 'bin/msgfmt', '--check', '-o', phase / 'proof.mo', self.helpers / 'gettext_probe.po'], directory=phase, timeout=20)
+        translations = gettext.GNUTranslations(io.BytesIO(safe_reads.read(phase / 'proof.mo', (phase,), 2 * 1024**2)))
+        need(translations.gettext('coffee') == 'café' and translations.ngettext('one apple', 'many apples', 2) == 'des pommes')
+        self.run('xgettext-functional', [self.provider / 'bin/xgettext', '--language=C', '--from-code=UTF-8',
+                 '--keyword=gettext', '--no-location', '-o', phase / 'proof.pot', self.helpers / 'gettext_probe.c'], directory=phase, timeout=20)
+        need('msgid "Deepdesk extraction proof"' in safe_reads.read(phase / 'proof.pot', (phase,), 1024**2).decode())
+
+        phase = self.directory('glib-build')
+        native_file = phase / 'native.ini'
+        native_file.write_text('[binaries]\n' + '\n'.join([
+            'c = ' + repr(self.tools['clang']), 'cpp = ' + repr(cxx), 'objc = ' + repr(self.tools['clang']),
+            'ar = ' + repr(self.tools['ar']), 'strip = ' + repr(self.tools['strip']),
+            # No python binary entry: Meson 1.11 drops flags from that entry.
+            # The approved adapter's shared python_command supplies -I -S instead.
+            'pkg-config = ' + repr(str(pkgconf)),
+            'gen-visibility-macros.py = ' + repr([str(py), '-I', '-S', str(trees['glib'] / 'tools/gen-visibility-macros.py')]),
+            'msgfmt = ' + repr(str(self.provider / 'bin/msgfmt')),
+            'xgettext = ' + repr(str(self.provider / 'bin/xgettext'))]) + '\n')
+        self.env.update({'CPPFLAGS': self.env['CPPFLAGS'] + ' -I' + str(self.provider / 'include'),
+                         'LDFLAGS': self.env['LDFLAGS'] + ' -L' + str(self.provider / 'lib')})
+        self.run('glib-configure', [py, '-I', '-S', self.helpers / 'meson_entry.py', 'setup', phase / 'out', trees['glib'],
+                 '--prefix=' + str(self.provider), '--libdir=lib', '--native-file=' + str(native_file), *GLIB_OPTIONS], directory=phase, timeout=180)
+        intro = phase / 'out/meson-info'
+        options = {x['name']: x['value'] for x in bounded_json(intro / 'intro-buildoptions.json', roots=(phase,))}
+        need(options.get('nls') == 'enabled' and options.get('xattr') is True and options.get('glib_assert') is True and options.get('glib_checks') is True)
+        deps = bounded_json(intro / 'intro-dependencies.json', roots=(phase,))
+        ffi = [x for x in deps if x.get('name') == 'libffi']
+        need(len(ffi) == 1 and ffi[0].get('version') == '3.8.0')
+        need(str(self.provider / 'lib/libffi.dylib') in ffi[0].get('link_args', []) or
+             str(self.provider / 'lib/libffi.8.dylib') in ffi[0].get('link_args', []))
+        iconv = [x for x in deps if x.get('name') == 'iconv']
+        need(len(iconv) == 1 and ('-liconv' in iconv[0].get('link_args', []) or
+             str(self.provider / 'lib/libiconv.dylib') in iconv[0].get('link_args', [])))
+        project = bounded_json(intro / 'intro-projectinfo.json', roots=(phase,))
+        need(project['version'] == '2.90.1' and {x['name'] for x in project.get('subprojects', [])} == {'gvdb'})
+        config = safe_reads.read(phase / 'out/config.h', (phase,), 1024**2).decode()
+        need(re.search(r'^#define HAVE_COCOA(?: 1)?$', config, re.M) is not None and
+             re.search(r'^#define HAVE_CARBON(?: 1)?$', config, re.M) is not None)
+        commands, _, _ = self.run('glib-command-inventory', [ninja, '-C', phase / 'out', '-t', 'commands'], directory=phase, timeout=30)
+        command_contract = verify_python_commands(commands, py, trees['glib'] / 'tools/gen-visibility-macros.py')
+        print(json.dumps({'phase': 'glib-generator-isolation-contract', 'status': 'passed', **command_contract}, sort_keys=True))
+        self.run('glib-build', [ninja, '-C', phase / 'out', '-j2'], directory=phase, timeout=480)
+        self.promote_glib(trees['glib'], phase / 'out', py)
+        self.glib_probes(py, flags)
+        roots = [self.provider / 'native' / component / name for name, component in self.native.GLIB_NAMES.items()]
+        roots += [runtime_intl / 'lib/libintl.8.dylib', self.provider / 'lib/libcharset.1.dylib',
+                  self.provider / 'bin/msgfmt', self.provider / 'bin/xgettext']
+        closure = self.native.recursive_provider_closure(roots, self.provider)
+        print(json.dumps({'phase': 'corrected-provider-closure', 'status': 'passed', **closure}, sort_keys=True))
         need(self.archive.snapshot(self.immutable) == self.base)
-        print(json.dumps({'phase': 'iconv-diagnostic-result', 'status': 'diagnostic_complete',
-            'scope': SCOPE, 'stopped_before_libtextstyle_make': True,
-            'libtextstyle_build': False, 'gettext_tools_runtime': False, 'glib_runtime': False,
-            'gobject_runtime': False, 'gmodule_runtime': False, 'gio_runtime': False,
-            'girepository_runtime': False, 'source_libffi_closure': False,
-            'diagnostic_facts_complete': facts['facts_complete'], **FALSE_GATES}, sort_keys=True))
+        self.checkpoint()
+        print(json.dumps({'phase': 'combined-prerequisite-result', 'status': 'passed', 'scope': SCOPE,
+            'foundation_rebuilt': True, 'source_libffi': '3.8.0', 'glib_version': '2.90.1',
+            'source_libiconv': '1.19', 'source_gnu_make': '4.4.1', 'iconv_upstream_semantic_variants': 2,
+            'corrected_libintl_charset_conversion': True, 'gnu_make_production_catalog_count': 30,
+            'glib_runtime': True, 'gobject_runtime': True, 'gmodule_runtime': True, 'gio_runtime': True,
+            'girepository_runtime': True, 'production_catalog_count': 102, 'glib_mkenums_fixture': True,
+            'output_total_bytes': self.output, **FALSE_GATES}, sort_keys=True))
+
+    def promote_glib(self, source, build, py):
+        installed = bounded_json(build / 'meson-info/intro-installed.json', roots=(build,))
+        need(isinstance(installed, dict) and len(installed) < 2048)
+        items, headers, pcs = [], set(), set()
+        for original, destinations in installed.items():
+            original = Path(original)
+            destinations = destinations if isinstance(destinations, list) else [destinations]
+            for destination in destinations:
+                destination = Path(destination)
+                need(destination.is_absolute() and destination.is_relative_to(self.provider) and '..' not in destination.parts)
+                rel = destination.relative_to(self.provider).as_posix()
+                if rel.endswith('.h') and rel.startswith(('include/glib-2.0/', 'include/gio-unix-2.0/', 'lib/glib-2.0/include/')):
+                    need(original.resolve().is_relative_to(source) or original.resolve().is_relative_to(build))
+                    need(rel not in headers)
+                    headers.add(rel); items.append((original, destination, False))
+                elif rel.startswith('lib/pkgconfig/') and rel.endswith('.pc'):
+                    need(original.resolve().is_relative_to(build) and '/' not in rel[len('lib/pkgconfig/'):])
+                    need(rel not in pcs)
+                    pcs.add(rel); items.append((original, destination, False))
+        need(200 <= len(headers) <= 512)
+        need({'lib/glib-2.0/include/glibconfig.h', 'include/glib-2.0/glib.h', 'include/glib-2.0/glib-object.h',
+              'include/glib-2.0/gio/gio.h', 'include/glib-2.0/gobject/glib-enumtypes.h'} <= headers)
+        need({'lib/pkgconfig/glib-2.0.pc', 'lib/pkgconfig/gobject-2.0.pc', 'lib/pkgconfig/gmodule-2.0.pc',
+              'lib/pkgconfig/gio-2.0.pc', 'lib/pkgconfig/gthread-2.0.pc', 'lib/pkgconfig/girepository-2.0.pc'} <= pcs)
+        for name, component in self.native.GLIB_NAMES.items():
+            original = build / component / name
+            destination = self.provider / 'native' / component / name
+            loads = self.inspect_promoted(component, original, destination)
+            if component == 'glib':
+                need(str(self.provider / 'lib/libiconv.2.dylib') in loads and
+                     str(self.provider / 'intl-with-iconv/lib/libintl.8.dylib') in loads)
+            items.append((original, destination, False))
+        languages = [line.split('#', 1)[0].strip() for line in safe_reads.read(source / 'po/LINGUAS', (source,), 65536).decode().splitlines()]
+        languages = [x for x in languages if x]
+        need(len(languages) == len(set(languages)) == 102)
+        contract = bounded_json(self.helpers / 'catalog-contract.json')
+        need(languages == contract['languages'])
+        for language in languages:
+            original = build / 'po' / language / 'LC_MESSAGES/glib20.mo'
+            data = safe_reads.read(original, (build,), 2 * 1024**2)
+            need(len(data) >= 28)
+            catalog = gettext.GNUTranslations(io.BytesIO(data))
+            need(len(catalog._catalog) >= 2)
+            if language == 'fr':
+                need(catalog.pgettext('full month name', 'January') == 'janvier')
+            items.append((original, self.provider / 'share/locale' / language / 'LC_MESSAGES/glib20.mo', False))
+        script = build / 'gobject/glib-mkenums'
+        original = safe_reads.read(source / 'gobject/glib-mkenums.in', (source,), 256 * 1024)
+        expected = original.replace(b'@PYTHON@', b'/usr/bin/env python3').replace(b'@VERSION@', b'2.90.1')
+        need(safe_reads.read(script, (build,), 256 * 1024) == expected)
+        items.append((script, self.provider / 'share/deepdesk-build-tools/glib-mkenums.py', False))
+        wrapper = build / 'deepdesk-glib-mkenums'
+        with wrapper.open('x') as output:
+            output.write('#!/bin/sh\nexec ' + shlex.quote(str(py)) + ' -I -S ' +
+                         shlex.quote(str(self.provider / 'share/deepdesk-build-tools/glib-mkenums.py')) + ' "$@"\n')
+        items.append((wrapper, self.provider / 'bin/glib-mkenums', True))
+        self.promote(items)
+        for name, component in self.native.GLIB_NAMES.items():
+            self.provider_alias(self.provider / 'lib' / name, '../native/' + component + '/' + name)
+            self.provider_alias(self.provider / 'lib' / name.replace('.0.dylib', '.dylib'), name)
+        print(json.dumps({'phase': 'glib-provider-promotion', 'status': 'passed',
+                          'library_count': 6, 'header_count': len(headers), 'pkgconfig_count': len(pcs),
+                          'production_catalog_count': len(languages), 'install_hooks_executed': False}))
+
+    def glib_probes(self, py, flags):
+        phase = self.directory('glib-probes')
+        pkgconf = self.immutable / 'toolbin/pkgconf'
+        out, _, _ = self.run('glib-mkenums-pkgconfig-binding', [pkgconf, '--variable=glib_mkenums', 'glib-2.0'], directory=phase, timeout=10)
+        need(out.strip() == str(self.provider / 'bin/glib-mkenums').encode())
+        out, _, _ = self.run('glib-mkenums-functional', [self.provider / 'bin/glib-mkenums', '--fhead=BEGIN_ENUM',
+            '--eprod=@EnumName@', '--vprod=@VALUENAME@=@valuenum@', '--ftail=END_ENUM', self.helpers / 'enum_probe.h'], directory=phase, timeout=15)
+        need(b'DeepdeskProof' in out and b'DEEPDESK_PROOF_FORTY_TWO=42' in out and b'END_ENUM' in out)
+        module = phase / 'libdeepdesk-module.dylib'
+        self.run('glib-module-compile', [self.tools['clang'], *flags, '-dynamiclib', self.helpers / 'glib_module.c',
+            '-Wl,-install_name,' + str(self.provider / 'lib/libdeepdesk-module.dylib'), '-o', module], directory=phase, timeout=30)
+        self.inspect('private-module', module)
+        self.promote([(module, self.provider / 'lib/libdeepdesk-module.dylib', False)])
+        out, _, _ = self.run('glib-pkgconfig-flags', [pkgconf, '--cflags', '--libs', 'glib-2.0', 'gobject-2.0', 'gio-2.0', 'gmodule-2.0', 'girepository-2.0', 'libffi'], directory=phase, timeout=10)
+        arguments = out.decode().strip().split()
+        need(len(arguments) < 100 and all(re.fullmatch(r'[-A-Za-z0-9_./,+]+', x) for x in arguments))
+        need(not any('/opt/' in x or '/usr/local' in x for x in arguments))
+        fixture = phase / 'glib-probe'
+        rpaths = ['-Wl,-rpath,' + str(self.provider / 'native' / component) for component in self.native.GLIB_COMPONENTS]
+        self.run('glib-probe-compile', [self.tools['clang'], *flags, self.helpers / 'glib_probe.c', *arguments, *rpaths, '-o', fixture], directory=phase, timeout=45)
+        self.inspect_runtime('glib-probe', fixture)
+        out, err, _ = self.run('glib-probe-run', [fixture, self.provider / 'lib/libdeepdesk-module.dylib', phase / 'local-proof.txt'],
+                              directory=phase, timeout=30, extra_env={'LC_ALL': 'en_US.UTF-8', 'LANGUAGE': 'fr'})
+        self.native.origin_fixture_output(out, GLIB_MARKERS, fixture, self.provider, {},
+            ['libglib-2.0.0.dylib', 'libgobject-2.0.0.dylib', 'libgmodule-2.0.0.dylib', 'libgio-2.0.0.dylib',
+             'libgirepository-2.0.0.dylib', 'libffi.8.dylib', 'libintl.8.dylib', 'libiconv.2.dylib', 'libpcre2-8.0.dylib', 'libdeepdesk-module.dylib'], reject_bootstrap_intl=True)
+        need(not err and not (phase / 'local-proof.txt').exists())
 
 
 def main():
@@ -293,8 +502,8 @@ def main():
         diagnostics = load('glib_input_diagnostics', HERE / 'glib_input_diagnostics.py')
         lock = bounded_json(HERE / 'input-lock.json')
         need(lock['scope'] == SCOPE and lock['source_changes_allowed'] is False)
-        need(len(lock['inputs']) == 8 and {x['id']: x['sha256'] for x in lock['inputs']} == INPUT_HASHES)
-        need(lock['total_compressed_bytes'] == 69310939 and lock['total_expanded_bytes'] == 394983369)
+        need(len(lock['inputs']) == 10 and {x['id']: x['sha256'] for x in lock['inputs']} == INPUT_HASHES)
+        need(lock['total_compressed_bytes'] == 77580242 and lock['total_expanded_bytes'] == 426518901)
         temp = Path(os.environ['RUNNER_TEMP'])
         need(temp.is_dir() and shutil.disk_usage(temp).free >= 6 * 1024**3)
         def interrupted(signum, frame):

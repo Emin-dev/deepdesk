@@ -16,7 +16,7 @@ import urllib.error
 import urllib.parse
 import zipfile
 
-INPUT_IDS = ('gettext', 'pcre2', 'pkgconf', 'meson', 'ninja', 'python', 'glib', 'libffi')
+INPUT_IDS = ('gettext', 'pcre2', 'pkgconf', 'meson', 'ninja', 'python', 'glib', 'libffi', 'make', 'libiconv')
 
 def status_number(value):
     return value if type(value) is int and 100 <= value <= 599 else None
