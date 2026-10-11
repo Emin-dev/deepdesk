@@ -88,7 +88,7 @@ int main(void) {
 
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory(prefix="deepdesk-launcher-test-")
-        self.root = Path(self.temporary.name)
+        self.root = Path(self.temporary.name).resolve()
         self.app = self.root / "DeepdeskEngine.app"
         self.resources = self.app / "Contents/Resources"
         self.python = self.resources / "Python"

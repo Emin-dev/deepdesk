@@ -367,7 +367,7 @@ class ExerciseTests(unittest.TestCase):
                     probe_event='socket.__new__', probe_line=126,
                     probe_source='exact', probe_phase='installed-wrapper-identity'):
         with tempfile.TemporaryDirectory(prefix='firstparty-policy-stub-') as temporary:
-            root = Path(temporary)
+            root = Path(temporary).resolve()
             resources = root / 'DeepdeskEngine.app/Contents/Resources'
             prefix = resources / 'Python'
             prefix.mkdir(parents=True)

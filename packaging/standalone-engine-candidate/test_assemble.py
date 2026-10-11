@@ -51,7 +51,7 @@ def synthetic_prefix(path: Path) -> Path:
 class AssemblyTests(unittest.TestCase):
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory(prefix="deepdesk-assembly-test-")
-        self.root = Path(self.temporary.name)
+        self.root = Path(self.temporary.name).resolve()
         self.prefix = synthetic_prefix(self.root / "prefix")
         self.launcher = self.root / "first-party-launcher"
         self.launcher.write_bytes(b"synthetic first-party launcher bytes\n")

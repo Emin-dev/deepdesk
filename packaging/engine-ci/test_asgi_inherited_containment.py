@@ -48,7 +48,15 @@ class InheritedTests(unittest.TestCase):
         events=self.canary()
         self.assertEqual([e[1] for e in events if e[0]=='connect'],[('192.0.2.1',9),('127.0.0.1',54321)])
         self.assertEqual([e[1] for e in events if e[0]=='bind'],[('127.0.0.1',54321)])
-        self.assertEqual([e[1] for e in events if e[0]=='write'],[self.root,self.immutable,self.runtime,ROOT.resolve()])
+        self.assertEqual([e[1] for e in events if e[0]=='write'],[p.resolve() for p in (self.root,self.immutable,self.runtime,ROOT)])
+
+    def test_expected_denials_through_temporary_path_alias(self):
+        # macOS /var is an alias of /private/var. Exercise the same distinction
+        # on any host without changing the real canary or its protected targets.
+        alias=self.root/'fixture-alias';alias.symlink_to(self.root,target_is_directory=True)
+        self.root=alias;self.scope=alias/'scope';self.home=self.scope/'fixture'
+        self.immutable=alias/'immutable';self.runtime=alias/'runtime'
+        self.test_expected_denials_and_all_targets()
 
     def test_access_denied_also_accepted(self):self.canary(connect=errno.EACCES,bind=errno.EACCES,write=errno.EACCES)
 

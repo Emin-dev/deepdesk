@@ -60,7 +60,7 @@ class FakeCDLL:
 
 class LoaderTests(unittest.TestCase):
     def setUp(self):
-        self.temporary = tempfile.TemporaryDirectory(); self.root = Path(self.temporary.name)
+        self.temporary = tempfile.TemporaryDirectory(); self.root = Path(self.temporary.name).resolve()
         self.prefix = self.root/'Moved engine Ω/DeepdeskEngine.app/Contents/Resources/Python'
         self.native = self.prefix/'lib/deepdesk-native/libmagic'
         self.fake_loader = self.prefix/'lib/python3.12/site-packages/magic/loader.py'
