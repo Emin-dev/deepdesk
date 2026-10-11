@@ -326,7 +326,7 @@ class InputTests(unittest.TestCase):
         for gate in s.FALSE_GATES: self.assertIs(records[1][gate], False)
     def test_revision_closed_receipt_and_hash_validation(self):
         receipt = json.loads((HERE / 'review-receipt.json').read_text())
-        self.assertEqual((s.CANDIDATE_REVISION, receipt['candidate_revision']), (8, 8))
+        self.assertEqual((s.CANDIDATE_REVISION, receipt['candidate_revision']), (9, 9))
         for gate in ('execution_approved', 'independent_review_passed', 'temporary_linker_adhoc_signing_approved', 'install_name_linker_assignment_approved'):
             self.assertIs(receipt[gate], False)
         s.validate_receipt(ROOT, HERE, receipt, False)
@@ -336,7 +336,7 @@ class InputTests(unittest.TestCase):
             isolated = copy.deepcopy(receipt)
             for flag in flags: isolated[flag] = flag != blocked
             with self.assertRaises(s.LaneError): s.validate_receipt(ROOT, HERE, isolated, True)
-        self.assertEqual(receipt['base_commit'], '4b83100cc76be279a5b62b166f03d3c166e57c63')
+        self.assertEqual(receipt['base_commit'], 'f4377a3646eae8139e6592529483e4059202d181')
         changed = copy.deepcopy(receipt); changed['sha256']['input_diagnostics.py'] = '0' * 64
         with self.assertRaises(s.LaneError): s.validate_receipt(ROOT, HERE, changed, False)
     def test_receipt_pins_unchanged_helper_and_canonical_source(self):

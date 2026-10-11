@@ -1,0 +1,99 @@
+{
+  "schema": 1,
+  "candidate_revision": 9,
+  "scope": "preserve-xcrun-invocation-spelling",
+  "base_commit": "f4377a3646eae8139e6592529483e4059202d181",
+  "base_tree": "61d3640376f24f3488fcdc031daaaa84b9c3774e",
+  "approved_v8_manifest_sha256": "65f359e4f49d0c657ef49e9e2f2d443d9bea3d28b205eed456771ab5615e971d",
+  "prior_run_id": 38136479248,
+  "prior_job_id": 114461276547,
+  "observed_failure": {
+    "phase": "pkgconf-build",
+    "target": "libpkgconf.la",
+    "recipe_exit": 1,
+    "make_exit": 2,
+    "stderr_lines": 23,
+    "stderr_bytes": 2119,
+    "tool_error": "libtool: no output file (-o) specified",
+    "permission_markers_proven_causal": false
+  },
+  "defect": "The stage replaced xcrun-selected invocation paths with resolved targets before exporting tool variables. Multicall tools may dispatch by the invocation basename.",
+  "source_supported_inference": "Resolving a ranlib alias to libtool changes argv[0] and can select libtool mode. The pinned GNU static archive recipe invokes RANLIB with only the archive path, which lacks the output option required by libtool mode.",
+  "runner_symlink_or_actual_failing_argv_directly_observed": false,
+  "correction": "Keep the validated xcrun output path for invocation; continue resolving the path solely for existing binary identity hashing.",
+  "runtime_change_count": 1,
+  "runtime_change": "self.tools[tool]=text replaces self.tools[tool]=str(Path(text).resolve())",
+  "unchanged": [
+    "tool discovery argv",
+    "allowed lookup roots",
+    "whitespace and file checks",
+    "resolved binary hashing",
+    "build commands and targets",
+    "six input hashes and manifests",
+    "downloaded source bytes",
+    "sandbox",
+    "environment keys and compiler flags",
+    "deadlines",
+    "resource and output budgets",
+    "probes",
+    "containment canaries",
+    "cleanup",
+    "diagnostic redaction",
+    "false gates"
+  ],
+  "independent_evidence_sha256": "731f4582c1848e5ba646a047c40d1bf3e30bad8e5b7e039c8469e63cc069a125",
+  "terminal_reconciliation_sha256": "f52e686405429aae6e8e3b2c679f071f531574e04b27cd8b520a793f4b8b1de9",
+  "pinned_source_archive_sha256": "943f0bc88bcaeceb630b00262e2a8ad5ea4fac3fba72a4267d8b9ec6b35d1194",
+  "pinned_source_locations": {
+    "Makefile.in": [
+      [
+        175,
+        177
+      ],
+      [
+        481,
+        481
+      ],
+      [
+        1582,
+        1583
+      ]
+    ],
+    "configure": [
+      [
+        7661,
+        7668
+      ],
+      [
+        9663,
+        9664
+      ]
+    ],
+    "ltmain.sh": [
+      [
+        11141,
+        11148
+      ],
+      [
+        11204,
+        11206
+      ]
+    ]
+  },
+  "official_reference": {
+    "url": "https://raw.githubusercontent.com/apple-oss-distributions/cctools/main/misc/libtool.c",
+    "argv0_mode_lines": [
+      420,
+      432
+    ],
+    "output_requirement_lines": [
+      1281,
+      1286
+    ],
+    "limitation": "Public source is supporting semantics, not established as byte-identical to the runner binary; exact error wording differs."
+  },
+  "tests": "Seven new first-party orchestration tests with mocked commands and an actual data-only ranlib-to-libtool symlink. No file in the fixture is executed.",
+  "native_success_claimed": false,
+  "source_payload_executed": false,
+  "publication_or_rerun_performed": false
+}

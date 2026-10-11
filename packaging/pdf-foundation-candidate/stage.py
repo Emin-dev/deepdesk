@@ -17,7 +17,7 @@ import tempfile
 import time
 sys.dont_write_bytecode=True
 SCOPE='pdf-foundation-prerequisites-v1'
-CANDIDATE_REVISION=8
+CANDIDATE_REVISION=9
 BRANCH='engine-pdf-foundation-v1-ci'
 WORKFLOW='.github/workflows/engine-pdf-foundation-v1-macos.yml'
 INPUT_HASHES={
@@ -200,9 +200,10 @@ class Lane:
     def execute(self,trees):
         host=Path(sys.executable).resolve();self.canaries(host)
         p=self.directory('sdk-preflight');self.tools={}
+        # Preserve invocation aliases (ranlib may dispatch by argv[0]); resolve only for identity hashing.
         for tool in ('clang','ar','ranlib','nm','ld','strip'):
             out,err,_=self.run('tool-path-'+tool,['/usr/bin/xcrun','--sdk','macosx','--find',tool],directory=p,timeout=10)
-            text=out.decode().strip();need(text.startswith(('/Applications/','/Library/Developer/','/usr/bin/')) and not re.search(r'\s',text) and Path(text).is_file());self.tools[tool]=str(Path(text).resolve())
+            text=out.decode().strip();need(text.startswith(('/Applications/','/Library/Developer/','/usr/bin/')) and not re.search(r'\s',text) and Path(text).is_file());self.tools[tool]=text
             print(json.dumps({'phase':'tool-identity-'+tool,'status':'passed','binary_sha256':digest(Path(text).resolve())}))
         sdkraw,_,_=self.run('sdk-path',['/usr/bin/xcrun','--sdk','macosx','--show-sdk-path'],directory=p,timeout=10)
         sdk=sdkraw.decode().strip();need(sdk.startswith(('/Applications/','/Library/Developer/')) and not re.search(r'\s',sdk) and Path(sdk).is_dir())

@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "scope": "pdf-foundation-prerequisites-v1",
-  "review_status": "independent-exact-build-diagnostic-review-approved",
+  "review_status": "independent-exact-tool-dispatch-review-approved",
   "execution_approved": true,
   "independent_review_passed": true,
   "temporary_linker_adhoc_signing_approved": true,
@@ -34,7 +34,7 @@
     "cache_used": false
   },
   "sha256": {
-    "README.md": "2e3a4c6693d69b59c09a2b921155bb181ac443bb17156ec16d3d2853d6798b07",
+    "README.md": "ce6f019f7192d5906b5f529be3f0c1a81b8e3ae84632f78300eded41e7d27366",
     "archive_tools.py": "d5273a166c7e3f3485cf8d0fd5f63551dee1b38a1cda3548f75e19553814a146",
     "bounds.py": "325f4f3811ce969eb90ae6e7ef7426a6af69fd875776a290027556bdb2b5349f",
     "build-diagnostic-catalog.json": "714b19b45f5e9300177e1be09e3e5ec3596e5e7369480538e368c5a8247a053b",
@@ -152,24 +152,26 @@
     "provider-contract.json": "d9734c140167ed26226e9bb95963d285eba9653733ab6e4b97d8db8b74d61862",
     "provider_probe.c": "4ba95e36b2c925dbb08027dfaf1ea12f9a608512d8d947e8400e07e3927845cc",
     "sdk_probe.c": "bb5c817169a9983ba05e64b282e61b6fcb7aa3ef9944ab3d08ed42d15f0418fa",
-    "stage.py": "607cd5b463c5a49d7a57fbd8f87021eaedfdd76a0e1d24206f954c07c6f0955e",
-    "test_build_diagnostics.py": "dbc25f446d8437d995ab4293f652010d2cb10f7c3c2b382234d11c4834dcbf4d",
-    "test_definition_suffix.py": "c99033a944936481b73be480f57b92221d2a67de4226a2a2cbeaef61d618a8cf",
-    "test_disclosure_structures.py": "56e00754995c4a577293f5150967fd11d8820a5a205935282178f1915160f212",
+    "stage.py": "afa4dfe1b4c687334d33e32565d01a6cd5c6d66d8564b5fee5a1e06e3ea5b4ff",
+    "test_build_diagnostics.py": "b709aa0a8e21bc5abc093bd5e8bdf73e89d83d4fb11021f8f5a3c129946408f9",
+    "test_definition_suffix.py": "d688edca2fa34882eb7ae1f32ddf3e17149f71c187541841ca1367199201ad2b",
+    "test_disclosure_structures.py": "d7c18afc7e1839708a3125771900090b19a28125c885b98407b8da6b108a5ebe",
     "test_helpers.py": "8d971d7027c955b298d7b6d0e24d6b98f94998e8255f8f084968e51bf54c168d",
-    "test_input_diagnostics.py": "b040e40b4270893f228c8426e88d2be25519fc81ad227fce877293b83c43dd0a",
-    "test_stderr_excerpts.py": "d6881d931a3f827d936107cd803bce794b62f23e4fb48beeb8cc8b6404057171",
+    "test_input_diagnostics.py": "c071412a0e0b0f20b0d7d0184093c50945aac0f66b1f4d9a49dd9a9363bbe3fd",
+    "test_stderr_excerpts.py": "707f7ecb2571888fb7f381aefbea65975630ff16f0a1ed62be46f420e14d1e9f",
+    "test_tool_dispatch.py": "75d60bff311edc8593ec951dd80cbfb65e0c1062a76afce664d39fb300045e3a",
+    "tool-dispatch-provenance.json": "771c8961529d26a8b902e51afa9bcd351b890b764d099395fa67d7543416f7e5",
     "utf8-contract.json": "d790625d7ddb5aa7a55ab052a126eedee780cade41f93b7b21359718f6c4c44c"
   },
-  "candidate_revision": 8,
-  "base_commit": "4b83100cc76be279a5b62b166f03d3c166e57c63",
-  "base_tree": "95c2b1cf1ddfd2a26a66bd6b18135547a818dfbb",
+  "candidate_revision": 9,
+  "base_commit": "f4377a3646eae8139e6592529483e4059202d181",
+  "base_tree": "61d3640376f24f3488fcdc031daaaa84b9c3774e",
   "approval": {
-    "approved_scope": "Exact inert-fixture amendment and sanitized-stderr diagnostic for the credential-free public-source foundation build, capped at 6 KiB excerpt and 16 KiB record; unchanged commands, inputs, profiles, budgets, targets and temporary compiler/linker effects. Pattern-based redaction is not a general secret-detection guarantee. Normal secret scanning remains required; any further rejection stops publication for diagnosis.",
-    "reviewed_manifest_sha256": "3bd1f74c7d3d7e7f7a27ab3a6825354121d2d9d64ea027d53dca9340a75cbc9e",
-    "independent_review_sha256": "b9aa205a167dd8d93d9157a7333a3e19f4d2a3ebef5581b3f79606dd318ecc07",
+    "approved_scope": "Exact validated-tool invocation-spelling correction with resolved-target hashing retained and the existing sanitized-stderr diagnostic for the credential-free public-source foundation build, capped at 6 KiB excerpt and 16 KiB record; unchanged commands, inputs, profiles, budgets, targets and temporary compiler/linker effects. Pattern-based redaction is not a general secret-detection guarantee. Normal secret scanning remains required; any further rejection stops publication for diagnosis.",
+    "reviewed_manifest_sha256": "8a48ea0e6692677b2b008d6df4597d198b6f42d345bc2666a72e0cdd2ed41a49",
+    "independent_review_sha256": "d14266954cc58281c6de9a93ac09ca3df6e133b71f520db2ca5109bc53ed4884",
     "approved_by": "approved project-task scope",
     "reviewer": "independent exact-input review",
-    "approved_at_utc": "2026-10-11T11:33:59Z"
+    "approved_at_utc": "2026-10-11T11:53:24Z"
   }
 }
