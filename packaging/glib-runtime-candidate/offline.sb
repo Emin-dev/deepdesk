@@ -1,0 +1,13 @@
+(version 1)
+(allow default)
+(deny network*)
+(deny file-write*)
+; Exactly one mutable phase directory. Runtime, source, inputs and coordinator are outside it.
+(allow file-write* (subpath (param "PHASE_DIR")))
+(allow file-write-data (literal "/dev/null"))
+(deny file-write* (subpath (param "IMMUTABLE_DIR")))
+(deny file-write* (subpath (param "CONTROL_DIR")))
+(deny file-read* (subpath "/opt/homebrew"))
+(deny file-read* (subpath "/opt/local"))
+(deny file-read* (subpath "/usr/local"))
+(deny file-read* (subpath "/Library/Frameworks/Python.framework"))

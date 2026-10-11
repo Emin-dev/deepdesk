@@ -1,0 +1,38 @@
+[
+  {
+    "case": "nested_rendered_double_quote_3",
+    "synthetic_stderr": "libtool: error: unexpected -DNAME=\\\"prefix \\\\\\\"SHORTPRIVATE\\\\\\\" suffix\\\" while linking\n",
+    "synthetic_stderr_hex": "6c6962746f6f6c3a206572726f723a20756e6578706563746564202d444e414d453d5c22707265666978205c5c5c2253484f5254505249564154455c5c5c22207375666669785c22207768696c65206c696e6b696e670a",
+    "excerpt_text": [
+      "libtool: error: unexpected [compiler-define redacted]SHORTPRIVATE\\\\\\\" suffix\\\" while linking"
+    ],
+    "unexpected_retained_value": "SHORTPRIVATE"
+  },
+  {
+    "case": "nested_rendered_double_quote_5",
+    "synthetic_stderr": "libtool: error: unexpected -DNAME=\\\"prefix \\\\\\\\\\\"SHORTPRIVATE\\\\\\\\\\\" suffix\\\" while linking\n",
+    "synthetic_stderr_hex": "6c6962746f6f6c3a206572726f723a20756e6578706563746564202d444e414d453d5c22707265666978205c5c5c5c5c2253484f5254505249564154455c5c5c5c5c22207375666669785c22207768696c65206c696e6b696e670a",
+    "excerpt_text": [
+      "libtool: error: unexpected [compiler-define redacted]SHORTPRIVATE\\\\\\\\\\\" suffix\\\" while linking"
+    ],
+    "unexpected_retained_value": "SHORTPRIVATE"
+  },
+  {
+    "case": "nested_rendered_single_quote_3",
+    "synthetic_stderr": "libtool: error: unexpected -DNAME=\\'prefix \\\\\\'SHORTPRIVATE\\\\\\' suffix\\' while linking\n",
+    "synthetic_stderr_hex": "6c6962746f6f6c3a206572726f723a20756e6578706563746564202d444e414d453d5c27707265666978205c5c5c2753484f5254505249564154455c5c5c27207375666669785c27207768696c65206c696e6b696e670a",
+    "excerpt_text": [
+      "libtool: error: unexpected [compiler-define redacted]SHORTPRIVATE\\\\\\' suffix\\' while linking"
+    ],
+    "unexpected_retained_value": "SHORTPRIVATE"
+  },
+  {
+    "case": "nested_rendered_single_quote_5",
+    "synthetic_stderr": "libtool: error: unexpected -DNAME=\\'prefix \\\\\\\\\\'SHORTPRIVATE\\\\\\\\\\' suffix\\' while linking\n",
+    "synthetic_stderr_hex": "6c6962746f6f6c3a206572726f723a20756e6578706563746564202d444e414d453d5c27707265666978205c5c5c5c5c2753484f5254505249564154455c5c5c5c5c27207375666669785c27207768696c65206c696e6b696e670a",
+    "excerpt_text": [
+      "libtool: error: unexpected [compiler-define redacted]SHORTPRIVATE\\\\\\\\\\' suffix\\' while linking"
+    ],
+    "unexpected_retained_value": "SHORTPRIVATE"
+  }
+]

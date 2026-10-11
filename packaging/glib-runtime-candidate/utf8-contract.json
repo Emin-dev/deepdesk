@@ -1,0 +1,19 @@
+{
+  "archive_sha256": "53c156e1ba416a20da8e65395daa132da0d80e76910424caca3fcdae7831d384",
+  "members": [
+    {
+      "member": "pcre2-10.49/src/pcre2.h.generic",
+      "sha256": "19756397bb6c402d43f74ba827c55acd26c21d078eead9ed5d49f582e4c506d8"
+    },
+    {
+      "member": "pcre2-10.49/src/pcre2_valid_utf.c",
+      "sha256": "fc7271e737bc7828b27bf52ade1feb0e1d29e40a9ef737d102ddb0a8091ccc3f"
+    }
+  ],
+  "invalid_byte_hex": "ff",
+  "required_macro": "PCRE2_ERROR_UTF8_ERR21",
+  "required_value": -23,
+  "normal_nonmatch_macro": "PCRE2_ERROR_NOMATCH",
+  "normal_nonmatch_value": -1,
+  "native_execution": false
+}

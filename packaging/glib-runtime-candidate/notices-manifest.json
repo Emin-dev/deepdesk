@@ -1,0 +1,628 @@
+{
+  "scope": "exact archive notice-file preservation for ephemeral execution review; not redistribution clearance",
+  "files": [
+    {
+      "input": "gettext",
+      "member": "gettext-1.0/AUTHORS",
+      "path": "notices/gettext/gettext-1.0/AUTHORS",
+      "sha256": "167b04ed012e59c2d2cfc87d420d8c8a8f5c528ef1fd068598b36d57f39db203",
+      "bytes": 2637
+    },
+    {
+      "input": "gettext",
+      "member": "gettext-1.0/gettext-runtime/AUTHORS",
+      "path": "notices/gettext/gettext-1.0/gettext-runtime/AUTHORS",
+      "sha256": "136ea88816ec1990c2fc060970013b9e94c875ba8b387f9bb3d62e77c90bc9b4",
+      "bytes": 145
+    },
+    {
+      "input": "gettext",
+      "member": "gettext-1.0/gettext-runtime/intl/AUTHORS",
+      "path": "notices/gettext/gettext-1.0/gettext-runtime/intl/AUTHORS",
+      "sha256": "4bd9e2cd15ab6d68b30965512b63a1d4aae95f4c1dd040657a4d1300252a695f",
+      "bytes": 96
+    },
+    {
+      "input": "gettext",
+      "member": "gettext-1.0/gettext-runtime/libasprintf/AUTHORS",
+      "path": "notices/gettext/gettext-1.0/gettext-runtime/libasprintf/AUTHORS",
+      "sha256": "590f1c4aa72c2c14dd52b0e230bf652e2109d00099fc7bb272e4594b800913d0",
+      "bytes": 33
+    },
+    {
+      "input": "gettext",
+      "member": "gettext-1.0/gettext-tools/AUTHORS",
+      "path": "notices/gettext/gettext-1.0/gettext-tools/AUTHORS",
+      "sha256": "4027705b723299dd8e6153939ab73395e22685503994cc8de92fa2ebaa432a49",
+      "bytes": 60
+    },
+    {
+      "input": "gettext",
+      "member": "gettext-1.0/libtextstyle/AUTHORS",
+      "path": "notices/gettext/gettext-1.0/libtextstyle/AUTHORS",
+      "sha256": "71c0580cb05d28848b341e5a4da2761d4a8eb482592358d646dab104648a8303",
+      "bytes": 271
+    },
+    {
+      "input": "gettext",
+      "member": "gettext-1.0/COPYING",
+      "path": "notices/gettext/gettext-1.0/COPYING",
+      "sha256": "e79e9c8a0c85d735ff98185918ec94ed7d175efc377012787aebcf3b80f0d90b",
+      "bytes": 35151
+    },
+    {
+      "input": "gettext",
+      "member": "gettext-1.0/gettext-runtime/COPYING",
+      "path": "notices/gettext/gettext-1.0/gettext-runtime/COPYING",
+      "sha256": "7ef2cdfe58e0c0460657b6598b49af29d4e03c1e41cbaf0e1da1eb8ad74b95d0",
+      "bytes": 495
+    },
+    {
+      "input": "gettext",
+      "member": "gettext-1.0/gettext-runtime/libasprintf/COPYING",
+      "path": "notices/gettext/gettext-1.0/gettext-runtime/libasprintf/COPYING",
+      "sha256": "03133addae5b99a6148c538300e6d97074453089be1423b741bd081f18e2b298",
+      "bytes": 65
+    },
+    {
+      "input": "gettext",
+      "member": "gettext-1.0/gettext-tools/COPYING",
+      "path": "notices/gettext/gettext-1.0/gettext-tools/COPYING",
+      "sha256": "5d4cff30d5038f82a0edc79798456049b61e1752fdb7e9ab1f4bfb9fae3a7303",
+      "bytes": 78
+    },
+    {
+      "input": "gettext",
+      "member": "gettext-1.0/gettext-tools/gnulib-lib/libxml/COPYING",
+      "path": "notices/gettext/gettext-1.0/gettext-tools/gnulib-lib/libxml/COPYING",
+      "sha256": "c5c63674f8a83c4d2e385d96d1c670a03cb871ba2927755467017317878574bd",
+      "bytes": 1289
+    },
+    {
+      "input": "gettext",
+      "member": "gettext-1.0/gnulib-local/lib/libxml/COPYING",
+      "path": "notices/gettext/gettext-1.0/gnulib-local/lib/libxml/COPYING",
+      "sha256": "c5c63674f8a83c4d2e385d96d1c670a03cb871ba2927755467017317878574bd",
+      "bytes": 1289
+    },
+    {
+      "input": "gettext",
+      "member": "gettext-1.0/libtextstyle/COPYING",
+      "path": "notices/gettext/gettext-1.0/libtextstyle/COPYING",
+      "sha256": "e79e9c8a0c85d735ff98185918ec94ed7d175efc377012787aebcf3b80f0d90b",
+      "bytes": 35151
+    },
+    {
+      "input": "gettext",
+      "member": "gettext-1.0/libtextstyle/lib/libxml/COPYING",
+      "path": "notices/gettext/gettext-1.0/libtextstyle/lib/libxml/COPYING",
+      "sha256": "c5c63674f8a83c4d2e385d96d1c670a03cb871ba2927755467017317878574bd",
+      "bytes": 1289
+    },
+    {
+      "input": "gettext",
+      "member": "gettext-1.0/gettext-runtime/intl/COPYING.LIB",
+      "path": "notices/gettext/gettext-1.0/gettext-runtime/intl/COPYING.LIB",
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95",
+      "bytes": 26419
+    },
+    {
+      "input": "gettext",
+      "member": "gettext-1.0/gettext-runtime/libasprintf/COPYING.LIB",
+      "path": "notices/gettext/gettext-1.0/gettext-runtime/libasprintf/COPYING.LIB",
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95",
+      "bytes": 26419
+    },
+    {
+      "input": "gettext",
+      "member": "gettext-1.0/gettext-tools/tree-sitter-0.23.2/LICENSE",
+      "path": "notices/gettext/gettext-1.0/gettext-tools/tree-sitter-0.23.2/LICENSE",
+      "sha256": "5f9cf9fb6acb1972b35ae29119ce563bb60ec097656bc4b69b9bac2d04c7a147",
+      "bytes": 1085
+    },
+    {
+      "input": "gettext",
+      "member": "gettext-1.0/gettext-tools/tree-sitter-0.23.2/lib/src/unicode/LICENSE",
+      "path": "notices/gettext/gettext-1.0/gettext-tools/tree-sitter-0.23.2/lib/src/unicode/LICENSE",
+      "sha256": "6a18c5fac70d7860b57f5b72b4e2c9a1ba6b3d2741eef7ff9767c5379364f10d",
+      "bytes": 21001
+    },
+    {
+      "input": "gettext",
+      "member": "gettext-1.0/gettext-tools/tree-sitter-d-0.8.2/LICENSE",
+      "path": "notices/gettext/gettext-1.0/gettext-tools/tree-sitter-d-0.8.2/LICENSE",
+      "sha256": "ecf206b1a27e8e4ea07f1e1529cb111b4be5ce8420bd27b8269981d9c0c389f8",
+      "bytes": 1040
+    },
+    {
+      "input": "gettext",
+      "member": "gettext-1.0/gettext-tools/tree-sitter-go-0.23.4/LICENSE",
+      "path": "notices/gettext/gettext-1.0/gettext-tools/tree-sitter-go-0.23.4/LICENSE",
+      "sha256": "2e0110e07abef7c2548b26ec9d6969775617ca539a0dc8dbeeb14d6452c711d1",
+      "bytes": 1080
+    },
+    {
+      "input": "gettext",
+      "member": "gettext-1.0/gettext-tools/tree-sitter-ocaml-0.23.2/LICENSE",
+      "path": "notices/gettext/gettext-1.0/gettext-tools/tree-sitter-ocaml-0.23.2/LICENSE",
+      "sha256": "f977a20805dd6e275f14bc090a5f8e638401dad4df366841c1060f12c75b74ae",
+      "bytes": 1094
+    },
+    {
+      "input": "gettext",
+      "member": "gettext-1.0/gettext-tools/tree-sitter-rust-0.23.2/LICENSE",
+      "path": "notices/gettext/gettext-1.0/gettext-tools/tree-sitter-rust-0.23.2/LICENSE",
+      "sha256": "31d5b6f4243d5c7c6e1c4ebbbb9f6407bd1457a08bcc4f706521710341acba36",
+      "bytes": 1080
+    },
+    {
+      "input": "gettext",
+      "member": "gettext-1.0/gettext-tools/tree-sitter-typescript-0.23.2/LICENSE",
+      "path": "notices/gettext/gettext-1.0/gettext-tools/tree-sitter-typescript-0.23.2/LICENSE",
+      "sha256": "49bf33cf78ef5897e4e161ce1517df7de1ae5042a65b6bcfd44401e0fc606559",
+      "bytes": 1080
+    },
+    {
+      "input": "pcre2",
+      "member": "pcre2-10.49/AUTHORS.md",
+      "path": "notices/pcre2/pcre2-10.49/AUTHORS.md",
+      "sha256": "412ace3355a4d6a4d835c350a7df172903811eafda7b13500dacf58429ee757e",
+      "bytes": 4232
+    },
+    {
+      "input": "pcre2",
+      "member": "pcre2-10.49/COPYING",
+      "path": "notices/pcre2/pcre2-10.49/COPYING",
+      "sha256": "99272c55f3dcfa07a8a7e15a5c1a33096e4727de74241d65fa049fccfdd59507",
+      "bytes": 97
+    },
+    {
+      "input": "pcre2",
+      "member": "pcre2-10.49/deps/sljit/LICENSE",
+      "path": "notices/pcre2/pcre2-10.49/deps/sljit/LICENSE",
+      "sha256": "5f216505c0f6ea3273caec89e766eef93cdeb7bbb0c429f9360116d7c938feeb",
+      "bytes": 1444
+    },
+    {
+      "input": "pcre2",
+      "member": "pcre2-10.49/cmake/COPYING-CMAKE-SCRIPTS",
+      "path": "notices/pcre2/pcre2-10.49/cmake/COPYING-CMAKE-SCRIPTS",
+      "sha256": "c666ec2313dba24523ccad88f4c04ea4b24fad6545263a35b1d4ab2b08efe50a",
+      "bytes": 1326
+    },
+    {
+      "input": "pcre2",
+      "member": "pcre2-10.49/LICENCE.md",
+      "path": "notices/pcre2/pcre2-10.49/LICENCE.md",
+      "sha256": "197d8a73ffee0d6b09adba2f9c677b5f5aede24edf89258a68e48248d010d811",
+      "bytes": 4011
+    },
+    {
+      "input": "pkgconf",
+      "member": "pkgconf-3.0.8/t/solver/conflicts-license.test",
+      "path": "notices/pkgconf/pkgconf-3.0.8/t/solver/conflicts-license.test",
+      "sha256": "4b2273398a484a2bab90f1ededb1929dbff0ce77cb99d5964ac079c6d82ce852",
+      "bytes": 177
+    },
+    {
+      "input": "pkgconf",
+      "member": "pkgconf-3.0.8/t/spdxtool/no-license.test",
+      "path": "notices/pkgconf/pkgconf-3.0.8/t/spdxtool/no-license.test",
+      "sha256": "990651304cd60b314622fc8410df37897a35e324b599e7e7c328a9afd689d4ec",
+      "bytes": 196
+    },
+    {
+      "input": "pkgconf",
+      "member": "pkgconf-3.0.8/t/sbom/license-malformed-token.test",
+      "path": "notices/pkgconf/pkgconf-3.0.8/t/sbom/license-malformed-token.test",
+      "sha256": "739a512f1d70585c36cb51e05946558c538823fcef2860ed3003280a07aa6de9",
+      "bytes": 138
+    },
+    {
+      "input": "pkgconf",
+      "member": "pkgconf-3.0.8/t/sbom/license-file-bar.test",
+      "path": "notices/pkgconf/pkgconf-3.0.8/t/sbom/license-file-bar.test",
+      "sha256": "36d686b0dacae47f3305198a1c18905829e4d0cddaf57a70f63708005823712d",
+      "bytes": 158
+    },
+    {
+      "input": "pkgconf",
+      "member": "pkgconf-3.0.8/t/sbom/license-isc.test",
+      "path": "notices/pkgconf/pkgconf-3.0.8/t/sbom/license-isc.test",
+      "sha256": "ebfe126be5bf39e35a2b6e937e8a35786cc2441eceaa19b946f22cf7ad811d61",
+      "bytes": 86
+    },
+    {
+      "input": "pkgconf",
+      "member": "pkgconf-3.0.8/t/sbom/license-noassertion.test",
+      "path": "notices/pkgconf/pkgconf-3.0.8/t/sbom/license-noassertion.test",
+      "sha256": "026f1fc13a2161a380c85822bbb8fbcbb9b192d093b209fb7d945394bc49c9b7",
+      "bytes": 140
+    },
+    {
+      "input": "pkgconf",
+      "member": "pkgconf-3.0.8/t/sbom/license-file-foo.test",
+      "path": "notices/pkgconf/pkgconf-3.0.8/t/sbom/license-file-foo.test",
+      "sha256": "0b10594015e20699de74b9ddd15e0b1b3439cec33382eed6da8f062ea3a1a92f",
+      "bytes": 115
+    },
+    {
+      "input": "pkgconf",
+      "member": "pkgconf-3.0.8/t/bomtool/no-license.test",
+      "path": "notices/pkgconf/pkgconf-3.0.8/t/bomtool/no-license.test",
+      "sha256": "868af9e05c7e9bcdae4a15bfa4a1e512b3dadc2d08a3e6d9400aebedf2530f29",
+      "bytes": 202
+    },
+    {
+      "input": "pkgconf",
+      "member": "pkgconf-3.0.8/libpkgconf/license.c",
+      "path": "notices/pkgconf/pkgconf-3.0.8/libpkgconf/license.c",
+      "sha256": "e8b54a017f50fc8695d03fd0d8789e120c2583c0165ab832b3789ad064136e69",
+      "bytes": 10381
+    },
+    {
+      "input": "pkgconf",
+      "member": "pkgconf-3.0.8/COPYING",
+      "path": "notices/pkgconf/pkgconf-3.0.8/COPYING",
+      "sha256": "055a265b839672a62f590869b0a1f8e4f5147e8f073c9ba77b17b8d7ad653966",
+      "bytes": 468
+    },
+    {
+      "input": "pkgconf",
+      "member": "pkgconf-3.0.8/AUTHORS",
+      "path": "notices/pkgconf/pkgconf-3.0.8/AUTHORS",
+      "sha256": "8b3dbc024558bb120b3db6b6d37bf23e38603165a810013ca3539bc7fbdadcd9",
+      "bytes": 3607
+    },
+    {
+      "input": "pkgconf",
+      "member": "pkgconf-3.0.8/tests/lib-sbom-files/nolicense.json",
+      "path": "notices/pkgconf/pkgconf-3.0.8/tests/lib-sbom-files/nolicense.json",
+      "sha256": "0f6c38415d2bbf101713c94d794888fc7bb69ac774f7b3ee8de1c193d7578219",
+      "bytes": 2860
+    },
+    {
+      "input": "pkgconf",
+      "member": "pkgconf-3.0.8/tests/lib-sbom-files/bomtool-nolicense.txt",
+      "path": "notices/pkgconf/pkgconf-3.0.8/tests/lib-sbom-files/bomtool-nolicense.txt",
+      "sha256": "ab173d628a6b957213f5e2953974e2efaf117792b9c49a30284ae8e6ed9ee9c0",
+      "bytes": 769
+    },
+    {
+      "input": "pkgconf",
+      "member": "pkgconf-3.0.8/tests/api/test-license.c",
+      "path": "notices/pkgconf/pkgconf-3.0.8/tests/api/test-license.c",
+      "sha256": "3a233eb370ecdefe2668b405488e5b4a0538c6f34b3fbc11b68e72bea61a8488",
+      "bytes": 8796
+    },
+    {
+      "input": "pkgconf",
+      "member": "pkgconf-3.0.8/tests/lib1/license-malformed.pc",
+      "path": "notices/pkgconf/pkgconf-3.0.8/tests/lib1/license-malformed.pc",
+      "sha256": "f79b3a011a4dd4601737927040858a8a6c09728d2f68248c828cd404fa64f816",
+      "bytes": 265
+    },
+    {
+      "input": "pkgconf",
+      "member": "pkgconf-3.0.8/tests/lib-sbom/nolicense.pc",
+      "path": "notices/pkgconf/pkgconf-3.0.8/tests/lib-sbom/nolicense.pc",
+      "sha256": "282a1d5c17601c1e24a613c92a880ae33babf08fd790e4b734c9f9a1d6a14333",
+      "bytes": 241
+    },
+    {
+      "input": "meson",
+      "member": "meson-1.11.0.dist-info/licenses/COPYING",
+      "path": "notices/meson/meson-1.11.0.dist-info/licenses/COPYING",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "bytes": 11358
+    },
+    {
+      "input": "ninja",
+      "member": "ninja-1.13.2.dist-info/licenses/LICENSE_Apache_20",
+      "path": "notices/ninja/ninja-1.13.2.dist-info/licenses/LICENSE_Apache_20",
+      "sha256": "73ba74dfaa520b49a401b5d21459a8523a146f3b7518a833eea5efa85130bf68",
+      "bytes": 10273
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/LICENSE.txt",
+      "path": "notices/python/python/lib/python3.12/LICENSE.txt",
+      "sha256": "3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf",
+      "bytes": 13936
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/AUTHORS.txt",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/AUTHORS.txt",
+      "sha256": "4eb1fb1705e2def898e81bcba19c3aac80620d27ba3569d6a6df7b4629d1b5c2",
+      "bytes": 12139
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/LICENSE.txt",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/LICENSE.txt",
+      "sha256": "634300a669d49aeae65b12c6c48c924c51a4cdf3d1ff086dc3456dc8bcaa2104",
+      "bytes": 1093
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/cachecontrol/LICENSE.txt",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/cachecontrol/LICENSE.txt",
+      "sha256": "86eeee87be2a43f3ff1f56496f451f69243926f025fedbb033666c304c4c161b",
+      "bytes": 558
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/certifi/LICENSE",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/certifi/LICENSE",
+      "sha256": "e93716da6b9c0d5a4a1df60fe695b370f0695603d21f6f83f053e42cfc10caf7",
+      "bytes": 989
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/distlib/LICENSE.txt",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/distlib/LICENSE.txt",
+      "sha256": "808e10c8a6ab8deb149ff9b3fb19f447a808094606d712a9ca57fead3552599d",
+      "bytes": 14531
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/distro/LICENSE",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/distro/LICENSE",
+      "sha256": "cb5e8e7e5f4a3988e1063c142c60dc2df75605f4c46515e776e3aca6df976e14",
+      "bytes": 11325
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/idna/LICENSE.md",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/idna/LICENSE.md",
+      "sha256": "1a9a4f0e3d479a27240ddd59a9137a66ab4a0f9dfdc8ca6188cc0bfd85187f04",
+      "bytes": 1541
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/msgpack/COPYING",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/msgpack/COPYING",
+      "sha256": "492dedba85da5872f78e6091bcd1fea474d660d35acb4dee964b8aab3f007427",
+      "bytes": 614
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/packaging/LICENSE",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/packaging/LICENSE",
+      "sha256": "cad1ef5bd340d73e074ba614d26f7deaca5c7940c3d8c34852e65c4909686c48",
+      "bytes": 197
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/packaging/LICENSE.APACHE",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/packaging/LICENSE.APACHE",
+      "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+      "bytes": 10174
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/packaging/LICENSE.BSD",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/packaging/LICENSE.BSD",
+      "sha256": "b70e7e9b742f1cc6f948b34c16aa39ffece94196364bc88ff0d2180f0028fac5",
+      "bytes": 1344
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/pkg_resources/LICENSE",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/pkg_resources/LICENSE",
+      "sha256": "86da0f01aeae46348a3c3d465195dc1ceccde79f79e87769a64b8da04b2a4741",
+      "bytes": 1023
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/platformdirs/LICENSE",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/platformdirs/LICENSE",
+      "sha256": "29e0fd62e929850e86eb28c3fdccf0cefdf4fa94879011cffb3d0d4bed6d4db6",
+      "bytes": 1089
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/pygments/LICENSE",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/pygments/LICENSE",
+      "sha256": "a9d66f1d526df02e29dce73436d34e56e8632f46c275bbdffc70569e882f9f17",
+      "bytes": 1331
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/pyproject_hooks/LICENSE",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/pyproject_hooks/LICENSE",
+      "sha256": "1b22b049b5267d6dfc23a67bf4a84d8ec04b9fdfb1a51d360e42b4342c8b4154",
+      "bytes": 1081
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/requests/LICENSE",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/requests/LICENSE",
+      "sha256": "09e8a9bcec8067104652c168685ab0931e7868f9c8284b66f5ae6edae5f1130b",
+      "bytes": 10142
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/resolvelib/LICENSE",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/resolvelib/LICENSE",
+      "sha256": "f388fd38cad13112c1dc0f669bbe80e7f84541edbafb72f3030d2ca7642c3c9d",
+      "bytes": 751
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/rich/LICENSE",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/rich/LICENSE",
+      "sha256": "deed7c17a4318158190a3ea239cc879a5a50271cebb98ae7025f48fbe58dca15",
+      "bytes": 1056
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/tomli/LICENSE",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/tomli/LICENSE",
+      "sha256": "b80816b0d530b8accb4c2211783790984a6e3b61922c2b5ee92f3372ab2742fe",
+      "bytes": 1072
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/tomli_w/LICENSE",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/tomli_w/LICENSE",
+      "sha256": "b80816b0d530b8accb4c2211783790984a6e3b61922c2b5ee92f3372ab2742fe",
+      "bytes": 1072
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/truststore/LICENSE",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/truststore/LICENSE",
+      "sha256": "33be7b7e8fa4fd19b1760e1a8ed8a668bdab852c91b692dd41424bcb725a9fca",
+      "bytes": 1086
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/urllib3/LICENSE.txt",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/urllib3/LICENSE.txt",
+      "sha256": "130e3a64d5fdd5d096a752694634a7d9df284469de86e5732100268041e3d686",
+      "bytes": 1093
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip/_vendor/cachecontrol/LICENSE.txt",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip/_vendor/cachecontrol/LICENSE.txt",
+      "sha256": "86eeee87be2a43f3ff1f56496f451f69243926f025fedbb033666c304c4c161b",
+      "bytes": 558
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip/_vendor/certifi/LICENSE",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip/_vendor/certifi/LICENSE",
+      "sha256": "e93716da6b9c0d5a4a1df60fe695b370f0695603d21f6f83f053e42cfc10caf7",
+      "bytes": 989
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip/_vendor/distlib/LICENSE.txt",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip/_vendor/distlib/LICENSE.txt",
+      "sha256": "808e10c8a6ab8deb149ff9b3fb19f447a808094606d712a9ca57fead3552599d",
+      "bytes": 14531
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip/_vendor/distro/LICENSE",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip/_vendor/distro/LICENSE",
+      "sha256": "cb5e8e7e5f4a3988e1063c142c60dc2df75605f4c46515e776e3aca6df976e14",
+      "bytes": 11325
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip/_vendor/idna/LICENSE.md",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip/_vendor/idna/LICENSE.md",
+      "sha256": "1a9a4f0e3d479a27240ddd59a9137a66ab4a0f9dfdc8ca6188cc0bfd85187f04",
+      "bytes": 1541
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip/_vendor/msgpack/COPYING",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip/_vendor/msgpack/COPYING",
+      "sha256": "492dedba85da5872f78e6091bcd1fea474d660d35acb4dee964b8aab3f007427",
+      "bytes": 614
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip/_vendor/packaging/LICENSE",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip/_vendor/packaging/LICENSE",
+      "sha256": "cad1ef5bd340d73e074ba614d26f7deaca5c7940c3d8c34852e65c4909686c48",
+      "bytes": 197
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip/_vendor/packaging/LICENSE.APACHE",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip/_vendor/packaging/LICENSE.APACHE",
+      "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+      "bytes": 10174
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip/_vendor/packaging/LICENSE.BSD",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip/_vendor/packaging/LICENSE.BSD",
+      "sha256": "b70e7e9b742f1cc6f948b34c16aa39ffece94196364bc88ff0d2180f0028fac5",
+      "bytes": 1344
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip/_vendor/pkg_resources/LICENSE",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip/_vendor/pkg_resources/LICENSE",
+      "sha256": "86da0f01aeae46348a3c3d465195dc1ceccde79f79e87769a64b8da04b2a4741",
+      "bytes": 1023
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip/_vendor/platformdirs/LICENSE",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip/_vendor/platformdirs/LICENSE",
+      "sha256": "29e0fd62e929850e86eb28c3fdccf0cefdf4fa94879011cffb3d0d4bed6d4db6",
+      "bytes": 1089
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip/_vendor/pygments/LICENSE",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip/_vendor/pygments/LICENSE",
+      "sha256": "a9d66f1d526df02e29dce73436d34e56e8632f46c275bbdffc70569e882f9f17",
+      "bytes": 1331
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/LICENSE",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/LICENSE",
+      "sha256": "1b22b049b5267d6dfc23a67bf4a84d8ec04b9fdfb1a51d360e42b4342c8b4154",
+      "bytes": 1081
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip/_vendor/requests/LICENSE",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip/_vendor/requests/LICENSE",
+      "sha256": "09e8a9bcec8067104652c168685ab0931e7868f9c8284b66f5ae6edae5f1130b",
+      "bytes": 10142
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip/_vendor/resolvelib/LICENSE",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip/_vendor/resolvelib/LICENSE",
+      "sha256": "f388fd38cad13112c1dc0f669bbe80e7f84541edbafb72f3030d2ca7642c3c9d",
+      "bytes": 751
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip/_vendor/rich/LICENSE",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip/_vendor/rich/LICENSE",
+      "sha256": "deed7c17a4318158190a3ea239cc879a5a50271cebb98ae7025f48fbe58dca15",
+      "bytes": 1056
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip/_vendor/tomli/LICENSE",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip/_vendor/tomli/LICENSE",
+      "sha256": "b80816b0d530b8accb4c2211783790984a6e3b61922c2b5ee92f3372ab2742fe",
+      "bytes": 1072
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip/_vendor/tomli_w/LICENSE",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip/_vendor/tomli_w/LICENSE",
+      "sha256": "b80816b0d530b8accb4c2211783790984a6e3b61922c2b5ee92f3372ab2742fe",
+      "bytes": 1072
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip/_vendor/truststore/LICENSE",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip/_vendor/truststore/LICENSE",
+      "sha256": "33be7b7e8fa4fd19b1760e1a8ed8a668bdab852c91b692dd41424bcb725a9fca",
+      "bytes": 1086
+    },
+    {
+      "input": "python",
+      "member": "python/lib/python3.12/site-packages/pip/_vendor/urllib3/LICENSE.txt",
+      "path": "notices/python/python/lib/python3.12/site-packages/pip/_vendor/urllib3/LICENSE.txt",
+      "sha256": "130e3a64d5fdd5d096a752694634a7d9df284469de86e5732100268041e3d686",
+      "bytes": 1093
+    }
+  ]
+}

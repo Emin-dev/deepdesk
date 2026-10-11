@@ -1,0 +1,223 @@
+{
+  "schema": 1,
+  "scope": "glib-runtime-prerequisites-v1",
+  "source_changes_allowed": false,
+  "inputs": [
+    {
+      "id": "gettext",
+      "version": "1.0",
+      "url": "https://ftp.gnu.org/gnu/gettext/gettext-1.0.tar.gz",
+      "sha256": "85d99b79c981a404874c02e0342176cf75c7698e2b51fe41031cf6526d974f1a",
+      "size": 32694085,
+      "redirect_hosts": [
+        "ftp.gnu.org"
+      ],
+      "license": {
+        "runtime": "LGPL-2.1-or-later (libintl and its headers); individual included gnulib notices also apply",
+        "build_sources": "GPL-3.0-or-later portions of distribution; see exact files",
+        "notice_paths": [
+          "texts/gettext/gettext-runtime/COPYING",
+          "texts/gettext/gettext-runtime/intl/COPYING.LIB",
+          "texts/gettext/COPYING"
+        ]
+      },
+      "format": "tar",
+      "root": "gettext-1.0",
+      "filename": "gettext-1.0.tar.gz",
+      "expanded_bytes": 247291870,
+      "member_count": 9346,
+      "max_member_bytes": 34918400,
+      "member_manifest": "members/gettext.json",
+      "member_manifest_sha256": "ffaf3c8ff6702d9fff652114204d251c1bd76a762018533619d7e449b0a77c6f"
+    },
+    {
+      "id": "pcre2",
+      "version": "10.49",
+      "url": "https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.49/pcre2-10.49.tar.bz2",
+      "sha256": "53c156e1ba416a20da8e65395daa132da0d80e76910424caca3fcdae7831d384",
+      "size": 2185271,
+      "redirect_hosts": [
+        "github.com",
+        "release-assets.githubusercontent.com"
+      ],
+      "license": {
+        "runtime": "BSD-3-Clause WITH PCRE2-exception; JIT/sljit BSD-2-Clause",
+        "notice_paths": [
+          "texts/pcre2/LICENCE.md",
+          "texts/pcre2/deps/sljit/LICENSE"
+        ]
+      },
+      "format": "tar",
+      "root": "pcre2-10.49",
+      "filename": "pcre2-10.49.tar.bz2",
+      "expanded_bytes": 13813672,
+      "member_count": 506,
+      "max_member_bytes": 652064,
+      "member_manifest": "members/pcre2.json",
+      "member_manifest_sha256": "075aa5c68d405be59fda0b6d532f61afde55c7639cdc454af6f68d6e1c857f13"
+    },
+    {
+      "id": "pkgconf",
+      "version": "3.0.8",
+      "url": "https://distfiles.ariadne.space/pkgconf/pkgconf-3.0.8.tar.xz",
+      "sha256": "943f0bc88bcaeceb630b00262e2a8ad5ea4fac3fba72a4267d8b9ec6b35d1194",
+      "size": 428240,
+      "redirect_hosts": [
+        "distfiles.ariadne.space"
+      ],
+      "license": {
+        "build_only": "ISC-family permission text; preserve exact COPYING and AUTHORS",
+        "notice_paths": [
+          "texts/pkgconf/COPYING",
+          "texts/pkgconf/AUTHORS"
+        ]
+      },
+      "format": "tar",
+      "root": "pkgconf-3.0.8",
+      "filename": "pkgconf-3.0.8.tar.xz",
+      "expanded_bytes": 2939411,
+      "member_count": 806,
+      "max_member_bytes": 531890,
+      "member_manifest": "members/pkgconf.json",
+      "member_manifest_sha256": "5d13fc425bfbb5030219faae360953ee8ba83a6c8e45e1fbb535e193a717f168"
+    },
+    {
+      "id": "meson",
+      "version": "1.11.0",
+      "url": "https://files.pythonhosted.org/packages/08/84/1ae2022a3562ac011c80c090e387a07e189d077b01fe58a266759b8fc2ff/meson-1.11.0-py3-none-any.whl",
+      "sha256": "9774eb62bbf2cb8043aa3feb771c09b510d112c0c382221e29aea7453ecce753",
+      "size": 1078425,
+      "redirect_hosts": [
+        "files.pythonhosted.org"
+      ],
+      "license": {
+        "build_only": "Apache-2.0",
+        "notice_paths": [
+          "texts/meson/meson-1.11.0.dist-info/licenses/COPYING"
+        ]
+      },
+      "format": "zip",
+      "root": null,
+      "filename": "meson-1.11.0-py3-none-any.whl",
+      "expanded_bytes": 4187395,
+      "member_count": 255,
+      "max_member_bytes": 210005,
+      "member_manifest": "members/meson.json",
+      "member_manifest_sha256": "05fd495e5ec27cd1542935f9419bdb5aa6a94cfc59f534d6421a9969e30edca3"
+    },
+    {
+      "id": "ninja",
+      "version": "1.13.2",
+      "url": "https://files.pythonhosted.org/packages/b5/b8/90a9518f2264637084d6199bc20c2f3fb97fefc4c474d277720150c3bd6d/ninja-1.13.2-py3-none-macosx_10_9_universal2.whl",
+      "sha256": "fd82e26c0706ad4ab88e5fdd26f3fab0a987a90f810160f6c322e752c6af298b",
+      "size": 306611,
+      "redirect_hosts": [
+        "files.pythonhosted.org"
+      ],
+      "license": {
+        "build_only": "Apache-2.0; PyPI wheel is scikit-build ninja-python-distributions",
+        "notice_paths": [
+          "texts/ninja/ninja-1.13.2.dist-info/licenses/LICENSE_Apache_20"
+        ]
+      },
+      "format": "zip",
+      "root": null,
+      "filename": "ninja-1.13.2-py3-none-macosx_10_9_universal2.whl",
+      "expanded_bytes": 675537,
+      "member_count": 17,
+      "max_member_bytes": 647352,
+      "member_manifest": "members/ninja.json",
+      "member_manifest_sha256": "7cc7c0e98b7a42f3f25bb8a6080023c45a709dadeaba22f8944ab8423876963d"
+    },
+    {
+      "id": "python",
+      "version": "3.12.15+20261009",
+      "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20261009/cpython-3.12.15%2B20261009-aarch64-apple-darwin-install_only.tar.gz",
+      "sha256": "83dcb04777c798bd95f3687acf9ae84b09860272ee6bdfb05be8bcf9447f75b8",
+      "size": 25165569,
+      "redirect_hosts": [
+        "github.com",
+        "release-assets.githubusercontent.com"
+      ],
+      "license": {
+        "status": "Reuse exact existing Python distribution and its archive notices; no redistribution claim"
+      },
+      "format": "tar",
+      "root": "python",
+      "filename": "cpython-3.12.15+20261009-aarch64-apple-darwin-install_only.tar.gz",
+      "expanded_bytes": 66226930,
+      "member_count": 1663,
+      "max_member_bytes": 18602664,
+      "member_manifest": "members/python.json",
+      "member_manifest_sha256": "a0fbc4d127c326f362e71a88340a38f99f7ac8a6d34968cc1aa9d4b496613407"
+    },
+    {
+      "id": "glib",
+      "version": "2.90.1",
+      "url": "https://download.gnome.org/sources/glib/2.90/glib-2.90.1.tar.xz",
+      "sha256": "93c941aa17d5eb1d53fe838365f29a8b4e539c222a256d974ec8f30fc413e396",
+      "size": 5871112,
+      "redirect_hosts": [
+        "download.gnome.org"
+      ],
+      "format": "tar",
+      "root": "glib-2.90.1",
+      "filename": "glib-2.90.1.tar.xz",
+      "expanded_bytes": 53941636,
+      "member_count": 2495,
+      "max_member_bytes": 2827429,
+      "member_manifest": "members/glib.json",
+      "member_manifest_sha256": "9feea76eda7057b572b863a0d518dc538e6b599f42079633c71fc05a094621eb",
+      "license": {
+        "runtime": "LGPL-2.1-or-later with exact included code notices",
+        "notice_paths": [
+          "notices/glib/LICENSES/AFL-2.0.txt",
+          "notices/glib/LICENSES/Apache-2.0.txt",
+          "notices/glib/LICENSES/CC-BY-SA-3.0.txt",
+          "notices/glib/LICENSES/CC0-1.0.txt",
+          "notices/glib/LICENSES/GPL-2.0-or-later.txt",
+          "notices/glib/LICENSES/LGPL-2.1-only.txt",
+          "notices/glib/LICENSES/LGPL-2.1-or-later.txt",
+          "notices/glib/LICENSES/LLVM-exception.txt",
+          "notices/glib/LICENSES/LicenseRef-old-glib-tests.txt",
+          "notices/glib/LICENSES/MIT.txt",
+          "notices/glib/LICENSES/MPL-1.1.txt",
+          "notices/glib/docs/reference/AUTHORS",
+          "notices/glib/docs/reference/COPYING",
+          "notices/glib/gmodule/AUTHORS",
+          "notices/glib/subprojects/gvdb/COPYING",
+          "notices/glib/subprojects/gvdb/LICENSES/LGPL-2.1-or-later.txt"
+        ]
+      }
+    },
+    {
+      "id": "libffi",
+      "version": "3.8.0",
+      "url": "https://github.com/libffi/libffi/releases/download/v3.8.0/libffi-3.8.0.tar.gz",
+      "sha256": "7da3e2d9a171eb0a038f592ecad3ff2bb2550f3496d87b3b29ad0cf4430c0db4",
+      "size": 1581626,
+      "redirect_hosts": [
+        "github.com",
+        "release-assets.githubusercontent.com"
+      ],
+      "format": "tar",
+      "root": "libffi-3.8.0",
+      "filename": "libffi-3.8.0.tar.gz",
+      "expanded_bytes": 5906918,
+      "member_count": 534,
+      "max_member_bytes": 707269,
+      "member_manifest": "members/libffi.json",
+      "member_manifest_sha256": "2f6ef841b7cdc8fc069b53d99bb1045313a7e222d121ee272a1c4bff89da8eea",
+      "license": {
+        "runtime": "MIT with exact bundled/build-tool notices",
+        "notice_paths": [
+          "notices/libffi/LICENSE-BUILDTOOLS",
+          "notices/libffi/LICENSE"
+        ]
+      }
+    }
+  ],
+  "total_compressed_bytes": 69310939,
+  "total_expanded_bytes": 394983369,
+  "foundation_inputs": 6
+}

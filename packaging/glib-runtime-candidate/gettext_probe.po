@@ -1,0 +1,13 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "coffee"
+msgstr "café"
+
+msgid "one apple"
+msgid_plural "many apples"
+msgstr[0] "une pomme"
+msgstr[1] "des pommes"

@@ -1,0 +1,173 @@
+{
+  "schema": 1,
+  "candidate": "pdf-foundation-build-diagnostic-v8",
+  "candidate_revision": 8,
+  "repository": "Emin-dev/deepdesk",
+  "normal_parent_commit": "4b83100cc76be279a5b62b166f03d3c166e57c63",
+  "normal_parent_tree": "95c2b1cf1ddfd2a26a66bd6b18135547a818dfbb",
+  "destination_branch": "engine-pdf-foundation-v1-ci",
+  "workflow": ".github/workflows/engine-pdf-foundation-v1-macos.yml",
+  "baseline": {
+    "file_count": 123,
+    "manifest_sha256": "3947c2b98f200ca0ec2b415275a2752ce895c0a85d389344b30e8e4ee2a5a52e",
+    "preserved": true
+  },
+  "prior_run": {
+    "run_id": 38131806922,
+    "job_id": 114447503295,
+    "commit": "4b83100cc76be279a5b62b166f03d3c166e57c63",
+    "url": "https://github.com/Emin-dev/deepdesk/actions/runs/38131806922",
+    "failed_phase": "pkgconf-build",
+    "exit_code": 2,
+    "stderr_bytes": 2119,
+    "stderr_sha256": "f82ab5573c7bbefac234de06f198f72910ca166ecd40e73559d102cc9d5fb5fb",
+    "stdout_bytes": 849,
+    "stdout_sha256": "ace1b82bd597a273fe21c2876e48e584a806281750f6a63459d0a97888539873",
+    "stderr_lines": 23,
+    "recognized_stderr_events": 1,
+    "failed_make_target": "libpkgconf.la",
+    "make_rule_line": 1582,
+    "recipe_exit": 1,
+    "exact_cause_proven": false,
+    "raw_streams_available": false,
+    "all_six_inputs_passed": true,
+    "sdk_compile_inspect_run_passed": true
+  },
+  "independent_terminal_sha256": "59d0173a9d2287148fce7e6177716fc7f7fffa4fb0e3d8d4be2619e2f438106f",
+  "pinned_libtool_coverage_sha256": "787cf20f6778ba4250c542de4758c209c473e99d7bdc829b7932bdcd2a044f3d",
+  "catalog_source": {
+    "url": "https://distfiles.ariadne.space/pkgconf/pkgconf-3.0.8.tar.xz",
+    "size": 428240,
+    "sha256": "943f0bc88bcaeceb630b00262e2a8ad5ea4fac3fba72a4267d8b9ec6b35d1194",
+    "archive_read_as_data_only": true,
+    "selected_source_files": 46,
+    "make_targets": 43,
+    "dependency_output_paths": 50,
+    "selected_hashes_match_existing_member_manifest": true,
+    "catalog_sha256": "714b19b45f5e9300177e1be09e3e5ec3596e5e7369480538e368c5a8247a053b"
+  },
+  "pinned_libtool_evidence": {
+    "ltmain_sha256": "f54cd2d9c6698e4bc15bb6350db3984d91fa002fed8334186ea1ab2285aa1762",
+    "severity_lines": [
+      821,
+      839
+    ],
+    "continuation_lines": [
+      782,
+      814
+    ],
+    "make_silent_rules_lines": [
+      171,
+      177,
+      362,
+      365
+    ],
+    "default_silent_configure_lines": [
+      5434,
+      5437
+    ],
+    "actual_omitted_error_known": false
+  },
+  "unchanged": [
+    "workflow",
+    "build commands and targets",
+    "input and dependency graph",
+    "environment",
+    "sandbox profile",
+    "budgets",
+    "probes",
+    "cleanup",
+    "native assertions",
+    "false gates",
+    "raw private stdout/stderr capture and byte hashes"
+  ],
+  "diagnostic_limits": {
+    "stream_bytes": 8388608,
+    "stream_lines": 32768,
+    "line_bytes": 8192,
+    "events_per_stream": 6,
+    "message_characters": 240,
+    "report_bytes": 16384,
+    "stderr_excerpt_lines": 64,
+    "stderr_excerpt_head_lines": 16,
+    "stderr_excerpt_line_characters": 512,
+    "stderr_excerpt_encoded_bytes": 6144
+  },
+  "disclosure_change": {
+    "structured_unknown_messages_still_withheld": true,
+    "sanitized_stderr_unknown_prose_preserved": true,
+    "raw_stdout_excluded": true,
+    "environment_and_command_dumps_excluded": true,
+    "pattern_based_not_universal_secret_detection": true,
+    "policy": "bounded_sanitized_stderr_v3"
+  },
+  "authorization": {
+    "execution_approved": false,
+    "independent_review_passed": false,
+    "temporary_linker_adhoc_signing_approved": false,
+    "install_name_linker_assignment_approved": false,
+    "github_publication_approved": false
+  },
+  "preparation": {
+    "first_party_offline_tests_only": true,
+    "downloaded_code_executed": false,
+    "native_execution": false,
+    "configured": false,
+    "compiled": false,
+    "published": false,
+    "rerun": false
+  },
+  "preparation_baseline": {
+    "candidate_revision": 7,
+    "manifest_sha256": "99cef94e40187cd13d1346cbf1f35b243e53275db5dd0b6656fb059190ce6a38",
+    "file_count": 128,
+    "preserved": true,
+    "approved": true,
+    "published": false,
+    "publication_blocked_before_commit_ref": true
+  },
+  "correction_review": {
+    "verdict": "v5_NO_GO",
+    "report_sha256": "6cfaf9ae9fa42e78f8dcd3e056266ff2393a8641dc5b3bd05f93cb273bd7700a",
+    "fixture_sha256": "567c3a486b541eb98da52bbb1abb3c7fac020fdaeb1e2ebbb7fdac2a56d18ebe",
+    "exact_fixture_count": 14,
+    "corrected_cases": [
+      "normalized command/env/quoted-tool/nested-trace suppression",
+      "quoted/JSON credential labels and quoted operands",
+      "credential continuation across blank/omitted lines",
+      "complete quoted/escaped compiler-definition operands"
+    ],
+    "ordinary_unknown_error_prose_preserved": true,
+    "prior_failure_sized_fixture_preserved": true
+  },
+  "definition_suffix_correction": {
+    "report_sha256": "dafb64a97326a75481ee3e36566ebf2b117e21ffb355a9469e1afe31347d0c2b",
+    "exact_fixture_sha256": "7fb9d89f43cab9ff46ab14e52618c4a8edef76e65998ad63c1bcb1c591828ba9",
+    "exact_fixture_count": 4,
+    "policy": "redact suffix from first recognized -D through end of line",
+    "nested_operand_parser_removed": true,
+    "ordinary_definition_free_prose_preserved": true,
+    "other_v6_fixes_preserved": true
+  },
+  "fixture_only_correction": {
+    "rejected_action": "GitHub create_tree",
+    "http_status": 422,
+    "reason_category": "repository_rule_secret_detection",
+    "matched_value_or_path_disclosed": false,
+    "rejected_batch_files": [
+      "test_disclosure_structures.py",
+      "test_input_diagnostics.py",
+      "test_stderr_excerpts.py"
+    ],
+    "inspection_classification": "Generated first-party synthetic fixtures; no real credentials found.",
+    "production_redaction_byte_identical": true,
+    "provider_shaped_literal_count_replaced": 8,
+    "inert_pipeline_cases": 8,
+    "production_pattern_contract_sha256": "d4cfef6258fa66f73da89243036c26f01b5f36f7bf55a8737eec201a05999c7d",
+    "private_key_fixture_explicitly_invalid": true,
+    "realistic_values_split_encoded_or_reconstructed": false,
+    "scanner_disabled_or_allowlisted": false,
+    "identical_retry": false,
+    "remote_secret_scan_result": "not_run"
+  }
+}

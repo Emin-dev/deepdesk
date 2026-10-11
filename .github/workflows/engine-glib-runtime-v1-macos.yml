@@ -1,0 +1,36 @@
+# INACTIVE REVIEW CANDIDATE. All execution approvals are closed.
+name: Validate bounded GLib runtime prerequisites
+on:
+  push:
+    branches:
+      - engine-glib-runtime-v1-ci
+    paths:
+      - 'packaging/glib-runtime-candidate/**'
+      - '.github/workflows/engine-glib-runtime-v1-macos.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: deepdesk-glib-runtime-v1-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  prerequisites:
+    if: github.repository == 'Emin-dev/deepdesk' && github.ref == 'refs/heads/engine-glib-runtime-v1-ci' && github.event.repository.private == false
+    runs-on: macos-26
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Execute only the separately approved exact combined candidate
+        run: /usr/bin/python3 -I packaging/glib-runtime-candidate/stage.py --repository "$GITHUB_WORKSPACE"
+      - name: State the prerequisite proof boundary
+        if: success()
+        run: |
+          printf '%s\n' \
+            'The rebuilt foundation, source libffi, gettext tools, GLib/GObject/GModule/GIO and GIRepository passed bounded synthetic checks.' \
+            'All 102 GLib catalogs and the downstream enum generator were retained and checked.' \
+            'This prerequisite subset is not a full GLib installation, Pango/rendering/font closure, relocation or release proof.' \
+            'Generated GIR/typelibs and optional profiling instrumentation remain outside the tested feature boundary.' \
+            'No paid runner, cache, uploaded artifact, explicit codesign, personal identity, model or provider query was used.' >> "$GITHUB_STEP_SUMMARY"

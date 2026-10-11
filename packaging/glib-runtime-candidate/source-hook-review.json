@@ -1,0 +1,475 @@
+{
+  "schema": 1,
+  "mode": "data-only static source/hook inspection; no execution approval",
+  "files": [
+    {
+      "input_id": "libffi",
+      "source_member": "libffi-3.8.0/configure",
+      "path": "source-review/libffi/configure",
+      "sha256": "29462144405ef9ef2332c71b2b928363bb8bd89861844ce588f170e1d2b16b07",
+      "size": 707269,
+      "mtime": 1786227145
+    },
+    {
+      "input_id": "libffi",
+      "source_member": "libffi-3.8.0/configure.ac",
+      "path": "source-review/libffi/configure.ac",
+      "sha256": "0d54ff74512fb2634833d034edbcd37abd6608d3a39c42f42124a631da3b08d8",
+      "size": 15315,
+      "mtime": 1786227141
+    },
+    {
+      "input_id": "libffi",
+      "source_member": "libffi-3.8.0/configure.host",
+      "path": "source-review/libffi/configure.host",
+      "sha256": "2690fbd0ffa7d70b5463026f38d1adc0523214e8363180e076e9c3c539c5984d",
+      "size": 6950,
+      "mtime": 1786227141
+    },
+    {
+      "input_id": "libffi",
+      "source_member": "libffi-3.8.0/Makefile.in",
+      "path": "source-review/libffi/Makefile.in",
+      "sha256": "4aabca5c044dce7b5e02664f5016c6ec834dba21ef558f03393d0045fc277162",
+      "size": 84217,
+      "mtime": 1786227146
+    },
+    {
+      "input_id": "libffi",
+      "source_member": "libffi-3.8.0/Makefile.am",
+      "path": "source-review/libffi/Makefile.am",
+      "sha256": "77f6b8ac4b263621fc62b03f47bdb56cdfb5b7a0d285fdab9c805fd7b8ed6429",
+      "size": 6556,
+      "mtime": 1786227141
+    },
+    {
+      "input_id": "libffi",
+      "source_member": "libffi-3.8.0/include/Makefile.in",
+      "path": "source-review/libffi/include/Makefile.in",
+      "sha256": "bae0c94a27b34b6cff92897c96134e77b4bf5acca5d3ffb0a933e9031e33c890",
+      "size": 18413,
+      "mtime": 1786227146
+    },
+    {
+      "input_id": "libffi",
+      "source_member": "libffi-3.8.0/include/ffi.h.in",
+      "path": "source-review/libffi/include/ffi.h.in",
+      "sha256": "decd0f2f39008aedf424f54a5f15f32328cd9a5c4384c7d4a347a244f5da4705",
+      "size": 16319,
+      "mtime": 1786227141
+    },
+    {
+      "input_id": "libffi",
+      "source_member": "libffi-3.8.0/libtool-version",
+      "path": "source-review/libffi/libtool-version",
+      "sha256": "ed5367344430f3c1d56b3fa68a03afd39db24f0badcc72edd648a61aea1d0954",
+      "size": 1095,
+      "mtime": 1786227141
+    },
+    {
+      "input_id": "libffi",
+      "source_member": "libffi-3.8.0/libtool-ldflags",
+      "path": "source-review/libffi/libtool-ldflags",
+      "sha256": "953d3a071dd9c49b5b066bd9aa6cabf8b003219f0419e211574964272672e1f5",
+      "size": 3370,
+      "mtime": 1786227141
+    },
+    {
+      "input_id": "libffi",
+      "source_member": "libffi-3.8.0/m4/ax_enable_builddir.m4",
+      "path": "source-review/libffi/m4/ax_enable_builddir.m4",
+      "sha256": "e63154501a33a7dba2621e14744f490482e1bc59ae7c7de2e53915ba8642f30d",
+      "size": 13216,
+      "mtime": 1786227141
+    },
+    {
+      "input_id": "libffi",
+      "source_member": "libffi-3.8.0/src/closures.c",
+      "path": "source-review/libffi/src/closures.c",
+      "sha256": "0c7d404a66e62154077a08966f21016793a75ad1fcd0be2b3fe814d93c3efcb6",
+      "size": 30174,
+      "mtime": 1786227141
+    },
+    {
+      "input_id": "libffi",
+      "source_member": "libffi-3.8.0/src/tramp.c",
+      "path": "source-review/libffi/src/tramp.c",
+      "sha256": "803ae4e289003cbd38659dad39bf15cfdfc06a18406cf9f8f7d190b703d942d0",
+      "size": 17988,
+      "mtime": 1786227141
+    },
+    {
+      "input_id": "libffi",
+      "source_member": "libffi-3.8.0/src/aarch64/ffi.c",
+      "path": "source-review/libffi/src/aarch64/ffi.c",
+      "sha256": "6cb999516a85c94de18f7dbc0c746e8c15d89bc8974553c7270d0e20b674e4dc",
+      "size": 35695,
+      "mtime": 1786227141
+    },
+    {
+      "input_id": "libffi",
+      "source_member": "libffi-3.8.0/src/aarch64/sysv.S",
+      "path": "source-review/libffi/src/aarch64/sysv.S",
+      "sha256": "5bcd3da436bcbb69974c9da20b870232e3517b7e509fcbe47827283b88d91576",
+      "size": 17040,
+      "mtime": 1786227141
+    },
+    {
+      "input_id": "glib",
+      "source_member": "glib-2.90.1/meson.build",
+      "path": "source-review/glib/meson.build",
+      "sha256": "d90db9abad41861a57434939227d0fd855a7263cfef8c0b0bae6ceff72e41035",
+      "size": 98968,
+      "mtime": 1791300164.0
+    },
+    {
+      "input_id": "glib",
+      "source_member": "glib-2.90.1/meson.options",
+      "path": "source-review/glib/meson.options",
+      "sha256": "40d30d23e16ae8ab09f923bb584a8ea836b0c879c7544025dc93699ff654e94b",
+      "size": 4765,
+      "mtime": 1791300164.0
+    },
+    {
+      "input_id": "glib",
+      "source_member": "glib-2.90.1/glib/meson.build",
+      "path": "source-review/glib/glib/meson.build",
+      "sha256": "f00c8bbbd573b97268d4096ebb32dd17a8fa056708bbcd5955ea505d6d71e059",
+      "size": 15621,
+      "mtime": 1791300164.0
+    },
+    {
+      "input_id": "glib",
+      "source_member": "glib-2.90.1/gobject/meson.build",
+      "path": "source-review/glib/gobject/meson.build",
+      "sha256": "6408b58f0ca8d16f2dbea69688fea59ee378e753ffd044afc87de2b6c4bda3c5",
+      "size": 6016,
+      "mtime": 1791300164.0
+    },
+    {
+      "input_id": "glib",
+      "source_member": "glib-2.90.1/gmodule/meson.build",
+      "path": "source-review/glib/gmodule/meson.build",
+      "sha256": "ccb4b9dcd328cfd9213bc325f0087fa5ccdae8e4c5ba332f4b3c18c7361d4faf",
+      "size": 5222,
+      "mtime": 1791300164.0
+    },
+    {
+      "input_id": "glib",
+      "source_member": "glib-2.90.1/gio/meson.build",
+      "path": "source-review/glib/gio/meson.build",
+      "sha256": "07e927fc64a849c74a0f8695928eeffea3097a60c5a7b2b0d3cf974cef241182",
+      "size": 35260,
+      "mtime": 1791300164.0
+    },
+    {
+      "input_id": "glib",
+      "source_member": "glib-2.90.1/gthread/meson.build",
+      "path": "source-review/glib/gthread/meson.build",
+      "sha256": "8547dadf148abe46120d09ecb6fded70c3cd304a6a15580a2455caf507fbdd66",
+      "size": 1568,
+      "mtime": 1791300164.0
+    },
+    {
+      "input_id": "glib",
+      "source_member": "glib-2.90.1/girepository/meson.build",
+      "path": "source-review/glib/girepository/meson.build",
+      "sha256": "0f74ddbd0fdd050a69358d8e22dd62686bb5b47a9163a34bd607b6261591da2c",
+      "size": 6825,
+      "mtime": 1791300164.0
+    },
+    {
+      "input_id": "glib",
+      "source_member": "glib-2.90.1/po/meson.build",
+      "path": "source-review/glib/po/meson.build",
+      "sha256": "bdc0b8208d913a14b439f308affc0aa852f8fe0c0e04c944fb6b019216fc4d4a",
+      "size": 173,
+      "mtime": 1791300164.0
+    },
+    {
+      "input_id": "glib",
+      "source_member": "glib-2.90.1/po/LINGUAS",
+      "path": "source-review/glib/po/LINGUAS",
+      "sha256": "4ab5234797a498e0650a8067496e77121f3c3ec779efa958ca57a260694ae95b",
+      "size": 412,
+      "mtime": 1791300164.0
+    },
+    {
+      "input_id": "glib",
+      "source_member": "glib-2.90.1/po/fr.po",
+      "path": "source-review/glib/po/fr.po",
+      "sha256": "8789da525f3fa6a09108369ce9013cef022e4d629cf79fcb1a2fe22b71a55625",
+      "size": 223305,
+      "mtime": 1791300164.0
+    },
+    {
+      "input_id": "glib",
+      "source_member": "glib-2.90.1/subprojects/gvdb/meson.build",
+      "path": "source-review/glib/subprojects/gvdb/meson.build",
+      "sha256": "38a33f574b74af09896311c1668653ae80f87e905fe364f03f65e6d535c77a46",
+      "size": 464,
+      "mtime": 1726152673.0
+    },
+    {
+      "input_id": "glib",
+      "source_member": "glib-2.90.1/subprojects/gvdb.wrap",
+      "path": "source-review/glib/subprojects/gvdb.wrap",
+      "sha256": "d669f93cb531a04d719dcc5b790838452c918eea0a6134ae2bf17b470eb7838c",
+      "size": 163,
+      "mtime": 1791300164.0
+    },
+    {
+      "input_id": "glib",
+      "source_member": "glib-2.90.1/gobject/glib-mkenums.in",
+      "path": "source-review/glib/gobject/glib-mkenums.in",
+      "sha256": "f87e8c7d420adc3348f19afd2f0636d8eecb9b350762a26b2ae49f8a67954853",
+      "size": 32269,
+      "mtime": 1791300164.0
+    },
+    {
+      "input_id": "glib",
+      "source_member": "glib-2.90.1/tools/gen-visibility-macros.py",
+      "path": "source-review/glib/tools/gen-visibility-macros.py",
+      "sha256": "7724928a4fcc22653f79f0044524d7b5798a7258b79d841a78e89547398cfcbc",
+      "size": 7993,
+      "mtime": 1791300164.0
+    },
+    {
+      "input_id": "gettext",
+      "source_member": "gettext-1.0/configure",
+      "path": "source-review/gettext/configure",
+      "sha256": "94aed342463655ea6fdbf459a46add99c1158d7b9a0fc4a89ac69ac7c150c442",
+      "size": 149920,
+      "mtime": 1769643451
+    },
+    {
+      "input_id": "gettext",
+      "source_member": "gettext-1.0/configure.ac",
+      "path": "source-review/gettext/configure.ac",
+      "sha256": "e2ad9a858d965506414b862f11e44ac745ef9d767e9ef5b1572ce60957b2053f",
+      "size": 3207,
+      "mtime": 1759318123
+    },
+    {
+      "input_id": "gettext",
+      "source_member": "gettext-1.0/libtextstyle/configure",
+      "path": "source-review/gettext/libtextstyle/configure",
+      "sha256": "fe3a1c8715f3a3b3feb8ec3b897d1f412afce89804a68eb30a3a7d64d6a77267",
+      "size": 1582204,
+      "mtime": 1769643576
+    },
+    {
+      "input_id": "gettext",
+      "source_member": "gettext-1.0/libtextstyle/configure.ac",
+      "path": "source-review/gettext/libtextstyle/configure.ac",
+      "sha256": "8889afb2cb60d66a121df987343d58bcb1f3213f78772d09eada6bdcc3464ede",
+      "size": 6247,
+      "mtime": 1768482775
+    },
+    {
+      "input_id": "gettext",
+      "source_member": "gettext-1.0/libtextstyle/lib/Makefile.in",
+      "path": "source-review/gettext/libtextstyle/lib/Makefile.in",
+      "sha256": "ca4dd7c833593a782924bda9ff9c2efb6a67412eec5d4e3c853acdb39b986ddf",
+      "size": 840364,
+      "mtime": 1769643577
+    },
+    {
+      "input_id": "gettext",
+      "source_member": "gettext-1.0/libtextstyle/lib/Makefile.am",
+      "path": "source-review/gettext/libtextstyle/lib/Makefile.am",
+      "sha256": "40d606e15c3de6c4da0d21539f258c7125093c33699145b3179739beff3e807a",
+      "size": 9464,
+      "mtime": 1769643379
+    },
+    {
+      "input_id": "gettext",
+      "source_member": "gettext-1.0/gettext-tools/configure",
+      "path": "source-review/gettext/gettext-tools/configure",
+      "sha256": "ab07da5e02a758a3b6c277ef8732632d496eb007b57f5ccd374cdfc4b7b7cf6f",
+      "size": 3316418,
+      "mtime": 1769643469
+    },
+    {
+      "input_id": "gettext",
+      "source_member": "gettext-1.0/gettext-tools/configure.ac",
+      "path": "source-review/gettext/gettext-tools/configure.ac",
+      "sha256": "9794268868b81f0f56f5cf6e13544a62ee2c617a41a2425a977c21d9eb3374b5",
+      "size": 28807,
+      "mtime": 1769643379
+    },
+    {
+      "input_id": "gettext",
+      "source_member": "gettext-1.0/gettext-tools/gnulib-lib/Makefile.in",
+      "path": "source-review/gettext/gettext-tools/gnulib-lib/Makefile.in",
+      "sha256": "1a9a757370590aa6ccaf0066b7b90ea467aa8a3a04b1b5a85104ea8e40658bdb",
+      "size": 1247263,
+      "mtime": 1769643584
+    },
+    {
+      "input_id": "gettext",
+      "source_member": "gettext-1.0/gettext-tools/gnulib-lib/Makefile.gnulib",
+      "path": "source-review/gettext/gettext-tools/gnulib-lib/Makefile.gnulib",
+      "sha256": "031233eaeb9d4ff5bbdae29165d6b7fc92f2755a14cca71c95234314631206b9",
+      "size": 269779,
+      "mtime": 1767348977
+    },
+    {
+      "input_id": "gettext",
+      "source_member": "gettext-1.0/gettext-tools/src/Makefile.in",
+      "path": "source-review/gettext/gettext-tools/src/Makefile.in",
+      "sha256": "057426375503ef4f40f1abeab1d758deb482264cc984686afc8748f8b50b169a",
+      "size": 659525,
+      "mtime": 1769643587
+    },
+    {
+      "input_id": "gettext",
+      "source_member": "gettext-1.0/gettext-tools/src/Makefile.am",
+      "path": "source-review/gettext/gettext-tools/src/Makefile.am",
+      "sha256": "4c8a63ec0f3f7432178b0ba0997c08a9a1c5cf04efcf9dffeb9cd5c0b1961d2f",
+      "size": 36460,
+      "mtime": 1768081867
+    },
+    {
+      "input_id": "gettext",
+      "source_member": "gettext-1.0/gettext-tools/tree-sitter.cfg",
+      "path": "source-review/gettext/gettext-tools/tree-sitter.cfg",
+      "sha256": "2810da9f9a6280c332b6ee970008d63b46a4b77dd19b9435229136848f369c64",
+      "size": 188,
+      "mtime": 1769605037
+    },
+    {
+      "input_id": "gettext",
+      "source_member": "gettext-1.0/gettext-tools/gnulib-m4/libtextstyle.m4",
+      "path": "source-review/gettext/gettext-tools/gnulib-m4/libtextstyle.m4",
+      "sha256": "857f1e6d763a057a342b992c932bd6d52d7cd91fe8922126d45bc93701091293",
+      "size": 2504,
+      "mtime": 1767348977
+    },
+    {
+      "input_id": "meson",
+      "source_member": "mesonbuild/modules/python.py",
+      "path": "source-review/meson/mesonbuild/modules/python.py",
+      "sha256": "997af77011f4ba6dd2c531ba9e85a5cb8a7e0fb4a2e0a206046c5d4e91bc85f3",
+      "size": 27493
+    },
+    {
+      "input_id": "meson",
+      "source_member": "mesonbuild/modules/i18n.py",
+      "path": "source-review/meson/mesonbuild/modules/i18n.py",
+      "sha256": "44b15a8e029aa155cfce05de8aada72576b379e23b59644e33d2131bbc4cdff0",
+      "size": 23203
+    },
+    {
+      "input_id": "meson",
+      "source_member": "mesonbuild/linkers/linkers.py",
+      "path": "source-review/meson/mesonbuild/linkers/linkers.py",
+      "sha256": "d3b63ad1189a1b062182b529a2792d072297487d63281792f0e3f9f7547f816d",
+      "size": 68178
+    },
+    {
+      "input_id": "meson",
+      "source_member": "mesonbuild/dependencies/__init__.py",
+      "path": "source-review/meson/mesonbuild/dependencies/__init__.py",
+      "sha256": "f9c6c5473cc99344627cfa99d69c972756ff2eea888fe87be84820f9aeee45a0",
+      "size": 8316
+    },
+    {
+      "input_id": "glib",
+      "source_member": "glib-2.90.1/tools/meson.build",
+      "path": "source-review/glib/tools/meson.build",
+      "sha256": "53132d19b14a929b710208e1ae5127868c7c29d36f1edfc710062f28b24b8511",
+      "size": 983,
+      "mtime": 1791300164.0
+    },
+    {
+      "input_id": "glib",
+      "source_member": "glib-2.90.1/glib/glibintl.h",
+      "path": "source-review/glib/glib/glibintl.h",
+      "sha256": "267afde2c1173e721026e9f543288e40d68bc3295bf44d0808df4bfad95a0c00",
+      "size": 1405,
+      "mtime": 1791300164.0
+    },
+    {
+      "input_id": "glib",
+      "source_member": "glib-2.90.1/glib/ggettext.c",
+      "path": "source-review/glib/glib/ggettext.c",
+      "sha256": "1138833c8dc027c71a39642eee17dbdc9149acb6cf4e9cdd2a47c1051caa184b",
+      "size": 17540,
+      "mtime": 1791300164.0
+    },
+    {
+      "input_id": "glib",
+      "source_member": "glib-2.90.1/glib/gregex.c",
+      "path": "source-review/glib/glib/gregex.c",
+      "sha256": "27708e69fd8b42a28ffeda5d2c893c8824b323cf4ce02c37f8fafea908728edf",
+      "size": 138533,
+      "mtime": 1791300164.0
+    },
+    {
+      "input_id": "glib",
+      "source_member": "glib-2.90.1/glib/gdatetime.c",
+      "path": "source-review/glib/glib/gdatetime.c",
+      "sha256": "15344cf21eea69ae6db0c55fa2d2b09c952c209ffdfc0c5a0ce79173c7826585",
+      "size": 116952,
+      "mtime": 1791300164.0
+    },
+    {
+      "input_id": "meson",
+      "source_member": "mesonbuild/programs.py",
+      "path": "source-review/meson/mesonbuild/programs.py",
+      "sha256": "ce28e75a7dc7de52cb0259c95f54fffaf85b7871d40dc2856f4d00eb90d9bc68",
+      "size": 19255
+    }
+  ],
+  "release_generated_outputs": [
+    {
+      "input": "gettext-1.0/gettext-tools/gnulib-lib/unicase/special-casing-table.gperf",
+      "input_mtime": 1758750066,
+      "output": "gettext-1.0/gettext-tools/gnulib-lib/unicase/special-casing-table.h",
+      "output_mtime": 1758750410,
+      "output_sha256": "04c58438ab72921136c40a1472a7fe2a1751d2a80d2d4d9d10b16fe50f6ec6da"
+    },
+    {
+      "input": "gettext-1.0/gettext-tools/gnulib-lib/uninorm/composition-table.gperf",
+      "input_mtime": 1758750066,
+      "output": "gettext-1.0/gettext-tools/gnulib-lib/uninorm/composition-table.h",
+      "output_mtime": 1758750410,
+      "output_sha256": "b80d2a96e85bf7b2d645ac27656e42c3adef993eb333eeeae6226704c07d4581"
+    },
+    {
+      "input": "gettext-1.0/gettext-tools/src/read-po-gram.y",
+      "input_mtime": 1769489113,
+      "output": "gettext-1.0/gettext-tools/src/read-po-gram.c",
+      "output_mtime": 1769500321,
+      "output_sha256": "8862c4463efa11b4769865b16fa2190e7e3bf34574dc3ca79ba79980ff06dedd"
+    },
+    {
+      "input": "gettext-1.0/gettext-tools/src/cldr-plural.y",
+      "input_mtime": 1769489113,
+      "output": "gettext-1.0/gettext-tools/src/cldr-plural.c",
+      "output_mtime": 1769500321,
+      "output_sha256": "13921415f49bc62b806e104c94f434676b4d50ea76f23df28d9866a18de492b1"
+    }
+  ],
+  "required_review_scope": [
+    "configure shell and native conftests",
+    "GNU libtool compiler/linker and implicit ad-hoc effects",
+    "source libffi architecture and closure selection",
+    "gettext libtextstyle and included XML/Unicode/tree-sitter selected target closure",
+    "GLib Meson generators/default build and included GVDB",
+    "Meson isolated Python and immutable rpaths",
+    "no installation hooks or downloaded fallback"
+  ],
+  "unproved": [
+    "macOS configure/build success",
+    "dynamic resource usage",
+    "complete runtime closure beyond fixed fixtures",
+    "Pango or rendering"
+  ],
+  "meson_libffi_resolver_check": {
+    "dependency_python_files": 22,
+    "exact_libffi_token_hits": [],
+    "meaning": "No special SDK libffi resolver is present; normal versioned dependency lookup must resolve a real provider."
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "candidate": "pdf-foundation-canonical-v3",
+  "candidate_revision": 3,
+  "repository": "Emin-dev/deepdesk",
+  "normal_parent_commit": "f52e37049b7d280e53e07013ccd14da3c3ac53d3",
+  "destination_branch": "engine-pdf-foundation-v1-ci",
+  "workflow": ".github/workflows/engine-pdf-foundation-v1-macos.yml",
+  "baseline": {
+    "file_count": 116,
+    "manifest_sha256": "9d9975e452ef7ad5ac3a536098e76a4708e603435c22008c39e47bc11d478976",
+    "preserved": true
+  },
+  "official_source": {
+    "announcement_url": "https://lists.gnu.org/archive/html/info-gnu/2026-01/msg00007.html",
+    "announcement_date": "2026-01-29",
+    "announcement_author": "Bruno Haible",
+    "release": "GNU gettext 1.0",
+    "archive_url": "https://ftp.gnu.org/gnu/gettext/gettext-1.0.tar.gz",
+    "sha256": "85d99b79c981a404874c02e0342176cf75c7698e2b51fe41031cf6526d974f1a",
+    "url_and_sha256_independently_read": true,
+    "verified_utc": "2026-10-11T09:41:35Z",
+    "fresh_archive_bytes_or_members_verified": false,
+    "signature_verified": false
+  },
+  "source_policy_change": {
+    "old_url": "https://ftpmirror.gnu.org/gettext/gettext-1.0.tar.gz",
+    "new_url": "https://ftp.gnu.org/gnu/gettext/gettext-1.0.tar.gz",
+    "old_redirect_hosts": [
+      "ftpmirror.gnu.org",
+      "mirrors.ocf.berkeley.edu"
+    ],
+    "new_redirect_hosts": [
+      "ftp.gnu.org"
+    ],
+    "other_pin_fields_changed": false,
+    "other_inputs_changed": false
+  },
+  "diagnostic_evidence": {
+    "commit": "38278848c86340ac09fd93673ada31773ebcadae",
+    "run_id": 38128686839,
+    "job_id": 114438310202,
+    "run_url": "https://github.com/Emin-dev/deepdesk/actions/runs/38128686839",
+    "reconciliation_sha256": "0e03d6736bcbdf30e6050187efc9233547ff1ee530ddb2bcd27730594116eadc",
+    "failure_class": "redirect_host_denied",
+    "redirect_status": 302,
+    "redirect_host_category": "other",
+    "archive_source_line": 33,
+    "downloaded_bytes": 0,
+    "cleanup": "removed",
+    "proves_only_this_diagnostic_request": true,
+    "earlier_generic_foundation_run_exact_cause_proven": false,
+    "earlier_foundation_run": 38126636047
+  },
+  "observer_origin": {
+    "reviewed_diagnostic_path": "packaging/pdf-input-diagnostic-candidate/diagnose.py",
+    "reviewed_diagnostic_commit": "38278848c86340ac09fd93673ada31773ebcadae",
+    "archive_tools_sha256": "d5273a166c7e3f3485cf8d0fd5f63551dee1b38a1cda3548f75e19553814a146",
+    "archive_helper_changed": false,
+    "per_pin_host_policy": true,
+    "alters_requests_or_follows_redirects": false
+  },
+  "authorization": {
+    "execution_approved": false,
+    "independent_review_passed": false,
+    "temporary_linker_adhoc_signing_approved": false,
+    "install_name_linker_assignment_approved": false,
+    "github_publication_approved": false
+  },
+  "preparation": {
+    "first_party_offline_tests_only": true,
+    "downloaded_code_executed": false,
+    "native_execution": false,
+    "configured": false,
+    "compiled": false,
+    "artifact_uploaded": false,
+    "cache_used": false,
+    "credential_changes": false,
+    "spending": false
+  }
+}
