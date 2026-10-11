@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "execution_approved": true,
+  "scope": "source-wheels-and-sqlcipher-only",
+  "source_import_commit": "1ae0aba0da096f88db4a44ef76f7ba7e1d3fd33b",
+  "review_status": "approved-stage-A-with-reviewed-README-mapping",
+  "sha256": {
+    "packaging/engine-ci/stage_a.py": "58a772ae4100c16e64bb17e4e15d48af2a3aa58c1156d8ad66ffd7413dc46ba3",
+    "packaging/engine-ci/audit_archives.py": "1f303f00a4923acecec0b83573ca2f44a6ac580ffc5dc96a24a364e0464d0509",
+    "packaging/engine-ci/check_sqlcipher.py": "3064578960f0c3e02aabe4ccd1d2b860c3581102185f62fc5d9f310909e4eef1",
+    "packaging/engine-ci/offline.sb": "2508cd44e470edc3b8750ec7843b5497b7babe6df1f8f4588e28e9e9cf4ef964",
+    "packaging/engine-ci/source-wheels-macos.yml.template": "28f0bacd4a56a0c9819af4bb0e267a86580597391cb128c7908ef0d6c54e5242",
+    "research/engine-ci/input-proposal.json": "fd8a4e975f994c4214e853c04ef65b8e8fcd731f33b312a1a6496950e41ec9df",
+    "research/engine-ci/python-candidate.json": "947c1348f680758400b335af99d5e891b553698df5fcf3ce8739097eb3760b38",
+    "research/engine-ci/source-build-manifest.json": "2e54e3313dca7ceb89a0e45dee0e6adfe603f2cb72c7ffa2a9d66c4ec867c1b4",
+    "research/engine-ci/build-requirements.lock": "4f1ea247ef07ed91e08a22a265bec182e6fb8124510efa6d0908f0b2647c0985",
+    "packaging/patches/readonly-themes.patch": "8164c8820d9d082805d4bf68f4cb6a8ab9c9b41d4573802fc1397006594b8c73",
+    "packaging/patches/managed-ddg-defaults.patch": "abd712aa1d2625f91673fa2ccc8c8b5469d50e67737b580ab3704a69917a24c4",
+    ".github/workflows/engine-source-wheels-macos.yml": "28f0bacd4a56a0c9819af4bb0e267a86580597391cb128c7908ef0d6c54e5242"
+  },
+  "review_kind": "Independent source/security inspection and first-party synthetic regression tests",
+  "approval_date_utc": "2026-10-11",
+  "approval_scope": "Exact source-wheels-and-SQLCipher preparation only; full runtime, Torch, inference, signing and publication of application artifacts are excluded.",
+  "source_readme_mapping": "Use the preserved docs/upstream/README.md bytes for staged upstream README.md; all original source hashes and destination names stay unchanged."
+}

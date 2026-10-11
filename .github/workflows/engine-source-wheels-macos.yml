@@ -1,0 +1,44 @@
+# Candidate only. Independent review and exact receipt required before publishing.
+name: Prepare Deepdesk engine wheels
+on:
+  push:
+    branches:
+      - engine-python-ci
+    paths:
+      - 'packaging/engine-ci/**'
+      - 'packaging/patches/**'
+      - 'research/engine-ci/**'
+      - '.github/workflows/engine-source-wheels-macos.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: deepdesk-engine-preparation-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  source-wheels:
+    if: github.repository == 'Emin-dev/deepdesk' && github.ref == 'refs/heads/engine-python-ci' && github.event.repository.private == false
+    runs-on: macos-26
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Verify standard arm64 host
+        run: |
+          test "$(uname -m)" = arm64
+          test -x /usr/bin/sandbox-exec
+          sw_vers
+          python3 --version
+          df -h "$RUNNER_TEMP"
+      - name: Review-gated offline builds and SQLCipher check
+        run: python3 -I packaging/engine-ci/stage_a.py --repository "$GITHUB_WORKSPACE" --review-receipt packaging/engine-ci/review-receipt.json
+      - name: Record validation boundary
+        if: success()
+        run: |
+          printf '%s\n' \
+            'Five source wheels built offline: four pinned small dependencies plus the pinned app source.' \
+            'Actual arm64 SQLCipher create/reopen/wrong-key/plain-SQLite checks passed.' \
+            'No full engine install, frozen app, authenticated API, model inference, research provider request, signing, DMG or release was tested.' \
+            'No cache or artifacts were uploaded. See logs for exact built-wheel SHA-256 values.' >> "$GITHUB_STEP_SUMMARY"

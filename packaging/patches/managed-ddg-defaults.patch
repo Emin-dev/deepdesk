@@ -1,0 +1,77 @@
+diff --git a/src/local_deep_research/defaults/settings_deepdesk_ddg.json b/src/local_deep_research/defaults/settings_deepdesk_ddg.json
+new file mode 100644
+--- /dev/null
++++ b/src/local_deep_research/defaults/settings_deepdesk_ddg.json
+@@ -0,0 +1,72 @@
++{
++    "search.engine.web.ddg.display_name": {
++        "category": "ddg",
++        "description": "Display name",
++        "editable": false,
++        "name": "Display name",
++        "type": "SEARCH",
++        "ui_element": "text",
++        "value": "DuckDuckGo",
++        "visible": false
++    },
++    "search.engine.web.ddg.description": {
++        "category": "ddg",
++        "description": "External search disclosure",
++        "editable": false,
++        "name": "External search disclosure",
++        "type": "SEARCH",
++        "ui_element": "text",
++        "value": "General web search. Research queries are sent to DuckDuckGo and source pages may be fetched.",
++        "visible": false
++    },
++    "search.engine.web.ddg.requires_api_key": {
++        "category": "ddg",
++        "description": "No API key is required",
++        "editable": false,
++        "name": "No API key is required",
++        "type": "SEARCH",
++        "ui_element": "checkbox",
++        "value": false,
++        "visible": false
++    },
++    "search.engine.web.ddg.requires_llm": {
++        "category": "ddg",
++        "description": "Search retrieval does not require a separate LLM service",
++        "editable": false,
++        "name": "Search retrieval does not require a separate LLM service",
++        "type": "SEARCH",
++        "ui_element": "checkbox",
++        "value": false,
++        "visible": false
++    },
++    "search.engine.web.ddg.supports_full_search": {
++        "category": "ddg",
++        "description": "Use the built-in bounded full-content wrapper",
++        "editable": false,
++        "name": "Use the built-in bounded full-content wrapper",
++        "type": "SEARCH",
++        "ui_element": "checkbox",
++        "value": true,
++        "visible": false
++    },
++    "search.engine.web.ddg.use_in_auto_search": {
++        "category": "ddg",
++        "description": "Allow this generic engine in explicit automatic-search modes",
++        "editable": false,
++        "name": "Allow this generic engine in explicit automatic-search modes",
++        "type": "SEARCH",
++        "ui_element": "checkbox",
++        "value": true,
++        "visible": false
++    },
++    "search.engine.web.ddg.agent_enabled": {
++        "category": "ddg",
++        "description": "Expose the built-in engine to the research agent",
++        "editable": false,
++        "name": "Expose the built-in engine to the research agent",
++        "type": "SEARCH",
++        "ui_element": "checkbox",
++        "value": true,
++        "visible": false
++    }
++}

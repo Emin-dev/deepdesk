@@ -1,0 +1,14 @@
+--- a/src/local_deep_research/web/fastapi_app.py
++++ b/src/local_deep_research/web/fastapi_app.py
+@@ -398,7 +398,10 @@
+         static_dir = Path(STATIC_DIR)
+         themes_css_path = static_dir / "css" / "themes.css"
+         combined_css = theme_registry.get_combined_css()
+-        themes_css_path.write_text(combined_css, encoding="utf-8")
++        # The native desktop bundle is sealed and read-only. Its SwiftUI UI
++        # does not consume this generated web stylesheet.
++        if os.environ.get("DEEPDESK_MANAGED_RUNTIME") != "1":
++            themes_css_path.write_text(combined_css, encoding="utf-8")
+         logger.debug(
+             f"Generated themes.css with {len(theme_registry.themes)} themes"
+         )

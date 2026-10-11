@@ -1,0 +1,20 @@
+{
+  "version": "3.12.15",
+  "distribution": "astral-sh/python-build-standalone",
+  "release": "20261009",
+  "filename": "cpython-3.12.15+20261009-aarch64-apple-darwin-install_only.tar.gz",
+  "size": 25165569,
+  "sha256": "83dcb04777c798bd95f3687acf9ae84b09860272ee6bdfb05be8bcf9447f75b8",
+  "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20261009/cpython-3.12.15%2B20261009-aarch64-apple-darwin-install_only.tar.gz",
+  "source_metadata": "https://api.github.com/repos/astral-sh/python-build-standalone/releases/tags/20261009",
+  "status": "downloaded-and-hash-verified-not-executed",
+  "official_cpython_release": "https://www.python.org/downloads/release/python-31215/",
+  "requires_review": [
+    "Third-party CPython distribution and bundled native library licenses",
+    "Dynamic libpython and PyInstaller relocation compatibility",
+    "Exact archive members/extraction and Mach-O architecture",
+    "Executable and bundled-library SHA256 manifest"
+  ],
+  "expanded_bytes": 66226930,
+  "archive_members": 1663
+}
