@@ -22,7 +22,7 @@ CHECKS = (
     'cloud-llm-denied', 'unset-compatible-llm-denied', 'exact-local-llm-permitted',
     'cloud-embeddings-denied', 'unknown-embeddings-denied', 'exact-local-embeddings-permitted',
     'inprocess-embeddings-permitted', 'managed-registry-bound',
-    'unmanaged-endpoint-rejected', 'wrong-model-rejected', 'no-inference-or-network-attempt',
+    'unmanaged-endpoint-rejected', 'wrong-model-rejected', 'only-reviewed-denied-import-probe',
 )
 ERRORS = {'none', 'AssertionError', 'RuntimeError', 'ValueError', 'TypeError', 'KeyError',
           'AttributeError', 'ImportError', 'ModuleNotFoundError', 'PermissionError',
@@ -34,6 +34,8 @@ MODEL = 'mlx-community/Qwen3.8-27B-4bit'
 ENDPOINT = 'http://127.0.0.1:18544/v1'
 SYNTHETIC_KEY = 'a' * 64
 FLAGS = ('LDR_LLM_REQUIRE_LOCAL_ENDPOINT', 'LDR_EMBEDDINGS_REQUIRE_LOCAL')
+EXPECTED_BLOCKED_PROBE = {'event': 'socket-create', 'check': 'installed-wrapper-identity',
+                          'source': 'urllib3-ipv6-probe', 'line': 126}
 
 
 def require(value):
@@ -43,10 +45,11 @@ def require(value):
 
 def validate(report):
     keys = {'schema', 'kind', 'status', 'checks', 'failed_check', 'error_class',
-            'forbidden_operation_attempted', 'blocked_operations', *FALSE_FIELDS}
+            'forbidden_operation_attempted', 'expected_blocked_probe_count',
+            'unexpected_operation_attempted', 'blocked_operations', *FALSE_FIELDS}
     if not isinstance(report, dict) or set(report) != keys:
         raise RuntimeError('Invalid managed policy schema')
-    if type(report['schema']) is not int or report['schema'] != 2 or report['kind'] != KIND:
+    if type(report['schema']) is not int or report['schema'] != 3 or report['kind'] != KIND:
         raise RuntimeError('Invalid managed policy identity')
     if (type(report['status']) is not str or type(report['error_class']) is not str
             or report['status'] not in {'passed', 'failed'} or report['error_class'] not in ERRORS):
@@ -58,6 +61,10 @@ def validate(report):
         raise RuntimeError('Unexpected inference or transport claim')
     if type(report['forbidden_operation_attempted']) is not bool:
         raise RuntimeError('Invalid managed policy operation flag')
+    count = report['expected_blocked_probe_count']
+    unexpected = report['unexpected_operation_attempted']
+    if type(count) is not int or not 0 <= count <= 2 or type(unexpected) is not bool:
+        raise RuntimeError('Invalid managed policy attempt accounting')
     operations = report['blocked_operations']
     if not isinstance(operations, list) or len(operations) > 4:
         raise RuntimeError('Invalid managed policy operation bound')
@@ -74,8 +81,18 @@ def validate(report):
             raise RuntimeError('Invalid blocked operation line')
         if operation['source'] in {'unknown', 'fixture'} and operation['line'] != 0:
             raise RuntimeError('Unexpected unverified source line')
+    visible_count = sum(operation == EXPECTED_BLOCKED_PROBE for operation in operations)
+    visible_unexpected = visible_count > 1 or any(operation != EXPECTED_BLOCKED_PROBE for operation in operations)
+    # Counters cover every attempt; diagnostic records remain capped at four.
+    if (count < min(2, visible_count) or (visible_unexpected and not unexpected)
+            or (count == 2 and not unexpected)
+            or (len(operations) < 4 and (count != min(2, visible_count)
+                                        or unexpected is not visible_unexpected))):
+        raise RuntimeError('Inconsistent managed policy attempt accounting')
     if report['status'] == 'passed':
-        if checks != list(CHECKS) or report['failed_check'] != 'none' or report['error_class'] != 'none' or report['forbidden_operation_attempted']:
+        if (checks != list(CHECKS) or report['failed_check'] != 'none' or report['error_class'] != 'none'
+                or report['forbidden_operation_attempted'] is not True or count != 1
+                or unexpected is not False or operations != [EXPECTED_BLOCKED_PROBE]):
             raise RuntimeError('Incomplete managed policy success')
     elif (len(checks) == len(CHECKS) or report['failed_check'] != CHECKS[len(checks)]
           or report['error_class'] == 'none'):
@@ -102,9 +119,10 @@ def parse_report(raw):
     return validate(report)
 
 
-# Diagnostic-only public labels. No audit arguments, paths, messages or locals
-# are retained. These exact immutable source hashes identify likely call sites;
-# all other frames map to unknown. A label never permits an operation.
+# Fixed public labels. No audit arguments, paths, messages or locals are retained.
+# These exact immutable source hashes identify reviewed call sites; all other
+# frames map to unknown. A label never permits an operation. Only the exact
+# still-denied import probe is recognized by the final acceptance check.
 EVENTS = {
     'socket.__new__': 'socket-create', 'socket.bind': 'socket-bind',
     'socket.connect': 'socket-connect', 'socket.getaddrinfo': 'socket-resolve',
@@ -157,11 +175,19 @@ def blocked_origin(prefix):
 def record_blocked(state, event):
     state['forbidden'] = True
     operations = state.setdefault('blocked_operations', [])
+    completed = state.get('completed', [])
+    check = CHECKS[min(len(completed), len(CHECKS) - 1)]
+    source, line = ('fixture', 0) if event == 'provider-factory' else blocked_origin(state.get('prefix'))
+    operation = {'event': event, 'check': check, 'source': source, 'line': line}
+    # Account before the display cap, so later or repeated attempts cannot hide.
+    if operation == EXPECTED_BLOCKED_PROBE:
+        state['expected_blocked_probe_count'] = min(2, state.get('expected_blocked_probe_count', 0) + 1)
+        if state['expected_blocked_probe_count'] > 1:
+            state['unexpected_operation_attempted'] = True
+    else:
+        state['unexpected_operation_attempted'] = True
     if len(operations) < 4:
-        completed = state.get('completed', [])
-        check = CHECKS[min(len(completed), len(CHECKS) - 1)]
-        source, line = ('fixture', 0) if event == 'provider-factory' else blocked_origin(state.get('prefix'))
-        operations.append({'event': event, 'check': check, 'source': source, 'line': line})
+        operations.append(operation)
 
 
 def operation_guard(state):
@@ -182,6 +208,7 @@ def operation_guard(state):
 def exercise(wrapper, wrapper_sha256, runtime_prefix, fixture_root):
     completed = []
     state = {'forbidden': False, 'factory_calls': 0, 'blocked_operations': [],
+             'expected_blocked_probe_count': 0, 'unexpected_operation_attempted': False,
              'completed': completed, 'prefix': None}
     try:
         # A fresh child-only directory; never open real account/model data.
@@ -301,7 +328,10 @@ def exercise(wrapper, wrapper_sha256, runtime_prefix, fixture_root):
             require(False)
         require(state['factory_calls'] == 0)
         completed.append(CHECKS[len(completed)])
-        require(state['forbidden'] is False and state['factory_calls'] == 0)
+        require(state['forbidden'] is True and state['factory_calls'] == 0
+                and state['expected_blocked_probe_count'] == 1
+                and state['unexpected_operation_attempted'] is False
+                and state['blocked_operations'] == [EXPECTED_BLOCKED_PROBE])
         completed.append(CHECKS[len(completed)])
         status, checkpoint, error = 'passed', 'none', 'none'
     except Exception as exc:
@@ -309,9 +339,11 @@ def exercise(wrapper, wrapper_sha256, runtime_prefix, fixture_root):
         checkpoint = CHECKS[len(completed)]
         name = type(exc).__name__
         error = name if name in ERRORS else 'OtherException'
-    return validate({'schema': 2, 'kind': KIND, 'status': status, 'checks': completed,
+    return validate({'schema': 3, 'kind': KIND, 'status': status, 'checks': completed,
                      'failed_check': checkpoint, 'error_class': error,
                      'forbidden_operation_attempted': state['forbidden'],
+                     'expected_blocked_probe_count': state['expected_blocked_probe_count'],
+                     'unexpected_operation_attempted': state['unexpected_operation_attempted'],
                      'blocked_operations': state['blocked_operations'],
                      **dict.fromkeys(FALSE_FIELDS, False)})
 

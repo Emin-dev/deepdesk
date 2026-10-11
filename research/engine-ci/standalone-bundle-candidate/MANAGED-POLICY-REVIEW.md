@@ -1,6 +1,6 @@
-# Standalone managed-policy integration: preparation only
+# Standalone managed-policy accounting reconstruction: preparation only
 
-Execution, managed-policy execution, publication and activation are false. This copied candidate extends accepted standalone-core v2 commit `32e4c8aeb287a5474c4203a754b880e0d96feb16`; the accepted snapshot and source-only proposal remain frozen. The existing core14 imports, SQLCipher4 checks, ASGI20 checks, complete payload preservation, sandbox profiles and workflow resource limits are retained.
+Execution, managed-policy execution, publication and activation are false. This newly reconstructed candidate extends exact diagnostic-v4 commit `ed0526c5d64769db6282b290674ca6248cfab668`. The published accepted core-v2 checkpoint `32e4c8aeb287a5474c4203a754b880e0d96feb16` remains unchanged. The previous unpublished v5 bytes were unavailable after workspace loss, so this candidate requires fresh exact review and activation approval. The existing core14 imports, SQLCipher4 checks, ASGI20 checks, complete payload preservation, sandbox profiles and workflow resource limits are retained.
 
 ## Production delta and refreshed pins
 
@@ -32,7 +32,7 @@ For guard safety, the provider’s underlying factory is replaced with an always
 
 ## Containment, diagnostics and failure behavior
 
-The existing `standalone-offline.sb` and `runtime-offline.sb` are byte-identical. All network operations, including loopback, remain kernel-denied. The child intends no inference or network activity. Imports can nevertheless perform capability probes; the strict Python audit hook marks and rejects every socket, DNS and process attempt before execution, and the final no-attempt assertion remains mandatory. This hook supplements the sandbox and is not a general tamper-proof security boundary. It is specific to this non-ASGI probe; existing ASGI event-loop/socketpair behavior is unchanged.
+The existing `standalone-offline.sb` and `runtime-offline.sb` are byte-identical. All network operations, including loopback, remain kernel-denied. The child intends no inference or network activity. Imports can nevertheless perform capability probes; the strict Python audit hook marks and rejects every socket, DNS and process attempt before execution, and the final acceptance requires exactly the previously observed, still-denied, hash-bound urllib3 import probe. Repeated or other attempts fail regardless of the diagnostic display cap. This does not claim that no socket-creation attempt occurred. This hook supplements the sandbox and is not a general tamper-proof security boundary. It is specific to this non-ASGI probe; existing ASGI event-loop/socketpair behavior is unchanged.
 
 The unchanged outer bounded runner enforces the existing global20-minute budget/work12GiB/output2MiB cap and a new per-child120-second ceiling. Work is limited to the fresh policy fixture scope by the existing profile. No network allowances, nested sandbox, install, model assets, native build or extra resource limits are introduced.
 
@@ -44,7 +44,7 @@ Success is reported separately as `managed_policy_contract`; it never changes `m
 
 Portable first-party tests reside beside their helpers and derive paths only from the checkout. They never require local audit/native/upstream directories or an installed engine. Existing first-party C, assembly, relocation, diagnostic and synthetic bounds suites remain runnable. New tests substitute inert in-memory upstream modules; they do not execute downloaded dependencies or actual policy source locally. They cover both wrapper modes, partial/invalid tuples, cloud-mode noninterference, sentinel regressions, fixed failure/check IDs, malformed/oversized reports and descriptor-level output isolation.
 
-The installed probe is prepared but not executed. The already accepted v2 result is still evidence for its frozen input bytes; it does not prove this new candidate’s managed policy or inference. Independent exact-input review must approve the refreshed receipt and separate policy gate before any publication/CI action. Real inference, models, external research, real HTTP/native transport, native/export closure, signing/notarization and distribution remain separate unverified gates.
+The earlier installed v4 probe failed as recorded below. This reconstructed accounting candidate has not executed against installed dependencies. The already accepted v2 result is still evidence for its published input bytes; it does not prove this new candidate’s managed policy or inference. Independent exact-input review must approve the refreshed receipt and separate policy gate before any publication/CI action. Real inference, models, external research, real HTTP/native transport, native/export closure, signing/notarization and distribution remain separate unverified gates.
 
 ## V4 diagnostic-only amendment after the first installed run
 
@@ -59,4 +59,21 @@ Exact source provenance for diagnostic labels:
 - `langchain-socket-options`: `langchain_openai-1.6.6-py3-none-any.whl` archive SHA-256 `60dcaa443ddfdf1559feaf1d25916f394c7dda809aebe22a769fc39f02705be7`; member `langchain_openai/chat_models/_client_utils.py` SHA-256 `1486a89c1ac2609fcfb52a9070d9a3379aae2cc225bb83f8186b2015a4ec3483`.
 - `upstream-egress-policy`: the existing policy source hash above. `stdlib-platform` and `stdlib-subprocess`: exact members of the existing pinned CPython archive, also present in the unchanged ASGI diagnostic inventory.
 
-Local validation uses only first-party inert fixtures. It checks unchanged complete success/failure flow, event and source allowlists, secret-bearing event arguments/names/filenames, exact filename/hash refusal, capped observations, boolean/line/schema inconsistencies, private descriptor output and unchanged wrapper assertions. No actual installed diagnostic outcome is available yet. Independent exact review and activation approval are required for this amendment.
+Local validation uses only first-party inert fixtures. It checks unchanged complete success/failure flow, event and source allowlists, secret-bearing event arguments/names/filenames, exact filename/hash refusal, capped observations, boolean/line/schema inconsistencies, private descriptor output and unchanged wrapper assertions. The later v4 runtime outcome is now available and is recorded below. Independent exact review and activation approval are required for this reconstructed amendment.
+
+
+## Observed v4 result and reconstructed v5 acceptance contract
+
+Run https://github.com/Emin-dev/deepdesk/actions/runs/38114750389, job `114397310052`, at exact `ed0526c5d64769db6282b290674ca6248cfab668` reached the first 15 policy checks and failed the last no-attempt assertion. Its fixed record contained exactly one observation:
+
+```json
+{"event":"socket-create","check":"installed-wrapper-identity","source":"urllib3-ipv6-probe","line":126}
+```
+
+That exact filename/hash-bound urllib3 site attempts to construct an IPv6 capability-probe socket during import and catches failure. The existing audit hook rejected the attempt before socket creation. There was no observed DNS/connect/provider action. The langchain candidate mentioned in the earlier static hypotheses was not observed. The v4 run did not reach the later ASGI stage.
+
+The reconstructed v5 changes only the final acceptance contract, its accounting/strict schema, first-party tests, this document and bound receipt. The audit event predicate and unconditional denial, source/hash attribution, private descriptor output, all first 15 policy assertions, wrappers, profiles, stage, workflow and dependency inputs remain unchanged. All captured attempts continue to be denied.
+
+Schema 3 success must report `forbidden_operation_attempted=true`, `expected_blocked_probe_count=1`, `unexpected_operation_attempted=false`, and exactly the one observation above. The final check ID is `only-reviewed-denied-import-probe`. Zero expected probes fail; repeated probes fail; changed source/line/phase, unknown origin, DNS, connect, process or provider attempts fail. Expected counts saturate at two, and unexpected evidence latches independently of the first-four-record display cap. No event arguments, endpoints, keys or raw paths enter public output.
+
+The source intent matches the earlier reviewed v5 design, but the lost v5 manifest is not reused as evidence of these new bytes. Portable tests use first-party inert modules and mocked origins only. Actual dependency execution requires a fresh reviewed receipt and the sole publisher’s guarded normal update from exact `ed0526c5d64769db6282b290674ca6248cfab668`. Native completeness, models, inference, research, real HTTP/native transport and release claims remain false.

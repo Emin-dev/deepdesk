@@ -4,7 +4,7 @@
   "scope": "standalone-relocated-core-checks",
   "review_status": "independent-exact-input-review-approved",
   "source_import_commit": "1ae0aba0da096f88db4a44ef76f7ba7e1d3fd33b",
-  "base_commit": "332d4f67cebb19ba5044cbcdfb22dfbac5b3da51",
+  "base_commit": "ed0526c5d64769db6282b290674ca6248cfab668",
   "destination_branch": "engine-standalone-core-ci",
   "torch_selection": "distinct-official-PyPI-wheel-explicit-override",
   "pdm_lock_unchanged": true,
@@ -31,7 +31,7 @@
     "packaging/engine-ci/audit_archives.py": "1f303f00a4923acecec0b83573ca2f44a6ac580ffc5dc96a24a364e0464d0509",
     "packaging/engine-ci/bounded_runtime.py": "a94a58ba7e45f203fafd4d4d7a0d60ec91cd8366ac7ae8d55909c7d8b1d128f4",
     "packaging/engine-ci/check_sqlcipher.py": "3064578960f0c3e02aabe4ccd1d2b860c3581102185f62fc5d9f310909e4eef1",
-    "packaging/engine-ci/managed_policy_checks.py": "7dd8d36d4ec3c957113193c2fc3694b1cca4414738c646e976fb24ce65e45120",
+    "packaging/engine-ci/managed_policy_checks.py": "c11133430e6fc39417bb6f1a0db1ea73f992e7fe8685a4bf7022659c31d8bf03",
     "packaging/engine-ci/runtime-offline.sb": "9d4f464140e5bb35efb2f937e820349b6f7a47482d4fcb2a618cc489b9bf4710",
     "packaging/engine-ci/runtime_api_stage.py": "c8735ba79159cef267699c3f48e2277feddbd27e1630b15cdc539fc1aa36c9ee",
     "packaging/engine-ci/runtime_asgi_stage.py": "b968f7c7a7d931ff4fa849f513ad0fb60f7aeb285b80a2d5ec106aff11806419",
@@ -42,7 +42,7 @@
     "packaging/engine-ci/test_asgi_diagnostics.py": "e9a328b1b70ac29dff1034850dd063c3beacb121f2d7d6776bc60f4ad7f86b58",
     "packaging/engine-ci/test_asgi_fixture_helpers.py": "a16db7ef957d0b198a8d710a81f0078b4d1a003a4a4c626bdcb70490bf38b973",
     "packaging/engine-ci/test_asgi_inherited_containment.py": "80ddd9e9103bb33bceda0512b7feb56ca95da79ac252277fe665b7d1097dca43",
-    "packaging/engine-ci/test_managed_policy_checks.py": "f7eb5d3215a30fe5fbb5d00cd2fc0464258c42294758aea94ee6018b317573c6",
+    "packaging/engine-ci/test_managed_policy_checks.py": "a75b1425f8a1180e085de7b72d862e4b6e9634d5e567c995003000a765c7dfc1",
     "packaging/engine-ci/test_runtime_api_helpers.py": "91633cfabf86736ded3cbc96ebf5899ea775d80da989f54a6bde9a7b28b2853c",
     "packaging/engine-ci/test_runtime_asgi_helpers.py": "ae37c6dcbed5dfee237a9fdbceab5ab9f21c9820badb06d800968b296ee7e005",
     "packaging/engine_entry.py": "7e4fdbe84458f1e8aed760d44852ff3a9823c729f56d161f3dd163120f118f65",
@@ -101,7 +101,7 @@
     "research/engine-ci/source-review/jstyleson/LICENSE.supplement": "d73ae9052b2bd1a0e7f586638ad83d67408e11a1ff6236d9d6fc45c15e4d7485",
     "research/engine-ci/stage-a-observed-wheel-hashes.json": "895a3d4c31aef577c4a05bb361b2315de30169df6d538493683cb6b61953c923",
     "research/engine-ci/standalone-bundle-candidate/CORE-REVIEW.md": "93f63e9c8018cef8b91aabdbe47ccbc7f6122693cad496f45c8b499ac56c6a82",
-    "research/engine-ci/standalone-bundle-candidate/MANAGED-POLICY-REVIEW.md": "275fab80b4a127abde1337341ebe5a7da0036bb0da702569ce139ec1c08d0d6a",
+    "research/engine-ci/standalone-bundle-candidate/MANAGED-POLICY-REVIEW.md": "723685301227eb6131faf6544591b0e22766c57e763078cec4712325f80f2df4",
     "research/engine-ci/standalone-bundle-candidate/PLAN.md": "a5068857ba6b174c8a02a54acea1dfc7d6fcb380a032e231d8a07f2b9f19010a",
     "research/engine-ci/standalone-bundle-candidate/core-self-test.diff": "d997aafc028aa14b7c9cf55ebb9ce042c59b3b563336c5deadff01c8e9e0030f",
     "research/engine-ci/torch-distinct-pypi-proposal.json": "b0d13a7cea899cfabf1706f6703ffdfe247da50101a1e80069992845228f4974",
@@ -117,16 +117,16 @@
     "model/inference/research",
     "signing/notarization/DMG/release"
   ],
-  "scope_notice": "Preparation only: complete-payload core/ASGI baseline plus a separate installed managed-policy contract without inference, network or HTTP; all native/export/release completeness flags remain false.",
+  "scope_notice": "Preparation only: complete-payload core/ASGI baseline plus installed managed-policy decisions. Exactly one hash-bound urllib3 import socket-creation attempt must remain denied and reported; repeated/unknown/DNS/connect/process/provider attempts fail. No inference, provider queries, successful network connection or actual HTTP is tested. All native/export/release completeness flags remain false.",
   "managed_policy_execution_approved": true,
   "managed_policy_contract": "installed-wrapper-public-only-context-no-inference",
   "publication_approved": true,
   "activation_approved": true,
   "reviewer": "independent exact-input review",
   "approved_by": "approved project-task scope",
-  "approval_recorded_utc": "2026-10-11T05:23:55.351139+00:00",
-  "approved_candidate_manifest_sha256": "b576e5f7cc43e2d03e607fdfa00c6cf3a428b3bf479d36ec5c0b303ba357ef52",
+  "approval_recorded_utc": "2026-10-11T08:49:13Z",
+  "approved_candidate_manifest_sha256": "270a3e107d02b534f0f1036b4231fb1ff34385914934c299fb7a70e93e6382f9",
   "independent_review_artifacts": {
-    "independent-standalone-core-v4-diagnostic-review.json": "7826a58920f241b195bf6584290bf326e092dcc9fd6915314696899919e631ba"
+    "independent-policy-v5-reconstructed-review.json": "627b86a82711910738bbd67e2901a24a5a727f1b3ebcd7c7f50f0e69b7390d03"
   }
 }
