@@ -1,0 +1,34 @@
+# Preparation only: the closed receipt rejects execution until exact review and separate approval.
+name: Diagnose exact gettext input only
+on:
+  push:
+    branches: [engine-pdf-input-diagnostic-ci]
+    paths:
+      - 'packaging/pdf-input-diagnostic-candidate/**'
+      - '.github/workflows/engine-pdf-input-diagnostic-macos.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: deepdesk-gettext-input-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  input-only:
+    if: github.repository == 'Emin-dev/deepdesk' && github.ref == 'refs/heads/engine-pdf-input-diagnostic-ci' && github.event.repository.private == false
+    runs-on: macos-26
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Retrieve and verify only the exact gettext input as data
+        shell: bash
+        run: |
+          /usr/bin/env -i PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+            RUNNER_TEMP="$RUNNER_TEMP" TMPDIR="$RUNNER_TEMP" \
+            GITHUB_REPOSITORY="$GITHUB_REPOSITORY" GITHUB_REF="$GITHUB_REF" \
+            GITHUB_EVENT_NAME="$GITHUB_EVENT_NAME" GITHUB_EVENT_PATH="$GITHUB_EVENT_PATH" \
+            /usr/bin/python3 -I -B packaging/pdf-input-diagnostic-candidate/diagnose.py \
+            --repository "$GITHUB_WORKSPACE" --execute

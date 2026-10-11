@@ -1,0 +1,21 @@
+{
+  "base_commit": "f52e37049b7d280e53e07013ccd14da3c3ac53d3",
+  "destination_branch": "engine-pdf-input-diagnostic-ci",
+  "execution_approved": true,
+  "independent_review_passed": true,
+  "reused_sha256": {
+    "archive_tools.py": "d5273a166c7e3f3485cf8d0fd5f63551dee1b38a1cda3548f75e19553814a146",
+    "input-lock.json": "e8220aeba8dfd36a0ddd93b6f48b17b4f1aef451fed248393f0293cc13236f2a",
+    "members/gettext.json": "ffaf3c8ff6702d9fff652114204d251c1bd76a762018533619d7e449b0a77c6f"
+  },
+  "schema": 1,
+  "scope": "gettext-input-only-diagnostic-v1",
+  "sha256": {
+    "README.md": "dcb8a8072b092cc06da4d6d09dc67d6c7ae1e66e74083543183a081b0269adcb",
+    "diagnose.py": "4aafe9449db1a8e15d0a19144e0886873d233815c272a7904e36e5d40312b551",
+    "pdf-input-diagnostic-macos.yml.template": "93bdca0b4838ed39243a2a2b8aebe53674a2bd28147276c477d1934ea25d83fc",
+    "test_diagnostic.py": "1fe937d16c1fe1ee9c1e1fa3a4e3e631a4839e22ef2282ae2955f3376c82df4a"
+  },
+  "source_changes_allowed": false,
+  "workflow_sha256": "93bdca0b4838ed39243a2a2b8aebe53674a2bd28147276c477d1934ea25d83fc"
+}
