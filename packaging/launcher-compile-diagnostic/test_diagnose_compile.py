@@ -50,6 +50,20 @@ class DiagnosticTests(unittest.TestCase):
                    'sha256': {path: helper.digest(root / path) for path in helper.REQUIRED_HASH_PATHS}}
         return root, receipt
 
+    def test_corrected_launcher_differs_only_by_the_reviewed_three_macro_lines(self):
+        source = (ROOT / 'packaging/standalone-engine-candidate/launcher.c').read_bytes()
+        addition = (b'#if defined(__APPLE__) && !defined(_DARWIN_C_SOURCE)\n'
+                    b'#define _DARWIN_C_SOURCE 1\n#endif\n')
+        self.assertEqual(hashlib.sha256(source).hexdigest(),
+                         '148b2cddcedcc8b1d23daccd29bd834b900baf5e3a4d1dc7e0d534a50cbcbe1b')
+        self.assertEqual(helper.LAUNCHER_SHA256, hashlib.sha256(source).hexdigest())
+        self.assertEqual(source.count(addition), 1)
+        self.assertIn(b'#define _XOPEN_SOURCE 700\n' + addition + b'#include <errno.h>', source)
+        original = source.replace(addition, b'', 1)
+        self.assertEqual(hashlib.sha256(original).hexdigest(),
+                         'b23fc0b7c2d5a3bf0ed88a99521128518d770f2878024da50a867725d499738a')
+        self.assertIn(b'open(path, O_RDONLY | O_NOFOLLOW)', source)
+
     def test_exact_original_command_with_dummy_protected_roots(self):
         profile = Path('/checkout/packaging/engine-ci/runtime-offline.sb')
         self.assertEqual(helper.compile_command(self.source, profile, self.work), [
@@ -221,7 +235,7 @@ class DiagnosticTests(unittest.TestCase):
         path = 'packaging/standalone-engine-candidate/launcher.c'
         (root / path).write_text('changed source')
         receipt['sha256'][path] = helper.digest(root / path)
-        with self.assertRaisesRegex(ValueError, 'original launcher differs'):
+        with self.assertRaisesRegex(ValueError, 'reviewed launcher differs'):
             helper.validate_receipt(receipt, root)
 
     def test_receipt_cannot_replace_original_profile_hash(self):

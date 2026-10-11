@@ -1,4 +1,4 @@
-"""Candidate: compile one pinned first-party launcher; never execute the result.
+"""Candidate v2: compile one reviewed corrected launcher; never execute the result.
 
 No downloads or runtime dependencies. Raw compiler bytes stay bounded in memory.
 A separately reviewed receipt must explicitly authorize this diagnostic lane.
@@ -21,7 +21,7 @@ import tempfile
 import time
 
 SCHEMA = "deepdesk-launcher-compile-diagnostic-v1"
-LAUNCHER_SHA256 = "b23fc0b7c2d5a3bf0ed88a99521128518d770f2878024da50a867725d499738a"
+LAUNCHER_SHA256 = "148b2cddcedcc8b1d23daccd29bd834b900baf5e3a4d1dc7e0d534a50cbcbe1b"
 PROFILE_SHA256 = "9d4f464140e5bb35efb2f937e820349b6f7a47482d4fcb2a618cc489b9bf4710"
 TOTAL_SECONDS = 120
 TIMEOUT_SECONDS = 90
@@ -69,7 +69,7 @@ def compile_environment(work: Path) -> dict[str, str]:
 
 
 def compile_command(source: Path, profile: Path, work: Path) -> list[str]:
-    """No diagnostic flags or macro fix: reproduce the original compiler argv."""
+    """No added diagnostic flags: retain the original compiler arguments."""
     return [
         '/usr/bin/sandbox-exec', '-D', 'WORK_DIR=' + str(work),
         '-D', 'IMMUTABLE_DIR=' + str(work / 'immutable'),
@@ -241,7 +241,7 @@ def validate_receipt(receipt: dict, repository: Path) -> None:
         require(path.resolve().is_relative_to(repository), "Reviewed file escaped repository")
         require(digest(path) == expected, "Reviewed file differs")
     require(hashes['packaging/standalone-engine-candidate/launcher.c'] == LAUNCHER_SHA256,
-            "Pinned original launcher differs")
+            "Pinned reviewed launcher differs")
     require(hashes['packaging/engine-ci/runtime-offline.sb'] == PROFILE_SHA256,
             "Pinned original deny profile differs")
     require(hashes['packaging/launcher-compile-diagnostic/diagnose_compile.py'] == digest(Path(__file__)),
