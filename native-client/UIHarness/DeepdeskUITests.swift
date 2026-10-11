@@ -1,4 +1,5 @@
 import XCTest
+import AppKit
 
 final class DeepdeskUITests: XCTestCase {
     @MainActor private var app: XCUIApplication!
@@ -28,6 +29,12 @@ final class DeepdeskUITests: XCTestCase {
     }
     @MainActor private func screenshot(_ name: String) {
         XCTAssertTrue(element("synthetic-host-banner").exists)
+        let sheetNotice = element("model.presentation-notice")
+        let notice = sheetNotice.exists ? sheetNotice : element("synthetic-host-banner")
+        XCTAssertTrue(notice.isHittable)
+        notice.hover()
+        // Let the runner Dock/tooltip retract after earlier pointer actions; no OS setting changes.
+        Thread.sleep(forTimeInterval: 1.0)
         let attachment = XCTAttachment(screenshot: app.windows.firstMatch.screenshot())
         attachment.name = name
         attachment.lifetime = .keepAlways
@@ -112,9 +119,14 @@ final class DeepdeskUITests: XCTestCase {
         second.click()
         let retry = element("model.retry.qwen38-27b-uncensored")
         XCTAssertTrue(retry.waitForExistence(timeout: 5))
+        if !retry.isHittable { element("models.scroll").scroll(byDeltaX: 0, deltaY: -200) }
+        XCTAssertTrue(retry.isHittable)
         screenshot("synthetic-download-error-dark")
         retry.click()
         XCTAssertTrue(element("model.use.qwen38-27b-uncensored").waitForExistence(timeout: 10))
+        let useSecond = element("model.use.qwen38-27b-uncensored")
+        if !useSecond.isHittable { element("models.scroll").scroll(byDeltaX: 0, deltaY: -200) }
+        XCTAssertTrue(useSecond.isHittable)
         screenshot("synthetic-model-chooser-dark")
         element("models.done").click()
         XCTAssertTrue(element("models.done").waitForNonExistence(timeout: 3))
@@ -182,8 +194,11 @@ final class DeepdeskUITests: XCTestCase {
         XCTAssertTrue(element("synthetic-host-banner").waitForExistence(timeout: 10))
         let window = app.windows.firstMatch
         let before = window.frame
-        guard before.width > 1000 else { throw XCTSkip("Runner screen leaves no room above the host's minimum width; resize is not verified.") }
-        let reduction = min(100, before.width - 985)
+        let visible = try XCTUnwrap(NSScreen.main?.visibleFrame)
+        XCTAssertGreaterThanOrEqual(before.minX, visible.minX)
+        XCTAssertLessThanOrEqual(before.maxX, visible.maxX)
+        guard before.width > 984 else { throw XCTSkip("Runner screen leaves no room above the host's minimum width; resize is not verified.") }
+        let reduction = min(100, before.width - 984)
         let edge = window.coordinate(withNormalizedOffset: CGVector(dx: 1, dy: 0.5)).withOffset(CGVector(dx: -0.5, dy: 0))
         edge.click(forDuration: 0.6, thenDragTo: edge.withOffset(CGVector(dx: -reduction, dy: 0)))
         print("DEEPDESK_SYNTHETIC_RESIZE before=\(before) after=\(window.frame)")

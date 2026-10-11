@@ -6,7 +6,7 @@ The test host is sandboxed without network entitlements. It has no bundled helpe
 
 ## Actual first run and pending correction
 
-[Run 38098632449](https://github.com/Emin-dev/deepdesk/actions/runs/38098632449) compiled and launched the synthetic host and executed all six UI tests: two passed (model error/retry/dark dismissal and queued cancellation), four failed (terminal text assertions, research-error text lookup, and resize). The 28 core tests and release compilation still passed. The corrected native AX label/value predicates, edge resize gesture, explicit minimum-size window policy, and strict Xcode attachment-name suffix handling await rerun. No screenshot pixels have been recovered or visually reviewed yet.
+[Run 38098632449](https://github.com/Emin-dev/deepdesk/actions/runs/38098632449) compiled and launched the synthetic host and executed all six UI tests: two passed (model error/retry/dark dismissal and queued cancellation), four failed (terminal text assertions, research-error text lookup, and resize). The 28 core tests and release compilation still passed. [Correction run 38099207221](https://github.com/Emin-dev/deepdesk/actions/runs/38099207221) passed five of six UI tests, plus all 28 core tests and release compilation. Exact status/error assertions pass using macOS AXValue/AXLabel. Six synthetic screenshots were decoded, hash-verified and visually inspected. They exposed an offscreen 1180-point window on the 1024-point runner, a Dock/tooltip overlay, and a sheet covering the synthetic banner. The remaining resize failure was a drag to the offscreen border (window x=-78, right edge1102). The next checkpoint fits the host to the visible screen, pins its synthetic notice in sheets, moves the pointer before capture, and preserves actual on-screen bounds/width-reduction assertions. This correction is pending rerun.
 
 ## Intended coverage (not a blanket pass)
 
@@ -15,7 +15,7 @@ The test host is sandboxed without network entitlements. It has no bundled helpe
 - Real shared ResearchStore start/poll/cancel and successful completion state transitions driven by a deterministic service.
 - History selection with a distinct report/query from the stopped run and native report rendering; unsafe source URL is not clickable; safe source link is intercepted; no WebView.
 - Research start failure, Command-Return and Command-N, labeled/hittable accessibility elements, resizing (separate explicit skip if the screen cannot accommodate it), light/dark appearance.
-- Screenshots capture only the synthetic host window and are attached to the runner-local test result for internal visual inspection. The test does not establish full VoiceOver or accessibility-audit compliance.
+- Screenshots request the synthetic host window rectangle (system overlays can still intersect it) and are attached to the runner-local test result for internal visual inspection. The test does not establish full VoiceOver or accessibility-audit compliance.
 
 ## Run on a macOS 26.4+ arm64 Xcode 26 runner
 

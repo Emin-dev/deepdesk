@@ -12,6 +12,8 @@ struct ContentView<Models: ModelManaging>: View {
     var activateModelAction: (@MainActor (CuratedModel) async -> Void)?
     var deviceEligibility = HardwareEligibility.current
     var inferenceStatusOverride: String?
+    var presentationNotice: String?
+    var windowTitleOverride: String?
     @State private var showModels = false
     @State private var activatingModel = false
     @State private var bootstrapping = false
@@ -76,7 +78,7 @@ struct ContentView<Models: ModelManaging>: View {
                 else { composer }
             }
             .background(Color(nsColor: .textBackgroundColor))
-            .navigationTitle(store.selectedID == nil ? "Deepdesk" : "Research")
+            .navigationTitle(windowTitleOverride ?? (store.selectedID == nil ? "Deepdesk" : "Research"))
             .toolbar {
                 ToolbarItemGroup(placement: .primaryAction) {
                     Button { store.newResearch() } label: { Label("New research", systemImage: "square.and.pencil") }
@@ -94,7 +96,7 @@ struct ContentView<Models: ModelManaging>: View {
         }
         .navigationSplitViewStyle(.balanced)
         .sheet(isPresented: $showModels) {
-            ModelChooserView(manager: models, onUse: { model in Task { await activate(model) } }, loadingModel: activatingModel, operationError: store.errorMessage, eligibility: deviceEligibility)
+            ModelChooserView(manager: models, onUse: { model in Task { await activate(model) } }, loadingModel: activatingModel, operationError: store.errorMessage, eligibility: deviceEligibility, presentationNotice: presentationNotice)
         }
         .onChange(of: historySelection) { _, id in
             if let id, id != store.selectedID, let item = store.history.first(where: { $0.id == id }) {

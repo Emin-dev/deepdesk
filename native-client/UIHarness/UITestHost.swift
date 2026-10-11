@@ -1,4 +1,5 @@
 import SwiftUI
+import AppKit
 import DeepdeskCore
 
 // This file belongs only to the separate UI test host target. It is never part of Deepdesk's package executable.
@@ -177,12 +178,18 @@ private final class UITestFixtures: ObservableObject {
 @main
 private struct DeepdeskUITestHost: App {
     @StateObject private var fixture = UITestFixtures()
+    private var initialWindowSize: CGSize {
+        let visible = NSScreen.main?.visibleFrame ?? NSRect(x: 0, y: 0, width: 1180, height: 850)
+        return CGSize(width: max(980, min(1180, visible.width - 24)),
+                      height: max(660, min(850, visible.height - 48)))
+    }
+    private let notice = "SYNTHETIC UI TEST HOST · No real models, network, Keychain, or research"
     private var dark: Bool { ProcessInfo.processInfo.arguments.contains("--dark") }
 
     var body: some Scene {
         Window("Deepdesk Synthetic UI Test Host", id: "test-host") {
             VStack(spacing: 0) {
-                Text("SYNTHETIC UI TEST HOST · No real models, network, Keychain, or research")
+                Text(notice)
                     .font(.caption.bold()).frame(maxWidth: .infinity).padding(8)
                     .background(Color.yellow.opacity(0.2)).accessibilityIdentifier("synthetic-host-banner")
                 if fixture.sourceWasHandled {
@@ -192,14 +199,16 @@ private struct DeepdeskUITestHost: App {
                             identity: fixture.identity, inference: fixture.inference,
                             bootstrapAction: fixture.bootstrap, activateModelAction: fixture.activate,
                             deviceEligibility: HardwareEligibility(supported: true, description: "Synthetic supported device"),
-                            inferenceStatusOverride: "Synthetic model fixture; no inference process")
+                            inferenceStatusOverride: "Synthetic model fixture; no inference process",
+                            presentationNotice: notice, windowTitleOverride: "Deepdesk · Synthetic UI Test Host")
             }
             .frame(minWidth: 980, minHeight: 660)
             .preferredColorScheme(dark ? .dark : .light)
             .environment(\.openURL, OpenURLAction { _ in fixture.sourceWasHandled = true; return .handled })
         }
         .windowResizability(.contentMinSize)
-        .defaultSize(width: 1180, height: 850)
+        .defaultSize(width: initialWindowSize.width, height: initialWindowSize.height)
+        .defaultPosition(.center)
         .commands {
             CommandGroup(replacing: .newItem) {
                 Button("New Research") { fixture.store.newResearch() }.keyboardShortcut("n", modifiers: .command)

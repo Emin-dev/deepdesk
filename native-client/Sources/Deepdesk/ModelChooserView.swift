@@ -9,37 +9,46 @@ struct ModelChooserView<Manager: ModelManaging>: View {
     var loadingModel = false
     var operationError: String?
     var eligibility = HardwareEligibility.current
+    var presentationNotice: String?
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 24) {
-                HStack {
-                    Spacer()
-                    Button("Done") { dismiss() }
-                        .keyboardShortcut(.cancelAction)
-                        .accessibilityIdentifier("models.done")
-                }
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Choose your model").font(.largeTitle.bold())
-                    Text("Download once. Think and research on this Mac.")
-                        .font(.title3).foregroundStyle(.secondary)
-                    Text("Weights come from the listed publisher on Hugging Face. Deepdesk verifies every file before use. Web research still sends search queries to search services.")
-                        .font(.callout).foregroundStyle(.secondary)
-                }
-                if !eligibility.supported {
-                    Label(eligibility.description, systemImage: "exclamationmark.triangle").foregroundStyle(.orange)
-                }
-                if let error = manager.errorMessage {
-                    Label(error, systemImage: "exclamationmark.circle").foregroundStyle(.red)
-                }
-                if let operationError { Text(operationError).foregroundStyle(.red).textSelection(.enabled) }
-                ForEach(manager.models) { model in modelCard(model) }
-                Text("Models share a verified draft component. It is downloaded only once. Your installed models are checked again before the inference engine opens them.")
-                    .font(.caption).foregroundStyle(.secondary)
+        VStack(spacing: 0) {
+            if let presentationNotice {
+                Text(presentationNotice)
+                    .font(.caption.bold()).frame(maxWidth: .infinity).padding(10)
+                    .background(Color.yellow.opacity(0.2))
+                    .accessibilityIdentifier("model.presentation-notice")
             }
-            .padding(32)
+            HStack {
+                Spacer()
+                Button("Done") { dismiss() }
+                    .keyboardShortcut(.cancelAction)
+                    .accessibilityIdentifier("models.done")
+            }.padding(.horizontal, 24).padding(.top, 16)
+            ScrollView {
+                VStack(alignment: .leading, spacing: 24) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Choose your model").font(.largeTitle.bold())
+                        Text("Download once. Think and research on this Mac.")
+                            .font(.title3).foregroundStyle(.secondary)
+                        Text("Weights come from the listed publisher on Hugging Face. Deepdesk verifies every file before use. Web research still sends search queries to search services.")
+                            .font(.callout).foregroundStyle(.secondary)
+                    }
+                    if !eligibility.supported {
+                        Label(eligibility.description, systemImage: "exclamationmark.triangle").foregroundStyle(.orange)
+                    }
+                    if let error = manager.errorMessage {
+                        Label(error, systemImage: "exclamationmark.circle").foregroundStyle(.red)
+                    }
+                    if let operationError { Text(operationError).foregroundStyle(.red).textSelection(.enabled) }
+                    ForEach(manager.models) { model in modelCard(model) }
+                    Text("Models share a verified draft component. It is downloaded only once. Your installed models are checked again before the inference engine opens them.")
+                        .font(.caption).foregroundStyle(.secondary)
+                }
+                .padding(32)
+            }
+            .accessibilityIdentifier("models.scroll")
         }
-        .accessibilityIdentifier("models.scroll")
         .frame(minWidth: 580, idealWidth: 700, maxWidth: 900, minHeight: 550)
     }
 
