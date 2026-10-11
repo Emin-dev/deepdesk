@@ -34,7 +34,9 @@ def summary(stdout=b'', stderr=b'', phase='pkgconf-build'):
 
 class DiagnosticTests(unittest.TestCase):
     def assertPrivate(self, record):
-        encoded = json.dumps(record)
+        # v4's strict no-unknown-text contract still applies to structured fields.
+        # v5's separately tested stderr excerpt intentionally preserves unfamiliar prose.
+        encoded = json.dumps({k:v for k,v in record.items() if k != 'stderr_excerpt'})
         for secret in ('ghp_', 'DO_NOT_PRINT', 'secret.invalid', 'PRIVATE', '::error', '/private/review-secret', '/Users/', '\\u001b', 'credential-value'):
             self.assertNotIn(secret, encoded)
         self.assertLessEqual(len(encoded.encode()), d.MAX_REPORT_BYTES)
@@ -267,7 +269,7 @@ class DiagnosticTests(unittest.TestCase):
         receipt=json.loads((HERE/'review-receipt.json').read_text())
         for name in ('build_diagnostics.py','build-diagnostic-catalog.json','test_build_diagnostics.py'):
             self.assertEqual(receipt['sha256'][name],hashlib.sha256((HERE/name).read_bytes()).hexdigest())
-        self.assertEqual(receipt['candidate_revision'],4)
+        self.assertEqual(receipt['candidate_revision'],8)
         self.assertNotIn('approval',receipt)
         for gate in ('execution_approved','independent_review_passed','temporary_linker_adhoc_signing_approved','install_name_linker_assignment_approved'):
             self.assertIs(receipt[gate],False)

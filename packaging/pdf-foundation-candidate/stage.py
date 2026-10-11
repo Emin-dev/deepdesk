@@ -17,7 +17,7 @@ import tempfile
 import time
 sys.dont_write_bytecode=True
 SCOPE='pdf-foundation-prerequisites-v1'
-CANDIDATE_REVISION=4
+CANDIDATE_REVISION=8
 BRANCH='engine-pdf-foundation-v1-ci'
 WORKFLOW='.github/workflows/engine-pdf-foundation-v1-macos.yml'
 INPUT_HASHES={

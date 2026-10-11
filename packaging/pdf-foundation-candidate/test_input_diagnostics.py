@@ -23,7 +23,7 @@ from unittest import mock
 sys.dont_write_bytecode = True
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
-SECRET = '::error::SECRET_TOKEN/path?credential=do-not-print'
+SECRET = 'INVALID_TEST_EXCEPTION token=INVALID_TEST_VALUE ::warning:: /invalid-test/private/location'
 URL = 'https://ftp.gnu.org/gnu/gettext/gettext-1.0.tar.gz'
 
 def load(name):
@@ -158,7 +158,7 @@ class InputTests(unittest.TestCase):
     def test_all_redirect_rules_remain_enforced(self):
         cases = [('http://ftp.gnu.org/a', 'redirect_scheme_denied'),
                  ('https://ftp.gnu.org:444/a', 'redirect_port_denied'),
-                 ('https://user:password@ftp.gnu.org/a', 'redirect_userinfo_denied'),
+                 ('https://INVALID_TEST_USER:INVALID_TEST_PASSWORD@ftp.gnu.org/a', 'redirect_userinfo_denied'),
                  ('https://ftp.gnu.org/a#' + SECRET, 'redirect_fragment_denied'),
                  ('https://[bad', 'redirect_url_malformed'),
                  ('https://ftp.gnu.org:bad/a', 'redirect_url_malformed'),
@@ -326,7 +326,7 @@ class InputTests(unittest.TestCase):
         for gate in s.FALSE_GATES: self.assertIs(records[1][gate], False)
     def test_revision_closed_receipt_and_hash_validation(self):
         receipt = json.loads((HERE / 'review-receipt.json').read_text())
-        self.assertEqual((s.CANDIDATE_REVISION, receipt['candidate_revision']), (4, 4))
+        self.assertEqual((s.CANDIDATE_REVISION, receipt['candidate_revision']), (8, 8))
         for gate in ('execution_approved', 'independent_review_passed', 'temporary_linker_adhoc_signing_approved', 'install_name_linker_assignment_approved'):
             self.assertIs(receipt[gate], False)
         s.validate_receipt(ROOT, HERE, receipt, False)
@@ -336,7 +336,7 @@ class InputTests(unittest.TestCase):
             isolated = copy.deepcopy(receipt)
             for flag in flags: isolated[flag] = flag != blocked
             with self.assertRaises(s.LaneError): s.validate_receipt(ROOT, HERE, isolated, True)
-        self.assertEqual(receipt['base_commit'], 'e886f6db7d0a6383aa91854378f08e2656d2fa42')
+        self.assertEqual(receipt['base_commit'], '4b83100cc76be279a5b62b166f03d3c166e57c63')
         changed = copy.deepcopy(receipt); changed['sha256']['input_diagnostics.py'] = '0' * 64
         with self.assertRaises(s.LaneError): s.validate_receipt(ROOT, HERE, changed, False)
     def test_receipt_pins_unchanged_helper_and_canonical_source(self):

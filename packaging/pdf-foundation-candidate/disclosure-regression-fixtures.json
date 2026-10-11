@@ -1,0 +1,117 @@
+[
+  {
+    "case": "libtool_command",
+    "synthetic_stderr": "libtool: link: /usr/bin/libtool -static -o libpkgconf.la SHORTPRIVATE\n",
+    "excerpt_text": [
+      "libtool: link: /usr/bin/libtool -static -o libpkgconf.la SHORTPRIVATE"
+    ],
+    "unexpected_retained_value": "SHORTPRIVATE"
+  },
+  {
+    "case": "xcrun_command",
+    "synthetic_stderr": "libtool: link: /usr/bin/xcrun nm SHORTPRIVATE\n",
+    "excerpt_text": [
+      "libtool: link: /usr/bin/xcrun nm SHORTPRIVATE"
+    ],
+    "unexpected_retained_value": "SHORTPRIVATE"
+  },
+  {
+    "case": "quoted_tool_command",
+    "synthetic_stderr": "libtool: link: \"/usr/bin/nm\" SHORTPRIVATE\n",
+    "excerpt_text": [
+      "libtool: link: \"/usr/bin/nm\" SHORTPRIVATE"
+    ],
+    "unexpected_retained_value": "SHORTPRIVATE"
+  },
+  {
+    "case": "prefixed_env_assignment",
+    "synthetic_stderr": "libtool: link: CUSTOM=SHORTPRIVATE /usr/bin/nm foo\n",
+    "excerpt_text": [
+      "libtool: link: CUSTOM=SHORTPRIVATE /usr/bin/nm foo"
+    ],
+    "unexpected_retained_value": "SHORTPRIVATE"
+  },
+  {
+    "case": "bare_env_command",
+    "synthetic_stderr": "env CUSTOM=SHORTPRIVATE /usr/bin/nm foo\n",
+    "excerpt_text": [
+      "env CUSTOM=SHORTPRIVATE /usr/bin/nm foo"
+    ],
+    "unexpected_retained_value": "SHORTPRIVATE"
+  },
+  {
+    "case": "nested_shell_trace",
+    "synthetic_stderr": "++ env CUSTOM=SHORTPRIVATE\n",
+    "excerpt_text": [
+      "++ env CUSTOM=SHORTPRIVATE"
+    ],
+    "unexpected_retained_value": "SHORTPRIVATE"
+  },
+  {
+    "case": "colored_shelltrace",
+    "synthetic_stderr": "\u001b[32m+ env CUSTOM=SHORTPRIVATE\u001b[0m\n",
+    "excerpt_text": [
+      "[terminal-control]+ env CUSTOM=SHORTPRIVATE[terminal-control]"
+    ],
+    "unexpected_retained_value": "SHORTPRIVATE"
+  },
+  {
+    "case": "colored_assignment",
+    "synthetic_stderr": "\u001b[32mCUSTOM=SHORTPRIVATE\u001b[0m\n",
+    "excerpt_text": [
+      "[terminal-control]CUSTOM=SHORTPRIVATE[terminal-control]"
+    ],
+    "unexpected_retained_value": "SHORTPRIVATE"
+  },
+  {
+    "case": "json_password",
+    "synthetic_stderr": "libtool: error: {\"password\":\"SHORTPRIVATE\"}\n",
+    "excerpt_text": [
+      "libtool: error: {\"password\":\"SHORTPRIVATE\"}"
+    ],
+    "unexpected_retained_value": "SHORTPRIVATE"
+  },
+  {
+    "case": "quoted_label",
+    "synthetic_stderr": "libtool: error: \"password\": \"SHORTPRIVATE\"\n",
+    "excerpt_text": [
+      "libtool: error: \"password\": \"SHORTPRIVATE\""
+    ],
+    "unexpected_retained_value": "SHORTPRIVATE"
+  },
+  {
+    "case": "quoted_password_operand",
+    "synthetic_stderr": "libtool: error: password \"SHORTPRIVATE\" trailing text\n",
+    "excerpt_text": [
+      "libtool: error: password \"SHORTPRIVATE\" trailing text"
+    ],
+    "unexpected_retained_value": "SHORTPRIVATE"
+  },
+  {
+    "case": "blank_credential_continuation",
+    "synthetic_stderr": "libtool: error: token:\n\nSHORTPRIVATE\n",
+    "excerpt_text": [
+      "libtool: error: [credential-field redacted]",
+      "[credential-block redacted]",
+      "SHORTPRIVATE"
+    ],
+    "unexpected_retained_value": "SHORTPRIVATE"
+  },
+  {
+    "case": "quoted_credential_continuation",
+    "synthetic_stderr": "libtool: error: \"token\":\n  SHORTPRIVATE\n",
+    "excerpt_text": [
+      "libtool: error: \"token\":",
+      "  SHORTPRIVATE"
+    ],
+    "unexpected_retained_value": "SHORTPRIVATE"
+  },
+  {
+    "case": "compiler_define_quoted_spaces",
+    "synthetic_stderr": "libtool: error: unexpected -DPRIVATE=\"SHORT PRIVATE VALUE\" while linking\n",
+    "excerpt_text": [
+      "libtool: error: unexpected [compiler-define redacted] PRIVATE VALUE\" while linking"
+    ],
+    "unexpected_retained_value": "PRIVATE VALUE"
+  }
+]

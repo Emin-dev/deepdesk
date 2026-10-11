@@ -3,11 +3,13 @@
 No execution, network, environment reads, source reads, or raw stream forwarding.
 Public names come only from a receipt-bound catalog of the pinned pkgconf input.
 Diagnostic text is emitted only through reviewed grammars with public operands;
-unknown operands are replaced individually and unknown messages are withheld.
+unknown structured operands are replaced individually. Failed-build stderr also
+has a bounded excerpt that preserves unfamiliar prose after explicit redaction.
 Observed errors and per-stream order are evidence, not a root-cause assertion.
 """
 from __future__ import annotations
 import json
+from collections import deque
 from pathlib import Path
 import re
 import shlex
@@ -186,6 +188,10 @@ def _event(line, context):
     if match:
         category, safe = _message(match[2], context)
         return {'severity': match[1], 'category': category, 'command_role': 'unattributed_diagnostic', 'message': safe[:MAX_MESSAGE]}
+    match = re.fullmatch(r'libtool:\s+(?:(?:link|compile):\s*)?(fatal error|error|warning|note):\s*(.+)', line)
+    if match:
+        category, safe = _message(match[2], context)
+        return {'severity': match[1], 'category': category, 'command_role': 'libtool', 'message': safe[:MAX_MESSAGE]}
     match = MAKE_DIAGNOSTIC.fullmatch(line)
     if match:
         body = match[1]
@@ -294,6 +300,203 @@ def _stream(data, context):
     return result
 
 
+# Bounded stderr-only review surface. Full stdout/stderr remain private and unchanged.
+MAX_EXCERPT_LINES = 64
+MAX_EXCERPT_LINE_CHARS = 512
+MAX_EXCERPT_BYTES = 6144  # Encoded JSON, including excerpt metadata.
+EXCERPT_HEAD_LINES = 16
+SAFE_TOOL_BASENAMES = frozenset(('clang','clang++','cc','gcc','ld','as','ar','ranlib','nm',
+    'sed','grep','egrep','fgrep','sort','uniq','cut','tr','mkdir','mv','cp','rm','touch',
+    'xcrun','xcodebuild','make','libtool','sh','bash','config.status','configure','missing','depcomp','ltmain.sh'))
+CREDENTIAL_KEY = r'(?:authorization|proxy-authorization|cookie|set-cookie|password|passwd|credentials?|client[_-]?secret|api[_-]?key|access[_-]?key|access[_-]?token|refresh[_-]?token|id[_-]?token|secret|token|(?:aws|github|gh|openai|slack)[_-][a-z0-9_-]*(?:key|token|secret))'
+# Optional plain or backslash-escaped quotes cover JSON and quoted field labels.
+CREDENTIAL_LABEL = re.compile(r'(?i)(?<![A-Za-z0-9_])(?:\\?["\'])?' + CREDENTIAL_KEY + r'(?:\\?["\'])?(?![A-Za-z0-9_])(?:[ \t]*[:=][ \t]*|[ \t]+(?=(?:\\?["\']|bearer\b|basic\b))|[ \t]+(?=[^ \t]+$))')
+TOKEN_PATTERN = re.compile(r'(?i)\b(?:gh[pousr]_[A-Za-z0-9_]{8,}|github_pat_[A-Za-z0-9_]{8,}|glpat-[A-Za-z0-9_-]{8,}|xox[baprs]-[A-Za-z0-9-]{8,}|sk-(?:proj-|svcacct-)?[A-Za-z0-9_-]{8,}|AIza[A-Za-z0-9_-]{20,}|(?:AKIA|ASIA)[A-Z0-9]{16}|eyJ[A-Za-z0-9_-]{5,}\.[A-Za-z0-9_-]{5,}\.[A-Za-z0-9_-]{5,})\b')
+URL_PATTERN = re.compile(r'(?i)\b[a-z][a-z0-9+.-]{1,20}://[^\s<>\'"`]+')
+ANSI_PATTERN = re.compile(r'\x1b(?:\][^\x07\x1b]*(?:\x07|\x1b\\)|\[[0-9;:]*m)')
+OPAQUE_PATTERN = re.compile(r'(?<![A-Za-z0-9_])[A-Za-z0-9_+/=-]{32,}(?![A-Za-z0-9_])')
+PATH_PATTERN = re.compile(r"(?<![A-Za-z0-9_\]])(?:[A-Za-z]:[\\/][^\s\'\"<>`|;,()]+|(?:~[A-Za-z0-9_.-]*|\.\.?|)/[^\s\'\"<>`|;,()]+|[A-Za-z0-9_.-]+(?:/[^\s\'\"<>`|;,():]+)+)")
+
+
+def _excerpt_path(value, context):
+    """Never return a private prefix; preserve exact public suffixes when useful."""
+    suffix = ''
+    # Diagnostic line/column trailers do not belong to the filesystem path.
+    match = re.search(r'(:[0-9]{1,6}(?::[0-9]{1,4})?)$', value)
+    if match:
+        suffix = match[1]; value = value[:match.start()]
+    value = value.rstrip(':')
+    if value.startswith(('/usr/bin/', '/bin/')) and value.rsplit('/',1)[-1] in SAFE_TOOL_BASENAMES:
+        return value + suffix
+    if value in context.catalog['files'] or value in context.catalog['targets'] or value in context.catalog['outputs']:
+        return value + suffix if context.pkgconf else '[relative-path]' + suffix
+    roots = ((context.source_root, 'pkgconf-source'), (context.directory+'/tmp','phase-tmp'),
+             (context.directory+'/home','phase-home'), *context.roots[1:])
+    for root, role in roots:
+        if value == root or value.startswith(root+'/'):
+            relative = value[len(root):].lstrip('/')
+            public = relative in context.catalog['files'] or relative in context.catalog['targets'] or relative in context.catalog['outputs']
+            # A known source/output suffix is useful; private directories are never retained.
+            return '['+role+']' + ('/'+relative if context.pkgconf and public else '') + suffix
+    role = 'path'
+    if value.startswith(('/Users/runner/', '/home/runner/')): role = 'runner-path'
+    elif value.startswith(('/private/var/folders/','/var/folders/','/private/tmp/','/tmp/')): role = 'runner-tmp'
+    elif value.startswith(('/Applications/','/Library/Developer/')): role = 'toolchain-path'
+    elif value.startswith(('/Users/','/home/','~')): role = 'home-path'
+    elif re.match(r'^[A-Za-z]:[\\/]',value): role = 'windows-path'
+    elif not value.startswith('/'): role = 'relative-path'
+    base = re.split(r'[\\/]',value)[-1]
+    if base in SAFE_TOOL_BASENAMES:
+        return '['+role+']/'+base+suffix
+    return '['+role+']'+suffix
+
+
+def _normalize_excerpt_line(raw):
+    """Remove terminal controls before inspecting the visible structural syntax."""
+    # Normalize eight-bit CSI/OSC/ST spellings too; unrecognized escape forms
+    # are omitted as a whole line, not converted into a misleading visible prefix.
+    raw = raw.replace(b'\x9b', b'\x1b[').replace(b'\x9d', b'\x1b]').replace(b'\x9c', b'\x1b\\')
+    value = raw.decode('utf-8', 'replace')
+    value = ANSI_PATTERN.sub('', value)
+    if '\x1b' in value:
+        return None  # An incomplete/unknown escape cannot hide a command prefix.
+    return ''.join(c if 32 <= ord(c) <= 126 else (' ' if c == '\t' else '') for c in value)
+
+
+def _suppressed_structure(value):
+    """Whole-line suppression for command/env contexts; never expose their argv."""
+    command = value.strip()
+    wrapped = re.match(r'^libtool:\s+(?:link|compile|execute):\s*(.*)$', command)
+    if wrapped:
+        command = wrapped[1]
+        # libtool's explicit command-echo context is not a free-form diagnostic.
+        # Real severity messages are retained, including unfamiliar error prose.
+        if re.match(r'^(?:fatal error|error|warning|note):', command):
+            return None
+        return '[command-line redacted]'
+    if re.match(r'^\++(?:\s|(?=[A-Za-z_/\'"(]))', command):
+        return '[shell-trace redacted]'
+    command = command.lstrip('(').lstrip()
+    if re.match(r'^[A-Za-z_][A-Za-z0-9_]*\s*=', command):
+        return '[environment-assignment redacted]'
+    try:
+        words = shlex.split(command)
+    except ValueError:
+        # Malformed quoted commands still cannot expose their remaining operands.
+        leading = re.match(r'''["']?([^ \t"']+)''', command)
+        words = [leading[1]] if leading else []
+        if command.startswith(('"', "'")) and '/' in command:
+            return '[malformed-command redacted]'
+    if not words:
+        return None
+    first = words[0]
+    if re.match(r'^[A-Za-z_][A-Za-z0-9_]*\s*=', first):
+        return '[environment-assignment redacted]'
+    base = first.rsplit('/', 1)[-1]
+    wrappers = {'env', 'command', 'exec', 'builtin', 'export', 'declare', 'readonly',
+                'typeset', 'time', 'nice', 'nohup', 'stdbuf', 'xargs', 'sudo', 'doas',
+                'python', 'python3', 'perl', 'ruby', 'awk', 'gawk', 'dash', 'zsh',
+                'echo', 'printf', 'cat', 'head', 'tail', 'wc', 'install', 'ln', 'chmod',
+                'basename', 'dirname', 'readlink', 'realpath', 'test', 'true', 'false',
+                'printenv', 'set', 'unset', 'local', 'read', 'eval', 'source', '.',
+                'ksh', 'fish', 'ccache', 'sccache', 'timeout', 'cmake', 'ninja'}
+    if base in SAFE_TOOL_BASENAMES or base in wrappers or re.fullmatch(r'(?:clang|gcc|cc|python|python3)(?:-[0-9.]+|[0-9.]+)', base):
+        return '[command-line redacted]'
+    return None
+
+
+def _redact_compiler_defines(value):
+    """No operand parsing: a recognized -D makes the entire suffix private."""
+    match = re.search(r'(?<![A-Za-z0-9_])-D', value)
+    return value[:match.start()] + '[compiler-define redacted]' if match else value
+
+
+def _sanitize_excerpt_line(raw, context):
+    """Redact values, not unknown error prose. This is not a raw-output fallback."""
+    value = _normalize_excerpt_line(raw)
+    if value is None:
+        return '[malformed terminal control redacted]'
+    suppressed = _suppressed_structure(value)
+    if suppressed is not None:
+        return suppressed
+    value = value.replace('::','[workflow-marker]')
+    # URLs can contain userinfo/query credentials and are always replaced as a unit.
+    value = URL_PATTERN.sub('[url-redacted]',value)
+    value = re.sub(r'\b[^\s:@]+:[^\s@]+@[^\s]+','[userinfo-redacted]',value)
+    value = TOKEN_PATTERN.sub('[credential-redacted]',value)
+    value = re.sub(r'(?i)\b(?:bearer|basic)\s+[^\s,;]+','[authorization-redacted]',value)
+    value = re.sub(r'(?i)\bssh-(?:rsa|ed25519|dss)\s+.*','[ssh-key-redacted]',value)
+    # A labeled credential may contain spaces or punctuation; redact through EOL.
+    label = CREDENTIAL_LABEL.search(value)
+    if label:
+        value = value[:label.start()] + '[credential-field redacted]'
+    value = re.sub(r'(?i)--(?:password|passwd|token|secret|api[-_]key|access[-_]token)(?:=|\s+).*','[credential-option redacted]',value)
+    value = _redact_compiler_defines(value)
+    # Quoted paths may contain spaces; handle them before unquoted path tokens.
+    value = re.sub(r"(['\"])((?:/|~|\.{1,2}/|[A-Za-z]:[\\/])[^'\"\n]+)\1",
+                   lambda m:m[1]+_excerpt_path(m[2],context)+m[1],value)
+    value = PATH_PATTERN.sub(lambda m:_excerpt_path(m[0],context),value)
+    # Unlabelled token-shaped strings are withheld unless exact public code operands.
+    value = OPAQUE_PATTERN.sub(lambda m:m[0] if m[0] in context.identifiers else '[opaque-value redacted]',value)
+    return value
+
+
+def _stderr_excerpt(data, context):
+    result = {'policy':'bounded_sanitized_stderr_v3','lines':[], 'scanned_lines':0,
+              'omitted_lines':0,'oversized_lines':0,'truncated_lines':0,'scan_truncated':False,
+              'raw_stdout_included':False,'raw_full_output_included':False}
+    if not isinstance(data,bytes):
+        result['status']='invalid_stream_type'; return result
+    head=[];tail=deque(maxlen=MAX_EXCERPT_LINES-EXCERPT_HEAD_LINES)
+    stop=min(len(data),MAX_STREAM_BYTES);start=0;count=0;private_key=False;pending_credential=0
+    result['scan_truncated']=len(data)>stop
+    while start<stop and count<MAX_LINES:
+        end=data.find(b'\n',start,stop)
+        if end<0:
+            end=stop
+            if stop<len(data):break
+        count+=1;size=end-start
+        raw=data[start:end] if size<=MAX_LINE_BYTES else b'';start=end+1
+        # State uses the same control-normalized syntax as redaction, and is
+        # maintained across blank and omitted lines before head/tail selection.
+        visible = _normalize_excerpt_line(raw)
+        visible = visible if visible is not None else ''
+        if '-----BEGIN ' in visible and 'PRIVATE KEY-----' in visible:private_key=True
+        blank = not visible.strip()
+        indented = bool(visible[:1] in (' ', '\t'))
+        blocked = private_key
+        if pending_credential:
+            if blank:
+                blocked = True  # A blank line does not consume the pending value.
+            elif pending_credential == 1 or indented:
+                blocked = True; pending_credential = 2
+            else:
+                pending_credential = 0
+        if '-----END ' in visible and 'PRIVATE KEY-----' in visible:private_key=False
+        label = CREDENTIAL_LABEL.search(visible)
+        if label and not visible[label.end():].strip():pending_credential=1
+        if blocked: raw=b'[credential-block redacted]'
+        elif size>MAX_LINE_BYTES:
+            raw=b'[oversized stderr line omitted]';result['oversized_lines']+=1
+        item=(count,raw)
+        if len(head)<EXCERPT_HEAD_LINES:head.append(item)
+        else:tail.append(item)
+    result['scanned_lines']=count
+    result['scan_truncated'] = result['scan_truncated'] or start<stop
+    for number,raw in head+list(tail):
+        value=_sanitize_excerpt_line(raw,context)
+        if len(value)>MAX_EXCERPT_LINE_CHARS:
+            value=value[:MAX_EXCERPT_LINE_CHARS-len(' [line truncated]')]+' [line truncated]';result['truncated_lines']+=1
+        result['lines'].append({'stream_line':number,'text':value})
+    result['omitted_lines']=count-len(result['lines'])
+    # Keep the head and final error context. Short stderr (including the prior 23
+    # lines / 2,119 bytes) is complete; long streams disclose all omission counts.
+    while len(json.dumps(result,sort_keys=True).encode('ascii'))>MAX_EXCERPT_BYTES and result['lines']:
+        index=min(EXCERPT_HEAD_LINES,len(result['lines'])//2)
+        result['lines'].pop(index);result['omitted_lines']+=1
+    return result
+
+
 def summarize(phase, stdout, stderr, catalog_path, immutable, directory, control):
     """Diagnostic failure never replaces the original failed subprocess record."""
     fixed = {'schema': 1, 'status': 'bounded_observations', 'causal_claim': 'none',
@@ -305,6 +508,15 @@ def summarize(phase, stdout, stderr, catalog_path, immutable, directory, control
         context = Context(phase, _load_catalog(catalog_path), immutable, directory, control)
         result = {**fixed, 'source_catalog_scope': 'pkgconf_3_0_8' if context.pkgconf else 'generic_grammar_only',
                   'stdout': _stream(stdout, context), 'stderr': _stream(stderr, context)}
+        result['stderr_excerpt'] = _stderr_excerpt(stderr, context)
+        result['event_records_omitted_for_excerpt'] = 0
+        # Excerpt evidence has priority over duplicate structured event records.
+        # First errors/targets, exit status and private byte/hash metadata remain.
+        for label in ('stdout', 'stderr'):
+            while len(json.dumps(result, sort_keys=True).encode('ascii')) > MAX_REPORT_BYTES and result[label]['events']:
+                result[label]['events'].pop()
+                result[label]['omitted_events'] += 1
+                result['event_records_omitted_for_excerpt'] += 1
         if len(json.dumps(result, sort_keys=True).encode('ascii')) > MAX_REPORT_BYTES:
             return {**fixed, 'status': 'diagnostic_output_cap'}
         return result
