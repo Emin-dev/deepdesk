@@ -1,0 +1,124 @@
+{
+  "schema": 1,
+  "candidate_revision": 11,
+  "base_commit": "c0d37598b3ed0dfa3d094a38458e04b2c6951147",
+  "base_tree": "c0eafddde0e2ac2b0630f0a5be683a744b046a61",
+  "base_approved_manifest_sha256": "b1b76525d1f2569e8b37405030b58273de304f14cd01ad7cd94d83c8a80b5f2c",
+  "run_id": 38138946224,
+  "job_id": 114468588980,
+  "observed_failure": {
+    "phase": "provider-probe-run",
+    "exit_code": 36,
+    "classification": "gettext_singular_translation_failed",
+    "stdout_bytes": 0,
+    "stderr_bytes": 0
+  },
+  "archive_sha256": "85d99b79c981a404874c02e0342176cf75c7698e2b51fe41031cf6526d974f1a",
+  "member_manifest_sha256": "ffaf3c8ff6702d9fff652114204d251c1bd76a762018533619d7e449b0a77c6f",
+  "source_members": {
+    "dcigettext.c": {
+      "archive_member": "gettext-1.0/gettext-runtime/intl/dcigettext.c",
+      "sha256": "45207e8ae3149af68a73de267e46ec05a996d6b0ca0fee0ed8f9e56f7e5de6b4",
+      "size": 45904,
+      "ranges": [
+        {
+          "start": 630,
+          "end": 636,
+          "text": "    }\n\n  /* Now determine the symbolic name of CATEGORY and its value.  */\n#ifndef CATEGORYNAME_INITIALIZED\n  categoryname = category_to_name (category);\n#endif\n  categoryvalue = guess_category_value (category, categoryname);"
+        },
+        {
+          "start": 682,
+          "end": 700,
+          "text": "      /* If the current locale value is \"C\" or \"C.<encoding>\" or \"POSIX\",\n\t we don't load a domain.  Return the MSGID.  */\n      if ((single_locale[0] == 'C'\n\t   && (single_locale[1] == '\\0' || single_locale[1] == '.'))\n\t  || strcmp (single_locale, \"POSIX\") == 0)\n\tbreak;\n\n      /* Find structure describing the message catalog matching the\n\t DOMAINNAME and CATEGORY.  */\n      domain = _nl_find_domain (dirname,\n#if defined _WIN32 && !defined __CYGWIN__\n\t\t\t\twdirname,\n#endif\n\t\t\t\tsingle_locale, xdomainname, binding);\n\n      if (domain != NULL)\n\t{\n\t  retval = _nl_find_msg (domain, binding, msgid1, 1, &retlen);\n"
+        },
+        {
+          "start": 1460,
+          "end": 1531,
+          "text": "/* Lookup or infer the value of specified category in the current locale.\n   This uses values of the environment variables LC_ALL, LC_*, LANG, LANGUAGE,\n   and/or system-dependent defaults.  */\nstatic const char *\nguess_category_value (int category, const char *categoryname)\n{\n  const char *language;\n  const char *locale;\n#ifndef _LIBC\n  const char *language_default;\n  int locale_defaulted;\n#endif\n\n  /* We use the settings in the following order:\n     1. The value of the environment variable 'LANGUAGE'.  This is a GNU\n        extension.  Its value can be a colon-separated list of locale names.\n     2. The value of the environment variable 'LC_ALL', 'LC_xxx', or 'LANG'.\n        More precisely, the first among these that is set to a non-empty value.\n        This is how POSIX specifies it.  The value is a single locale name.\n     3. A system-dependent preference list of languages.  Its value can be a\n        colon-separated list of locale names.\n     4. A system-dependent default locale name.\n     This way:\n       - System-dependent settings can be overridden by environment variables.\n       - If the system provides both a list of languages and a default locale,\n         the former is used.  */\n\n  /* Fetch the locale name, through the POSIX method of looking to `LC_ALL',\n     `LC_xxx', and `LANG'.  On some systems this can be done by the\n     `setlocale' function itself.  */\n#ifdef _LIBC\n  locale = __current_locale_name (category);\n#else\n  locale_defaulted = 0;\n# if HAVE_USELOCALE\n  locale = gl_locale_name_thread_unsafe (category, categoryname);\n  if (locale == NULL)\n# endif\n    {\n      locale = gl_locale_name_posix (category, categoryname);\n      if (locale == NULL)\n\t{\n\t  locale = gl_locale_name_default ();\n\t  locale_defaulted = 1;\n\t}\n    }\n#endif\n\n  /* Ignore LANGUAGE and its system-dependent analogon if the locale is set\n     to \"C\" because\n     1. \"C\" locale usually uses the ASCII encoding, and most international\n\tmessages use non-ASCII characters. These characters get displayed\n\tas question marks (if using glibc's iconv()) or as invalid 8-bit\n\tcharacters (because other iconv()s refuse to convert most non-ASCII\n\tcharacters to ASCII). In any case, the output is ugly.\n     2. The precise output of some programs in the \"C\" locale is specified\n\tby POSIX and should not depend on environment variables like\n\t\"LANGUAGE\" or system-dependent information.  We allow such programs\n        to use gettext().\n     Ignore LANGUAGE and its system-dependent analogon also if the locale is\n     set to \"C.UTF-8\" or, more generally, to \"C.<encoding>\", because that's\n     the by-design behaviour for glibc, see\n     <https://sourceware.org/glibc/wiki/Proposals/C.UTF-8>.  */\n  if (locale[0] == 'C' && (locale[1] == '\\0' || locale[1] == '.'))\n    return locale;\n\n  /* The highest priority value is the value of the 'LANGUAGE' environment\n     variable.  */\n  language = getenv (\"LANGUAGE\");\n  if (language != NULL && language[0] != '\\0')\n    return language;\n#if !defined _LIBC"
+        }
+      ]
+    },
+    "gnulib-lib/localename-unsafe.c": {
+      "archive_member": "gettext-1.0/gettext-runtime/intl/gnulib-lib/localename-unsafe.c",
+      "sha256": "ac7cc053fcf561911f514c54406fb0d96e6787f69508b661c9eac4a67f17e619",
+      "size": 88082,
+      "ranges": [
+        {
+          "start": 2694,
+          "end": 2714,
+          "text": "const char *\ngl_locale_name_thread_unsafe (int category, _GL_UNUSED const char *categoryname)\n{\n  if (category == LC_ALL)\n    /* Invalid argument.  */\n    abort ();\n#if HAVE_GOOD_USELOCALE\n  {\n    locale_t thread_locale = uselocale (NULL);\n    if (thread_locale != LC_GLOBAL_LOCALE)\n      {\n        struct string_with_storage ret =\n          getlocalename_l_unsafe (category, thread_locale);\n        return ret.value;\n      }\n  }\n#endif\n  /* On WINDOWS_NATIVE, don't use GetThreadLocale() here, because when\n     SetThreadLocale has not been called - which is a very frequent case -\n     the value of GetThreadLocale() ignores past calls to 'setlocale'.  */\n  return NULL;"
+        },
+        {
+          "start": 2717,
+          "end": 2801,
+          "text": "/* XPG3 defines the result of 'setlocale (category, NULL)' as:\n   \"Directs 'setlocale()' to query 'category' and return the current\n    setting of 'local'.\"\n   However it does not specify the exact format.  Neither do SUSV2 and\n   ISO C 99.  So we can use this feature only on selected systems, where\n   the return value has the XPG syntax\n     language[_territory][.codeset][@modifier]\n   or\n     C[.codeset]\n   namely\n     - glibc systems (except for aliases from /usr/share/locale/locale.alias,\n       that no one uses any more),\n     - musl libc,\n     - FreeBSD, NetBSD,\n     - Solaris,\n     - Haiku.\n   We cannot use it on\n     - macOS, Cygwin (because these systems have a facility for customizing the\n       default locale, and setlocale (category, NULL) ignores it and merely\n       returns \"C\" or \"C.UTF-8\"),\n     - OpenBSD (because on OpenBSD \u2264 6.1, LC_ALL does not set the LC_NUMERIC,\n       LC_TIME, LC_COLLATE, LC_MONETARY categories).\n     - AIX (because here the return value has the syntax\n         language[_script]_territory[.codeset]\n       e.g. zh_Hans_CN.UTF-8),\n     - native Windows (because it has locale names such as French_France.1252),\n     - Android (because it only supports the C and C.UTF-8 locales).\n */\n#if defined _LIBC || ((defined __GLIBC__ && __GLIBC__ >= 2) && !defined __UCLIBC__) || MUSL_LIBC || defined __FreeBSD__ || defined __NetBSD__ || defined __sun || defined __HAIKU__\n# define HAVE_LOCALE_NULL\n#endif\n\nconst char *\ngl_locale_name_posix_unsafe (int category, _GL_UNUSED const char *categoryname)\n{\n  if (category == LC_ALL)\n    /* Invalid argument.  */\n    abort ();\n#if defined WINDOWS_NATIVE\n  if (LC_MIN <= category && category <= LC_MAX)\n    {\n      const char *locname =\n        /* setlocale_null (category) is identical to setlocale (category, NULL)\n           on this platform.  */\n        setlocale (category, NULL);\n\n      /* Convert locale name to LCID.  We don't want to use\n         LocaleNameToLCID because (a) it is only available since Vista,\n         and (b) it doesn't accept locale names returned by 'setlocale'.  */\n      LCID lcid = get_lcid (locname);\n\n      if (lcid > 0)\n        return gl_locale_name_from_win32_LCID (lcid);\n    }\n#endif\n  {\n    const char *locname;\n\n    /* Use the POSIX methods of looking to 'LC_ALL', 'LC_xxx', and 'LANG'.\n       On some systems this can be done by the 'setlocale' function itself.  */\n#if defined HAVE_LC_MESSAGES && defined HAVE_LOCALE_NULL\n    /* All platforms for which HAVE_LOCALE_NULL is defined happen to have\n       SETLOCALE_NULL_ONE_MTSAFE defined to 1.  Therefore it is OK, here,\n       to call setlocale_null_unlocked instead of setlocale_null.  */\n    locname = setlocale_null_unlocked (category);\n#else\n    /* On other systems we ignore what setlocale reports and instead look at the\n       environment variables directly.  This is necessary\n         1. on systems which have a facility for customizing the default locale\n            (macOS, native Windows, Cygwin) and where the system's setlocale()\n            function ignores this default locale (macOS, Cygwin), in two cases:\n            a. when the user missed to use the setlocale() override from libintl\n               (for example by not including <libintl.h>),\n            b. when setlocale supports only the \"C\" locale, such as on Cygwin\n               1.5.x.  In this case even the override from libintl cannot help.\n         2. on all systems where setlocale supports only the \"C\" locale.  */\n    /* Strictly speaking, it is a POSIX violation to look at the environment\n       variables regardless whether setlocale has been called or not.  POSIX\n       says:\n           \"For C-language programs, the POSIX locale shall be the\n            default locale when the setlocale() function is not called.\"\n       But we assume that all programs that use internationalized APIs call\n       setlocale (LC_ALL, \"\").  */\n    locname = gl_locale_name_environ (category, categoryname);\n#endif"
+        }
+      ]
+    },
+    "gnulib-lib/localename-environ.c": {
+      "archive_member": "gettext-1.0/gettext-runtime/intl/gnulib-lib/localename-environ.c",
+      "sha256": "1be081408323e7a9977b9b1b85a4b26d5c202cae57416ee35df71dd0d68c10d8",
+      "size": 1927,
+      "ranges": [
+        {
+          "start": 27,
+          "end": 61,
+          "text": "const char *\ngl_locale_name_environ (_GL_UNUSED int category, const char *categoryname)\n{\n  /* Setting of LC_ALL overrides all other.  */\n  {\n    const char *retval = getenv (\"LC_ALL\");\n    if (retval != NULL && retval[0] != '\\0')\n      return retval;\n  }\n  /* Next comes the name of the desired category.  */\n  {\n    const char *retval = getenv (categoryname);\n    if (retval != NULL && retval[0] != '\\0')\n      return retval;\n  }\n  /* Last possibility is the LANG environment variable.  */\n  {\n    const char *retval = getenv (\"LANG\");\n    if (retval != NULL && retval[0] != '\\0')\n      {\n#if HAVE_CFPREFERENCESCOPYAPPVALUE\n        /* Mac OS X 10.2 or newer.\n           Ignore invalid LANG value set by the Terminal application.  */\n        if (!streq (retval, \"UTF-8\"))\n#endif\n#if defined __CYGWIN__\n        /* Cygwin.\n           Ignore dummy LANG value set by ~/.profile.  */\n         if (!streq (retval, \"C.UTF-8\"))\n#endif\n          return retval;\n      }\n  }\n\n  return NULL;"
+        }
+      ]
+    },
+    "gnulib-lib/localename.c": {
+      "archive_member": "gettext-1.0/gettext-runtime/intl/gnulib-lib/localename.c",
+      "sha256": "9d362440f18bfb198edb048717a68d336c731f77ed799b9031c20d7a093ca97d",
+      "size": 2664,
+      "ranges": [
+        {
+          "start": 52,
+          "end": 64,
+          "text": "\nconst char *\ngl_locale_name_posix (int category, const char *categoryname)\n{\n  if (category == LC_ALL)\n    /* Invalid argument.  */\n    abort ();\n  const char *name = gl_locale_name_posix_unsafe (category, categoryname);\n  if (name != NULL)\n    return struniq (name);\n  return NULL;\n}\n"
+        }
+      ]
+    },
+    "setlocale.c": {
+      "archive_member": "gettext-1.0/gettext-runtime/intl/setlocale.c",
+      "sha256": "a0b8d5fe3729a53261525de57e10e19724124f4552759c4bda349ff63a4340d8",
+      "size": 68512,
+      "ranges": [
+        {
+          "start": 1444,
+          "end": 1450,
+          "text": "SHLIB_EXPORTED\nchar *\nlibintl_setlocale (int category, const char *locale)\n{\n  if (locale != NULL && locale[0] == '\\0')\n    {\n      /* A request to the set the current locale to the default locale.  */"
+        },
+        {
+          "start": 1775,
+          "end": 1781,
+          "text": "            return setlocale_single (category, NULL);\n        }\n# else\n      return setlocale_single (category, locale);\n# endif\n    }\n"
+        }
+      ]
+    }
+  },
+  "source_supported_cause": "For the global locale on macOS the pinned gnulib fallback reads locale environment variables. LC_ALL=C wins and the C guard returns before LANGUAGE=fr is considered. Explicit setlocale(en_US.UTF-8) does not replace LC_ALL in the environment.",
+  "correction": {
+    "step": "provider-probe-run",
+    "extra_env": {
+      "LC_ALL": "en_US.UTF-8"
+    },
+    "global_build_LC_ALL": "C",
+    "global_build_LANG": "C",
+    "native_LANGUAGE_setting": "fr"
+  },
+  "provider_probe_sha256": "4ba95e36b2c925dbb08027dfaf1ea12f9a608512d8d947e8400e07e3927845cc",
+  "catalog_sha256": "f81e5053377605dd8be0d5a0976c0bad12b973a77033fac5deff37b06527ff14",
+  "catalog_bytes": 230,
+  "catalog_validation": "Independent Python stdlib GNUTranslations accepts exact first-party MO bytes and returns the expected UTF-8 singular, both tested plurals and missing-key fallback; this is not native libintl validation.",
+  "native_checks_unreached_in_v10": [
+    "gettext_plural_one",
+    "gettext_plural_many",
+    "gettext_missing_key_fallback",
+    "loaded_image_validation"
+  ],
+  "native_source_executed_locally": false,
+  "new_download": false,
+  "fixture_assertions_weakened": false,
+  "limitation": "Source-supported correction; native lookup output was empty and no raw runtime locale value was captured. Native final probe and loaded-image checks remain pending a separately approved run."
+}

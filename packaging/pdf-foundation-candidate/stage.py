@@ -17,7 +17,7 @@ import tempfile
 import time
 sys.dont_write_bytecode=True
 SCOPE='pdf-foundation-prerequisites-v1'
-CANDIDATE_REVISION=10
+CANDIDATE_REVISION=11
 BRANCH='engine-pdf-foundation-v1-ci'
 WORKFLOW='.github/workflows/engine-pdf-foundation-v1-macos.yml'
 INPUT_HASHES={
@@ -296,7 +296,7 @@ class Lane:
         p=self.directory('provider-probe');fixture=p/'provider-probe'
         self.run('provider-probe-compile',[self.tools['clang'],*cflags,'-I'+str(self.provider/'include'),self.helpers/'provider_probe.c',self.provider/'lib/libpcre2-8.0.dylib',self.provider/'lib/libintl.8.dylib','-o',fixture],directory=p,timeout=30)
         self.inspect('provider-probe',fixture)
-        out,err,_=self.run('provider-probe-run',[fixture,self.immutable/'catalog'],directory=p,timeout=15)
+        out,err,_=self.run('provider-probe-run',[fixture,self.immutable/'catalog'],directory=p,timeout=15,extra_env={'LC_ALL':'en_US.UTF-8'})
         tests=self.native.fixture_output(out,['pcre2_unicode_jit_dfa_errors_passed','gnu_libintl_catalog_plural_utf8_passed'],fixture,self.provider,['libpcre2-8.0.dylib','libintl.8.dylib']);need(not err)
         need(self.archive.snapshot(self.immutable)==self.base);self.checkpoint()
         print(json.dumps({'phase':'prerequisite-result','status':'passed','scope':SCOPE,'pdf_foundation_prerequisites':True,

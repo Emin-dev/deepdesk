@@ -77,7 +77,7 @@ class DefinitionSuffixTests(unittest.TestCase):
 
     def test_receipt_binds_current_revision_and_exact_regression_data(self):
         receipt=json.loads((HERE/'review-receipt.json').read_text())
-        self.assertEqual(receipt['candidate_revision'],10)
+        self.assertEqual(receipt['candidate_revision'],11)
         for name in ('test_definition_suffix.py','nested-definition-regression-fixtures.json','build_diagnostics.py'):
             self.assertEqual(receipt['sha256'][name],hashlib.sha256((HERE/name).read_bytes()).hexdigest())
         for gate in ('execution_approved','independent_review_passed','temporary_linker_adhoc_signing_approved','install_name_linker_assignment_approved'):

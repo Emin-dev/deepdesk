@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "scope": "pdf-foundation-prerequisites-v1",
-  "review_status": "independent-exact-contained-gettext-layout-review-approved",
+  "review_status": "independent-exact-provider-locale-review-approved",
   "execution_approved": true,
   "independent_review_passed": true,
   "temporary_linker_adhoc_signing_approved": true,
@@ -34,7 +34,7 @@
     "cache_used": false
   },
   "sha256": {
-    "README.md": "7fb46b082042309577dfd834239c1ecc1bf3f7b64bb8d40c44308229b31b69a9",
+    "README.md": "01711421e77b3dda62f07b735da54416c1ebe3fd38ce00122347fbf77668fea2",
     "archive_tools.py": "d5273a166c7e3f3485cf8d0fd5f63551dee1b38a1cda3548f75e19553814a146",
     "bounds.py": "325f4f3811ce969eb90ae6e7ef7426a6af69fd875776a290027556bdb2b5349f",
     "build-diagnostic-catalog.json": "714b19b45f5e9300177e1be09e3e5ec3596e5e7369480538e368c5a8247a053b",
@@ -151,29 +151,31 @@
     "probe_project/main.c": "534f5393cc85ddb3cc1084cfaff4d100b888302130a9608df214233539d74a15",
     "probe_project/meson.build": "e0a0d3ef354bc495ec462123224d10014f0c7e9a52bbc79d0eefa69316b1c1db",
     "provider-contract.json": "d9734c140167ed26226e9bb95963d285eba9653733ab6e4b97d8db8b74d61862",
+    "provider-locale-contract.json": "473ef41d5228498ef936dc3fe2fcced466d3ed07c82c9167e762e44bd921f51a",
     "provider_probe.c": "4ba95e36b2c925dbb08027dfaf1ea12f9a608512d8d947e8400e07e3927845cc",
     "sdk_probe.c": "bb5c817169a9983ba05e64b282e61b6fcb7aa3ef9944ab3d08ed42d15f0418fa",
-    "stage.py": "b7c6ba8ec104b70863761f211a18fea9e72e1227813e8e568aabe69f00b4e61b",
-    "test_build_diagnostics.py": "9c52a4134bb4ebbb065f31418e18a1fc887b8e16cb11391c14dd010062bc3b38",
-    "test_definition_suffix.py": "b141a074bdac2904bc1865e90eb8599c66ab4127fc0dd4c5bb21553964e3ac13",
-    "test_disclosure_structures.py": "17c04fcbbd7c291c9d25d989c3e5ab837f87a896b9226217b58ad68a0c443e84",
+    "stage.py": "38f83e48f482bed4051809f7b3aa489e6204bb0cbbca0c929422b1dbb3fc7e2c",
+    "test_build_diagnostics.py": "77764c329a93019e24d43741577b3711e80806a3c1e688d436589f33e754a2cd",
+    "test_definition_suffix.py": "4eabe83b3440c994d6520d7766a3dfc8ebe97b21f9d61f2093e80f2f647a8762",
+    "test_disclosure_structures.py": "00730115a17f46fd4904061e6d8a07c3aead8c656ad7d85414cf4b234b097885",
     "test_gettext_layout.py": "2b2366fb57c2b80708ec0ab503928ad80a3a01539669424f23f2e1705d11474a",
     "test_helpers.py": "8d971d7027c955b298d7b6d0e24d6b98f94998e8255f8f084968e51bf54c168d",
-    "test_input_diagnostics.py": "a8085cd802fd3cf45fadd2c0e8d7a73179eec2797ad06901fa765b16aa8d39f9",
-    "test_stderr_excerpts.py": "a63e360b26e3ebc80bb3d0ca792c419dc0b06e63389cf68e51dde59f7031cd23",
+    "test_input_diagnostics.py": "67f8535b34683ac0c1d49721e16988e832018c0cb788d6cc5f38219b2c378faa",
+    "test_provider_locale.py": "78be9df18ee5e8f72593fc1a3518fa0d85617111f74a0eb0a540ca4fb0e2dae6",
+    "test_stderr_excerpts.py": "489a7e8b81467969aac78b6276bfed05740b87864971141c082b70ab5b86d078",
     "test_tool_dispatch.py": "75d60bff311edc8593ec951dd80cbfb65e0c1062a76afce664d39fb300045e3a",
     "tool-dispatch-provenance.json": "771c8961529d26a8b902e51afa9bcd351b890b764d099395fa67d7543416f7e5",
     "utf8-contract.json": "d790625d7ddb5aa7a55ab052a126eedee780cade41f93b7b21359718f6c4c44c"
   },
-  "candidate_revision": 10,
-  "base_commit": "eeee4308a79e5d0b7fc95d1eac4fdb1bea60671a",
-  "base_tree": "dd550b15319cd25dd64ef6b61c0127eb3354c457",
+  "candidate_revision": 11,
+  "base_commit": "c0d37598b3ed0dfa3d094a38458e04b2c6951147",
+  "base_tree": "c0eafddde0e2ac2b0630f0a5be683a744b046a61",
   "approval": {
-    "approved_scope": "Exact in-phase standalone gettext layout and contained relative generated config.h alias with the existing sanitized-stderr diagnostic for the credential-free public-source foundation build, capped at 6 KiB excerpt and 16 KiB record; unchanged commands, inputs, profiles, budgets, targets and temporary compiler/linker effects. Pattern-based redaction is not a general secret-detection guarantee. Normal secret scanning remains required; any further rejection stops publication for diagnosis.",
-    "reviewed_manifest_sha256": "c58b6423e72aadb2dd0f7fd495ae747392c672178e39e457a8f221eea53ad215",
-    "independent_review_sha256": "e3632e26cb63694b38924f83b6d21ce45587b162bbe4bf3f67ee6bec84d5f59f",
+    "approved_scope": "Exact provider-run LC_ALL alignment with the unchanged en_US.UTF-8 fixture; build locales, source/native assertions and the existing sanitized-stderr diagnostic retained for the credential-free public-source foundation build, capped at 6 KiB excerpt and 16 KiB record; unchanged commands, inputs, profiles, budgets, targets and temporary compiler/linker effects. Pattern-based redaction is not a general secret-detection guarantee. Normal secret scanning remains required; any further rejection stops publication for diagnosis.",
+    "reviewed_manifest_sha256": "03ea45a64e67d72d8662eebf2812ae29e8f3a4c4d62867624349b30900069bef",
+    "independent_review_sha256": "a5728a2dee72eba5f96d223f7c7b0b82c3f63cc24ffb15b1a54fa64704a74f4e",
     "approved_by": "approved project-task scope",
     "reviewer": "independent exact-input review",
-    "approved_at_utc": "2026-10-11T12:16:23Z"
+    "approved_at_utc": "2026-10-11T12:41:07Z"
   }
 }

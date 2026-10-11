@@ -212,7 +212,7 @@ class ExcerptTests(unittest.TestCase):
 
     def test_revision_and_tests_receipt_bound(self):
         receipt=json.loads((HERE/'review-receipt.json').read_text())
-        self.assertEqual(receipt['candidate_revision'],10)
+        self.assertEqual(receipt['candidate_revision'],11)
         for name in ('test_stderr_excerpts.py','build_diagnostics.py'):
             self.assertEqual(receipt['sha256'][name],hashlib.sha256((HERE/name).read_bytes()).hexdigest())
         self.assertNotIn('approval',receipt)
