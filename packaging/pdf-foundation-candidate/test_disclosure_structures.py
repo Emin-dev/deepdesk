@@ -159,7 +159,7 @@ class StructuralTests(unittest.TestCase):
         receipt=json.loads((HERE/'review-receipt.json').read_text())
         for name in ('test_disclosure_structures.py','disclosure-regression-fixtures.json','build_diagnostics.py'):
             self.assertEqual(receipt['sha256'][name],hashlib.sha256((HERE/name).read_bytes()).hexdigest())
-        self.assertEqual(receipt['candidate_revision'],9)
+        self.assertEqual(receipt['candidate_revision'],10)
         for gate in ('execution_approved','independent_review_passed','temporary_linker_adhoc_signing_approved','install_name_linker_assignment_approved'):
             self.assertIs(receipt[gate],False)
 

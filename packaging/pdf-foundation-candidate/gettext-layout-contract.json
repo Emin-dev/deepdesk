@@ -1,0 +1,483 @@
+{
+  "schema": 1,
+  "candidate_revision": 10,
+  "input_id": "gettext",
+  "version": "1.0",
+  "archive_sha256": "85d99b79c981a404874c02e0342176cf75c7698e2b51fe41031cf6526d974f1a",
+  "member_manifest_sha256": "ffaf3c8ff6702d9fff652114204d251c1bd76a762018533619d7e449b0a77c6f",
+  "source_members": {
+    "Makefile.am": {
+      "archive_member": "gettext-1.0/gettext-runtime/intl/Makefile.am",
+      "sha256": "422180c096320ccaedb2e2ce32c69b51466ca6a2895f899e44c3416f45080d94",
+      "size": 21805,
+      "ranges": [
+        {
+          "start": 26,
+          "end": 26,
+          "text": "BUILT_SOURCES ="
+        },
+        {
+          "start": 180,
+          "end": 206,
+          "text": "\nLIBINTLSOURCES = \\\n  bindtextdom.c \\\n  dcgettext.c \\\n  dgettext.c \\\n  gettext.c \\\n  finddomain.c \\\n  hash-string.c \\\n  loadmsgcat.c \\\n  localealias.c \\\n  textdomain.c \\\n  l10nflist.c \\\n  explodename.c \\\n  dcigettext.c \\\n  dcngettext.c \\\n  dngettext.c \\\n  ngettext.c \\\n  plural.y \\\n  plural-exp.c \\\n  langprefs.c \\\n  log.c \\\n  printf.c \\\n  setlocale.c \\\n  version.c \\\n  osdep.c \\\n  intl-compat.c \\\n  compat.c"
+        },
+        {
+          "start": 224,
+          "end": 244,
+          "text": "libgnuintl.h: $(srcdir)/libgnuintl.in.h $(srcdir)/export.h\n\tsed -e 's,@''HAVE_POSIX_PRINTF''@,@HAVE_POSIX_PRINTF@,g' \\\n\t    -e 's,@''HAVE_ASPRINTF''@,@HAVE_ASPRINTF@,g' \\\n\t    -e 's,@''HAVE_SNPRINTF''@,@HAVE_SNPRINTF@,g' \\\n\t    -e 's,@''HAVE_WPRINTF''@,@HAVE_WPRINTF@,g' \\\n\t    -e 's,@''HAVE_NEWLOCALE''@,@HAVE_NEWLOCALE@,g' \\\n\t    -e 's,@''ENHANCE_LOCALE_FUNCS''@,@ENHANCE_LOCALE_FUNCS@,g' \\\n\t  < $(srcdir)/libgnuintl.in.h \\\n\t| if test '@WOE32DLL@' = 1; then \\\n\t    sed -e 's/extern \\([^()]*\\);/extern __declspec (dllimport) \\1;/'; \\\n\t  else \\\n\t    cat; \\\n\t  fi \\\n\t| sed -e 's/extern \\([^\"]\\)/extern LIBINTL_SHLIB_EXPORTED \\1/' \\\n\t      -e \"/#define _LIBINTL_H/r $(srcdir)/export.h\" \\\n\t| sed -e '/#define _LIBINTL_H/,/[*][/]$$/{/#define _LIBINTL_H/!d;}' \\\n\t| sed -e 's,@''HAVE_VISIBILITY''@,@HAVE_VISIBILITY@,g' \\\n\t| sed -e 's,@''WOE32DLL''@,@WOE32DLL@,g' \\\n\t  > libgnuintl.h\nBUILT_SOURCES += libgnuintl.h\nMOSTLYCLEANFILES += libgnuintl.h"
+        },
+        {
+          "start": 315,
+          "end": 326,
+          "text": "BUILT_SOURCES        += plural.c plural.h\nMOSTLYCLEANFILES     += plural.tab.c plural.tab.h plural.c-tmp plural.h-tmp\nMAINTAINERCLEANFILES += plural.c plural.h\nEXTRA_DIST           += plural.c plural.h\n\n# Rules for compiling a .c file, that work even without a VPATH variable.\nbindtextdom.lo: $(srcdir)/bindtextdom.c\n\t$(AM_V_CC)$(LTCOMPILE) -c -o $@ $(srcdir)/bindtextdom.c\ndcgettext.lo: $(srcdir)/dcgettext.c\n\t$(AM_V_CC)$(LTCOMPILE) -c -o $@ $(srcdir)/dcgettext.c\ndgettext.lo: $(srcdir)/dgettext.c\n\t$(AM_V_CC)$(LTCOMPILE) -c -o $@ $(srcdir)/dgettext.c"
+        },
+        {
+          "start": 380,
+          "end": 404,
+          "text": "bindtextdom.lo:      ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h\ndcgettext.lo:        ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h\ndgettext.lo:         ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h\ngettext.lo:          ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h\nfinddomain.lo:       ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h\nhash-string.lo:      ../config.h $(srcdir)/hash-string.h\nloadmsgcat.lo:       ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h $(srcdir)/hash-string.h $(srcdir)/plural-exp.h\nlocalealias.lo:      ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h\ntextdomain.lo:       ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h\nl10nflist.lo:        ../config.h $(srcdir)/loadinfo.h\nexplodename.lo:      ../config.h $(srcdir)/loadinfo.h\ndcigettext.lo:       ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h $(srcdir)/plural-exp.h $(srcdir)/hash-string.h $(srcdir)/eval-plural.h\ndcngettext.lo:       ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h\ndngettext.lo:        ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h\nngettext.lo:         ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h\nplural.lo:           ../config.h $(srcdir)/plural-exp.h $(PLURAL_DEPS)\nplural-exp.lo:       ../config.h $(srcdir)/plural-exp.h\nlangprefs.lo:        ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h\nlog.lo:              ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h\nprintf.lo:           ../config.h\nsetlocale.lo:        ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h\nversion.lo:          ../config.h libgnuintl.h\nosdep.lo:            ../config.h $(srcdir)/intl-exports.c $(srcdir)/os2compat.c\nintl-compat.lo:      ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h\ncompat.lo:           ../config.h libgnuintl.h"
+        }
+      ]
+    },
+    "Makefile.in": {
+      "archive_member": "gettext-1.0/gettext-runtime/intl/Makefile.in",
+      "sha256": "0e2ed81808e778a58cbaec376988fadd47aeece4e94b88420bb677d4b96afdac",
+      "size": 142579,
+      "ranges": [
+        {
+          "start": 247,
+          "end": 247,
+          "text": "CONFIG_HEADER = config.h"
+        },
+        {
+          "start": 250,
+          "end": 299,
+          "text": "LTLIBRARIES = $(noinst_LTLIBRARIES)\n@WOE32_TRUE@am__DEPENDENCIES_1 = libintl.res.lo\nam__libgnuintl_la_SOURCES_DIST = bindtextdom.c dcgettext.c dgettext.c \\\n\tgettext.c finddomain.c hash-string.c loadmsgcat.c \\\n\tlocalealias.c textdomain.c l10nflist.c explodename.c \\\n\tdcigettext.c dcngettext.c dngettext.c ngettext.c plural.y \\\n\tplural-exp.c langprefs.c log.c printf.c setlocale.c version.c \\\n\tosdep.c intl-compat.c compat.c\nam__objects_1 = bindtextdom.lo dcgettext.lo dgettext.lo gettext.lo \\\n\tfinddomain.lo hash-string.lo loadmsgcat.lo localealias.lo \\\n\ttextdomain.lo l10nflist.lo explodename.lo dcigettext.lo \\\n\tdcngettext.lo dngettext.lo ngettext.lo plural.lo plural-exp.lo \\\n\tlangprefs.lo log.lo printf.lo setlocale.lo version.lo osdep.lo \\\n\tintl-compat.lo compat.lo\n@USE_INCLUDED_LIBINTL_FALSE@am_libgnuintl_la_OBJECTS =  \\\n@USE_INCLUDED_LIBINTL_FALSE@\t$(am__objects_1)\nlibgnuintl_la_OBJECTS = $(am_libgnuintl_la_OBJECTS)\nAM_V_lt = $(am__v_lt_@AM_V@)\nam__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)\nam__v_lt_0 = --silent\nam__v_lt_1 = \nlibgnuintl_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \\\n\t$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \\\n\t$(libgnuintl_la_LDFLAGS) $(LDFLAGS) -o $@\n@USE_INCLUDED_LIBINTL_FALSE@am_libgnuintl_la_rpath =\nam__libintl_la_SOURCES_DIST = bindtextdom.c dcgettext.c dgettext.c \\\n\tgettext.c finddomain.c hash-string.c loadmsgcat.c \\\n\tlocalealias.c textdomain.c l10nflist.c explodename.c \\\n\tdcigettext.c dcngettext.c dngettext.c ngettext.c plural.y \\\n\tplural-exp.c langprefs.c log.c printf.c setlocale.c version.c \\\n\tosdep.c intl-compat.c compat.c\n@USE_INCLUDED_LIBINTL_TRUE@am_libintl_la_OBJECTS = $(am__objects_1)\nlibintl_la_OBJECTS = $(am_libintl_la_OBJECTS)\nlibintl_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \\\n\t$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \\\n\t$(libintl_la_LDFLAGS) $(LDFLAGS) -o $@\n@USE_INCLUDED_LIBINTL_TRUE@am_libintl_la_rpath =\nAM_V_P = $(am__v_P_@AM_V@)\nam__v_P_ = $(am__v_P_@AM_DEFAULT_V@)\nam__v_P_0 = false\nam__v_P_1 = :\nAM_V_GEN = $(am__v_GEN_@AM_V@)\nam__v_GEN_ = $(am__v_GEN_@AM_DEFAULT_V@)\nam__v_GEN_0 = @echo \"  GEN     \" $@;\nam__v_GEN_1 = \nAM_V_at = $(am__v_at_@AM_V@)\nam__v_at_ = $(am__v_at_@AM_DEFAULT_V@)\nam__v_at_0 = @\nam__v_at_1 = \nDEFAULT_INCLUDES = -I.@am__isrc@"
+        },
+        {
+          "start": 2236,
+          "end": 2236,
+          "text": "BUILT_SOURCES = libgnuintl.h plural.c plural.h"
+        },
+        {
+          "start": 2476,
+          "end": 2482,
+          "text": "config.h: stamp-h1\n\t@test -f $@ || rm -f stamp-h1\n\t@test -f $@ || $(MAKE) $(AM_MAKEFLAGS) stamp-h1\n\nstamp-h1: $(srcdir)/config.h.in $(top_builddir)/config.status\n\t$(AM_V_at)rm -f stamp-h1\n\t$(AM_V_GEN)cd $(top_builddir) && $(SHELL) ./config.status config.h"
+        },
+        {
+          "start": 2503,
+          "end": 2504,
+          "text": "libintl.la: $(libintl_la_OBJECTS) $(libintl_la_DEPENDENCIES) $(EXTRA_libintl_la_DEPENDENCIES) \n\t$(AM_V_CCLD)$(libintl_la_LINK) $(am_libintl_la_rpath) $(libintl_la_OBJECTS) $(libintl_la_LIBADD) $(LIBS)"
+        },
+        {
+          "start": 3196,
+          "end": 3197,
+          "text": "bindtextdom.lo: $(srcdir)/bindtextdom.c\n\t$(AM_V_CC)$(LTCOMPILE) -c -o $@ $(srcdir)/bindtextdom.c"
+        },
+        {
+          "start": 3247,
+          "end": 3271,
+          "text": "bindtextdom.lo:      ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h\ndcgettext.lo:        ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h\ndgettext.lo:         ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h\ngettext.lo:          ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h\nfinddomain.lo:       ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h\nhash-string.lo:      ../config.h $(srcdir)/hash-string.h\nloadmsgcat.lo:       ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h $(srcdir)/hash-string.h $(srcdir)/plural-exp.h\nlocalealias.lo:      ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h\ntextdomain.lo:       ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h\nl10nflist.lo:        ../config.h $(srcdir)/loadinfo.h\nexplodename.lo:      ../config.h $(srcdir)/loadinfo.h\ndcigettext.lo:       ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h $(srcdir)/plural-exp.h $(srcdir)/hash-string.h $(srcdir)/eval-plural.h\ndcngettext.lo:       ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h\ndngettext.lo:        ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h\nngettext.lo:         ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h\nplural.lo:           ../config.h $(srcdir)/plural-exp.h $(PLURAL_DEPS)\nplural-exp.lo:       ../config.h $(srcdir)/plural-exp.h\nlangprefs.lo:        ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h\nlog.lo:              ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h\nprintf.lo:           ../config.h\nsetlocale.lo:        ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h\nversion.lo:          ../config.h libgnuintl.h\nosdep.lo:            ../config.h $(srcdir)/intl-exports.c $(srcdir)/os2compat.c\nintl-compat.lo:      ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h\ncompat.lo:           ../config.h libgnuintl.h"
+        }
+      ]
+    },
+    "configure.ac": {
+      "archive_member": "gettext-1.0/gettext-runtime/intl/configure.ac",
+      "sha256": "bb973abcd67c71fbc865b1ec524610a8b9493859b5bb3ef640fcb88564a3211e",
+      "size": 20150,
+      "ranges": [
+        {
+          "start": 18,
+          "end": 28,
+          "text": "\nAC_PREREQ([2.64])\nAC_INIT([libintl], [package], [bug-gettext@gnu.org])\nAC_CONFIG_SRCDIR([dcigettext.c])\nAC_CONFIG_AUX_DIR([../../build-aux])\nVERSION_NUMBER=`cd $srcdir/../.. \\\n                && build-aux/git-version-gen .tarball-version`\ngl_INIT_PACKAGE_VERSION([$VERSION_NUMBER])\nAM_INIT_AUTOMAKE([silent-rules])\nAC_CONFIG_HEADERS([config.h])\n"
+        },
+        {
+          "start": 460,
+          "end": 463,
+          "text": "AC_CONFIG_FILES([Makefile])\nAC_CONFIG_FILES([gnulib-lib/Makefile])\n\nAC_OUTPUT"
+        }
+      ]
+    },
+    "configure": {
+      "archive_member": "gettext-1.0/gettext-runtime/intl/configure",
+      "sha256": "3719fe178c44eaf6c60915585faf7866d3688113801808b49a762caa6b1d4f92",
+      "size": 1375062,
+      "ranges": [
+        {
+          "start": 5717,
+          "end": 5717,
+          "text": "ac_config_headers=\"$ac_config_headers config.h\""
+        }
+      ]
+    },
+    "gnulib-lib/Makefile.in": {
+      "archive_member": "gettext-1.0/gettext-runtime/intl/gnulib-lib/Makefile.in",
+      "sha256": "858f31b5f72145024f456932de57459dc5be366884ca0fb78a3f151805df0520",
+      "size": 387100,
+      "ranges": [
+        {
+          "start": 342,
+          "end": 342,
+          "text": "CONFIG_HEADER = $(top_builddir)/config.h"
+        },
+        {
+          "start": 487,
+          "end": 487,
+          "text": "DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)"
+        },
+        {
+          "start": 2444,
+          "end": 2444,
+          "text": "top_builddir = @top_builddir@"
+        }
+      ]
+    }
+  },
+  "object_rules": [
+    {
+      "target": "bindtextdom.lo",
+      "line": 3247,
+      "parent_prerequisites": [
+        "../config.h"
+      ],
+      "all_prerequisites": [
+        "../config.h",
+        "$(srcdir)/gettextP.h",
+        "libgnuintl.h",
+        "$(srcdir)/gmo.h",
+        "$(srcdir)/loadinfo.h"
+      ]
+    },
+    {
+      "target": "dcgettext.lo",
+      "line": 3248,
+      "parent_prerequisites": [
+        "../config.h"
+      ],
+      "all_prerequisites": [
+        "../config.h",
+        "$(srcdir)/gettextP.h",
+        "libgnuintl.h",
+        "$(srcdir)/gmo.h",
+        "$(srcdir)/loadinfo.h"
+      ]
+    },
+    {
+      "target": "dgettext.lo",
+      "line": 3249,
+      "parent_prerequisites": [
+        "../config.h"
+      ],
+      "all_prerequisites": [
+        "../config.h",
+        "$(srcdir)/gettextP.h",
+        "libgnuintl.h",
+        "$(srcdir)/gmo.h",
+        "$(srcdir)/loadinfo.h"
+      ]
+    },
+    {
+      "target": "gettext.lo",
+      "line": 3250,
+      "parent_prerequisites": [
+        "../config.h"
+      ],
+      "all_prerequisites": [
+        "../config.h",
+        "$(srcdir)/gettextP.h",
+        "libgnuintl.h",
+        "$(srcdir)/gmo.h",
+        "$(srcdir)/loadinfo.h"
+      ]
+    },
+    {
+      "target": "finddomain.lo",
+      "line": 3251,
+      "parent_prerequisites": [
+        "../config.h"
+      ],
+      "all_prerequisites": [
+        "../config.h",
+        "$(srcdir)/gettextP.h",
+        "libgnuintl.h",
+        "$(srcdir)/gmo.h",
+        "$(srcdir)/loadinfo.h"
+      ]
+    },
+    {
+      "target": "hash-string.lo",
+      "line": 3252,
+      "parent_prerequisites": [
+        "../config.h"
+      ],
+      "all_prerequisites": [
+        "../config.h",
+        "$(srcdir)/hash-string.h"
+      ]
+    },
+    {
+      "target": "loadmsgcat.lo",
+      "line": 3253,
+      "parent_prerequisites": [
+        "../config.h"
+      ],
+      "all_prerequisites": [
+        "../config.h",
+        "$(srcdir)/gettextP.h",
+        "libgnuintl.h",
+        "$(srcdir)/gmo.h",
+        "$(srcdir)/loadinfo.h",
+        "$(srcdir)/hash-string.h",
+        "$(srcdir)/plural-exp.h"
+      ]
+    },
+    {
+      "target": "localealias.lo",
+      "line": 3254,
+      "parent_prerequisites": [
+        "../config.h"
+      ],
+      "all_prerequisites": [
+        "../config.h",
+        "$(srcdir)/gettextP.h",
+        "libgnuintl.h",
+        "$(srcdir)/gmo.h",
+        "$(srcdir)/loadinfo.h"
+      ]
+    },
+    {
+      "target": "textdomain.lo",
+      "line": 3255,
+      "parent_prerequisites": [
+        "../config.h"
+      ],
+      "all_prerequisites": [
+        "../config.h",
+        "$(srcdir)/gettextP.h",
+        "libgnuintl.h",
+        "$(srcdir)/gmo.h",
+        "$(srcdir)/loadinfo.h"
+      ]
+    },
+    {
+      "target": "l10nflist.lo",
+      "line": 3256,
+      "parent_prerequisites": [
+        "../config.h"
+      ],
+      "all_prerequisites": [
+        "../config.h",
+        "$(srcdir)/loadinfo.h"
+      ]
+    },
+    {
+      "target": "explodename.lo",
+      "line": 3257,
+      "parent_prerequisites": [
+        "../config.h"
+      ],
+      "all_prerequisites": [
+        "../config.h",
+        "$(srcdir)/loadinfo.h"
+      ]
+    },
+    {
+      "target": "dcigettext.lo",
+      "line": 3258,
+      "parent_prerequisites": [
+        "../config.h"
+      ],
+      "all_prerequisites": [
+        "../config.h",
+        "$(srcdir)/gettextP.h",
+        "libgnuintl.h",
+        "$(srcdir)/gmo.h",
+        "$(srcdir)/loadinfo.h",
+        "$(srcdir)/plural-exp.h",
+        "$(srcdir)/hash-string.h",
+        "$(srcdir)/eval-plural.h"
+      ]
+    },
+    {
+      "target": "dcngettext.lo",
+      "line": 3259,
+      "parent_prerequisites": [
+        "../config.h"
+      ],
+      "all_prerequisites": [
+        "../config.h",
+        "$(srcdir)/gettextP.h",
+        "libgnuintl.h",
+        "$(srcdir)/gmo.h",
+        "$(srcdir)/loadinfo.h"
+      ]
+    },
+    {
+      "target": "dngettext.lo",
+      "line": 3260,
+      "parent_prerequisites": [
+        "../config.h"
+      ],
+      "all_prerequisites": [
+        "../config.h",
+        "$(srcdir)/gettextP.h",
+        "libgnuintl.h",
+        "$(srcdir)/gmo.h",
+        "$(srcdir)/loadinfo.h"
+      ]
+    },
+    {
+      "target": "ngettext.lo",
+      "line": 3261,
+      "parent_prerequisites": [
+        "../config.h"
+      ],
+      "all_prerequisites": [
+        "../config.h",
+        "$(srcdir)/gettextP.h",
+        "libgnuintl.h",
+        "$(srcdir)/gmo.h",
+        "$(srcdir)/loadinfo.h"
+      ]
+    },
+    {
+      "target": "plural.lo",
+      "line": 3262,
+      "parent_prerequisites": [
+        "../config.h"
+      ],
+      "all_prerequisites": [
+        "../config.h",
+        "$(srcdir)/plural-exp.h",
+        "$(PLURAL_DEPS)"
+      ]
+    },
+    {
+      "target": "plural-exp.lo",
+      "line": 3263,
+      "parent_prerequisites": [
+        "../config.h"
+      ],
+      "all_prerequisites": [
+        "../config.h",
+        "$(srcdir)/plural-exp.h"
+      ]
+    },
+    {
+      "target": "langprefs.lo",
+      "line": 3264,
+      "parent_prerequisites": [
+        "../config.h"
+      ],
+      "all_prerequisites": [
+        "../config.h",
+        "$(srcdir)/gettextP.h",
+        "libgnuintl.h",
+        "$(srcdir)/gmo.h",
+        "$(srcdir)/loadinfo.h"
+      ]
+    },
+    {
+      "target": "log.lo",
+      "line": 3265,
+      "parent_prerequisites": [
+        "../config.h"
+      ],
+      "all_prerequisites": [
+        "../config.h",
+        "$(srcdir)/gettextP.h",
+        "libgnuintl.h",
+        "$(srcdir)/gmo.h",
+        "$(srcdir)/loadinfo.h"
+      ]
+    },
+    {
+      "target": "printf.lo",
+      "line": 3266,
+      "parent_prerequisites": [
+        "../config.h"
+      ],
+      "all_prerequisites": [
+        "../config.h"
+      ]
+    },
+    {
+      "target": "setlocale.lo",
+      "line": 3267,
+      "parent_prerequisites": [
+        "../config.h"
+      ],
+      "all_prerequisites": [
+        "../config.h",
+        "$(srcdir)/gettextP.h",
+        "libgnuintl.h",
+        "$(srcdir)/gmo.h",
+        "$(srcdir)/loadinfo.h"
+      ]
+    },
+    {
+      "target": "version.lo",
+      "line": 3268,
+      "parent_prerequisites": [
+        "../config.h"
+      ],
+      "all_prerequisites": [
+        "../config.h",
+        "libgnuintl.h"
+      ]
+    },
+    {
+      "target": "osdep.lo",
+      "line": 3269,
+      "parent_prerequisites": [
+        "../config.h"
+      ],
+      "all_prerequisites": [
+        "../config.h",
+        "$(srcdir)/intl-exports.c",
+        "$(srcdir)/os2compat.c"
+      ]
+    },
+    {
+      "target": "intl-compat.lo",
+      "line": 3270,
+      "parent_prerequisites": [
+        "../config.h"
+      ],
+      "all_prerequisites": [
+        "../config.h",
+        "$(srcdir)/gettextP.h",
+        "libgnuintl.h",
+        "$(srcdir)/gmo.h",
+        "$(srcdir)/loadinfo.h"
+      ]
+    },
+    {
+      "target": "compat.lo",
+      "line": 3271,
+      "parent_prerequisites": [
+        "../config.h"
+      ],
+      "all_prerequisites": [
+        "../config.h",
+        "libgnuintl.h"
+      ]
+    }
+  ],
+  "bare_parent_prerequisites": [
+    "../config.h"
+  ],
+  "source_layout": "Standalone gettext-runtime/intl/configure generates config.h in its build root; Makefile.in retains parent-relative config.h prerequisites for all 25 explicit .lo rules.",
+  "new_build_directory": "PHASE_DIR/intl",
+  "new_header_alias": {
+    "path": "PHASE_DIR/config.h",
+    "relative_target": "intl/config.h",
+    "generated_target_hash_verified": true
+  },
+  "gnulib_config_header": "From PHASE_DIR/intl/gnulib-lib, ../config.h refers directly to PHASE_DIR/intl/config.h.",
+  "other_parent_references": "Remaining parent references are source-root anchored auxiliary/m4 inputs or dist/maintainer rules, not extra generated parent-header prerequisites of explicit .lo targets.",
+  "observed_missing_prerequisite_spelling_disclosed": false,
+  "causal_confidence": "source-proven topology defect consistent with the observed undisclosed relative prerequisite; exact failing spelling remains unobserved",
+  "source_executed_locally": false,
+  "source_modified": false,
+  "permissions_expanded": false
+}

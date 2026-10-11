@@ -269,7 +269,7 @@ class DiagnosticTests(unittest.TestCase):
         receipt=json.loads((HERE/'review-receipt.json').read_text())
         for name in ('build_diagnostics.py','build-diagnostic-catalog.json','test_build_diagnostics.py'):
             self.assertEqual(receipt['sha256'][name],hashlib.sha256((HERE/name).read_bytes()).hexdigest())
-        self.assertEqual(receipt['candidate_revision'],9)
+        self.assertEqual(receipt['candidate_revision'],10)
         self.assertNotIn('approval',receipt)
         for gate in ('execution_approved','independent_review_passed','temporary_linker_adhoc_signing_approved','install_name_linker_assignment_approved'):
             self.assertIs(receipt[gate],False)

@@ -17,7 +17,7 @@ import tempfile
 import time
 sys.dont_write_bytecode=True
 SCOPE='pdf-foundation-prerequisites-v1'
-CANDIDATE_REVISION=9
+CANDIDATE_REVISION=10
 BRANCH='engine-pdf-foundation-v1-ci'
 WORKFLOW='.github/workflows/engine-pdf-foundation-v1-macos.yml'
 INPUT_HASHES={
@@ -66,6 +66,17 @@ def digest(path):
     with p.open('rb') as f:
         for part in iter(lambda:f.read(1024**2),b''):h.update(part)
     return h.hexdigest()
+
+def bind_gettext_config_header(phase):
+    """Satisfy the pinned ../config.h prerequisite entirely inside its phase."""
+    build=phase/'intl';source=build/'config.h';alias=phase/'config.h'
+    need(phase.is_dir() and not phase.is_symlink() and build.is_dir() and not build.is_symlink())
+    need(build.resolve().parent==phase.resolve() and source.is_file() and not source.is_symlink())
+    need(0<source.stat().st_size<=1024**2 and not alias.exists() and not alias.is_symlink())
+    header_sha256=digest(source);alias.symlink_to('intl/config.h')
+    need(alias.resolve()==source.resolve() and digest(alias.resolve())==header_sha256)
+    return {'phase':'gettext-config-header-binding','status':'passed','prerequisite':'../config.h',
+            'binding':'in_phase_relative_symlink','config_header_sha256':header_sha256,'config_header_bytes':source.stat().st_size}
 
 def validate_receipt(root,helpers,receipt,execute):
     need(receipt.get('scope')==SCOPE and receipt.get('schema')==1 and receipt.get('candidate_revision')==CANDIDATE_REVISION)
@@ -145,12 +156,15 @@ class Lane:
         p=self.phases/name;p.mkdir(mode=0o700,exist_ok=True)
         for n in ('home','tmp'):(p/n).mkdir(mode=0o700,exist_ok=True)
         return p
-    def run(self,name,command,*,directory=None,timeout=60,expected=(0,),extra_env=None):
-        self.phase=name;self.checkpoint();p=directory or self.directory(name)
+    def run(self,name,command,*,directory=None,timeout=60,expected=(0,),extra_env=None,subdirectory=None):
+        self.phase=name;self.checkpoint();p=directory or self.directory(name);cwd=p
+        if subdirectory is not None:
+            need(subdirectory=='intl' and p==self.phases/'gettext-build' and name in ('gettext-configure','gettext-headers','gettext-gnulib-build','gettext-libintl-build'))
+            cwd=p/'intl';need(cwd.is_dir() and not cwd.is_symlink() and cwd.resolve().parent==p.resolve())
         env=dict(self.env,HOME=str(p/'home'),TMPDIR=str(p/'tmp'));env.update(extra_env or {})
         wrapped=['/usr/bin/sandbox-exec','-D','PHASE_DIR='+str(p),'-D','IMMUTABLE_DIR='+str(self.immutable),
                  '-D','CONTROL_DIR='+str(self.root),'-f',str(self.helpers/'offline.sb'),*map(str,command)]
-        record,out,err=self.bounds.run(wrapped,cwd=p,env=env,work=self.work,deadline=min(self.deadline,time.monotonic()+timeout),
+        record,out,err=self.bounds.run(wrapped,cwd=cwd,env=env,work=self.work,deadline=min(self.deadline,time.monotonic()+timeout),
             output_remaining=8*1024**2-self.output,expected_codes=expected)
         self.output+=record['stdout_bytes']+record['stderr_bytes'];record={'phase':name,**record}
         if record['status']=='failed' and name in ('pkgconf-build','pcre2-build','gettext-headers','gettext-gnulib-build','gettext-libintl-build'):
@@ -160,7 +174,7 @@ class Lane:
             record['required_api_mentions']=required_api_mentions(out+err)
         if record['status']=='failed' and name in ('sdk-probe-run','provider-probe-run'):
             record['fixture_failure']=FIXTURE_EXITS.get(record['exit_code'],'unclassified_fixture_exit')
-        if record['status']=='failed':record['private_diagnostics']=[self.bounds.private_file_record(p/'config.log','config_log'),self.bounds.private_file_record(p/'out/meson-logs/meson-log.txt','meson_log')]
+        if record['status']=='failed':record['private_diagnostics']=[self.bounds.private_file_record(cwd/'config.log','config_log'),self.bounds.private_file_record(cwd/'out/meson-logs/meson-log.txt','meson_log')]
         self.steps.append(record);print(json.dumps(record,sort_keys=True),flush=True)
         if record['status']!='passed':raise PhaseError(record)
         return out,err,record
@@ -270,13 +284,14 @@ class Lane:
         contract=json.loads((self.helpers/'provider-contract.json').read_text());self.symbols('pcre2',self.provider/'lib/libpcre2-8.0.dylib',contract['glib_regex_pcre2_exports'])
         out,err,_=self.run('pcre2-pkgconf-version',[toolbin/'pkgconf','--modversion','libpcre2-8'],timeout=10);need(out.strip()==b'10.49' and not err)
         # Real standalone libintl, with source release layout and parser mtimes unchanged.
-        p=self.directory('gettext-build')
-        self.run('gettext-configure',['/bin/sh',trees['gettext']/'gettext-runtime/intl/configure','--prefix='+str(self.provider),'--with-included-libintl','--enable-nls','--enable-shared','--disable-static','--enable-threads=posix','--without-libintl-prefix','--without-libiconv-prefix'],directory=p,timeout=110)
-        self.run('gettext-headers',['/usr/bin/make','libintl.h','libgnuintl.h'],directory=p,timeout=20)
-        self.run('gettext-gnulib-build',['/usr/bin/make','-C','gnulib-lib','-j2','all'],directory=p,timeout=140)
-        self.run('gettext-libintl-build',['/usr/bin/make','-j2','libintl.la'],directory=p,timeout=90)
-        library=p/'.libs/libintl.8.dylib';self.inspect('libintl',library)
-        self.freeze(library,self.provider/'lib/libintl.8.dylib');self.alias(self.provider/'lib/libintl.dylib','libintl.8.dylib');self.freeze(p/'libintl.h',self.provider/'include/libintl.h')
+        p=self.directory('gettext-build');build=p/'intl';build.mkdir(mode=0o700)
+        self.run('gettext-configure',['/bin/sh',trees['gettext']/'gettext-runtime/intl/configure','--prefix='+str(self.provider),'--with-included-libintl','--enable-nls','--enable-shared','--disable-static','--enable-threads=posix','--without-libintl-prefix','--without-libiconv-prefix'],directory=p,subdirectory='intl',timeout=110)
+        print(json.dumps(bind_gettext_config_header(p),sort_keys=True),flush=True)
+        self.run('gettext-headers',['/usr/bin/make','libintl.h','libgnuintl.h'],directory=p,subdirectory='intl',timeout=20)
+        self.run('gettext-gnulib-build',['/usr/bin/make','-C','gnulib-lib','-j2','all'],directory=p,subdirectory='intl',timeout=140)
+        self.run('gettext-libintl-build',['/usr/bin/make','-j2','libintl.la'],directory=p,subdirectory='intl',timeout=90)
+        library=build/'.libs/libintl.8.dylib';self.inspect('libintl',library)
+        self.freeze(library,self.provider/'lib/libintl.8.dylib');self.alias(self.provider/'lib/libintl.dylib','libintl.8.dylib');self.freeze(build/'libintl.h',self.provider/'include/libintl.h')
         self.symbols('libintl',self.provider/'lib/libintl.8.dylib',contract['libintl_minimum_exports'])
         p=self.directory('provider-probe');fixture=p/'provider-probe'
         self.run('provider-probe-compile',[self.tools['clang'],*cflags,'-I'+str(self.provider/'include'),self.helpers/'provider_probe.c',self.provider/'lib/libpcre2-8.0.dylib',self.provider/'lib/libintl.8.dylib','-o',fixture],directory=p,timeout=30)

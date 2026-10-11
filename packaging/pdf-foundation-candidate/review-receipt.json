@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "scope": "pdf-foundation-prerequisites-v1",
-  "review_status": "independent-exact-tool-dispatch-review-approved",
+  "review_status": "independent-exact-contained-gettext-layout-review-approved",
   "execution_approved": true,
   "independent_review_passed": true,
   "temporary_linker_adhoc_signing_approved": true,
@@ -34,7 +34,7 @@
     "cache_used": false
   },
   "sha256": {
-    "README.md": "ce6f019f7192d5906b5f529be3f0c1a81b8e3ae84632f78300eded41e7d27366",
+    "README.md": "7fb46b082042309577dfd834239c1ecc1bf3f7b64bb8d40c44308229b31b69a9",
     "archive_tools.py": "d5273a166c7e3f3485cf8d0fd5f63551dee1b38a1cda3548f75e19553814a146",
     "bounds.py": "325f4f3811ce969eb90ae6e7ef7426a6af69fd875776a290027556bdb2b5349f",
     "build-diagnostic-catalog.json": "714b19b45f5e9300177e1be09e3e5ec3596e5e7369480538e368c5a8247a053b",
@@ -43,6 +43,7 @@
     "canary.py": "12c74f2fcb5bdf872aa0b09fa6c448e734ca7a230a14fc998dbf60f3331197f2",
     "canonical-source-provenance.json": "397c31a051fe17df1263a15d247ae7e24d6db63665be8305031318481dce568a",
     "disclosure-regression-fixtures.json": "567c3a486b541eb98da52bbb1abb3c7fac020fdaeb1e2ebbb7fdac2a56d18ebe",
+    "gettext-layout-contract.json": "6bbe7bf309f4164a66f99bcd9bdfb7d83cc1d4aa8a776f87c9761378a4807e67",
     "input-lock.json": "d6d14555c552cde2a390ed895a9adcd5a58c458e0e8a06cf3356710a468524bd",
     "input_diagnostics.py": "dc99c6f013af276d2c01af91ef5eb332af5984f4dc5b378748d2d1ae125642b1",
     "members/gettext.json": "ffaf3c8ff6702d9fff652114204d251c1bd76a762018533619d7e449b0a77c6f",
@@ -152,26 +153,27 @@
     "provider-contract.json": "d9734c140167ed26226e9bb95963d285eba9653733ab6e4b97d8db8b74d61862",
     "provider_probe.c": "4ba95e36b2c925dbb08027dfaf1ea12f9a608512d8d947e8400e07e3927845cc",
     "sdk_probe.c": "bb5c817169a9983ba05e64b282e61b6fcb7aa3ef9944ab3d08ed42d15f0418fa",
-    "stage.py": "afa4dfe1b4c687334d33e32565d01a6cd5c6d66d8564b5fee5a1e06e3ea5b4ff",
-    "test_build_diagnostics.py": "b709aa0a8e21bc5abc093bd5e8bdf73e89d83d4fb11021f8f5a3c129946408f9",
-    "test_definition_suffix.py": "d688edca2fa34882eb7ae1f32ddf3e17149f71c187541841ca1367199201ad2b",
-    "test_disclosure_structures.py": "d7c18afc7e1839708a3125771900090b19a28125c885b98407b8da6b108a5ebe",
+    "stage.py": "b7c6ba8ec104b70863761f211a18fea9e72e1227813e8e568aabe69f00b4e61b",
+    "test_build_diagnostics.py": "9c52a4134bb4ebbb065f31418e18a1fc887b8e16cb11391c14dd010062bc3b38",
+    "test_definition_suffix.py": "b141a074bdac2904bc1865e90eb8599c66ab4127fc0dd4c5bb21553964e3ac13",
+    "test_disclosure_structures.py": "17c04fcbbd7c291c9d25d989c3e5ab837f87a896b9226217b58ad68a0c443e84",
+    "test_gettext_layout.py": "2b2366fb57c2b80708ec0ab503928ad80a3a01539669424f23f2e1705d11474a",
     "test_helpers.py": "8d971d7027c955b298d7b6d0e24d6b98f94998e8255f8f084968e51bf54c168d",
-    "test_input_diagnostics.py": "c071412a0e0b0f20b0d7d0184093c50945aac0f66b1f4d9a49dd9a9363bbe3fd",
-    "test_stderr_excerpts.py": "707f7ecb2571888fb7f381aefbea65975630ff16f0a1ed62be46f420e14d1e9f",
+    "test_input_diagnostics.py": "a8085cd802fd3cf45fadd2c0e8d7a73179eec2797ad06901fa765b16aa8d39f9",
+    "test_stderr_excerpts.py": "a63e360b26e3ebc80bb3d0ca792c419dc0b06e63389cf68e51dde59f7031cd23",
     "test_tool_dispatch.py": "75d60bff311edc8593ec951dd80cbfb65e0c1062a76afce664d39fb300045e3a",
     "tool-dispatch-provenance.json": "771c8961529d26a8b902e51afa9bcd351b890b764d099395fa67d7543416f7e5",
     "utf8-contract.json": "d790625d7ddb5aa7a55ab052a126eedee780cade41f93b7b21359718f6c4c44c"
   },
-  "candidate_revision": 9,
-  "base_commit": "f4377a3646eae8139e6592529483e4059202d181",
-  "base_tree": "61d3640376f24f3488fcdc031daaaa84b9c3774e",
+  "candidate_revision": 10,
+  "base_commit": "eeee4308a79e5d0b7fc95d1eac4fdb1bea60671a",
+  "base_tree": "dd550b15319cd25dd64ef6b61c0127eb3354c457",
   "approval": {
-    "approved_scope": "Exact validated-tool invocation-spelling correction with resolved-target hashing retained and the existing sanitized-stderr diagnostic for the credential-free public-source foundation build, capped at 6 KiB excerpt and 16 KiB record; unchanged commands, inputs, profiles, budgets, targets and temporary compiler/linker effects. Pattern-based redaction is not a general secret-detection guarantee. Normal secret scanning remains required; any further rejection stops publication for diagnosis.",
-    "reviewed_manifest_sha256": "8a48ea0e6692677b2b008d6df4597d198b6f42d345bc2666a72e0cdd2ed41a49",
-    "independent_review_sha256": "d14266954cc58281c6de9a93ac09ca3df6e133b71f520db2ca5109bc53ed4884",
+    "approved_scope": "Exact in-phase standalone gettext layout and contained relative generated config.h alias with the existing sanitized-stderr diagnostic for the credential-free public-source foundation build, capped at 6 KiB excerpt and 16 KiB record; unchanged commands, inputs, profiles, budgets, targets and temporary compiler/linker effects. Pattern-based redaction is not a general secret-detection guarantee. Normal secret scanning remains required; any further rejection stops publication for diagnosis.",
+    "reviewed_manifest_sha256": "c58b6423e72aadb2dd0f7fd495ae747392c672178e39e457a8f221eea53ad215",
+    "independent_review_sha256": "e3632e26cb63694b38924f83b6d21ce45587b162bbe4bf3f67ee6bec84d5f59f",
     "approved_by": "approved project-task scope",
     "reviewer": "independent exact-input review",
-    "approved_at_utc": "2026-10-11T11:53:24Z"
+    "approved_at_utc": "2026-10-11T12:16:23Z"
   }
 }
