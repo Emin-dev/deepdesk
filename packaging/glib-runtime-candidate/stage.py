@@ -32,7 +32,7 @@ def load(name, path):
 foundation = load('foundation_stage', HERE / 'foundation_stage.py')
 safe_reads = load('glib_safe_reads', HERE / 'safe_reads.py')
 need, digest = foundation.need, foundation.digest
-SCOPE = 'glib-runtime-symbol-parser-v4'
+SCOPE = 'glib-runtime-scope-contract-v5'
 BRANCH = 'engine-glib-runtime-v1-ci'
 WORKFLOW = '.github/workflows/engine-glib-runtime-v1-macos.yml'
 INPUT_HASHES = dict(foundation.INPUT_HASHES,
@@ -96,9 +96,25 @@ def verify_python_commands(data, python, visibility_generator):
     return {'isolated_python_commands': python_commands, 'visibility_generator_commands': found_visibility}
 
 
+def validate_input_lock(lock):
+    """One deterministic contract for both static review and actual input entry."""
+    need(type(lock) is dict and type(lock.get('schema')) is int and lock['schema'] == 1)
+    need(lock.get('scope') == SCOPE and lock.get('source_changes_allowed') is False)
+    inputs = lock.get('inputs')
+    need(type(inputs) is list and len(inputs) == 10 and all(type(pin) is dict for pin in inputs))
+    need(all(type(pin.get('id')) is str and type(pin.get('sha256')) is str for pin in inputs))
+    need({pin['id']: pin['sha256'] for pin in inputs} == INPUT_HASHES)
+    for field, expected in (('total_compressed_bytes', 77580242), ('total_expanded_bytes', 426518901)):
+        need(type(lock.get(field)) is int and lock[field] == expected)
+    for field, total in (('size', 'total_compressed_bytes'), ('expanded_bytes', 'total_expanded_bytes')):
+        need(all(type(pin.get(field)) is int and pin[field] >= 0 for pin in inputs))
+        need(sum(pin[field] for pin in inputs) == lock[total])
+    return lock
+
+
 def validate(root, receipt, execute=False):
     need(receipt.get('schema') == 1 and receipt.get('scope') == SCOPE)
-    need(receipt.get('candidate_revision') == 4 and receipt.get('destination_branch') == BRANCH)
+    need(receipt.get('candidate_revision') == 5 and receipt.get('destination_branch') == BRANCH)
     need(receipt.get('input_sha256') == INPUT_HASHES and receipt.get('false_gates') == FALSE_GATES)
     need(receipt.get('source_changes_allowed') is False)
     need(not any(p.is_symlink() for p in HERE.rglob('*')))
@@ -118,6 +134,7 @@ def validate(root, receipt, execute=False):
         for key in ('explicit_codesign_allowed', 'personal_signing_allowed', 'source_patch_allowed',
                     'paid_runner_allowed', 'network_during_build_allowed', 'artifact_upload_allowed'):
             need(receipt.get(key) is False)
+    return validate_input_lock(bounded_json(HERE / 'input-lock.json'))
 
 
 class Lane(foundation.Lane):
@@ -494,7 +511,7 @@ def main():
         root = args.repository.resolve(strict=True)
         need(HERE == root / 'packaging/glib-runtime-candidate')
         receipt = bounded_json(HERE / 'review-receipt.json')
-        validate(root, receipt, not args.validate_candidate)
+        lock = validate(root, receipt, not args.validate_candidate)
         if args.validate_candidate:
             print(json.dumps({'status': 'static_candidate_integrity_passed', 'execution_approved': receipt['execution_approved'], 'native_execution': False}))
             return 0
@@ -509,10 +526,6 @@ def main():
         need(Path('/usr/bin/sandbox-exec').is_file() and str(Path(sys.executable).resolve()).startswith(('/Applications/', '/Library/Developer/', '/usr/bin/')))
         modules = (load('glib_archive_tools', HERE / 'glib_archive_tools.py'), load('glib_bounds', HERE / 'glib_bounds.py'), load('glib_native_checks', HERE / 'glib_native_checks.py'))
         diagnostics = load('glib_input_diagnostics', HERE / 'glib_input_diagnostics.py')
-        lock = bounded_json(HERE / 'input-lock.json')
-        need(lock['scope'] == SCOPE and lock['source_changes_allowed'] is False)
-        need(len(lock['inputs']) == 10 and {x['id']: x['sha256'] for x in lock['inputs']} == INPUT_HASHES)
-        need(lock['total_compressed_bytes'] == 77580242 and lock['total_expanded_bytes'] == 426518901)
         temp = Path(os.environ['RUNNER_TEMP'])
         need(temp.is_dir() and shutil.disk_usage(temp).free >= 6 * 1024**3)
         def interrupted(signum, frame):

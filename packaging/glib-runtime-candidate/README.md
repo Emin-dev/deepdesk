@@ -1,6 +1,14 @@
-# Inactive GLib symbol-parser correction v4
+# Inactive GLib scope-contract correction v5
 
 This receipt-closed candidate preserves the passed foundation, adds official source GNU Make 4.4.1 and GNU libiconv 1.19, rebuilds a separate iconv-enabled GNU libintl, then resumes the reviewed gettext-tools/GLib/NLS/native checks. It has not run on macOS. No downloaded source, configure script, compiler input, wheel or native payload has been executed during preparation. Independent review and exact root approval are required before activation.
+
+## Narrow v5 metadata correction
+
+Published v4 commit `1d2a3662a5c92498e0b8966bb1274fcd1fce66b0`, run [38154003455](https://github.com/Emin-dev/deepdesk/actions/runs/38154003455), stopped before inputs in the broad host-and-destination guard phase. The log SHA-256 is `f01c470550005bfed2bb0992ddad12373a0ae8238fc5a7f246f84f7f1bc68b2e`. It does not identify the first failing predicate. Independently, the exact published stage used the v4 scope while the input lock retained the v3 scope, making its later equality check impossible on any otherwise valid host. The earlier static validator returned before checking that invariant.
+
+V5 aligns stage, receipt and lock scope labels. A single deterministic `validate_input_lock` now checks scope, schema, source-change prohibition, exact input count/hash set and declared byte totals in both static validation and actual main execution. Each declared total must also equal the sum of its unchanged pin fields. Main uses that same validated lock instead of a later duplicate check. All individual pin objects, source/member hashes, host/public-runner/resource guards, commands, sandbox and runtime assertions remain unchanged. Malformed labels/counts/hashes/totals fail offline, and a mocked valid-host main-flow regression reaches the first input-read boundary, then deliberately stops without downloading or executing any payload. A wrong-scope mutation cannot reach that boundary.
+
+The earlier symbol fix and all six required exports remain. No macOS success is claimed by the inert main-flow test.
 
 ## Narrow v4 correction
 

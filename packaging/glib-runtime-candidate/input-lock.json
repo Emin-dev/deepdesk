@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "scope": "glib-runtime-iconv-correction-v3",
+  "scope": "glib-runtime-scope-contract-v5",
   "source_changes_allowed": false,
   "inputs": [
     {
