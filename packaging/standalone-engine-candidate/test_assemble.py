@@ -16,7 +16,7 @@ SPEC = importlib.util.spec_from_file_location("candidate_assemble", HERE / "asse
 assert SPEC and SPEC.loader
 assemble = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(assemble)
-WRAPPER = HERE.parent / "engine_entry.py"
+WRAPPER = HERE / "engine_entry.py"
 
 
 def synthetic_prefix(path: Path) -> Path:

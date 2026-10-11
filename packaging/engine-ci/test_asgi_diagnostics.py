@@ -72,7 +72,7 @@ class DiagnosticTests(unittest.TestCase):
         value={**self.report(),'source_category':'installed-package',
                'source_file':'local_deep_research/web/fastapi_app.py','source_line':272}
         self.assertEqual(diag.validate(value),value)
-        self.assertEqual(len(diag.SOURCE_FILES['installed-package']),1099)
+        self.assertEqual(len(diag.SOURCE_FILES['installed-package']),1100)
         self.assertEqual(len(diag.SOURCE_FILES['stdlib']),1090)
 
     def test_private_context_stays_local(self):

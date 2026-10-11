@@ -1,7 +1,8 @@
 """Proposed full-prefix standalone core relocation lane; review gate closed.
 
 Retains every installed payload including known native/export blockers. No
-PyInstaller/hooks, native dependency build, model, query, release or upload.
+PyInstaller/hooks, model, query, release or upload. The separately gated native
+libmagic build retains its full install and exact Python binding overlay.
 """
 from __future__ import annotations
 import argparse
@@ -17,12 +18,15 @@ from pathlib import Path, PurePosixPath
 import platform
 import re
 import shutil
+import sys
 import tempfile
 import tarfile
 import time
 import zipfile
 import urllib.parse
 import urllib.request
+
+sys.dont_write_bytecode = True
 
 
 def require(ok, message):
@@ -213,8 +217,8 @@ def main():
         'packaging/standalone-engine-candidate/relocate_check.py',
         'packaging/standalone-engine-candidate/native_audit.py',
         'packaging/standalone-engine-candidate/standalone-offline.sb',
-        'packaging/standalone-engine-candidate/standalone-core-macos.yml.template',
-        '.github/workflows/engine-standalone-core-macos.yml', 'packaging/engine-ci/bounded_runtime.py',
+        'packaging/standalone-engine-candidate/standalone-libmagic-macos.yml.template',
+        '.github/workflows/engine-standalone-libmagic-macos.yml', 'packaging/engine-ci/bounded_runtime.py',
         'packaging/engine-ci/runtime_checks.py', 'packaging/engine-ci/smoke_asgi_authenticated.py',
         'packaging/engine-ci/asgi_diagnostics.py', 'packaging/engine-ci/asgi-diagnostic-source-allowlist.json',
         'packaging/engine-ci/managed_policy_checks.py', 'packaging/engine-ci/test_managed_policy_checks.py',
@@ -232,8 +236,11 @@ def main():
         relative = PurePosixPath(filename)
         require(not relative.is_absolute() and '..' not in relative.parts, 'Unsafe reviewed path')
         require(digest(root / filename) == expected, 'Reviewed input changed: ' + filename)
-    require(digest(root / '.github/workflows/engine-standalone-core-macos.yml') ==
-            digest(root / 'packaging/standalone-engine-candidate/standalone-core-macos.yml.template'), 'Deployed workflow differs')
+    require(digest(root / '.github/workflows/engine-standalone-libmagic-macos.yml') ==
+            digest(root / 'packaging/standalone-engine-candidate/standalone-libmagic-macos.yml.template'), 'Deployed workflow differs')
+    libmagic = load_helper(root / 'packaging/standalone-engine-candidate/libmagic_integration.py',
+                           'deepdesk_bundled_magic_integration')
+    libmagic.validate_gate(receipt, root)
     require(platform.system() == 'Darwin' and platform.machine() == 'arm64', 'macOS arm64 only')
     require(Path('/usr/bin/sandbox-exec').is_file(), 'Required kernel sandbox absent')
     helpers = root / 'packaging/engine-ci'
@@ -298,6 +305,9 @@ def main():
                         'Unreviewed executable startup file')
             if item['kind'] == 'wheel':
                 shutil.copyfile(path, wheels / path.name)
+        pilot = load_helper(bundle_helpers / 'libmagic-pilot/stage.py', 'deepdesk_libmagic_source_controls')
+        native_archive = downloads / 'file-5.48.tar.gz'
+        pilot.download(native_archive, min(deadline, time.monotonic() + 60))
         stage_a.extract_regular_tar(pyarchive, immutable / 'python-root', allow_internal_links=True)
         python = immutable / 'python-root/python/bin/python3.12'
         require(digest(python) == '6e4dac0c7c1761a63c5a603ef56397c8d3d8fa00cf8dd65fb3e6a4476b63af4b',
@@ -312,7 +322,8 @@ def main():
         readonly_env = work / 'not-yet-sealed'
         relocated = False
         runtime_source = work / 'standalone-prefix'
-        def run(command, *, cwd=work, timeout=180, writable=work):
+        def run(command, *, cwd=work, timeout=180, writable=work, fixture_executable=None):
+            require(command and str(command[0]) != '/usr/bin/sandbox-exec', 'Nested stage sandbox invocation forbidden')
             require(writable.resolve().is_relative_to(work), 'Sandbox write root must remain inside the fresh stage work tree')
             sandbox = ['/usr/bin/sandbox-exec', '-D', 'WORK_DIR=' + str(writable),
                 '-D', 'IMMUTABLE_DIR=' + str(immutable), '-D', 'READONLY_ENV=' + str(readonly_env)]
@@ -323,6 +334,11 @@ def main():
                     'ORIGINAL_RUNTIME':runtime_source,'BUILD_ENV':work / 'build-env',
                     'SOURCE_TREE':work / 'upstream-source'}.items():
                     sandbox += ['-D',key + '=' + str(value)]
+            if fixture_executable is not None:
+                require(relocated and fixture_executable == runtime_env / libmagic.NATIVE_RELATIVE /
+                        'libexec/deepdesk-libmagic-smoke', 'Unexpected moved native fixture executable')
+                profile = bundle_helpers / 'libmagic-moved-no-exec.sb'
+                sandbox += ['-D','FIXTURE_PATH=' + str(fixture_executable)]
             command = [*sandbox,'-f',str(profile),*map(str,command)]
             return bounded.run_bounded(command, cwd=cwd, env=env, work=work, timeout=min(timeout,budget()))
         netprobe = "import errno,socket\ntry:\n s=socket.socket();s.settimeout(1);r=s.connect_ex(('192.0.2.1',9));s.close()\nexcept OSError as e:\n r=e.errno\nassert r in (errno.EPERM,errno.EACCES),r\n"
@@ -412,8 +428,26 @@ def main():
         readonly_env = runtime_env
         run([python,'-I','-c',writeprobe,runtime_env / 'must-not-create'],timeout=10)
         run([runtime_python,'-I','-m','pip','--isolated','check'])
+        native_work = work / 'libmagic-build'
+        # Trusted first-party stdlib orchestration only. Every downloaded/native
+        # child receives one pilot profile; nesting sandbox-exec is not supported.
+        native_build = libmagic.run_measured(lambda: bounded.run_bounded([
+            '/usr/bin/python3','-I','-S','-B',bundle_helpers / 'native_libmagic_stage.py',
+            '--repository',root,'--review-receipt',args.review_receipt.resolve(),
+            '--work-root',native_work,'--source-archive',native_archive],
+            cwd=work,env=env,work=work,timeout=min(540,budget()),own_session=True))
+        require(native_build.get('status') == 'passed' and native_build.get('fixture_count') == 7
+                and native_build.get('native_exec_canary', {}).get('passed') is True
+                and native_build.get('preserved_text_fragments') == 358, 'Native build fixture result differs')
+        native_prefix = native_work / 'install'
+        # run_measured has returned only after outer process-group cleanup.
+        tested_native = libmagic.verify_tested_install(native_prefix,native_build,inventory=assembly.inventory_tree)
+        native_overlay = libmagic.integrate(runtime_env,native_prefix,bundle_helpers,inventory=assembly.inventory_tree,
+                                           expected_native_manifest=tested_native)
+        assembly._remove_owned_partial(native_prefix)
+        require(not native_prefix.exists(), 'Original temporary native installation remains')
         immutable_before = snapshot(immutable)
-        # No native closure/signing claim is made by this full-payload core lane.
+        # No full native closure/signing claim is made by this full-payload core lane.
         launcher = work / 'DeepdeskEngine'
         compiler = '/usr/bin/clang'
         require(Path(compiler).is_file(), 'Standard Xcode compiler missing')
@@ -449,6 +483,57 @@ def main():
         run([runtime_python,'-I','-c',netprobe],timeout=10)
         run([runtime_python,'-I','-c',local_connect_probe],timeout=10)
         run([runtime_python,'-I','-c',local_bind_probe],timeout=10)
+        # Re-run the retained native fixture under its exact executable-only
+        # policy after moving the full install and removing its original prefix.
+        moved_native_scope = work / 'moved-native-fixtures'
+        moved_native_scope.mkdir(mode=0o700)
+        moved_native = runtime_env / libmagic.NATIVE_RELATIVE
+        moved_fixture = moved_native / 'libexec/deepdesk-libmagic-smoke'
+        moved_marker = moved_native_scope / 'exec-denial.marker'
+        moved_marker.touch(exist_ok=False)
+        moved_canary = pilot.native_canary_observation(moved_marker,True,run([
+            moved_fixture,'--verify-exec-denial',moved_marker],
+            cwd=moved_native_scope,writable=moved_native_scope,timeout=10,fixture_executable=moved_fixture))
+        require(moved_canary['passed'], 'Moved native exec denial canary differs')
+        moved_smoke = run([moved_fixture,moved_native / 'lib/libmagic.1.dylib',
+            moved_native / 'share/misc/magic.mgc',moved_native_scope / 'missing.mgc'],
+            cwd=moved_native_scope,writable=moved_native_scope,timeout=20,fixture_executable=moved_fixture)
+        moved_images = pilot.validate_smoke(moved_smoke.decode(),moved_native,moved_fixture)
+        require(not native_prefix.exists(), 'Original native installation returned during moved fixture')
+        # Fresh processes exercise modern/compat default compile/reopen and binary
+        # load/check/list. Native C stdout/stderr remains privately bounded.
+        magic_results = []
+        native_bundle = runtime_env / libmagic.NATIVE_RELATIVE
+        for magic_case, missing_relative in (
+                ('full', None), ('missing-library', 'lib/libmagic.1.dylib'),
+                ('missing-database', 'share/misc/magic.mgc'), ('missing-text', 'share/misc/magic')):
+            magic_scope = work / ('bundled-magic-' + magic_case)
+            magic_scope.mkdir(mode=0o700)
+            missing = native_bundle / missing_relative if missing_relative else None
+            held = work / ('held-magic-' + magic_case)
+            previous_env = env
+            env = {**env, 'HOME':str(magic_scope), 'TMPDIR':str(magic_scope)}
+            try:
+                if missing is not None:
+                    require(missing.exists() and not held.exists(), 'Missing-resource fixture precondition differs')
+                    missing.rename(held)
+                result = libmagic.run_measured(lambda: run([runtime_python,'-I','-B',
+                    bundle_helpers / 'libmagic_runtime.py','--helpers',bundle_helpers,
+                    '--case',magic_case,'--scope',magic_scope],cwd=magic_scope,writable=magic_scope,timeout=180))
+                require(result.get('status') == 'passed' and result.get('kind') == 'relocated-installed-libmagic'
+                        and result.get('case') == magic_case and result.get('host_fallback_used') is False
+                        and result.get('native_features_complete') is False, 'Bundled magic runtime result differs')
+                magic_results.append(result)
+            except Exception:
+                print(json.dumps({'libmagic_case':magic_case,'status':'failed'},sort_keys=True),flush=True)
+                raise RuntimeError('Bundled magic fixture failed; fixed diagnostics only') from None
+            finally:
+                env = previous_env
+                if missing is not None and held.exists():
+                    held.rename(missing)
+                require(assembly.inventory_tree(bundle) == assembled['bundle_manifest'],
+                        'Bundle differs after native resource restoration')
+        require(not native_prefix.exists() and not original_bundle.exists(), 'Original native/app path returned')
         core_scope = work / 'core-self-test-scope'
         core_scope.mkdir(mode=0o700)
         previous_env = env
@@ -524,7 +609,13 @@ def main():
             'torch_version':checks['torch_version'],'sqlcipher_checks':cipher['checks'],'api_checks':api['checks'],
             'managed_policy_contract':managed_policy,
             'model_loaded':False,'provider_queried':False,'research_execution_tested':False,
-            'standalone_bundle_created':True,'pdf_tested':False,'libmagic_tested':False,
+            'standalone_bundle_created':True,'pdf_tested':False,'libmagic_tested':True,
+            'libmagic_native_build':native_build,'libmagic_binding_checks':magic_results,
+            'libmagic_moved_native_exec_denial':moved_canary,
+            'libmagic_moved_native_fixture_count':7,'libmagic_moved_loaded_image_count':len(moved_images),
+            'libmagic_overlay_provenance':native_overlay['overlay_provenance'],
+            'original_native_install_removed':not native_prefix.exists(),
+            'libmagic_complete_install_preserved':True,'libmagic_text_fragments_preserved':358,
             'native_bundle_tested':False,'artifact_uploaded':False,
             'transport':'in-process-ASGI','client_backend':'httpx2-2.13.1','real_http_tested':False,'tcp_listener_tested':False,
             'owned_listener_identity_tested':False,'native_transport_tested':False,

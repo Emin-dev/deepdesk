@@ -1,5 +1,6 @@
 """First-party AST and mocked branch tests; no installed engine code runs."""
 import ast
+import hashlib
 from contextlib import redirect_stdout
 import io
 import json
@@ -19,8 +20,11 @@ class CoreModeTests(unittest.TestCase):
         old_defs={n.name:ast.dump(n) for n in old.body if isinstance(n,(ast.FunctionDef,ast.ClassDef))}
         new_defs={n.name:ast.dump(n) for n in new.body if isinstance(n,(ast.FunctionDef,ast.ClassDef))}
         self.assertEqual(set(old_defs),set(new_defs))
+        self.assertEqual(hashlib.sha256(new_defs['install_managed_inference_provider'].encode()).hexdigest(),
+                         '82275ccb3095d70ce7208b90cc7835501cf7c2ef82ec8d3662485779431593a6')
         for name in old_defs:
-            if name!='self_test':self.assertEqual(old_defs[name],new_defs[name],name)
+            if name not in {'self_test', 'install_managed_inference_provider'}:
+                self.assertEqual(old_defs[name],new_defs[name],name)
     def run_mode(self,core):
         module=runpy.run_path(str(HERE/'engine_entry.py'),run_name='synthetic_wrapper_contract')
         with tempfile.TemporaryDirectory() as d:

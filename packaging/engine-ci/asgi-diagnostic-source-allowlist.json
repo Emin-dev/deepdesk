@@ -10,7 +10,8 @@
     "sqlalchemy-2.0.54-cp312-cp312-macosx_11_0_arm64.whl": "ffba7eb2d67c7505e82a0902aa854d8824b74c28a183820d6a8bd3cfd0f812c2",
     "starlette-1.3.1-py3-none-any.whl": "c7372aae11c3c3f26a42df7bd626cec2f47d03483d261d369516a615a53714c6",
     "uvicorn-0.54.0-py3-none-any.whl": "505bdb0f318731d45f1f712071fc781a8981f6847a31c902c9f5e652d4f67faf",
-    "cpython-3.12.15+20261009-aarch64-apple-darwin-install_only.tar.gz": "83dcb04777c798bd95f3687acf9ae84b09860272ee6bdfb05be8bcf9447f75b8"
+    "cpython-3.12.15+20261009-aarch64-apple-darwin-install_only.tar.gz": "83dcb04777c798bd95f3687acf9ae84b09860272ee6bdfb05be8bcf9447f75b8",
+    "python_magic-0.4.27-py2.py3-none-any.whl": "c212960ad306f700aa0d01e5d7a325d20548ff97eb9920dcd29513174f0294d3"
   },
   "files": {
     "installed-package": {
@@ -1112,7 +1113,8 @@
       "uvicorn/supervisors/multiprocess.py": "53541976227fec0b9ace2c7a5ce8f592ed0d8ff37f3c93c2a18baae9236365c2",
       "uvicorn/supervisors/statreload.py": "5cf684b555da6ac208d64906df65141bca03efe7d2d05c325e440b17d4183db0",
       "uvicorn/supervisors/watchfilesreload.py": "bbe32e626d0bb1930debbd2efd3b525a2301500db3e23d6c21edced80ebb129e",
-      "uvicorn/workers.py": "94c0ae6e7d568bee21da3c6b5cd32684e259cbb64ff10c5b65b3f7ff63b58871"
+      "uvicorn/workers.py": "94c0ae6e7d568bee21da3c6b5cd32684e259cbb64ff10c5b65b3f7ff63b58871",
+      "magic/loader.py": "6f822c22b16a3c93ae3904636a61bd4b0494a0513b591e15b7347478152b0f7e"
     },
     "stdlib": {
       "__future__.py": "981d4c398849f9ebcab72300d9c1fe288fd6d7f28957b3b3fa3a493a5836d95c",
@@ -2210,5 +2212,13 @@
   "managed_wrapper_sha256": {
     "packaging/engine_entry.py": "7e4fdbe84458f1e8aed760d44852ff3a9823c729f56d161f3dd163120f118f65",
     "packaging/standalone-engine-candidate/engine_entry.py": "ad8fc34f04809ad9b6a43922d47709a112e6aaedf04ddc427cae968edc5264d2"
+  },
+  "installed_overlay_provenance": {
+    "magic/loader.py": {
+      "original_member_sha256": "279a11466f7de3450e7f7aefdca2264fedb333da5aff44515a2f891741ad8e55",
+      "original_wheel_sha256": "c212960ad306f700aa0d01e5d7a325d20548ff97eb9920dcd29513174f0294d3",
+      "overlay_sha256": "6f822c22b16a3c93ae3904636a61bd4b0494a0513b591e15b7347478152b0f7e",
+      "overlay_source": "packaging/standalone-engine-candidate/bundled_magic_loader.py"
+    }
   }
 }

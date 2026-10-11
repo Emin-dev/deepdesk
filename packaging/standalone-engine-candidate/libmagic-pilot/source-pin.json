@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "url": "https://astron.com/pub/file/file-5.48.tar.gz",
+  "filename": "file-5.48.tar.gz",
+  "version": "5.48",
+  "sha256": "ed14656883b23a364b4057c05595d93252da9bc473d30106519519d0da141283",
+  "size": 2693209,
+  "expanded_bytes": 5966778,
+  "members": 655,
+  "source_members_sha256": "98b2114e31e92c3faf911d88138e002b5ef3fe94cd052790ca24d0ef0b1a4b1e",
+  "source_changes_allowed": false,
+  "compression_policy": "Require zlib and bzip2; leave all other configure codec options at upstream autodetection defaults. Record detected capabilities. No full-decompression claim.",
+  "scope": "libmagic-source-synthetic-mime-pilot-only"
+}

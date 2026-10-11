@@ -1,0 +1,55 @@
+# Candidate only: new exact bundled-libmagic review/GO required; core branch untouched.
+name: Validate Deepdesk relocated core and bundled libmagic
+on:
+  push:
+    branches:
+      - engine-standalone-libmagic-ci
+    paths:
+      - 'packaging/standalone-engine-candidate/**'
+      - 'packaging/engine-ci/**'
+      - 'packaging/engine_entry.py'
+      - 'packaging/patches/**'
+      - 'research/engine-ci/**'
+      - '.github/workflows/engine-standalone-libmagic-macos.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: deepdesk-standalone-libmagic-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  relocated-libmagic:
+    if: github.repository == 'Emin-dev/deepdesk' && github.ref == 'refs/heads/engine-standalone-libmagic-ci' && github.event.repository.private == false
+    runs-on: macos-26
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Verify standard arm64 host and compiler
+        run: |
+          test "$(uname -m)" = arm64
+          test -x /usr/bin/sandbox-exec
+          test -x /usr/bin/clang
+          sw_vers
+          /usr/bin/clang --version
+          /usr/bin/xcrun --show-sdk-version
+          df -h "$RUNNER_TEMP"
+      - name: Portable first-party stdlib and mocked contracts
+        run: python3 -I -B packaging/standalone-engine-candidate/run_portable_tests.py
+      - name: Separately reviewed complete-prefix relocation, core and bundled libmagic checks
+        run: python3 -I -B packaging/standalone-engine-candidate/standalone_stage.py --repository "$GITHUB_WORKSPACE" --review-receipt packaging/standalone-engine-candidate/review-receipt.json
+      - name: Record precise validation boundary
+        if: success()
+        run: |
+          printf '%s\n' \
+            'Full reviewed Python prefix preserved in a relocated helper app; real relative launcher and explicit core self-test passed.' \
+            'Relocated bundled Python passed SQLCipher and in-process authenticated ASGI fixture checks under TCP denial.' \
+            'Separate installed managed-policy checks rejected cloud routes and retained exact local policy decisions without inference, DNS or HTTP.' \
+            'Every installed Python payload and complete libmagic installation remain present; the loader.py overlay and regenerated RECORD are explicit.' \
+            'Bundled libmagic MIME/codecs, external-helper refusal, separate Python bindings, 358 text fragments, compile/reopen, and missing-resource refusal passed after relocation.' \
+            'Native PDF completeness and the known x86 Pandoc payload remain unresolved.' \
+            'No real HTTP/native transport, model/research/provider query, explicit signing, DMG or release was tested.' \
+            'Compiler/linker may emit its ordinary ad-hoc ARM64 launcher signature; no personal signing identity is used.' \
+            'No cache or artifact uploads. This helper is a temporary core-validation prototype, not a distributable app.' >> "$GITHUB_STEP_SUMMARY"

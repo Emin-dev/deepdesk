@@ -1,0 +1,2513 @@
+{
+  "schema": 1,
+  "makefile_sha256": "4871c42e2fa589837f80b333aff9376dca6ef6558a6ae70b50833d744d769dde",
+  "count": 358,
+  "fragments": [
+    {
+      "source": "magic/Header",
+      "name": "Header",
+      "sha256": "e392e4a39000a765a2915c6953e695baad2fb17150e26f036a6e115bae8ce58f",
+      "size": 246,
+      "mode": 436
+    },
+    {
+      "source": "magic/Localstuff",
+      "name": "Localstuff",
+      "sha256": "ec56623d8249f221e4dbfa3f9c6df2c064f9100a8034001fd905a696aed5a10c",
+      "size": 321,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/a2ml",
+      "name": "a2ml",
+      "sha256": "effb52324e5b0e345c2d7cfbf4b7ff4239f30cb931d8a8b243ad51a1767bdfb1",
+      "size": 1626,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/acorn",
+      "name": "acorn",
+      "sha256": "ab82ecfe45d39f7ccff713314080d02fdf2ec05220a931922afd358d94f333bb",
+      "size": 2795,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/adi",
+      "name": "adi",
+      "sha256": "72a204e7dcb4db382124f45dadcd1c65c59968be1dee6bbf1e7f9cb8df71d7ca",
+      "size": 425,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/adventure",
+      "name": "adventure",
+      "sha256": "66037481adead88c46f2a5f51fed1295fdded59dabe792b675b3f58015b1c93a",
+      "size": 4573,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/aes",
+      "name": "aes",
+      "sha256": "ccb31dac8fef128eb2e90678e4b03428971230d74240e4c9d31e16a51b3b5188",
+      "size": 1164,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/algol68",
+      "name": "algol68",
+      "sha256": "bfc77b19622add317ec6cfd0fa106ee6fc7a2b5071107003058225807689737e",
+      "size": 1044,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/allegro",
+      "name": "allegro",
+      "sha256": "d86b7ad175881ee8ddf6e0adad8a0aa071cdcd9c9f2c0feb4c523914303d751b",
+      "size": 402,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/alliant",
+      "name": "alliant",
+      "sha256": "06a9d7358ddcaf6d6801814de0e1b3c6217c91cb05af50135435cdc92a6903b9",
+      "size": 760,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/amanda",
+      "name": "amanda",
+      "sha256": "bdb1e2ef2a177ae74aa3782c891459dc0e3efea384d641c1252ad111df71819b",
+      "size": 385,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/amigaos",
+      "name": "amigaos",
+      "sha256": "e45406e16e753c5776179c2b5e4df020d4d6b78fc5f5b94eab7593b05cead427",
+      "size": 10263,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/andrew",
+      "name": "andrew",
+      "sha256": "801999445e5525899e16b48fbcb6e4474f1662c680e50cff7e317fa1fd5314da",
+      "size": 991,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/android",
+      "name": "android",
+      "sha256": "91507e7979f30965604b9264da1ec4524add8d3ccf93eb7fca1d7d8128cab6fc",
+      "size": 10002,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/animation",
+      "name": "animation",
+      "sha256": "bfcb4f6af9463a6147d9a176e099fea96bf0a01c6ca57fc4dd0cc065cc5835ea",
+      "size": 53434,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/aout",
+      "name": "aout",
+      "sha256": "ba88beae2cc3d8761d281c32564624b87ef973886bf6cbfa8202e3788a24aa9f",
+      "size": 1730,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/apache",
+      "name": "apache",
+      "sha256": "e30df977dc83a09f6a62017d96ac1bfaeb16c2794022cc23bd16bb3ced686132",
+      "size": 1317,
+      "mode": 509
+    },
+    {
+      "source": "magic/Magdir/apl",
+      "name": "apl",
+      "sha256": "cce150019620c2dc5917fea205bac26d0f1f6411e3edc43b2394cc8aac059f3c",
+      "size": 276,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/apple",
+      "name": "apple",
+      "sha256": "3956713b0275aaf3e1eb4cdf3c460d77790d452e0d737580649e86a7896236ab",
+      "size": 32029,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/application",
+      "name": "application",
+      "sha256": "050e330b0f8b7c3327b29704f24c7dd41fe44637e9a460e2de5faa926c25c3ac",
+      "size": 273,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/applix",
+      "name": "applix",
+      "sha256": "7ce1fe5cd05bf231e9a8f3c094c93425a110683e78d294f56f612812a22c209c",
+      "size": 428,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/apt",
+      "name": "apt",
+      "sha256": "1f64ca1ebfbe4d39047b46459e7de5bf4cc97f064e15e5b99048e32bcfb4234a",
+      "size": 1610,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/archive",
+      "name": "archive",
+      "sha256": "0e91b55e9c03d7f29a9581bd943f4c1b7ae65c55b4ff9f5c70e79cae8c4fe54d",
+      "size": 107611,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/aria",
+      "name": "aria",
+      "sha256": "b63436890cafeec0dd5a94443397f7c088dfa25a340bdc44a8529932ed3873ca",
+      "size": 1783,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/arm",
+      "name": "arm",
+      "sha256": "03eed13b030993901281a35a8ce874ebdcd527b651ce5c91607454755dfb173e",
+      "size": 1692,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/asf",
+      "name": "asf",
+      "sha256": "aa37cf6b00c6db5a68754e15910ff2415820b213035bbd7dc0c2f8049d3fad76",
+      "size": 6553,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/assembler",
+      "name": "assembler",
+      "sha256": "534e44e9cafe469125d0cd7766d89a68369e0d036322734d16fcd7d2e6d991a2",
+      "size": 700,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/asterix",
+      "name": "asterix",
+      "sha256": "e2d9b4a13ab40bf0a317edae58237750fa01f3561769335390e7e0e4bb159429",
+      "size": 584,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/atari",
+      "name": "atari",
+      "sha256": "919e13c05c3b1aa973d2b27392a47b778c6b01bb7ac161b0d0e35938b06c07ee",
+      "size": 6660,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/att3b",
+      "name": "att3b",
+      "sha256": "48a4bc111f4d5720602d39c69c1122802e4ab5bcd4090b06aa8302f63af0d986",
+      "size": 1259,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/audio",
+      "name": "audio",
+      "sha256": "aa17db53d058bd0908153d80f8fb050c4d5db6989d09f0f4e79fe9e694919eb8",
+      "size": 42632,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/avm",
+      "name": "avm",
+      "sha256": "ed48a840a53a288d5180d2ba58a1d5bef5dbe02509671243e9351b564a827642",
+      "size": 1232,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/basis",
+      "name": "basis",
+      "sha256": "c93e025086b1b1fb5333f39364671d8e92327824656f1d41d0469957d39a669d",
+      "size": 571,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/beetle",
+      "name": "beetle",
+      "sha256": "bb6b4b8ee34fb6ce21bb2c55a748b0be3241ffad0b08e75ef7d8bc88cae082d8",
+      "size": 289,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/ber",
+      "name": "ber",
+      "sha256": "0cb5920e56cf7ee5eb857fdb3af1a84c57af220928f75af1d0f7af850723739f",
+      "size": 2387,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/bflt",
+      "name": "bflt",
+      "sha256": "6e3342a4cd44d2457f37d5d3eed8d5bb38d9ce4246f3ef88799d8be063d08332",
+      "size": 414,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/bgcode",
+      "name": "bgcode",
+      "sha256": "1c7cf31e4ebc4ee2ce63e170e944121a17e6a10cf4ab086636396387b74630f3",
+      "size": 286,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/bhl",
+      "name": "bhl",
+      "sha256": "663b243d37b665c353da666fc81ff776b7cb4930011dd895442cc1ab28fbfa4d",
+      "size": 341,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/bioinformatics",
+      "name": "bioinformatics",
+      "sha256": "e2ff2148f5a3ec37c2fe66c74fbb702272ff90ee30f3674b98adb92c22e89823",
+      "size": 7683,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/biosig",
+      "name": "biosig",
+      "sha256": "52cf4134188bc955ba409623120b58bb4d48a59cea852a41c0ab3c82184b3cac",
+      "size": 4905,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/blackberry",
+      "name": "blackberry",
+      "sha256": "9e5965c2dec40cc296636fa703daf355b1802d4536753e2ac729280d87b1e0b2",
+      "size": 282,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/blcr",
+      "name": "blcr",
+      "sha256": "62e52258712b49fff2890f6c8e1f650c8c07cb32252c1c5b5fe69ca482dd3bf7",
+      "size": 746,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/blender",
+      "name": "blender",
+      "sha256": "2e186cd0653248f60bead9e83a9c51a0508ce98e4f688de1094e36c4a2945642",
+      "size": 1874,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/blit",
+      "name": "blit",
+      "sha256": "10e29508fc4d0420175ec811749c1a3e3b6d43934773d233114497a8e5d786c7",
+      "size": 1130,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/bm",
+      "name": "bm",
+      "sha256": "c30049ac056fabeb80eac468ca3aaf3e141b9fa783e9dc31e8bc1f89dadbc4cd",
+      "size": 381,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/bout",
+      "name": "bout",
+      "sha256": "8cca027a37d55e6a555c724580242cf339d99ea95652a980893d6ad67daeb1ca",
+      "size": 349,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/bsdi",
+      "name": "bsdi",
+      "sha256": "32bb362edc452d5ab626f89a86c9a1b939068f6f9446c3b332c84754f439aa3a",
+      "size": 1351,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/bsi",
+      "name": "bsi",
+      "sha256": "b1e822c48f23986f76995f10d3e7bfdf5e8a354edeecaa20b29b1e77952a792c",
+      "size": 327,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/btsnoop",
+      "name": "btsnoop",
+      "sha256": "9f89cf72327f90b1b92cd01b8ee52b19bccad85d4f44031bee64e48454687d47",
+      "size": 429,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/burp",
+      "name": "burp",
+      "sha256": "a0639bd7ed3679d23ea5e5ea544841fe0975544357773b05b87951631c49e66c",
+      "size": 304,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/bytecode",
+      "name": "bytecode",
+      "sha256": "c1011e128c05dc595e2808e299f07f53d062e39570d98cc46cdc787bd7c3f6b3",
+      "size": 1498,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/c-lang",
+      "name": "c-lang",
+      "sha256": "dbf147adb02a763813c10b54b5cd41da0ef86f5f9c8683b72c7cbbe26b17c480",
+      "size": 3982,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/c64",
+      "name": "c64",
+      "sha256": "c8f2495654b4a0b4501c0209e918fc795389d78f60ad8f518fb60a49d46affad",
+      "size": 27375,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/cad",
+      "name": "cad",
+      "sha256": "7c9d9e8ad5f2329a6aeb7f6925ff8c470dcf71b096a21c7831a9d5c56ca76c47",
+      "size": 17433,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/cafebabe",
+      "name": "cafebabe",
+      "sha256": "e950decc069db31f54e9e8a0949804d745493ba1e0c6c2e538e9ea337a7654bd",
+      "size": 3697,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/cbor",
+      "name": "cbor",
+      "sha256": "2e976a7d1c84e44295516411897da625943f37027c5c954a98ba6e897efce3d6",
+      "size": 611,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/ccf",
+      "name": "ccf",
+      "sha256": "6213e2bbb983db34e80d577e8a45d52636c02a55594913601acfa9c4f70d4455",
+      "size": 599,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/cddb",
+      "name": "cddb",
+      "sha256": "eb08c00dcdbb5a629f454017f13165f7cc23e6afd4665887df3566917abb83b6",
+      "size": 386,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/chord",
+      "name": "chord",
+      "sha256": "6501631199bd3de41c2e5f12094eab78dfdd768502adb6214e82fbcea3378c61",
+      "size": 577,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/cisco",
+      "name": "cisco",
+      "sha256": "faee2059d77f00bf8f001bb2aa57ea6efe822667f0c153dafbeff81ce3a8593f",
+      "size": 622,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/citrus",
+      "name": "citrus",
+      "sha256": "130fb208254822d989329296ceaf4a4e6f60a1ed8dcf2f24373190ce1468997a",
+      "size": 462,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/clarion",
+      "name": "clarion",
+      "sha256": "062796e2782ca4534e6e6494fd1c07841e6307c9e2c9af404398b74dc8777452",
+      "size": 769,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/claris",
+      "name": "claris",
+      "sha256": "5bc09ef4e384747da1840add0883c22b872afae28a99f41a68277a27fe65caeb",
+      "size": 2253,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/clipper",
+      "name": "clipper",
+      "sha256": "c1917f5cda664ba9d16444ead5ffced3bc7aa67379ac4783821cb47368006691",
+      "size": 2140,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/clojure",
+      "name": "clojure",
+      "sha256": "3edc234c0c2c51f95a891540b4845e5189cd4ddd7769dc4ca23fc61cca06259b",
+      "size": 1138,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/coff",
+      "name": "coff",
+      "sha256": "78a962e49a53ce4d93b5948acb4e9de16be209b61fb3b5fa3ad383eb5a62a8ab",
+      "size": 8520,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/commands",
+      "name": "commands",
+      "sha256": "bce330df64ab1c330fe10cd977e2ab8722375653663107e0b3124ab8113d62c1",
+      "size": 8498,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/communications",
+      "name": "communications",
+      "sha256": "4753c68110ec69c245fe13e71ac6b26ebb981c89e060b6be37a066d099701c49",
+      "size": 853,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/compress",
+      "name": "compress",
+      "sha256": "0a0d72e391c4ec36815ee09ed7643ea7bcdd5c3e49b11eaf089b33ab268b7410",
+      "size": 16856,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/console",
+      "name": "console",
+      "sha256": "e1515030496a333a7e998f84dfa3bde9dc7d7bca8f30e57b0c7194529bd90e61",
+      "size": 50926,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/convex",
+      "name": "convex",
+      "sha256": "7117a43bf6c02f0d9bda7a754400ad3c93988e8a1eb0117774fcbe32fe603458",
+      "size": 2641,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/coverage",
+      "name": "coverage",
+      "sha256": "8a6facfbe021134aa625f050e6527b9cd5afb3b8683e26f0de97b1803c136c7a",
+      "size": 3058,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/cracklib",
+      "name": "cracklib",
+      "sha256": "a21f7aff537e6d25822290c25ddfce8f5f2848e2b035694a97c120c5b8d05b0d",
+      "size": 531,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/creativeassembly",
+      "name": "creativeassembly",
+      "sha256": "0776cdabd44286e678ef236912ca1100cf16203d5d32d19fdef2211075145b17",
+      "size": 954,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/crypto",
+      "name": "crypto",
+      "sha256": "109f86841a59be0efd8ca11a5d63d158b86a5cfc16f950142444727729ec6139",
+      "size": 1549,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/ctags",
+      "name": "ctags",
+      "sha256": "592325a482e1c4129e0564cb744a95505216b30a0def9e3bb8d322c662881e86",
+      "size": 297,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/ctf",
+      "name": "ctf",
+      "sha256": "bf0f83566d7b42a5871fd1a69475abd7bd97f108455b25111c3e449c868059f7",
+      "size": 878,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/cubemap",
+      "name": "cubemap",
+      "sha256": "afcc8ca683f7d3e308d5df451b5598fcd4976ec84079bb5b6506ca0c4328f42f",
+      "size": 403,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/cups",
+      "name": "cups",
+      "sha256": "752c62df92fef4a51843ceb8dc05e572d8c1efda3028d31c3497a3849e6397f9",
+      "size": 1793,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/dact",
+      "name": "dact",
+      "sha256": "50fe68fe5bdb27376864a94ab784cba4e09383bd23ee8f2b9d0f6bb51407a185",
+      "size": 379,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/database",
+      "name": "database",
+      "sha256": "155711f5ad20852222f9ec2047c85a75c44710b2f6632649ff29b280a7d38d2f",
+      "size": 36880,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/dataone",
+      "name": "dataone",
+      "sha256": "2a79e282a14d3616c5d0956b0755e239f12ac807a7bbc4baf17b23f8dfdc2c17",
+      "size": 1822,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/dbpf",
+      "name": "dbpf",
+      "sha256": "9b72c1753489dc985f76437a56b3929ca63ce22e83d1791451eabe2de1039ef3",
+      "size": 630,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/der",
+      "name": "der",
+      "sha256": "8e35fdee410ad32967b64bc4ff00922a72880265f86a68236fc762b2554267c3",
+      "size": 3685,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/diamond",
+      "name": "diamond",
+      "sha256": "bd5c8a9d362dc73215b47db4c4fb7c0dd518d93ae4b45a2ecbb96882a813a543",
+      "size": 509,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/dif",
+      "name": "dif",
+      "sha256": "3d5c874669bc0f6cd960e2241ff1575925b82d1afe1ffe648fc08ad2388ebda8",
+      "size": 1430,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/diff",
+      "name": "diff",
+      "sha256": "0c24889fc0f83b2a912506b6a44012f7ddf002631042fde4230d09427bab0f78",
+      "size": 6560,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/digital",
+      "name": "digital",
+      "sha256": "36bb0d7cde705dee6d862d4a1c86f7988e996c76c7d5c79a3f51e196fdb0a266",
+      "size": 2472,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/dolby",
+      "name": "dolby",
+      "sha256": "2dd8cf28c1da3ddb78f38dfe23bc82875055374c619b934e2cf33c1fb52ae636",
+      "size": 2379,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/dump",
+      "name": "dump",
+      "sha256": "3569a0aed38c56f6fbd83c696cf37794e1e85087c2c4d3d2080a6354fde18d63",
+      "size": 2908,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/dwarfs",
+      "name": "dwarfs",
+      "sha256": "64b26462e49faeb251cd8c52e99ea03b9f3a207b87185dda2105574b7711ae9c",
+      "size": 1797,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/dyadic",
+      "name": "dyadic",
+      "sha256": "6c46942ce5028dc4498c2e7a7e928fb294bb959b5047e2b81a061d3e11d52bc0",
+      "size": 2584,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/ebml",
+      "name": "ebml",
+      "sha256": "ed6fdaec6b2a79a72535f58c3aa0972f5b357dcbfbfc3bd09dbbdb747e939350",
+      "size": 350,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/edid",
+      "name": "edid",
+      "sha256": "73690cd938e398af015650a0b077cf65b25a6ba5a0ede72e16db90ccef5e6df8",
+      "size": 377,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/editors",
+      "name": "editors",
+      "sha256": "13cf7457116af68f73f7178e18c8cbe750ad1926b27f30f42df74a1f0c3989ff",
+      "size": 1179,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/efi",
+      "name": "efi",
+      "sha256": "341660704a1026af5054ea4c77574d55a57047865c35f0bfe0fd1912aaa01ea6",
+      "size": 2645,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/elf",
+      "name": "elf",
+      "sha256": "cc9b05d242115d0b1b830ff3af8919c63927d09fec0800aac9e29f84a7674d5b",
+      "size": 13780,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/encore",
+      "name": "encore",
+      "sha256": "3ddc8b79d81511d34d56b33e80f51e5943f684c1416fee7d785548ef8687c3e5",
+      "size": 725,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/epoc",
+      "name": "epoc",
+      "sha256": "800bcda352a35c5eafb766e27d00a7430da2d275b0839c8527361e0a1dc1893d",
+      "size": 3203,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/erlang",
+      "name": "erlang",
+      "sha256": "340841c62b5fac02f3b2318bbb5207a9b13ed3f467e6bdfb888acbabbb877fff",
+      "size": 709,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/espressif",
+      "name": "espressif",
+      "sha256": "77145c670b4486f72d4bcd1225a9c4cfa84f674de025f5f93095564df56f8d04",
+      "size": 2103,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/esri",
+      "name": "esri",
+      "sha256": "69934c66f9fd944295ede6ea7927e86f4dbf32dad2834f03ca3aaa919ff5722c",
+      "size": 826,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/fcs",
+      "name": "fcs",
+      "sha256": "41796739ee611406b7004bbdf79386a9a7d187ac9a3a2856711b0151ea4ec5de",
+      "size": 516,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/filesystems",
+      "name": "filesystems",
+      "sha256": "f602c51a2c1f84865d452e9580f1d8bd1cddfce336de75fa9fdd429736fb06a2",
+      "size": 107144,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/finger",
+      "name": "finger",
+      "sha256": "25cb17b687a3ab04b0959a39886850cfaa30a587487187952bcb0db68b07c343",
+      "size": 672,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/firmware",
+      "name": "firmware",
+      "sha256": "2425d2f858c1b2f942c8be5e7d5688c32e066c8a1534882e4bb0fef8e67dad99",
+      "size": 15484,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/flash",
+      "name": "flash",
+      "sha256": "6eb7b130db818c9fcaf3bc1991efa72e07665919d818652cbf82ff504f99fef5",
+      "size": 1771,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/flif",
+      "name": "flif",
+      "sha256": "3a11f7efe4dea9083a6b740b49725462ff62df4ea842d5d79d7fb5bfc9e58dc8",
+      "size": 1107,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/fonts",
+      "name": "fonts",
+      "sha256": "15f611e4c9d68128566ab9c2f3368461bc710776e66ea6681c44b16b59b258f6",
+      "size": 17577,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/forth",
+      "name": "forth",
+      "sha256": "6e0c331ee65153eec44e00749b602efe628158dcae3c1decd28db8ac0f8c76d0",
+      "size": 3002,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/fortran",
+      "name": "fortran",
+      "sha256": "d5a51508396c19a52c429ef3486ef5093a2b49a4705ba1f9c9a773000eca9352",
+      "size": 349,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/frame",
+      "name": "frame",
+      "sha256": "9596be0a8044728d8e843c176271e5f59d1c3d404f614db999be574e64d21fa4",
+      "size": 6739,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/freebsd",
+      "name": "freebsd",
+      "sha256": "f5ecceb989ff60a3560ccb1dee0c595a26f818f2d08af4b556ace648ea37510c",
+      "size": 5476,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/fsav",
+      "name": "fsav",
+      "sha256": "7320709af16ba03de87768efb65b76f49c6833284ab3702427c9969218a32b56",
+      "size": 4228,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/fusecompress",
+      "name": "fusecompress",
+      "sha256": "4ec5ea5f7ed0f2437493a79f26ef7a48f0d108f3421fb09b8efd646c29d42d1d",
+      "size": 430,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/games",
+      "name": "games",
+      "sha256": "2571a602f4fdf7b9e07aec89cbc33caa7a50c007222a781bf67329939b28c470",
+      "size": 27202,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/gcc",
+      "name": "gcc",
+      "sha256": "fb1d67794f7fbc436bc7ee02fde9766b5114d72ea54664a42e485ecaefd4ce24",
+      "size": 505,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/gconv",
+      "name": "gconv",
+      "sha256": "1773382dcc07549bfbdb1cdc95d6b5ccbdc58fcbb7e769e59df2fc694c27aa9a",
+      "size": 344,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/gentoo",
+      "name": "gentoo",
+      "sha256": "851427b79ccc8788c251aa2ba17b1e2d49790efd8a6c4454ac156a28aff46fd4",
+      "size": 3080,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/geo",
+      "name": "geo",
+      "sha256": "e63a36e70c73768ddb19aa57b0e03f3e0879df7e080af171ce41493b43aff37e",
+      "size": 6158,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/geos",
+      "name": "geos",
+      "sha256": "5fa514c0ba18429fb0b6a713fb253758be71cb701bd86f4c6a4b171c842c8493",
+      "size": 816,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/gguf",
+      "name": "gguf",
+      "sha256": "af2dd2084e9c0b3dfd89935e445210f4556910c22f1c96b01bb5f75c3116bc38",
+      "size": 1022,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/gimp",
+      "name": "gimp",
+      "sha256": "a3e1beb50907c70dded1ab7bb5fb89c51a07785505c51dbf4e47cc6dc5206b60",
+      "size": 2768,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/git",
+      "name": "git",
+      "sha256": "10031116d6163b417cb291a467a9479f8859df8acccd9c562a9917efe570b1f8",
+      "size": 330,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/glibc",
+      "name": "glibc",
+      "sha256": "e1f09fa01d6a4aa4bde19ba88e1fac75021448a1f6acb2dbb14b896025d6db10",
+      "size": 879,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/gnome",
+      "name": "gnome",
+      "sha256": "d70ea4c26a61bdc8607851359db08613cee69948706760c2dc1fc09de652468e",
+      "size": 2495,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/gnu",
+      "name": "gnu",
+      "sha256": "ceb15b077ccd1ba3f32662036d1e3858addba16cf009c2c23f14256dd88ac868",
+      "size": 6110,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/gnumeric",
+      "name": "gnumeric",
+      "sha256": "7181966aef15c105d6d3635b2dc4c55c0d7486449ec7a17c757fbc9a63d3bd9f",
+      "size": 411,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/gpt",
+      "name": "gpt",
+      "sha256": "055fdbb268ef9e9ed821c4b0f629d28edd05457d9397bcd548a46b086e17127f",
+      "size": 9979,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/gpu",
+      "name": "gpu",
+      "sha256": "8560465332943b9288642d4096d3ab1b14d132aa65acb69c94a72a3670e0c7c4",
+      "size": 925,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/grace",
+      "name": "grace",
+      "sha256": "0fad24fa6dfcd4c6d02a1adf286cba594b5f768c818f0c008f99a5e1c39c91d9",
+      "size": 892,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/graphviz",
+      "name": "graphviz",
+      "sha256": "850864b033798350dc469433522d223571bcd53ff20dd0fde4f2aa01c1b36922",
+      "size": 580,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/gringotts",
+      "name": "gringotts",
+      "sha256": "d710733c01673bf917e714e1ce694de003381c158372fc59d5cd7560bae363cc",
+      "size": 1577,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/hardware",
+      "name": "hardware",
+      "sha256": "167703b7270bdc15fa86ccf1efe934c27f83559bd469c59ec0b77cb1c00fb4ac",
+      "size": 385,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/hitachi-sh",
+      "name": "hitachi-sh",
+      "sha256": "ce0e20f82b74a9438b69462457dae58b5b41af1ade321cd9e8cb187f5c3ab7a7",
+      "size": 1424,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/hp",
+      "name": "hp",
+      "sha256": "1404b2d81ea69e360db793924a0d3e80fa8816a718cbd06369da8acdf78e49b1",
+      "size": 13672,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/human68k",
+      "name": "human68k",
+      "sha256": "575d89dc9139a5916da1b766817cdf5d378abd7a5541cd85901c6a0ec12a8f90",
+      "size": 1003,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/ibm370",
+      "name": "ibm370",
+      "sha256": "1eb06b67bd865abbd62113fb712da4d94cd55fb1cbf0b52aff98a84e5dbb15e6",
+      "size": 2232,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/ibm6000",
+      "name": "ibm6000",
+      "sha256": "15e09d5cfd59511ebeea056313b7c484518b7d85fb471e52ee4fcc111384ad00",
+      "size": 1581,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/icc",
+      "name": "icc",
+      "sha256": "5078ff339b4a2dbb8d074b8bebabd12d4ccb509b5a0844cf781776931a95b8a3",
+      "size": 7846,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/iff",
+      "name": "iff",
+      "sha256": "90b3ffb3d873887f9c18b05bb89ebd669d8add49293953c802c2682f5a9dab46",
+      "size": 4065,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/images",
+      "name": "images",
+      "sha256": "9e2245c9616982a0f0e98a312136985230cf81d3fcf6921cc293b2145d30f86d",
+      "size": 171023,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/inform",
+      "name": "inform",
+      "sha256": "530760ccdf806b212be8cb04db0cf2474665bfc205dc5f7565a51a1253591848",
+      "size": 333,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/intel",
+      "name": "intel",
+      "sha256": "e424abe8051e48e61a948f3bf71bc7b9c96a1576a448b79d2da76faf5901206d",
+      "size": 13964,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/interleaf",
+      "name": "interleaf",
+      "sha256": "a1c05211bd35b3f3fe09984dc49cff757a280e27e47748f67d169cd4d2bfd5e6",
+      "size": 672,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/island",
+      "name": "island",
+      "sha256": "ef77d09f2e29fb9d2b404e1092b5843e5ebd31832dc3c45863945af24ddb1f11",
+      "size": 345,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/ispell",
+      "name": "ispell",
+      "sha256": "ac2493c7eacdb21a66d2caf6fe7df50e7d04efd2da7a4f5d9340f89c89ee03e4",
+      "size": 11545,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/isz",
+      "name": "isz",
+      "sha256": "0d9cf7dbff478651c5eea298f42d0318c3fdee17fe96fa70c3238daf149e653c",
+      "size": 514,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/java",
+      "name": "java",
+      "sha256": "fb08f447823182859efa1c4d772f00c7b06191e486b3a6f2c6df257bdad14db8",
+      "size": 1811,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/javascript",
+      "name": "javascript",
+      "sha256": "607a3f3bce00130f0d956b151f2089e726eb30b0f44285e8ffea5ebc5fd5ba1f",
+      "size": 6438,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/jpeg",
+      "name": "jpeg",
+      "sha256": "38ef4ea36afc7f8f9a076d7393ee6d433de78aaa148eae8a7d13bbe442403def",
+      "size": 9101,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/k9",
+      "name": "k9",
+      "sha256": "e8f74702dadd143da39e40850884903fa29fb87b2de18c3bb54cb6adb1e09b9d",
+      "size": 1354,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/karma",
+      "name": "karma",
+      "sha256": "4c7a46c66eafe27cc58df0406a974b37ba3203882f5e5626371dfdadb6f05ffc",
+      "size": 291,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/kde",
+      "name": "kde",
+      "sha256": "fa26e99ab12e841b1d156cf795a6244c84254ef5365b3ca907010fa4c3a780d3",
+      "size": 390,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/keepass",
+      "name": "keepass",
+      "sha256": "3d613bbac6a8cc6b7a18b485ecb4034c9ffcc9acd76f9556a7d082b5c6b8ec02",
+      "size": 692,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/kerberos",
+      "name": "kerberos",
+      "sha256": "10028768adc1dc381e0550f75f383b9adcc85796d435d0c23889be637519f02c",
+      "size": 1461,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/keyman",
+      "name": "keyman",
+      "sha256": "5e7c2d9ba9bd9a310b51ac625ae8785330d201e8064cfa7a1ddd60733523816a",
+      "size": 519,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/kicad",
+      "name": "kicad",
+      "sha256": "bed4802bc8a5b2b59339442879831dceacc120a197a8e3469e88504692e2b34f",
+      "size": 2261,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/kml",
+      "name": "kml",
+      "sha256": "8da8d81f4bab4253cc3a799cee278a25e7043a00279b8acdbe2370e258b78d2b",
+      "size": 1466,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/lammps",
+      "name": "lammps",
+      "sha256": "1ab62a8f00ab015e8604d51148928fe647265973aace2e4ed8adc8d2274128fb",
+      "size": 2467,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/lauterbach",
+      "name": "lauterbach",
+      "sha256": "32ecc7d6bdad193fd7ae9733f9dfcf6fafcf68e7a219fb33141832f1f9be7989",
+      "size": 248,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/lecter",
+      "name": "lecter",
+      "sha256": "58b6a47843124076c98515cb04522e81b511a9458613a77d5509d3073e2c579b",
+      "size": 269,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/lex",
+      "name": "lex",
+      "sha256": "61adf25afb433746d9f5dddac7fd81a4c0323e5b4226bdb3b357e32719f6c7a7",
+      "size": 528,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/lif",
+      "name": "lif",
+      "sha256": "76e009f07d9c9503aa7b9d6134f70b4135334d4c6c8f575da7177c22af9ef413",
+      "size": 2036,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/linux",
+      "name": "linux",
+      "sha256": "0d85f15ad7542aa2352063f4a17010b2e574526c2d771083caa56f6e8bbb1018",
+      "size": 44143,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/lisp",
+      "name": "lisp",
+      "sha256": "3ca19ac5362c10c27f2961a76cc0c96e60e96c66b0ab7ed8eda16c5b93b966c0",
+      "size": 3204,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/llvm",
+      "name": "llvm",
+      "sha256": "3a610953532e09875199df3f8003bdde8967f421230aaa08681496c035192c00",
+      "size": 768,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/locoscript",
+      "name": "locoscript",
+      "sha256": "a48a9160a5a15ac9df19277b319dc7c01cbd576f00275f33621e739180da1296",
+      "size": 543,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/lua",
+      "name": "lua",
+      "sha256": "751b30082f4c15dae2f4edff1e7bc7c4749caa7ee7556147cd3b8b639653449a",
+      "size": 1176,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/luks",
+      "name": "luks",
+      "sha256": "692c7d230c141001a2cb0c98c04da6e959d0721b95c71f5501bbc38bacc0cab2",
+      "size": 4958,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/m4",
+      "name": "m4",
+      "sha256": "32d0c9d29769722cb49237f1385b97e732a8823c197008d57f4aea5d56ce7c67",
+      "size": 370,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/mach",
+      "name": "mach",
+      "sha256": "e2ec18d44553565050876ce531a73081315bf9b1299512e3495bf63da48b7e9c",
+      "size": 10853,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/macintosh",
+      "name": "macintosh",
+      "sha256": "27a2f5142f330ba179da17ff695804f5ee3c608da9f10dcdb6cfcaea2563d94b",
+      "size": 17026,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/macos",
+      "name": "macos",
+      "sha256": "e12872f1619379f66075a7b1a36546455be0b79429f97cc24443a685d160bccf",
+      "size": 206,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/magic",
+      "name": "magic",
+      "sha256": "77d43184d5237a2167d3fc6a330bba7a536f77997b13dd5efbaaf0c0a7c23d7b",
+      "size": 4383,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/mail.news",
+      "name": "mail.news",
+      "sha256": "ec77bc3375015ba3b3ec300ffeb84139f34a3b7e4ecbde8dd83ac15e3648e85d",
+      "size": 6047,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/make",
+      "name": "make",
+      "sha256": "2da21eca456ae14f4edff8ac8a81fe4574af547c9632b2f5c55e27e5d58cab15",
+      "size": 893,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/map",
+      "name": "map",
+      "sha256": "64af647e8c20c7c237244e70f41160c283c041cb34bbd221481c6c51908af6ed",
+      "size": 13953,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/maple",
+      "name": "maple",
+      "sha256": "917fc95bf0fbc5d3850bf28e84a3aa731d24715b8ac0f8541e21d64d63ae74a7",
+      "size": 3873,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/marc21",
+      "name": "marc21",
+      "sha256": "5f2f1ff1b0f15abd3ff267f82a3b91673af6a00bfe600a7176cfd42b9ba83d5c",
+      "size": 1019,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/mathcad",
+      "name": "mathcad",
+      "sha256": "de4286933630c9f095b279093d98f6eb2d499c9f5c7dfa984faa4788ad1692f7",
+      "size": 300,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/mathematica",
+      "name": "mathematica",
+      "sha256": "c2f503801f0178a15dd29abc9addcab2772f2bf757422b3bb2e5aa669f280f44",
+      "size": 6818,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/matroska",
+      "name": "matroska",
+      "sha256": "300a8d39f643d4743e6777876eed523bf85e8ea422749edb76d1d8752901860d",
+      "size": 422,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/mcrypt",
+      "name": "mcrypt",
+      "sha256": "50cf5098188d821710131e1833e0053cc991676f44fde7d9890173917e11f442",
+      "size": 1783,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/measure",
+      "name": "measure",
+      "sha256": "80538a394e6c277aa59d223310bbcbf325d80b15a327746281e1fe055088c360",
+      "size": 1483,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/mercurial",
+      "name": "mercurial",
+      "sha256": "0d45de6978f6ca071dd5f4a09f07767b2624a91cade6a173ab33bad794f88622",
+      "size": 424,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/metastore",
+      "name": "metastore",
+      "sha256": "f1a91fe44c7ad7ba5a7fd8739039ada339e796daabb2a5b58ce62b182de7ccc3",
+      "size": 337,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/meteorological",
+      "name": "meteorological",
+      "sha256": "73b4409fe3ac0a6456e4071071475a10cce76090ea67f50e53781161db043f35",
+      "size": 2314,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/microfocus",
+      "name": "microfocus",
+      "sha256": "0db446e09395a1bc56499b6a5078f8244afda12d58f47630282c8f9570a24de3",
+      "size": 741,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/mime",
+      "name": "mime",
+      "sha256": "1b0d7060ea12e3dea973ee7c015c845f218f78e61c3c640f0e0b39e650d603c5",
+      "size": 280,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/mips",
+      "name": "mips",
+      "sha256": "0fd9990a8bedb1cd03091fa4be5fc6a2267b086a991e4384b2f172e764235a39",
+      "size": 2347,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/mirage",
+      "name": "mirage",
+      "sha256": "02773e547d5431c266ecb1d6d8de032e76ea31846aa82f1d8e8f88a05f52c1e7",
+      "size": 258,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/misctools",
+      "name": "misctools",
+      "sha256": "9507df855c110a1494acfc617cad98270f9776236262d83542e2829353371e5b",
+      "size": 6342,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/mkid",
+      "name": "mkid",
+      "sha256": "845baa1ffcadffe91661f05580242d733f0e6dfc6bc9f7b3c1e97baa0c54ab90",
+      "size": 318,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/mlssa",
+      "name": "mlssa",
+      "sha256": "e483a23b6e2496c0a35eb42e1103a38b93663c35cfd86bcf4a624ca3dcda8b68",
+      "size": 277,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/mmdf",
+      "name": "mmdf",
+      "sha256": "25b4e07a3563605c873f030298aeba65245e90999f360e0c018937b2c758a0c6",
+      "size": 1403,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/modem",
+      "name": "modem",
+      "sha256": "7a45b50f522cf8eab28c8c59738b2c3f97116151843047f6899e0c3199e30c7b",
+      "size": 3445,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/modulefile",
+      "name": "modulefile",
+      "sha256": "42761917f512318a0e5392b845f44929181f038bbf7597257927ae5783302344",
+      "size": 421,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/motorola",
+      "name": "motorola",
+      "sha256": "629ab244d959a3f013027da16bb30281f2eafdada80de90733fcf2bbe383fa3b",
+      "size": 2778,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/mozilla",
+      "name": "mozilla",
+      "sha256": "e41f7e805c22cc9b9d2261280285bf464cd231cb10415415edb80322570bd5df",
+      "size": 1444,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/msdos",
+      "name": "msdos",
+      "sha256": "3f04e5f78a8c7d2bbb5b5c83b9c3fde9fda6ad042a85612950d1cd5cc1dcf134",
+      "size": 126715,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/msooxml",
+      "name": "msooxml",
+      "sha256": "9176ba4118f70a13af2cfd043ce8d7d0491c7eccfc6380ae4274f5529b6c3ac4",
+      "size": 3213,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/msvc",
+      "name": "msvc",
+      "sha256": "e5b065f34c0b5ec151c8c3a6b721983c9db31d3b95ea1ac310a3b27f5bebe56a",
+      "size": 10543,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/msx",
+      "name": "msx",
+      "sha256": "458150f7e8eca4a86ef5a6b62467f2e5b2c6af7a5f86c975a5bc5cbaaab5dc3d",
+      "size": 9573,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/mup",
+      "name": "mup",
+      "sha256": "e51fb528b6f268dc496b03c1d5fd97f16e37963734470249cc2fd3a96fcc0212",
+      "size": 781,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/music",
+      "name": "music",
+      "sha256": "5d39f1cef6a9e79759ca7f1874f7e1927ab9b7500886443013618651e764cea4",
+      "size": 2801,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/nasa",
+      "name": "nasa",
+      "sha256": "0be26b2f6f28af5a540be3b576998a50264de867ab16039fa26794d398bb792e",
+      "size": 347,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/natinst",
+      "name": "natinst",
+      "sha256": "d8a564cd5560e67abd99c3bd97b6107e098fd76ca7f856dd4c9e2a342d7ce554",
+      "size": 1072,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/ncr",
+      "name": "ncr",
+      "sha256": "8b8eef3111cf2a266ccab969876f4e6c210261ff6a995cc27e87111be20e26e7",
+      "size": 1733,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/netbsd",
+      "name": "netbsd",
+      "sha256": "4e86a09ee3044d8bbf37eb82a1d832ab027130544cc423d8799490a96f2b8f85",
+      "size": 7541,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/netscape",
+      "name": "netscape",
+      "sha256": "e8391f2eb41082af2a1b4ebc8c17e6d8afd00be54dec3f1513ecd9b920b9bb5a",
+      "size": 902,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/netware",
+      "name": "netware",
+      "sha256": "0e6eeb136639498a27e745353d55308461b8ebbace8b774a9223b8f22db3a883",
+      "size": 412,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/news",
+      "name": "news",
+      "sha256": "87f83e94bd8020eb3f7e33d83691d0ea741428564791841b9454a5dde0633134",
+      "size": 555,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/nifty",
+      "name": "nifty",
+      "sha256": "dbfe47591d11595ce81b701c1870a37aeebd5f8885a5696c82af1629013d638c",
+      "size": 5129,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/nim-lang",
+      "name": "nim-lang",
+      "sha256": "7a15543be55fffbd53b2d618f0f27e3522fb23d6aab09acf29fe19a2cf5fa46b",
+      "size": 593,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/nitpicker",
+      "name": "nitpicker",
+      "sha256": "80a3564ce4eaaf93e667134841b7e683fde0db5a57c80bcedc003c8a187f49aa",
+      "size": 460,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/nix",
+      "name": "nix",
+      "sha256": "347ad0eddae2694128208cfeb305f0e999cc539788d0b790c3b73359d7243433",
+      "size": 666,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/numpy",
+      "name": "numpy",
+      "sha256": "9692e6166b3f5aa18ed4bbeffe2b4b2ca42f331354aedbaaaf0d36d2e25b7e86",
+      "size": 401,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/oasis",
+      "name": "oasis",
+      "sha256": "793deaab4dedbe44e20d7ffe2e351573870ed21256a7ffe16c11c4255562673e",
+      "size": 471,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/ocaml",
+      "name": "ocaml",
+      "sha256": "278e2e63c86909cfeb0fbfb31df5e785b4c26db709b6035b8e939bcbe619d905",
+      "size": 542,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/octave",
+      "name": "octave",
+      "sha256": "5b00cf02a9213d13c6192a87679e6f3994c7178ae135e0fff88ae0275863887d",
+      "size": 323,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/ole2compounddocs",
+      "name": "ole2compounddocs",
+      "sha256": "e2e73c10513f7f2b42680c72ed17b1d6c11215462cb703f594cb4e37fc7bdfef",
+      "size": 32520,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/olf",
+      "name": "olf",
+      "sha256": "2578527746e03f1ae243a0e5669a83541c2e0fc5565364b85eb694d78c32ccae",
+      "size": 3207,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/openfst",
+      "name": "openfst",
+      "sha256": "ae49e7d1b3f1f06982b9100663af94ffd217f28610d82bee3932914496b22bef",
+      "size": 616,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/opentimestamps",
+      "name": "opentimestamps",
+      "sha256": "d66be67f8a4a938824f3e38f2227247a1f4ce71fbd8d1c62bd91e2765044f0e2",
+      "size": 704,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/oric",
+      "name": "oric",
+      "sha256": "345578f9d96fe257264fc2e77b02798ac827b3623e0a84a8db36a1b7e55aa94a",
+      "size": 536,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/os2",
+      "name": "os2",
+      "sha256": "c107c1f51e9092406718a3818e17bb654d044669410711044f2394278ef77701",
+      "size": 7373,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/os400",
+      "name": "os400",
+      "sha256": "6ad146c5dff4a97354c298090cd33b98f8e8f0112533b86c1fb4bf4f5c40c462",
+      "size": 1923,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/os9",
+      "name": "os9",
+      "sha256": "3163fb3dcc8138fbc1fa212988dde29defac997449093e607c36586230994159",
+      "size": 2614,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/osf1",
+      "name": "osf1",
+      "sha256": "787319647d74ff9d234ac9a285e34514e00ad37a8a47150b2f6385c30ff53aa2",
+      "size": 254,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/pack",
+      "name": "pack",
+      "sha256": "b597dc1d12f1ebb91eed59fb83fb0fef0f48f393fbfa94473550c1519e3e6278",
+      "size": 4270,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/palm",
+      "name": "palm",
+      "sha256": "f9e2cbea08e6fa2ec0f058761f4c7403323085e4a947ea1c1ccc3f0aa1daa17c",
+      "size": 5317,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/parix",
+      "name": "parix",
+      "sha256": "513218f0200af5cd26b85b6557eeb0c8b9db465b59c30dd8c8ddeda88d1ec7b2",
+      "size": 384,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/parrot",
+      "name": "parrot",
+      "sha256": "f3e738a459ababb57b3be8f685f5f7b94c9e4d9b3902a32f0a6149f303e2779f",
+      "size": 764,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/partclone",
+      "name": "partclone",
+      "sha256": "2975d6747f2fdc4f1aa27e8d0f66727f6e11128e91206e06ad470bdca5e66288",
+      "size": 1129,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/pascal",
+      "name": "pascal",
+      "sha256": "3d3708e8b7f1fe198b89beb07ad1ca10ed7dedb2f15d2cf0682a0d8f7bda1750",
+      "size": 1332,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/pbf",
+      "name": "pbf",
+      "sha256": "31bc1152499701c8fa44ae09b8af317be27661e6aa0b777899c2d85b09041482",
+      "size": 444,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/pbm",
+      "name": "pbm",
+      "sha256": "02bab017c33ffa7e7e344d34dba4b72eb77b028e2d07fd5ef2f8d613564c31e4",
+      "size": 258,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/pc98",
+      "name": "pc98",
+      "sha256": "c67dbdcb7ff73ef533c08bec65035bb8b7aa4828304a389f5144ee22fea89e77",
+      "size": 2790,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/pci_ids",
+      "name": "pci_ids",
+      "sha256": "d46649eb474f3f9c35b127920f061e90e2a42fbf223577edf5dfda1df5daa61d",
+      "size": 3673,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/pcjr",
+      "name": "pcjr",
+      "sha256": "93d8e4c9cd72e0f37857715ec4288f7dda1fed9ff889e91c163a92c63cc45582",
+      "size": 355,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/pdf",
+      "name": "pdf",
+      "sha256": "dda994ef113c8594994b2c2d454aa74892f80f2e8ac49f565be91df1dc118cfd",
+      "size": 1171,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/pdp",
+      "name": "pdp",
+      "sha256": "bd011469fc2dec1e2eea79044d9d78116b7c5ea016b60ee44e163668313a11f0",
+      "size": 1862,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/perl",
+      "name": "perl",
+      "sha256": "69e39516c633444f8604df379a641d3ce4dd2ba30b3219f83d98b83a696ce1b5",
+      "size": 3727,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/pgf",
+      "name": "pgf",
+      "sha256": "8e271b2f61c5c7ca7d58a267414eded704c1ec2d024c47565bd48f5b6d64d963",
+      "size": 1410,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/pgp",
+      "name": "pgp",
+      "sha256": "569a61f424926990d76699d1994492696dece84dc2fdc1e52f0e2a1f2db5cdd8",
+      "size": 16199,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/pgp-binary-keys",
+      "name": "pgp-binary-keys",
+      "sha256": "b62cc7e48629b3a33bdfcb0a2ba17ab42bbac647dae3d1a242886dd4e1af4a50",
+      "size": 13416,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/pkgadd",
+      "name": "pkgadd",
+      "sha256": "f000757f68618a64c2ea3d58babd81f261af4dfab76682975b4a2ad0414477c1",
+      "size": 297,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/plan9",
+      "name": "plan9",
+      "sha256": "36e05f51902e6512310f4a539d3e29efa0475dbb508ed332b8b29e6e2e19b3e9",
+      "size": 1196,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/playdate",
+      "name": "playdate",
+      "sha256": "ea4505a7bd2d7f50a2d0d4227e5c9821ef0e6444034f52f934fb94da3ff87a29",
+      "size": 1677,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/plus5",
+      "name": "plus5",
+      "sha256": "8f1a1b1d0fa5e7900e5276000c373f9113081201075f39d93f34b5e5775839cd",
+      "size": 550,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/pmem",
+      "name": "pmem",
+      "sha256": "268fd4a65de53873b78c674c3553aba4d41d9cd39da9e3c52f4bf6d2644ec0db",
+      "size": 1255,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/polyml",
+      "name": "polyml",
+      "sha256": "d3f1f486db7cdd8c8d0f73bdf9121410a72a6fb65c15536f77fc913114680eb5",
+      "size": 744,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/printer",
+      "name": "printer",
+      "sha256": "b380e90fb80cc990645580b1e332b7555ac6a4772f35802f187e0f53ea10edc3",
+      "size": 11068,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/project",
+      "name": "project",
+      "sha256": "82358c9808b654b44ef26e77d7458c7dc6109ec4e3ab78f4519939b326c2ac77",
+      "size": 389,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/psdbms",
+      "name": "psdbms",
+      "sha256": "953e717a7e651ba4390cb6b7c1428316be088ecbc0ca7bbb3e24a38f2ba934f6",
+      "size": 483,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/psl",
+      "name": "psl",
+      "sha256": "3c82cfe4b75c5af65529e338cc8e691a4c1afb6e3f178fe84f71c5874dfad001",
+      "size": 559,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/pulsar",
+      "name": "pulsar",
+      "sha256": "34eb826145213db363ccf9f2923479722906934704674f7ce76a92d616b9438f",
+      "size": 370,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/puzzle",
+      "name": "puzzle",
+      "sha256": "387045ec1d7b8fcf69fa2e13e369ca705f04036dd1845244fb6d003dd1f5c4da",
+      "size": 588,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/pwsafe",
+      "name": "pwsafe",
+      "sha256": "23855b4a2d3aae5961692cc89f1e46943f7f76e75d66ced0180c0fb7e696a451",
+      "size": 669,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/pyramid",
+      "name": "pyramid",
+      "sha256": "e08195c1e4f7e71ccbd029ef3159bd89a4baf79516a08519b05ccf377fc98d88",
+      "size": 426,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/python",
+      "name": "python",
+      "sha256": "da154def5e6e673b2294d8eee88647e8a8a8c605a864bb58a1c3b3048559893a",
+      "size": 12070,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/qt",
+      "name": "qt",
+      "sha256": "e302a762d3fd0918429a3fc12216c39b2fc635c8c44dcb3b48f6e427de69b91b",
+      "size": 1060,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/r",
+      "name": "r",
+      "sha256": "cedc1a19ebad0197455dd4fd5ebf7799b04a0b751ff6a008e62e4dd97199732a",
+      "size": 2592,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/revision",
+      "name": "revision",
+      "sha256": "e0b25a88fd40dfb44866e2b111042a4bf0cfd7edd1afad2edbe62d970c767c64",
+      "size": 1396,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/riff",
+      "name": "riff",
+      "sha256": "2a19997c35da6de2d54f2972a47cdc36a17841404e4fce5ab242d466b5094ff1",
+      "size": 36314,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/ringdove",
+      "name": "ringdove",
+      "sha256": "c7aedee2f4ef18c4b913cfec205eda8a0184a8313579b74f1af32117b22e3463",
+      "size": 2702,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/rpi",
+      "name": "rpi",
+      "sha256": "6cdc3c0a4ffafc989cc3784f006b6e8ee4fe06a163d0e82a5336d41197b26bf3",
+      "size": 1613,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/rpm",
+      "name": "rpm",
+      "sha256": "70df97fbcb7924384ce4132f19652e45c05f560d0b1d9281f50cc8ac470e4243",
+      "size": 1373,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/rpmsg",
+      "name": "rpmsg",
+      "sha256": "e6d0a5743507c5653a36589636c953265fee2fa09ec8a1bb909fd52acd6afe4a",
+      "size": 349,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/rst",
+      "name": "rst",
+      "sha256": "70589f37f51fdea01429b23d95ba0feff93f33576d37e1e2e6a843bafe56e224",
+      "size": 489,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/rtf",
+      "name": "rtf",
+      "sha256": "a9fb2627612282e7e45057f28c419fbb32b4e9cc7c254e4a150252fb3e7f66da",
+      "size": 4011,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/ruby",
+      "name": "ruby",
+      "sha256": "337a2cd12a28ca5fe2ebab9c975b396504ecfa0857289629a66896314008540a",
+      "size": 1790,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/rust",
+      "name": "rust",
+      "sha256": "1a80e9e4f83f5507f543cd4547b4ee56be5928a41e9178d73a7a792dfae5e387",
+      "size": 770,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/sc",
+      "name": "sc",
+      "sha256": "51d348eed4e50c2027935c92ad6347383a40b310f8db54b5d97181dd36d84984",
+      "size": 245,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/sccs",
+      "name": "sccs",
+      "sha256": "9654a6a94bef786b5cc71beb4aa066592fe2135ac2e42da80f3626ff8bb61909",
+      "size": 899,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/scientific",
+      "name": "scientific",
+      "sha256": "8e5d2e7ed631966bd4e7b63bddecff6fc69d289eab8223f36bfcc55fe0fd03d8",
+      "size": 5120,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/securitycerts",
+      "name": "securitycerts",
+      "sha256": "3ee920ed40c80eff3857b896513cec6135cbaffef1499768d51e2e08c05a7f87",
+      "size": 366,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/selinux",
+      "name": "selinux",
+      "sha256": "1e6125e2fd1dbe6c7d7480f605c29a0c10fb5a33295fef2657f3055ad817c991",
+      "size": 806,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/sendmail",
+      "name": "sendmail",
+      "sha256": "c13cbfce07bd038ed175a8c5f8e2e4550703e5152bbdfa637dd644925e8c87bd",
+      "size": 1496,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/sequent",
+      "name": "sequent",
+      "sha256": "139156d0c7a87d45b386578210d65bffbfba42634b2fa06bc883428343de686b",
+      "size": 1714,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/sereal",
+      "name": "sereal",
+      "sha256": "da5ab5aeade52a17a2ce88d9296912bb160f49c6fa9582399c3dac2d8f9b4c95",
+      "size": 1274,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/sf3",
+      "name": "sf3",
+      "sha256": "d6cafc5fe21811e89a161c26cec86d2bd30ba98c9078e86d7a2f2a7fb1d3976a",
+      "size": 2946,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/sgi",
+      "name": "sgi",
+      "sha256": "a3388fcea9470eacc872084f14fb3a2e6b0152379040e8ef0f331fc131105298",
+      "size": 4171,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/sgml",
+      "name": "sgml",
+      "sha256": "e0aba740969b2645fbedb7b8794bb4dea508e0a01f80b4dce7ece182072512be",
+      "size": 5003,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/sharc",
+      "name": "sharc",
+      "sha256": "5474f53fe14a0749c2411965f340d959dc6543c3dd2ee79fe3ab05bfd2f70875",
+      "size": 820,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/sinclair",
+      "name": "sinclair",
+      "sha256": "638d2de24b6a5ecf076c07902e5812654778beb043a2109a78f84a99a5d89a81",
+      "size": 1060,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/sisu",
+      "name": "sisu",
+      "sha256": "493ae0b33061766cd4f39fcf9ee66892a0e5fe99346b36252d3303064f768f86",
+      "size": 471,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/sketch",
+      "name": "sketch",
+      "sha256": "2cb5b11b64efd8fdc689abf0ea4f33a2a995904554b1da4d9b00b79e232361b3",
+      "size": 258,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/smalltalk",
+      "name": "smalltalk",
+      "sha256": "4e5863dda9a6408450f31e9be7f39c974370a4068e15394f1c840b350df53c13",
+      "size": 593,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/smile",
+      "name": "smile",
+      "sha256": "942140ff12c7983a1f28ac81e39ecc8b0ea1637e79a89f45c2bc842773ef9d6b",
+      "size": 1262,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/sniffer",
+      "name": "sniffer",
+      "sha256": "393597fea8ee84ac1a08d3337e0656afa26c9f8a4b18e41c3d8fa7ba876cc2a3",
+      "size": 19095,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/softquad",
+      "name": "softquad",
+      "sha256": "fad9b2824a862bcad1b117d6f3b3e412876e60d5ed8d8b40755f5ff871bfe4c9",
+      "size": 1677,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/sosi",
+      "name": "sosi",
+      "sha256": "738106e408f207b77025dd78f8a57c2cf0d84877cc4c5b81375bab8d5d217bae",
+      "size": 1689,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/spec",
+      "name": "spec",
+      "sha256": "fd6171157e96fbe5c1b581466dda84db93f1d2837367e798b452854a76250231",
+      "size": 600,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/spectrum",
+      "name": "spectrum",
+      "sha256": "80ebc1181afc18b83459dd8a85adc3b28819aa7e0faba91f3921f0153c78035e",
+      "size": 7201,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/sql",
+      "name": "sql",
+      "sha256": "bee819afcf70cade01414bde8d3e6d5277fd1062af15f3606b9d45a28565d778",
+      "size": 18120,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/ssh",
+      "name": "ssh",
+      "sha256": "38e6e7049f18a557950a50167c40a4dff7529bbfdaaa240d612889431cd382fd",
+      "size": 3045,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/ssl",
+      "name": "ssl",
+      "sha256": "2a606fb0edfe4df2cb3ffdef8a412a74cdf154bec64d21c8fd5624fbfbe3aee0",
+      "size": 1705,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/statistics",
+      "name": "statistics",
+      "sha256": "bd29b5b8d61c6f806c109e77077da3441e326df34d9b5eb141ba99d5322cbbf9",
+      "size": 1962,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/subtitle",
+      "name": "subtitle",
+      "sha256": "3dc19f4b5396c011bd09ea2453e4ff2f7d934b828a5fd421f1552b60b37fbec9",
+      "size": 1069,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/sun",
+      "name": "sun",
+      "sha256": "696989f5a33463bd3036f508e5df7bb7bc95200f82401c8c9b4b5b1046fe4426",
+      "size": 5171,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/svf",
+      "name": "svf",
+      "sha256": "7b357d155dd28220ec6676392b037be93c8adb09d16edaa2187b804a96745a9f",
+      "size": 220,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/syd",
+      "name": "syd",
+      "sha256": "7b6bc707a84e1def17da0536ca26f41b67b1ba222226640d445954190301eed5",
+      "size": 1199,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/sylk",
+      "name": "sylk",
+      "sha256": "fdd09150df692c7a42b9cb8fa19d30308cf34ba02618f935a1e7a0c0c31cd825",
+      "size": 1257,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/symbos",
+      "name": "symbos",
+      "sha256": "411a5af2f6c99748481547e136080cb91899652e0ebad817a68cede153013697",
+      "size": 975,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/sysex",
+      "name": "sysex",
+      "sha256": "f8134f2c962fe371154fc7a5e4cf93805180f4dd45fa0c4a45b6ceb47088038a",
+      "size": 16247,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/tapebackup",
+      "name": "tapebackup",
+      "sha256": "4958093f6d89406e450eff06cc32eeb0842d6193381ced6f3ba853cc84c3a121",
+      "size": 906,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/tcl",
+      "name": "tcl",
+      "sha256": "21c19c858dcd80bbbbd84aa18fc4a8b824c25bbe24022218093758f48b3796b9",
+      "size": 1005,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/teapot",
+      "name": "teapot",
+      "sha256": "6d7e1cb3e49041ff968786342cb505416b6e0dafdbd54a2a14775c3cb1274b98",
+      "size": 266,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/terminfo",
+      "name": "terminfo",
+      "sha256": "7cfc031f4e7520fc7e8d619bda625eb0845a2be27b24590ce4203413d092c871",
+      "size": 2674,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/tex",
+      "name": "tex",
+      "sha256": "145d222f5d243abcdf01e2dd99988ba76d77c079be98149729b3df5e8d944255",
+      "size": 5498,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/tgif",
+      "name": "tgif",
+      "sha256": "615660727c08a2931cbb33cd8d27872479da52aff839657e00148ce61db11e55",
+      "size": 262,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/ti-8x",
+      "name": "ti-8x",
+      "sha256": "8f904e91b19ba7a56849259fc887e3222001309e27ab54f419a6295e263ce740",
+      "size": 7868,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/timezone",
+      "name": "timezone",
+      "sha256": "5ff2c1c89a34b7748daf4bab44892f04d520532b3db0583cf04437d06e259869",
+      "size": 1701,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/tplink",
+      "name": "tplink",
+      "sha256": "98e47114a4f2281027bc6f2ad7b9f8e3d628d85b9df6eadf168d1eb2ca9b3445",
+      "size": 3372,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/troff",
+      "name": "troff",
+      "sha256": "c4caba721f7570b91df8c41d265141f852d14a23148ec35f147e7c44c4597230",
+      "size": 1344,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/tuxedo",
+      "name": "tuxedo",
+      "sha256": "a55ffd40b41f3284bc38203154da7a96b028832ca1c2880e2f4a86d9695b5827",
+      "size": 306,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/typeset",
+      "name": "typeset",
+      "sha256": "67c9b566fe15bbc65d3a88f555430738b1a08703c89373622909f0b3ed03be14",
+      "size": 286,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/uf2",
+      "name": "uf2",
+      "sha256": "0ec8d60d404b644e7b7b15da80c9b5a4f37183cc10faff0896366c380ad69a46",
+      "size": 3946,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/unicode",
+      "name": "unicode",
+      "sha256": "35725c813529ddcfdec117c643443dfea853c23c6c9d0998ba43880c8bf530ca",
+      "size": 771,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/unisig",
+      "name": "unisig",
+      "sha256": "269ae2b958e8b7da183038bab79d1dfab5b3f53d14861a827e1af3225cb0eec9",
+      "size": 402,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/unknown",
+      "name": "unknown",
+      "sha256": "2950280ef73e456eeac0cee53491c99dfc88c05f22201a2bd48888648dcb4878",
+      "size": 1370,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/usd",
+      "name": "usd",
+      "sha256": "894d7a2e15bd78bf69beaf8fda213b8eee5f39f1d221ec83f14430e9228816d6",
+      "size": 568,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/uterus",
+      "name": "uterus",
+      "sha256": "4345ed900627e7d0e473fcdd93a97e68c4f65daa5b4500d6796f334212f7d761",
+      "size": 469,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/uuencode",
+      "name": "uuencode",
+      "sha256": "6da462e9835acb35c852c790b979e47fade207660bbde988b37b384ccb10583a",
+      "size": 1192,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/uxn",
+      "name": "uxn",
+      "sha256": "93adae8a8ac99075bc23cb4db810e04843ad305a4ad87f9c82f7de045d8476d7",
+      "size": 567,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/vacuum-cleaner",
+      "name": "vacuum-cleaner",
+      "sha256": "3d0bbf0d6f79e01f0b2ab6d607c4b995e176b557b646139b6d120a43d36048b4",
+      "size": 2109,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/varied.out",
+      "name": "varied.out",
+      "sha256": "b8ba572eb3231e448f7ac541a27cf9d51e0fc1f464e686684b3dfef7d4694282",
+      "size": 1664,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/varied.script",
+      "name": "varied.script",
+      "sha256": "b75264901c720b49a5043af2eb48917f728eeee6ed5af0ab44688af8a2362b2b",
+      "size": 920,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/vax",
+      "name": "vax",
+      "sha256": "02a6254c7798014de6e91a7869866ddef92b2d71f4a2c65a4ee017d23e7984d5",
+      "size": 1002,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/vicar",
+      "name": "vicar",
+      "sha256": "3f65887a954426d06663e91abe4600f2c65fd4047fec7683fbb4f48c431fb329",
+      "size": 759,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/virtual",
+      "name": "virtual",
+      "sha256": "9a59b640a48d5913fcf30ccbcc82842483569cd6c9b8c006554033eb6dcaec5d",
+      "size": 13420,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/virtutech",
+      "name": "virtutech",
+      "sha256": "04ea1ad2d369aea4a46502def0ce7ee2a892645bebb358de809040f8b6050a7a",
+      "size": 524,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/visx",
+      "name": "visx",
+      "sha256": "801a3437f097b3fc86b78a01c7a7fe09f5582e795938fa92ff154356602a7e12",
+      "size": 972,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/vms",
+      "name": "vms",
+      "sha256": "adc6eb2cfab02dbdaf0d74be7e09b567ed466c4cfb2f8c999b5e1ca82b3a4649",
+      "size": 1444,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/vmware",
+      "name": "vmware",
+      "sha256": "14a35432830332d5d59d1e85036a482e927fba1d2587452521763ee327010681",
+      "size": 283,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/vorbis",
+      "name": "vorbis",
+      "sha256": "2f42574301888aa4f83dc6158f84dfc36941faf59d84d0bad131bafdf93f928d",
+      "size": 6112,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/vxl",
+      "name": "vxl",
+      "sha256": "dba97428be0decc6b309a71b31225509778392f85949f7b5471d6c7f1d5abcc9",
+      "size": 489,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/warc",
+      "name": "warc",
+      "sha256": "497198228eefd965e632751d003688ee642a1ebfb08f7c40a3adcb7e3075604d",
+      "size": 596,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/weak",
+      "name": "weak",
+      "sha256": "869883c38337605b1607281c3bbbbc57469a717c33e759b7d928724d535d7c63",
+      "size": 684,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/web",
+      "name": "web",
+      "sha256": "c002a251cb2c95ed838fc0a9cb28270334e6cf1d1e9072580f5144d15d897e07",
+      "size": 522,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/webassembly",
+      "name": "webassembly",
+      "sha256": "66d542539460417c2a42edf2d738b4940931e31dfbf454f4a8a5577eb041776e",
+      "size": 693,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/windows",
+      "name": "windows",
+      "sha256": "6cfbbbaa843e461da1095dd93815c1f9a5e7c626a93b2f107a16f11fea252f75",
+      "size": 79378,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/wireless",
+      "name": "wireless",
+      "sha256": "a17c82e6fbaf9494c608a880ef7e79daea4e99ca2e0bd59991ffbb0d8496d611",
+      "size": 295,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/wordprocessors",
+      "name": "wordprocessors",
+      "sha256": "ffae6557abc7f0bdcd9e57beb98ff03c946740fb1b47a6ef322d9a031cbd303c",
+      "size": 24914,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/wsdl",
+      "name": "wsdl",
+      "sha256": "3d9377272b6a08be3af3ea6ccaf03c75a9fb4bd8e82a201a8b50adbda8ec58d9",
+      "size": 760,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/x68000",
+      "name": "x68000",
+      "sha256": "ec8a0db82970381a1bf59c303c6e1f0c2929679babac15dedfa3c191a7de2454",
+      "size": 743,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/xdelta",
+      "name": "xdelta",
+      "sha256": "bdcfb41abfa9d2a715edfe87c601ffff88f600841e2c6bdfd30b508add7aad37",
+      "size": 548,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/xenix",
+      "name": "xenix",
+      "sha256": "47362b5e1567f67f4f5cc1da7dafcd66e576ed0d77960fe8e9e11a2d55825a8b",
+      "size": 7559,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/xilinx",
+      "name": "xilinx",
+      "sha256": "75ec5ca0797f6549fd9e8756f7781519d8c899c52e8f5dffb5dc7994e126733a",
+      "size": 3058,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/xo65",
+      "name": "xo65",
+      "sha256": "e891522d2d92e7fc1e59644f904b828098a9518e0a210f35cc9ada7bc50cd82a",
+      "size": 1194,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/xwindows",
+      "name": "xwindows",
+      "sha256": "23b0b5f0fe92f488c5a6ec9fdcbbd4e5de4a034ab128b7be764be20e2c0cbbfc",
+      "size": 1325,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/yara",
+      "name": "yara",
+      "sha256": "0e5039bda5e8b5fa09b749ead02eae6090d093dc086a12ff02ac2fdae3736391",
+      "size": 467,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/zfs",
+      "name": "zfs",
+      "sha256": "2804eb31bb15034c2569f325e82899445ae91303540d859ada02bcf9f68d006f",
+      "size": 2423,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/zilog",
+      "name": "zilog",
+      "sha256": "4c876e76aa514c388bf7938ce0a8ba8267318732f75ec40027d0db874c0d4610",
+      "size": 451,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/zip",
+      "name": "zip",
+      "sha256": "9893ab14cc2abd9eb9170ad49ecfb6e2b68f171c15d2aec80726173c3bc3335b",
+      "size": 4183,
+      "mode": 436
+    },
+    {
+      "source": "magic/Magdir/zyxel",
+      "name": "zyxel",
+      "sha256": "25dfb98c01b4cb3924ce21d058c38b64245edf45b168b47ada69fe57b94c23a6",
+      "size": 613,
+      "mode": 436
+    }
+  ]
+}

@@ -17,7 +17,7 @@ import stat
 from typing import Any
 
 MANIFEST_SCHEMA = "deepdesk-content-v1"
-WRAPPER_SHA256 = "7e4fdbe84458f1e8aed760d44852ff3a9823c729f56d161f3dd163120f118f65"
+WRAPPER_SHA256 = "ad8fc34f04809ad9b6a43922d47709a112e6aaedf04ddc427cae968edc5264d2"
 INTERPRETER_RELATIVE = "bin/python3.12"
 
 

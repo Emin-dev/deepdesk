@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "wheel_sha256": "c212960ad306f700aa0d01e5d7a325d20548ff97eb9920dcd29513174f0294d3",
+  "members": {
+    "magic/__init__.py": {
+      "sha256": "8c31760002258f7b972a33fac7fc0485762e3eb65b97e005dd30236f49dd7829",
+      "size": 14964
+    },
+    "magic/__init__.pyi": {
+      "sha256": "0847db10a9a592bf82473227494319a463c2c78970bea6afb4e5b78e0cbe9f41",
+      "size": 2506
+    },
+    "magic/compat.py": {
+      "sha256": "3ad490d82f2da72dcd5232a2bbec981a2673454fa793ee54636182a79a3e1692",
+      "size": 8316
+    },
+    "magic/loader.py": {
+      "sha256": "279a11466f7de3450e7f7aefdca2264fedb333da5aff44515a2f891741ad8e55",
+      "size": 1168
+    },
+    "magic/py.typed": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "python_magic-0.4.27.dist-info/LICENSE": {
+      "sha256": "5081053ad3adb0423dc0c581cb1155a60e4e2a0571d5a641d3083cb65b1f4bb2",
+      "size": 2869
+    },
+    "python_magic-0.4.27.dist-info/METADATA": {
+      "sha256": "406fd2f090886a38a08a594771230a154b561b853f6634ee38d2438b934d64d3",
+      "size": 5844
+    },
+    "python_magic-0.4.27.dist-info/WHEEL": {
+      "sha256": "5b367c7308e1f25d23b542cd8d8ab51e9afe582a824603ebfbe4d7e0fe48d56a",
+      "size": 110
+    },
+    "python_magic-0.4.27.dist-info/top_level.txt": {
+      "sha256": "3030ce6423e63c188f5d6d742c70ba4730096865f4f166838ffa0e3a8eec4117",
+      "size": 6
+    },
+    "python_magic-0.4.27.dist-info/RECORD": {
+      "sha256": "1fb268c5b090f2e5a52b51dcc7f12ab84339dc117e919b674dcf52773c225562",
+      "size": 778
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "member": "file-5.48/configure",
+  "before_sha256": "94bbeb5e2cf90dd7638f46d5b426e33334d7032ba4c2cd199fc204b85c77f648",
+  "after_sha256": "2bba1bb24f4265e6beee9cbca40e1e3f73541c42a0a0e9cc1b73a59cd030cb4c",
+  "before_size": 551327,
+  "after_size": 551325,
+  "before_block": "-install_name \\$rpath/\\$soname",
+  "after_block": "-install_name @rpath/\\$soname",
+  "replacements": 2,
+  "purpose": "Assign relative libmagic install ID at source configure/link time; no binary mutation"
+}

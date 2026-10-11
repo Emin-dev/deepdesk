@@ -1,0 +1,35 @@
+# Inactive candidate. Do not copy to .github/workflows or approve its receipt until exact review.
+name: Validate bounded patched libmagic source pilot v2
+on:
+  push:
+    branches:
+      - engine-libmagic-source-v2-ci
+    paths:
+      - 'packaging/libmagic-source-candidate-v2/**'
+      - '.github/workflows/engine-libmagic-source-v2-macos.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: deepdesk-libmagic-source-v2-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  libmagic-source-pilot:
+    if: github.repository == 'Emin-dev/deepdesk' && github.ref == 'refs/heads/engine-libmagic-source-v2-ci' && github.event.repository.private == false
+    runs-on: macos-26
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Execute only an exact separately approved native source pilot
+        run: /usr/bin/python3 -I packaging/libmagic-source-candidate-v2/stage.py --repository "$GITHUB_WORKSPACE" --review-receipt packaging/libmagic-source-candidate-v2/review-receipt.json
+      - name: State exact verification boundary
+        if: success()
+        run: |
+          printf '%s\n' \
+            'The exact one-guard-patched source-built libmagic and matching magic.mgc passed bounded synthetic text/PDF/PNG MIME checks, gzip/bzip2 no-helper checks, external-helper refusal and missing-database rejection.' \
+            'Other detected codec capabilities were recorded, not claimed verified.' \
+            'Full decompression, external helpers, WeasyPrint, engine freeze, relocation and full app remain untested. No personal signing identity, explicit codesign, notarization or release was used; temporary linker ad-hoc signatures were in the reviewed scope.' \
+            'No cache or artifacts were uploaded.' >> "$GITHUB_STEP_SUMMARY"
