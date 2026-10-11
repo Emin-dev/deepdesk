@@ -2,12 +2,16 @@
 import SwiftUI
 import DeepdeskCore
 
-struct ContentView: View {
+struct ContentView<Models: ModelManaging>: View {
     @ObservedObject var store: ResearchStore
     @ObservedObject var engine: EngineSupervisor
-    @ObservedObject var models: ModelManager
+    @ObservedObject var models: Models
     @ObservedObject var identity: LocalIdentityManager
     @ObservedObject var inference: InferenceSupervisor
+    var bootstrapAction: (@MainActor () async -> Void)?
+    var activateModelAction: (@MainActor (CuratedModel) async -> Void)?
+    var deviceEligibility = HardwareEligibility.current
+    var inferenceStatusOverride: String?
     @State private var showModels = false
     @State private var activatingModel = false
     @State private var bootstrapping = false
@@ -32,6 +36,7 @@ struct ContentView: View {
                             .padding(.vertical, 6)
                             .tag(item.id)
                             .accessibilityElement(children: .combine)
+                            .accessibilityIdentifier("history.\(item.id)")
                         }
                     }
                     if store.historyHasMore && historySearch.isEmpty {
@@ -89,7 +94,7 @@ struct ContentView: View {
         }
         .navigationSplitViewStyle(.balanced)
         .sheet(isPresented: $showModels) {
-            ModelChooserView(manager: models, onUse: { model in Task { await activate(model) } }, loadingModel: activatingModel, operationError: store.errorMessage)
+            ModelChooserView(manager: models, onUse: { model in Task { await activate(model) } }, loadingModel: activatingModel, operationError: store.errorMessage, eligibility: deviceEligibility)
         }
         .onChange(of: historySelection) { _, id in
             if let id, id != store.selectedID, let item = store.history.first(where: { $0.id == id }) {
@@ -119,8 +124,8 @@ struct ContentView: View {
                     Text("Choose a model. Ask a question. Keep the evidence close.")
                         .font(.title3).foregroundStyle(.secondary)
                 }
-                if !HardwareEligibility.current.supported {
-                    Label(HardwareEligibility.current.description, systemImage: "exclamationmark.triangle").foregroundStyle(.orange)
+                if !deviceEligibility.supported {
+                    Label(deviceEligibility.description, systemImage: "exclamationmark.triangle").foregroundStyle(.orange)
                 }
                 if identity.needsDisclosure {
                     VStack(alignment: .leading, spacing: 14) {
@@ -129,9 +134,11 @@ struct ContentView: View {
                         Text("The key stays on this Mac. Losing this Keychain key or moving only the encrypted research files to another Mac can make your research inaccessible. Deepdesk cannot reset the key or recover that data.")
                             .foregroundStyle(.secondary)
                         Toggle("I understand how my local research is protected and recovered.", isOn: $identity.disclosureAccepted)
+                            .accessibilityIdentifier("onboarding.consent")
                         Button("Set up Deepdesk") { Task { await bootstrap() } }
+                            .accessibilityIdentifier("onboarding.continue")
                             .buttonStyle(.borderedProminent)
-                            .disabled(bootstrapping || !identity.disclosureAccepted || !HardwareEligibility.current.supported)
+                            .disabled(bootstrapping || !identity.disclosureAccepted || !deviceEligibility.supported)
                     }
                 } else {
                     switch engine.state {
@@ -176,6 +183,7 @@ struct ContentView: View {
                         .background(Color(nsColor: .controlBackgroundColor), in: RoundedRectangle(cornerRadius: 12))
                         .overlay(RoundedRectangle(cornerRadius: 12).stroke(.quaternary))
                         .accessibilityLabel("Research question")
+                        .accessibilityIdentifier("research.question")
                     HStack {
                         Picker("Depth", selection: $store.mode) {
                             ForEach(ResearchMode.allCases) { Text($0.label).tag($0) }
@@ -188,12 +196,14 @@ struct ContentView: View {
                 configurationSummary
                 VStack(alignment: .leading, spacing: 10) {
                     Toggle("Allow this question and follow-up searches to reach external search sites.", isOn: $store.acknowledgedNetworkUse)
+                        .accessibilityIdentifier("research.network-consent")
                     Text("The model runs on this Mac. DuckDuckGo and the search services it uses can receive search queries. Websites are contacted to retrieve sources. Network errors or rate limits can interrupt research.")
                         .font(.caption).foregroundStyle(.secondary)
                 }
                 HStack {
                     if store.startingResearch { ProgressView().controlSize(.small) }
                     Button(store.startingResearch ? "Starting…" : "Start research") { Task { await store.startResearch() } }
+                        .accessibilityIdentifier("research.start")
                         .buttonStyle(.borderedProminent).controlSize(.large)
                         .disabled(!store.canStart)
                         .keyboardShortcut(.return, modifiers: [.command])
@@ -220,7 +230,7 @@ struct ContentView: View {
                     Label("On this Mac", systemImage: "desktopcomputer")
                     if store.thinkingEnabled { Label("Thinking on", systemImage: "sparkles") }
                 }.font(.caption).foregroundStyle(.secondary)
-                Text(inference.state.label).font(.caption).foregroundStyle(.secondary)
+                Text(inferenceStatusOverride ?? inference.state.label).font(.caption).foregroundStyle(.secondary)
                 Label("Sources: DuckDuckGo web search", systemImage: "globe").font(.caption).foregroundStyle(.secondary)
             } else {
                 Text("Choose and download a model to start. Splash is selected by default.").foregroundStyle(.secondary)
@@ -238,11 +248,14 @@ struct ContentView: View {
                 VStack(alignment: .leading, spacing: 28) {
                     VStack(alignment: .leading, spacing: 12) {
                         Text(store.selectedQuery).font(.title.bold()).textSelection(.enabled)
+                            .accessibilityIdentifier("research.selected-query")
                         HStack(spacing: 8) {
                             Image(systemName: statusSymbol)
                             Text(store.stoppingResearch ? "Stopping…" : (store.progress?.phase.label ?? "Loading…"))
+                                .accessibilityIdentifier("research.phase")
                             if let fraction = store.progress?.fraction, store.hasActiveJob {
                                 Text(fraction, format: .percent.precision(.fractionLength(0))).monospacedDigit()
+                                    .accessibilityIdentifier("research.progress")
                             }
                         }
                         .font(.callout.weight(.medium))
@@ -257,6 +270,7 @@ struct ContentView: View {
                             Button(store.stoppingResearch ? "Stopping…" : "Stop research", role: .destructive) {
                                 Task { await store.stopResearch() }
                             }
+                            .accessibilityIdentifier("research.stop")
                             .disabled(store.stoppingResearch)
                             Text("Research continues if you view another item or close this window.")
                                 .font(.caption).foregroundStyle(.secondary)
@@ -327,10 +341,11 @@ struct ContentView: View {
     }
 
     private func bootstrap() async {
+        if let bootstrapAction { await bootstrapAction(); return }
         guard !bootstrapping else { return }
         bootstrapping = true
         defer { bootstrapping = false }
-        guard HardwareEligibility.current.supported else { return }
+        guard deviceEligibility.supported else { return }
         guard await identity.prepare(), let coordinator = identity.coordinator else { return }
         await store.disconnectLocally()
         if await engine.start(), let nonce = engine.instanceNonce {
@@ -340,6 +355,7 @@ struct ContentView: View {
     }
 
     private func activate(_ model: CuratedModel) async {
+        if let activateModelAction { await activateModelAction(model); showModels = false; return }
         guard !activatingModel else { return }
         activatingModel = true
         store.busy = true

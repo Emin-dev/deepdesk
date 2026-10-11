@@ -1,6 +1,8 @@
 # Native checkpoint verification
 
-Source-only checkpoint prepared on 2026-10-10 in Linux. No macOS compile, UI launch, model download, account creation, or credential storage was performed.
+Initial source checkpoint was prepared on 2026-10-10 in Linux. The subsequent reviewed signing-API correction passed 28 XCTest tests (15 core, 13 identity/download) and arm64 release compilation on macOS 26.6.2 / Xcode 26.6 / Swift 6.3.3 at [commit 3f35953a](https://github.com/Emin-dev/deepdesk/actions/runs/38097545856).
+
+The current synthetic UI-host changes have not yet been compiled or launched. No model download, real account creation, Keychain persistence, or inference was performed by these checks.
 
 ## Passed locally
 
@@ -12,7 +14,7 @@ Source-only checkpoint prepared on 2026-10-10 in Linux. No macOS compile, UI lau
 
 ## Not yet established
 
-- `swift test`, SwiftUI compilation, resource-bundle loading, or native UI/accessibility behavior.
+- Compilation/tests of the subsequent UI-host changes, resource-bundle loading, or native UI/accessibility behavior. The baseline source compilation and 28 mock tests passed as recorded above.
 - Real URLSession cookie behavior against the actual Python engine. Core transport tests are mocks; do not count them as live integration.
 - Keychain persistence, unlock/denial UI, application identity upgrades, signing entitlements, or data recovery.
 - Splash runtime execution, both actual 27B models, thinking output, sustained memory usage, model switch teardown, GPU-child cleanup, pause/resume against live large files, and live web search.

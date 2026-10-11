@@ -3,7 +3,17 @@ import Foundation
 import FoundationNetworking
 #endif
 
-public actor ResearchAPI {
+public protocol ResearchService: Sendable {
+    func start(_ request: ResearchStartRequest) async throws -> ResearchAccepted
+    func progress(id: String) async throws -> ResearchProgress
+    func stop(id: String) async throws
+    func report(id: String) async throws -> ResearchReport
+    func history(offset: Int) async throws -> [ResearchHistoryItem]
+    func signOut() async throws
+    func disconnect() async
+}
+
+public actor ResearchAPI: ResearchService {
     public let endpoint: LocalEndpoint
     private let transport: any HTTPTransport
     private let expectedInstance: String?

@@ -2,3 +2,7 @@
 .swiftpm/
 dist/
 .DS_Store
+UIHarness/DerivedData/
+*.xcresult/
+**/xcuserdata/
+__pycache__/

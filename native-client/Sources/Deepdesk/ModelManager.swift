@@ -5,11 +5,26 @@ import CryptoKit
 import Darwin
 import DeepdeskCore
 
+enum ModelDownloadState: Equatable {
+    case available, queued, downloading(Int64, Int64), paused, verifying, installed, failed(String)
+}
+
 @MainActor
-final class ModelManager: ObservableObject {
-    enum DownloadState: Equatable {
-        case available, queued, downloading(Int64, Int64), paused, verifying, installed, failed(String)
-    }
+protocol ModelManaging: ObservableObject {
+    var models: [CuratedModel] { get }
+    var errorMessage: String? { get }
+    var selectedModelID: String? { get }
+    var memoryGB: Int { get }
+    func state(for model: CuratedModel) -> ModelDownloadState
+    func choose(_ model: CuratedModel)
+    func download(_ model: CuratedModel)
+    func pause(_ model: CuratedModel)
+    func verifyForUse(_ model: CuratedModel) async throws -> URL
+}
+
+@MainActor
+final class ModelManager: ModelManaging {
+    typealias DownloadState = ModelDownloadState
     @Published private(set) var models: [CuratedModel] = []
     @Published private(set) var states: [String: DownloadState] = [:]
     @Published private(set) var errorMessage: String?

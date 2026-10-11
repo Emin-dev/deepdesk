@@ -67,8 +67,10 @@ final class LocalIdentityManager: ObservableObject {
     @Published private(set) var errorMessage: String?
     private(set) var coordinator: LocalIdentityCoordinator?
     private var existingEncryptedData = true
+    private let signingCheck: @Sendable () -> Bool
 
     init() {
+        signingCheck = Self.productionSignatureVerified
         do {
             let support = try FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask,
                                                       appropriateFor: nil, create: true)
@@ -81,11 +83,19 @@ final class LocalIdentityManager: ObservableObject {
         } catch { errorMessage = IdentityError.recoveryRequired.localizedDescription }
     }
 
+    /// Explicit service injection used only by the separate synthetic UI host.
+    init(coordinator: LocalIdentityCoordinator, existingEncryptedData: Bool,
+         signingCheck: @escaping @Sendable () -> Bool) {
+        self.coordinator = coordinator
+        self.existingEncryptedData = existingEncryptedData
+        self.signingCheck = signingCheck
+    }
+
     func prepare() async -> Bool {
         guard let coordinator else { return false }
         do {
             try await coordinator.prepare(consentGranted: disclosureAccepted, existingEncryptedData: existingEncryptedData,
-                                          signingIdentityVerified: Self.productionSignatureVerified())
+                                          signingIdentityVerified: signingCheck())
             needsDisclosure = false
             errorMessage = nil
             return true

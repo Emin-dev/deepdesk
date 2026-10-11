@@ -1,6 +1,5 @@
-# Native-only source/mock verification. Independent YAML review is required
-# before copying this exact file into .github/workflows/native-macos.yml.
-# No application launch, upstream Python, model, packaging, signing or upload.
+# Native source, mock-core and isolated synthetic-UI verification.
+# No production app, upstream Python, model, packaging, signing secrets or upload.
 name: Verify native Deepdesk
 on:
   push:
@@ -38,12 +37,18 @@ jobs:
         run: swift test --package-path native-client
       - name: Compile native executable without launching
         run: swift build --package-path native-client --configuration release --arch arm64
+      - name: Exercise isolated synthetic native UI
+        run: bash native-client/UIHarness/run-ui-tests.sh "$RUNNER_TEMP/deepdesk-synthetic-ui"
+      - name: Emit bounded synthetic screenshot receipts to public job logs
+        if: always()
+        continue-on-error: true
+        run: python3 native-client/UIHarness/export-synthetic-screenshots.py "$RUNNER_TEMP/deepdesk-synthetic-ui/SyntheticUI.xcresult"
       - name: State validation boundaries
         run: |
           printf '%s\n' \
-            'Swift package mock tests and native executable compilation completed.' \
-            'No app was launched; no Python engine, inference runtime or model was executed.' \
-            'Bundled integration, real research, Keychain, visual accessibility, DMG and Gatekeeper tests remain unverified.' \
+            'Swift mock tests, native executable compilation and isolated synthetic UI tests completed.' \
+            'Only the isolated synthetic UI host was launched; the production app, Python engine, inference runtime and models were not executed.' \
+            'Bundled integration, real research, Keychain, full accessibility, DMG and Gatekeeper tests remain unverified.' \
             'No binary was uploaded. This job does not provide a download.' >> "$GITHUB_STEP_SUMMARY"
 
 # A separate full DMG workflow would require a new review after:

@@ -29,11 +29,21 @@ final class ResearchStore: ObservableObject {
     private var servedModelID: String?
     @Published var thinkingEnabled = true
 
-    private var api: ResearchAPI?
+    private var api: (any ResearchService)?
     private var pollingTask: Task<Void, Never>?
     private var selectionTask: Task<Void, Never>?
     private var sessionGeneration = UUID()
     private var selectionGeneration = UUID()
+
+    init() {}
+
+    /// Allows a dedicated host to supply an isolated service; the release entrypoint uses connectManaged.
+    func attach(service: any ResearchService, displayIdentity: String) async {
+        await disconnectLocally()
+        api = service
+        username = displayIdentity
+        await loadSession()
+    }
 
     var authenticated: Bool { username != nil }
     var hasActiveJob: Bool { progress?.phase.isActive == true }

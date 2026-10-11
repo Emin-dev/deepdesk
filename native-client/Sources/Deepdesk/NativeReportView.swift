@@ -74,7 +74,7 @@ struct SourcesView: View {
             if sources.isEmpty {
                 Text("No source links were returned for this report.").foregroundStyle(.secondary)
             }
-            ForEach(sources) { source in
+            ForEach(Array(sources.enumerated()), id: \.element.id) { index, source in
                 VStack(alignment: .leading, spacing: 4) {
                     if let url = source.safeURL {
                         Link(destination: url) {
@@ -82,6 +82,7 @@ struct SourcesView: View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         }
                         .accessibilityHint("Opens this source in your default browser.")
+                        .accessibilityIdentifier("source.link.\(index)")
                         Text(url.host ?? "").font(.caption).foregroundStyle(.secondary)
                     } else {
                         Text(source.displayTitle)

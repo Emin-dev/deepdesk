@@ -2,16 +2,23 @@
 import SwiftUI
 import DeepdeskCore
 
-struct ModelChooserView: View {
-    @ObservedObject var manager: ModelManager
+struct ModelChooserView<Manager: ModelManaging>: View {
+    @Environment(\.dismiss) private var dismiss
+    @ObservedObject var manager: Manager
     let onUse: (CuratedModel) -> Void
     var loadingModel = false
     var operationError: String?
-    private let eligibility = HardwareEligibility.current
+    var eligibility = HardwareEligibility.current
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
+                HStack {
+                    Spacer()
+                    Button("Done") { dismiss() }
+                        .keyboardShortcut(.cancelAction)
+                        .accessibilityIdentifier("models.done")
+                }
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Choose your model").font(.largeTitle.bold())
                     Text("Download once. Think and research on this Mac.")
@@ -32,6 +39,7 @@ struct ModelChooserView: View {
             }
             .padding(32)
         }
+        .accessibilityIdentifier("models.scroll")
         .frame(minWidth: 580, idealWidth: 700, maxWidth: 900, minHeight: 550)
     }
 
@@ -40,6 +48,10 @@ struct ModelChooserView: View {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 6) {
                     Text(model.name).font(.title2.bold())
+                    if manager.selectedModelID == model.id {
+                        Text("Selected model").font(.caption.weight(.medium)).foregroundStyle(.tint)
+                            .accessibilityIdentifier("model.selected.\(model.id)")
+                    }
                     Text(model.summary).foregroundStyle(.secondary)
                 }
                 Spacer()
@@ -62,20 +74,23 @@ struct ModelChooserView: View {
             switch manager.state(for: model) {
             case .available:
                 Button("Download model") { manager.download(model) }
+                    .accessibilityIdentifier("model.download.\(model.id)")
                     .buttonStyle(.borderedProminent)
                     .disabled(!eligibility.supported || manager.memoryGB < model.minimumMemoryGB)
             case .queued:
-                HStack { Text("Queued").foregroundStyle(.secondary); Spacer(); Button("Cancel") { manager.pause(model) } }
+                HStack { Text("Queued").foregroundStyle(.secondary); Spacer(); Button("Cancel") { manager.pause(model) }.accessibilityIdentifier("model.cancel.\(model.id)") }
             case .downloading(let completed, let total):
                 ProgressView(value: Double(completed), total: Double(total))
+                    .accessibilityIdentifier("model.progress.\(model.id)")
+                    .accessibilityValue("\(Int(Double(completed) / Double(max(total, 1)) * 100)) percent downloaded")
                 HStack {
                     Text("\(ByteCountFormatter.string(fromByteCount: completed, countStyle: .file)) of \(ByteCountFormatter.string(fromByteCount: total, countStyle: .file))")
                         .font(.caption).monospacedDigit().foregroundStyle(.secondary)
                     Spacer()
-                    Button("Pause") { manager.pause(model) }
+                    Button("Pause") { manager.pause(model) }.accessibilityIdentifier("model.pause.\(model.id)")
                 }
             case .paused:
-                HStack { Text("Paused").foregroundStyle(.secondary); Spacer(); Button("Resume download") { manager.download(model) } }
+                HStack { Text("Paused").foregroundStyle(.secondary); Spacer(); Button("Resume download") { manager.download(model) }.accessibilityIdentifier("model.resume.\(model.id)") }
             case .verifying:
                 HStack { ProgressView().controlSize(.small); Text("Verifying model files…").foregroundStyle(.secondary) }
             case .installed:
@@ -85,11 +100,11 @@ struct ModelChooserView: View {
                     Button(loadingModel ? "Loading…" : "Use this model") {
                         manager.choose(model)
                         onUse(model)
-                    }.buttonStyle(.borderedProminent).disabled(loadingModel || !eligibility.supported)
+                    }.accessibilityIdentifier("model.use.\(model.id)").buttonStyle(.borderedProminent).disabled(loadingModel || !eligibility.supported)
                 }
             case .failed(let message):
                 Text(message).font(.caption).foregroundStyle(.red)
-                Button("Retry download") { manager.download(model) }.disabled(!eligibility.supported)
+                Button("Retry download") { manager.download(model) }.accessibilityIdentifier("model.retry.\(model.id)").disabled(!eligibility.supported)
             }
         }
         .padding(22)
