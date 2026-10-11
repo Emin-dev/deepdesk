@@ -20,6 +20,18 @@ import tempfile
 import urllib.parse
 import uuid
 
+_diag_spec=importlib.util.spec_from_file_location('deepdesk_asgi_diagnostics',Path(__file__).with_name('asgi_diagnostics.py'))
+diag=importlib.util.module_from_spec(_diag_spec);_diag_spec.loader.exec_module(diag)
+checkpoint='controller-setup'
+active_phase='controller'
+
+
+def mark(value):
+    global checkpoint
+    if value not in diag.CHECKPOINTS: raise RuntimeError('Unknown diagnostic checkpoint')
+    checkpoint=value
+
+
 PORT = 54321  # ASGI scope metadata only; this is never bound to a TCP socket.
 CHECKS = {
     'register': ['asgi-health-without-token','managed-host-origin-token-rejection','registration',
@@ -85,6 +97,12 @@ class Client:
         if bootstrap:
             require('cookie' not in request.headers and 'x-deepdesk-request' not in request.headers,
                     'Bootstrap included synthetic secret')
+        route=path.split('?',1)[0]
+        mark({'/api/v1/health':'health','/auth/csrf-token':'csrf-refresh','/auth/register':'registration',
+            '/auth/check':'identity','/history/api':'history','/api/start_research':'invalid-start',
+            '/settings/api':'settings','/auth/login':'login','/auth/logout':'logout'}.get(route,
+            'report' if route.startswith('/api/report/') else 'status' if route.endswith('/status')
+            else 'terminal-stop' if route.startswith('/api/terminate/') else 'unknown'))
         response=self.transport.send(request,follow_redirects=False)
         require(response.headers.get('x-deepdesk-instance')==self.nonce,'ASGI instance metadata differs')
         require(len(response.content)<=2*1024*1024,'ASGI response limit exceeded')
@@ -118,6 +136,7 @@ def exercise(client,config,phase):
     client.request('GET','/api/v1/health',bootstrap=True)
     if phase=='register':
         # Real production middleware, not a mocked route or authorization result.
+        mark('managed-boundary')
         for headers in ({'Host':'other.invalid'}, {'Origin':'http://other.invalid'},
                         {'Sec-Fetch-Site':'cross-site'}, {'X-Deepdesk-Request':'incorrect'}, {}):
             invalid_headers={'X-Deepdesk-Request':client.nonce,**headers} if headers else {}
@@ -173,6 +192,7 @@ def exercise(client,config,phase):
 
 
 def run_worker(engine,phase):
+    mark('fixture-input')
     raw=sys.stdin.buffer.read(16385)
     require(len(raw)<=16384,'Oversized synthetic stdin')
     config=json.loads(raw);validate_fixture(config)
@@ -180,6 +200,7 @@ def run_worker(engine,phase):
             'Upstream imported before managed wrapper setup')
     nonce=secrets.token_hex(32)
     os.environ.update(LDR_WEB_HOST='127.0.0.1',LDR_WEB_PORT=str(PORT),DEEPDESK_INSTANCE_NONCE=nonce)
+    mark('transport-import')
     import uvicorn
     import starlette.testclient as testclient_module
     require(testclient_module.httpx.__name__=='httpx2' and testclient_module.httpx.__version__=='2.13.1',
@@ -187,20 +208,26 @@ def run_worker(engine,phase):
     TestClient=testclient_module.TestClient
     calls=[]
     def in_process(app_name,**kwargs):
+        mark('uvicorn-contract')
         require(not calls,'Unexpected repeated server startup')
         require(app_name=='local_deep_research.web.fastapi_app:app','Unexpected uvicorn app target')
         require(kwargs=={'host':'127.0.0.1','port':PORT,'workers':1,'log_level':'warning',
             'access_log':False,'server_header':False,'timeout_keep_alive':5,'timeout_graceful_shutdown':10,
             'proxy_headers':False,'forwarded_allow_ips':None},'Unreviewed uvicorn launch arguments')
         from local_deep_research.web.fastapi_app import app
+        mark('lifespan-enter')
         with TestClient(ResponseCap(app),base_url=f'http://127.0.0.1:{PORT}',follow_redirects=False,
                         client=('127.0.0.1',54322)) as transport:
+            mark('routes')
             exercise(Client(transport,nonce),config,phase)
+            mark('lifespan-exit')
         calls.append('lifespan-entered-routes-checked-lifespan-exited')
     original=uvicorn.run
     uvicorn.run=in_process
     try:
+        mark('wrapper-load')
         wrapper=runpy.run_path(str(engine),run_name='deepdesk_reviewed_asgi_wrapper')
+        mark('wrapper-serve')
         wrapper['serve']()
     finally:
         uvicorn.run=original
@@ -216,12 +243,23 @@ def main():
     parser.add_argument('--offline-profile',type=Path)
     parser.add_argument('--fixture-root',type=Path)
     parser.add_argument('--immutable-root',type=Path)
-    parser.add_argument('--phase',choices=tuple(CHECKS))
+    parser.add_argument('--phase',choices=(*CHECKS,'seed'))
     args=parser.parse_args()
     require(platform.system()=='Darwin' and platform.machine()=='arm64','macOS arm64 fixture only')
     engine=args.engine.resolve(strict=True)
     if args.phase:
-        with redirect_stdout(sys.stderr): result=run_worker(engine,args.phase)
+        with redirect_stdout(sys.stderr):
+            try:
+                if args.phase=='seed':
+                    mark('seed-main')
+                    seed=runpy.run_path(str(Path(__file__).with_name('seed_fixture.py')),run_name='deepdesk_offline_seed')
+                    seed['main']()
+                    result={'status':'seeded','synthetic':True,'model_executed':False,'provider_queried':False}
+                else:
+                    result=run_worker(engine,args.phase)
+            except BaseException as exc:
+                diag.private_context(exc,args.phase)
+                result=diag.failure(exc,args.phase,checkpoint,engine)
         print(json.dumps(result,sort_keys=True));return
     require(all((args.runtime_python,args.offline_profile,args.fixture_root,args.immutable_root)), 'Missing controller arguments')
     require(not args.fixture_root.exists() and args.fixture_root.parent.is_dir(),'Fixture root must be new')
@@ -249,10 +287,21 @@ def main():
             return json.loads(bounds.run_bounded(prefix+command,input_data=json.dumps(config).encode(),
                 env=env,cwd=root,work=root,disk_limit=128*1024**2,timeout=timeout,
                 own_session=False,public_summary=False))
-        before=invoke([str(Path(__file__).resolve()),'--engine',str(engine),'--phase','register'],120)
-        seeded=invoke([str(Path(__file__).with_name('seed_fixture.py').resolve())],90)
+        def phase_result(phase,timeout):
+            global active_phase
+            active_phase=phase
+            mark('worker-result')
+            result=invoke([str(Path(__file__).resolve()),'--engine',str(engine),'--phase',phase],timeout)
+            if result.get('status')=='failed': diag.validate(result)
+            return result
+        before=phase_result('register',120)
+        if before.get('status')=='failed': print(json.dumps(before,sort_keys=True));return
+        seeded=phase_result('seed',90)
+        if seeded.get('status')=='failed': print(json.dumps(seeded,sort_keys=True));return
         require(seeded=={'status':'seeded','synthetic':True,'model_executed':False,'provider_queried':False},'Fixture seed failed')
-        after=invoke([str(Path(__file__).resolve()),'--engine',str(engine),'--phase','persisted'],120)
+        after=phase_result('persisted',120)
+        if after.get('status')=='failed': print(json.dumps(after,sort_keys=True));return
+        mark('worker-result')
         for result,phase in ((before,'register'),(after,'persisted')):
             require(result=={'status':'passed','phase':phase,'transport':'in-process-ASGI','checks':CHECKS[phase],
                 'lifespan_completed':True,'real_http_tested':False,'client_backend':'httpx2-2.13.1','pid':result.get('pid')}
@@ -265,4 +314,10 @@ def main():
         'research_execution_tested':False,'model_loaded':False,'provider_queried':False},sort_keys=True))
 
 
-if __name__=='__main__': main()
+if __name__=='__main__':
+    try:
+        main()
+    except BaseException as exc:
+        # Controller/pre-parser errors also receive only the same fixed schema.
+        result=diag.failure(exc,active_phase,checkpoint,Path(__file__).with_name('engine_entry.py'))
+        print(json.dumps(result,sort_keys=True))

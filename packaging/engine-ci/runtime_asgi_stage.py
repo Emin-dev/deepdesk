@@ -201,6 +201,7 @@ def main():
             'Explicit Torch origin selection missing')
     required = {'packaging/engine-ci/runtime_asgi_stage.py', 'packaging/engine-ci/bounded_runtime.py',
         'packaging/engine-ci/runtime_checks.py', 'packaging/engine-ci/smoke_asgi_authenticated.py',
+        'packaging/engine-ci/asgi_diagnostics.py', 'packaging/engine-ci/asgi-diagnostic-source-allowlist.json',
         'packaging/engine-ci/seed_fixture.py', 'packaging/engine-ci/runtime-offline.sb',
         'packaging/engine-ci/stage_a.py',
         'packaging/engine-ci/audit_archives.py', 'packaging/engine-ci/check_sqlcipher.py',
@@ -223,6 +224,7 @@ def main():
     stage_a = load_helper(helpers / 'stage_a.py', 'deepdesk_stage_a_helpers')
     archive = load_helper(helpers / 'audit_archives.py', 'deepdesk_archive_helpers')
     bounded = load_helper(helpers / 'bounded_runtime.py', 'deepdesk_bounded_helpers')
+    diagnostics = load_helper(helpers / 'asgi_diagnostics.py', 'deepdesk_diagnostic_helpers')
     proposal = json.loads((root / 'research/engine-ci/all-pypi-input-proposal.json').read_text())
     candidate = json.loads((root / 'research/engine-ci/python-candidate.json').read_text())
     sources = json.loads((root / 'research/engine-ci/source-build-manifest.json').read_text())
@@ -394,6 +396,9 @@ def main():
             '--engine',root / 'packaging/engine_entry.py','--runtime-python',runtime_python,
             '--offline-profile',helpers / 'runtime-offline.sb',
             '--fixture-root',work / 'fixture','--immutable-root',immutable],timeout=360))
+        if api.get('status') == 'failed':
+            print(json.dumps(diagnostics.validate(api),sort_keys=True))
+            raise RuntimeError('In-process ASGI fixture failed; see fixed diagnostic fields only')
         require(api.get('status') == 'passed' and api.get('kind') == 'installed-authenticated-synthetic-ASGI'
                 and api.get('transport') == 'in-process-ASGI' and api.get('client_backend') == 'httpx2-2.13.1'
                 and api.get('real_http_tested') is False
