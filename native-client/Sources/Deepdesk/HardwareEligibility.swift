@@ -18,7 +18,7 @@ struct HardwareEligibility {
         guard sysctlbyname("machdep.cpu.brand_string", &buffer, &size, nil, 0) == 0 else {
             return HardwareEligibility(supported: false, description: "This Mac’s chip could not be verified.")
         }
-        let chip = String(cString: buffer)
+        let chip = String(decoding: buffer.prefix(while: { $0 != 0 }).map { UInt8(bitPattern: $0) }, as: UTF8.self)
         guard let range = chip.range(of: "Apple M"),
               let family = Int(chip[range.upperBound...].prefix(while: { $0.isNumber })), family >= 3 else {
             return HardwareEligibility(supported: false, description: "Deepdesk’s embedded inference engine requires Apple M3 or newer. This Mac reports \(chip).")

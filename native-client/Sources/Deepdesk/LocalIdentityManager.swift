@@ -121,18 +121,22 @@ final class LocalIdentityManager: ObservableObject {
 
     nonisolated private static func productionSignatureVerified() -> Bool {
         guard let expectedTeam = Bundle.main.object(forInfoDictionaryKey: "DeepdeskSigningTeamID") as? String,
-              !expectedTeam.isEmpty else { return false }
+              expectedTeam.count == 10,
+              expectedTeam.unicodeScalars.allSatisfy(CharacterSet(charactersIn: "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789").contains) else { return false }
         var code: SecCode?
-        guard SecCodeCopySelf([], &code) == errSecSuccess, let code,
-              SecCodeCheckValidity(code, [], nil) == errSecSuccess else { return false }
+        guard SecCodeCopySelf([], &code) == errSecSuccess, let code else { return false }
+        // An Apple-anchored certificate requirement rejects ad-hoc signatures without relying on
+        // C signing-flag constants that Security does not expose to this Swift SDK.
+        let expression = "anchor apple generic and identifier \"dev.emin.deepdesk\" and certificate leaf[subject.OU] = \"\(expectedTeam)\""
+        var requirement: SecRequirement?
+        guard SecRequirementCreateWithString(expression as CFString, [], &requirement) == errSecSuccess,
+              let requirement, SecCodeCheckValidity(code, [], requirement) == errSecSuccess else { return false }
         var staticCode: SecStaticCode?
         guard SecCodeCopyStaticCode(code, [], &staticCode) == errSecSuccess, let staticCode else { return false }
         var information: CFDictionary?
         guard SecCodeCopySigningInformation(staticCode, SecCSFlags(rawValue: kSecCSSigningInformation), &information) == errSecSuccess,
               let info = information as? [String: Any],
-              let team = info[kSecCodeInfoTeamIdentifier as String] as? String, team == expectedTeam,
-              let flags = info[kSecCodeInfoFlags as String] as? UInt32,
-              flags & UInt32(kSecCodeSignatureAdhoc) == 0 else { return false }
+              let team = info[kSecCodeInfoTeamIdentifier as String] as? String, team == expectedTeam else { return false }
         return true
     }
 }
